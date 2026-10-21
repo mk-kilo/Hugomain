@@ -1,7 +1,7 @@
-const PARTNER_URL = 'https://ofox.ai/';
-
-document.querySelectorAll('.js-partner').forEach((el) => {
-  el.href = PARTNER_URL;
-  el.target = '_blank';
-  el.rel = 'noopener noreferrer';
+// JXZNE AI partner referral destination. Do not place private credentials here.
+const PARTNER_URL = 'https://ofox.ai/x/itoken';
+document.querySelectorAll('a.js-partner').forEach((link) => {
+  link.href = PARTNER_URL;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer sponsored';
 });
