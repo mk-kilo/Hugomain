@@ -1,0 +1,17 @@
+name: Ofox API Compatibility Smoke Test
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  api-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test authenticated OpenAI Responses and Anthropic Messages APIs
+        env:
+          OFOX_API_KEY: ${{ secrets.OFOX_API_KEY }}
+          OFOX_RESPONSES_MODEL: openai/gpt-5.6
+          OFOX_ANTHROPIC_MODEL: anthropic/claude-sonnet-4.6
+        run: python3 tests/ofox_smoke.py
