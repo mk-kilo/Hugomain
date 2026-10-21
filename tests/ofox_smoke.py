@@ -3,6 +3,16 @@
 Run only with an explicit OFOX_API_KEY and expect billable requests."""
 import json, os, sys, urllib.request, urllib.error
 KEY=os.getenv("OFOX_API_KEY","")
+if KEY != KEY.strip():
+ print("SECRET_FORMAT_WARNING: leading/trailing whitespace removed.")
+ KEY=KEY.strip()
+if KEY.lower().startswith(("bearer ","authorization:","x-api-key:")):
+ print("INVALID_SECRET_FORMAT: supply the raw API key without prefixes.")
+ sys.exit(2)
+if any(ord(c)<33 or ord(c)>126 for c in KEY):
+ print("INVALID_SECRET_FORMAT: API key has unexpected whitespace or control characters.")
+ sys.exit(2)
+print("Proxy configured:", bool(os.getenv("HTTPS_PROXY") or os.getenv("https_proxy")))
 if not KEY:
  print("BLOCKED_NO_OFOX_API_KEY: Set encrypted GitHub Actions secret OFOX_API_KEY.")
  sys.exit(2)
@@ -28,6 +38,10 @@ for name,url,payload,headers in tests:
   # Print only status, never echo server response which may contain sensitive metadata.
   print(f"{name}: HTTP {exc.code}; FAILED. Check model, account balance and protocol. Response omitted.")
   failure=True
+ except ValueError:
+  print(f"{name}: REQUEST_SETUP_ERROR ValueError; check key format, endpoint and proxy.")
+  failure=True
+  continue
  except Exception as exc:
   print(f"{name}: NETWORK_ERROR {type(exc).__name__}; FAILED (details omitted)")
   failure=True
