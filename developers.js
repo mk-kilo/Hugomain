@@ -1,0 +1,10 @@
+(()=>{'use strict';
+const toolData={codex:{name:'Codex CLI',anchor:'codex',info:'查阅 Responses API 端点、模型及配置格式，注意第三方 API 与官方订阅不同。',caution:'请先确认提供商支持对应模型、Responses API 和工具调用；Ofox 实际调用测试尚未完成。'},claude:{name:'Claude Code',anchor:'claude-code',info:'确认 Anthropic Messages 协议、API Base URL 与模型兼容，再安全设置本机环境变量。',caution:'第三方网关需要明确支持 Messages API 和工具调用；不要在本网站输入 API Key。'},cursor:{name:'Cursor',anchor:'cursor',info:'Cursor 的自定义 API 未必兼容全部功能。可使用 Cursor 终端中的 Codex CLI 或 Claude Code。',caution:'不要将第三方 API 直连 Cursor 宣传成全面支持；请先阅读限制。'}};
+const osNames={mac:'macOS',windows:'Windows',linux:'Linux'};
+const getSelected=name=>document.querySelector('input[name="'+name+'"]:checked')?.value||'';
+function update(){const t=toolData[getSelected('dev-tool')]||toolData.codex;const os=osNames[getSelected('dev-os')]||'macOS';document.getElementById('dev-result-title').textContent=t.name+' · '+os;document.getElementById('dev-result-text').textContent=t.info+'教程中可进一步选择 '+os+' 对应步骤。';document.getElementById('dev-result-caution').textContent=t.caution;document.getElementById('dev-guide-link').href='guides.html#'+t.anchor;}
+document.querySelectorAll('input[name="dev-tool"],input[name="dev-os"]').forEach(el=>el.addEventListener('change',update));update();
+function track(kind,detail){try{if(typeof window.gtag==='function')window.gtag('event',kind,{event_category:'developer_funnel',event_label:detail});if(typeof window.plausible==='function')window.plausible(kind,{props:{source:detail}})}catch(e){}}
+document.querySelectorAll('a[href*="ofox.ai/x/itoken"]').forEach(el=>el.addEventListener('click',()=>track('referral_click',el.getAttribute('data-cta')||'developer_page')));
+document.querySelectorAll('a[href*="guides.html"]').forEach(el=>el.addEventListener('click',()=>track('guide_click',el.getAttribute('href')||'guides')));
+})();
