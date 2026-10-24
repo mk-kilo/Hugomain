@@ -38,4 +38,16 @@ function calculatePrice(){
  verdict.replaceChildren();const strong=document.createElement('strong');strong.textContent=label;const p=document.createElement('p');p.textContent='预计差额 '+fmt(Math.abs(diff))+' / 月。仅根据输入的报价计算，不代表实际优惠已获批准。';verdict.append(strong,p);
 }
 if(el('price-model')){['price-model','price-in','price-out','price-ofox-in','price-ofox-out','price-rebate'].forEach(id=>el(id).addEventListener('input',calculatePrice));el('price-model').addEventListener('change',()=>{el('price-ofox-in').value='';el('price-ofox-out').value='';calculatePrice();});calculatePrice();}
+
+function calcMigration(){
+ const cur=el('mig-current'),next=el('mig-new'),once=el('mig-once');if(!cur||!next)return;
+ const h=el('mig-headline'),p=el('mig-summary'),d=el('mig-delta'),pay=el('mig-payback');
+ if(next.value.trim()===''||Number(next.value)<0||!Number.isFinite(Number(next.value))){
+ h.textContent='等待 Ofox 实际报价';p.textContent='请输入相同模型和使用量下的真实 Ofox 月成本。';d.textContent='—';pay.textContent='—';return;}
+ const current=Math.max(0,Number(cur.value)||0),future=Math.max(0,Number(next.value)||0),cost=Math.max(0,Number(once.value)||0),savings=current-future;
+ d.textContent=(savings>=0?'节省 ':'增加 ')+fmt(Math.abs(savings));
+ if(savings>0){h.textContent='有潜在节省，但应先实测';p.textContent='预计每月节省 '+fmt(savings)+'；建议小额试用并验证常用功能。';pay.textContent=cost===0?'立即（仅计算）':(cost/savings).toFixed(1)+' 个月';}
+ else{h.textContent=savings===0?'费用基本相同':'Ofox 在此情景下更贵';p.textContent='单从费用看，暂无迁移收益。请评估统一接入和实际可靠性。';pay.textContent='无法回本';}
+}
+if(el('mig-current'))['mig-current','mig-new','mig-once'].forEach(id=>el(id).addEventListener('input',calcMigration));if(el('mig-current'))calcMigration();
 })();
