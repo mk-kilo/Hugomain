@@ -8,8 +8,34 @@ function track(kind,detail){try{if(typeof window.gtag==='function')window.gtag('
 document.querySelectorAll('a[href*="ofox.ai/x/itoken"]').forEach(el=>el.addEventListener('click',()=>track('referral_click',el.getAttribute('data-cta')||'developer_page')));
 document.querySelectorAll('a[href*="guides.html"]').forEach(el=>el.addEventListener('click',()=>track('guide_click',el.getAttribute('href')||'guides')));
 
-const pIn=document.getElementById('price-in');
-if(pIn){const fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
-const recalc=()=>{const safe=id=>Math.max(0,Math.min(100000,Number(document.getElementById(id).value)||0));const input=safe('price-in'),output=safe('price-out'),discount=Math.min(100,safe('price-rebate'));const official=input*2+output*10;const ofox=input*2+output*10;const effective=ofox*(1-discount/100);document.getElementById('price-official').textContent=fmt(official);document.getElementById('price-ofox-list').textContent=fmt(ofox);document.getElementById('price-ofox-net').textContent=fmt(effective);document.getElementById('price-saving').textContent=fmt(official-effective);};
-['price-in','price-out','price-rebate'].forEach(id=>document.getElementById(id).addEventListener('input',recalc));recalc();}
+const models={
+ gpt54:{name:'GPT-5.4',i:2.5,o:15,url:'https://developers.openai.com/api/docs/models/gpt-5.4'},
+ gpt52:{name:'GPT-5.2',i:1.75,o:14,url:'https://developers.openai.com/api/docs/models/gpt-5.2'},
+ sonnet46:{name:'Claude Sonnet 4.6',i:3,o:15,url:'https://platform.claude.com/docs/en/models/sonnet-4-6/overview'},
+ gemini25:{name:'Gemini 2.5 Flash（文本）',i:.30,o:2.50,url:'https://ai.google.dev/gemini-api/docs/pricing'}};
+const el=id=>document.getElementById(id),fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
+const val=id=>Math.max(0,Math.min(100000,Number(el(id).value)||0));
+function calculatePrice(){
+ const m=models[el('price-model').value]||models.gpt54;
+ const official=val('price-in')*m.i+val('price-out')*m.o;
+ el('price-official').textContent=fmt(official);
+ el('price-model-reference').textContent=m.name+'：官方输入 $'+m.i+' / 百万、输出 $'+m.o+' / 百万 Token。';
+ el('price-official-source').href=m.url;
+ const pI=el('price-ofox-in').value.trim(),pO=el('price-ofox-out').value.trim();
+ const hasPrices=pI!==''&&pO!==''&&Number.isFinite(Number(pI))&&Number.isFinite(Number(pO))&&Number(pI)>=0&&Number(pO)>=0;
+ const verdict=el('price-verdict');
+ if(!hasPrices){
+ el('price-ofox-list').textContent='待填写';el('price-ofox-net').textContent='待填写';
+ el('price-saving').textContent='无法计算';el('price-diff-label').textContent='与官方费用的差额';
+ verdict.className='price-verdict';verdict.innerHTML='<strong>尚不能判断哪边更便宜</strong><p>请从 Ofox 报价页核实该模型输入和输出单价，再填入左侧。</p>';return;}
+ const list=val('price-in')*Number(pI)+val('price-out')*Number(pO);
+ const net=list*(1-Math.min(100,val('price-rebate'))/100);
+ const diff=official-net;el('price-ofox-list').textContent=fmt(list);el('price-ofox-net').textContent=fmt(net);
+ verdict.className='price-verdict '+(diff>0.005?'better':diff<-.005?'worse':'equal');
+ let label=diff>.005?'该情景下 Ofox 预计便宜':diff<-.005?'该情景下官方 API 预计便宜':'该情景下费用基本相同';
+ el('price-diff-label').textContent=diff>=0?'Ofox 相比官方节约':'Ofox 相比官方多花';
+ el('price-saving').textContent=fmt(Math.abs(diff));
+ verdict.replaceChildren();const strong=document.createElement('strong');strong.textContent=label;const p=document.createElement('p');p.textContent='预计差额 '+fmt(Math.abs(diff))+' / 月。仅根据输入的报价计算，不代表实际优惠已获批准。';verdict.append(strong,p);
+}
+if(el('price-model')){['price-model','price-in','price-out','price-ofox-in','price-ofox-out','price-rebate'].forEach(id=>el(id).addEventListener('input',calculatePrice));el('price-model').addEventListener('change',()=>{el('price-ofox-in').value='';el('price-ofox-out').value='';calculatePrice();});calculatePrice();}
 })();
