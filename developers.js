@@ -7,4 +7,9 @@ document.querySelectorAll('input[name="dev-tool"],input[name="dev-os"]').forEach
 function track(kind,detail){try{if(typeof window.gtag==='function')window.gtag('event',kind,{event_category:'developer_funnel',event_label:detail});if(typeof window.plausible==='function')window.plausible(kind,{props:{source:detail}})}catch(e){}}
 document.querySelectorAll('a[href*="ofox.ai/x/itoken"]').forEach(el=>el.addEventListener('click',()=>track('referral_click',el.getAttribute('data-cta')||'developer_page')));
 document.querySelectorAll('a[href*="guides.html"]').forEach(el=>el.addEventListener('click',()=>track('guide_click',el.getAttribute('href')||'guides')));
+
+const pIn=document.getElementById('price-in');
+if(pIn){const fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
+const recalc=()=>{const safe=id=>Math.max(0,Math.min(100000,Number(document.getElementById(id).value)||0));const input=safe('price-in'),output=safe('price-out'),discount=Math.min(100,safe('price-rebate'));const official=input*2+output*10;const ofox=input*2+output*10;const effective=ofox*(1-discount/100);document.getElementById('price-official').textContent=fmt(official);document.getElementById('price-ofox-list').textContent=fmt(ofox);document.getElementById('price-ofox-net').textContent=fmt(effective);document.getElementById('price-saving').textContent=fmt(official-effective);};
+['price-in','price-out','price-rebate'].forEach(id=>document.getElementById(id).addEventListener('input',recalc));recalc();}
 })();
