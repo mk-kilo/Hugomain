@@ -50,4 +50,22 @@ function calcMigration(){
  else{h.textContent=savings===0?'费用基本相同':'Ofox 在此情景下更贵';p.textContent='单从费用看，暂无迁移收益。请评估统一接入和实际可靠性。';pay.textContent='无法回本';}
 }
 if(el('mig-current'))['mig-current','mig-new','mig-once'].forEach(id=>el(id).addEventListener('input',calcMigration));if(el('mig-current'))calcMigration();
+
+async function loadOfoxPrices(){
+ const status=el('live-price-status'),btn=el('load-ofox-prices');btn.disabled=true;status.textContent='正在读取 Ofox 公开模型目录…';
+ try{
+ const response=await fetch('https://api.ofox.ai/v1/models',{cache:'no-store'});
+ if(!response.ok)throw new Error('HTTP '+response.status);
+ const data=await response.json();if(!Array.isArray(data.data))throw new Error('Invalid catalog');
+ const wanted={gpt54:['openai/gpt-5.4'],gpt52:['openai/gpt-5.2'],sonnet46:['anthropic/claude-sonnet-4.6'],gemini25:['google/gemini-2.5-flash']};
+ const key=el('price-model').value;const match=data.data.find(x=>(wanted[key]||[]).includes(x.id));
+ if(!match||!match.pricing)throw new Error('Selected model has no public price');
+ const pi=Number(match.pricing.prompt),po=Number(match.pricing.completion);
+ if(!Number.isFinite(pi)||!Number.isFinite(po)||pi<0||po<0)throw new Error('Missing per-token rate');
+ el('price-ofox-in').value=String(Number((pi*1000000).toFixed(6)));el('price-ofox-out').value=String(Number((po*1000000).toFixed(6)));
+ calculatePrice();status.textContent='已获取 '+match.id+' 的公开标价。输入 +el('price-ofox-in').value+' / 百万，输出 +el('price-ofox-out').value+' / 百万；请以最终账单为准。';
+ }catch(err){status.textContent='未能读取该模型公开价格（可能是浏览器跨域限制、模型缺失或接口异常）。请直接在 Ofox 核实后手动输入。';}
+ finally{btn.disabled=false;}
+}
+if(el('load-ofox-prices'))el('load-ofox-prices').addEventListener('click',loadOfoxPrices);
 })();
