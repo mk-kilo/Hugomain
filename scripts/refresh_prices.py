@@ -7,7 +7,7 @@ ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'pricing-snapshots.json'
 HISTORY=ROOT/'price-history'
 API='https://subpriced.com/api/prices'
-PRODUCTS=['chatgpt','claude','gemini','grok','glm','leonardo-ai','character-ai','perplexity','microsoft-copilot','manus','kimi','poe','sora','kling-ai','runwayml','captions','pollo-ai','heygen','invideo-ai','catcosplay','suno','x','le-chat']
+PRODUCTS=['chatgpt','claude','gemini','grok','perplexity','kimi','glm','microsoft-copilot','poe','le-chat']
 COUNTRIES={'US':'美国','TR':'土耳其','JP':'日本','GB':'英国','CA':'加拿大','FR':'法国','DE':'德国','IN':'印度','BR':'巴西','PH':'菲律宾','PK':'巴基斯坦','EG':'埃及','ID':'印度尼西亚','CN':'中国','NG':'尼日利亚','DK':'丹麦','AU':'澳大利亚','KR':'韩国','MX':'墨西哥','AR':'阿根廷','CH':'瑞士','TH':'泰国','VN':'越南','SG':'新加坡'}
 NAMES={'chatgpt':'ChatGPT','claude':'Claude','gemini':'Gemini','grok':'Grok','glm':'GLM','leonardo-ai':'Leonardo AI','character-ai':'Character AI','perplexity':'Perplexity','microsoft-copilot':'Microsoft Copilot','manus':'Manus','kimi':'Kimi','poe':'Poe','sora':'Sora','kling-ai':'Kling AI','runwayml':'Runway','captions':'Captions','pollo-ai':'Pollo AI','heygen':'HeyGen','invideo-ai':'invideo AI','catcosplay':'CatCosplay','suno':'Suno','x':'X','le-chat':'Le Chat'}
 def pick(obj,*keys):
@@ -17,7 +17,7 @@ def pick(obj,*keys):
 def records(x):
  if isinstance(x,list): return x
  if not isinstance(x,dict): return []
- for key in ('prices','data','results','items','rows'):
+ for key in ('prices','data','results','items','rows','subscriptions','plans'):
   val=x.get(key)
   if isinstance(val,list): return val
   if isinstance(val,dict):
@@ -33,21 +33,27 @@ def normalized(record,id,now):
  if record.get('is_demo') is True or record.get('demo') is True or record.get('is_placeholder') is True:return None
  if str(record.get('status','')).lower() in ('demo','placeholder','unverified','rejected'):return None
  item=record.get('price') if isinstance(record.get('price'),dict) else record
- country=str(pick(item,'country_code','countryCode','region_code','region','country') or '').upper()
+ country_obj=pick(item,'country_code','countryCode','region_code','region','country')
+ if isinstance(country_obj,dict):country_obj=pick(country_obj,'code','iso2','country_code','id')
+ country=str(country_obj or '').upper()
  if country not in COUNTRIES:return None
- plan=str(pick(item,'plan','plan_name','tier','subscription','name') or '套餐未标记')[:90]
- channel=str(pick(item,'platform','channel','store','source_type') or '未标记渠道')[:50]
- amount=pick(item,'price_usd','usd_price','usdPrice','usd','monthly_usd','amount_usd')
+ plan_obj=pick(item,'plan','plan_name','tier','subscription','name')
+ if isinstance(plan_obj,dict):plan_obj=pick(plan_obj,'name','title','slug')
+ plan=str(plan_obj or '套餐未标记')[:90]
+ channel_obj=pick(item,'platform','channel','store','source_type')
+ if isinstance(channel_obj,dict):channel_obj=pick(channel_obj,'name','title','slug')
+ channel=str(channel_obj or '未标记渠道')[:50]
+ amount=pick(item,'price_usd','usd_price','usdPrice','usd','monthly_usd','amount_usd','usd_value','usdValue')
  try: usd=float(amount)
  except (ValueError,TypeError):return None
  if not 0 < usd < 5000:return None
  cycle=str(pick(item,'period','billing_period','interval','billingCycle') or 'monthly').lower()
- if cycle not in ('month','monthly','1 month','monthly subscription','per_month','month_1'):
+ if cycle not in ('month','monthly','1 month','monthly subscription','per_month','month_1','1m'):
   # Never treat annual/weekly billing as monthly without verified conversion.
   return None
  source=str(pick(item,'source_url','sourceUrl','url','store_url') or '')
  if not source.startswith('https://'):return None
- date=str(pick(item,'last_verified','verified_at','observed_at','date','checked_at','last_updated') or '')[:10]
+ date=str(pick(item,'last_verified','lastVerified','verified_at','observed_at','date','checked_at','last_updated','updatedAt') or '')[:10]
  try:dt.date.fromisoformat(date)
  except ValueError:return None
  original=pick(item,'local_price','price_local','amount_local','local_amount')
@@ -63,10 +69,23 @@ def main():
  collected={};worked=0;errors=[]
  for id in PRODUCTS:
   try:
-   # Dedicated public endpoint; one request per product, staying well below public limit.
+   # Product endpoint may contain its entire country / plan catalog.
+   # Fall back to paginated raw-price API; never use country/plan guesses.
    from urllib.parse import quote
-   data=get(API+'?product='+quote(id)+'&page=1')
-   raw=records(data);valid=0
+   raw=[]
+   try:
+    raw=records(get('https://subpriced.com/api/services/'+quote(id)))
+   except (urllib.error.URLError,TimeoutError,ValueError,json.JSONDecodeError) as e:
+    print(id, 'service endpoint:', type(e).__name__)
+   if not raw:
+    for page in range(1,21):
+     data=get(API+'?product='+quote(id)+'&page='+str(page))
+     batch=records(data)
+     if not batch:break
+     raw.extend(batch)
+     if len(batch)<20:break
+     time.sleep(.6)
+   valid=0
    for x in raw:
     row=normalized(x,id,now)
     if row:
@@ -74,6 +93,7 @@ def main():
      prev=collected.get(key)
      if prev is None or row['date']>prev['date']:collected[key]=row
      valid+=1
+   print(id,'raw records:',len(raw),'valid monthly observations:',valid)
    if valid:worked+=1
    else:errors.append(id+': no validated monthly rows')
   except (urllib.error.URLError,TimeoutError,ValueError,json.JSONDecodeError) as e:errors.append(id+': '+type(e).__name__)
