@@ -1,5 +1,10 @@
 name: Refresh Global AI Subscription Prices
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/refresh_prices.py'
+      - '.github/workflows/refresh-prices.yml'
   schedule:
     - cron: '17 4 * * *'
   workflow_dispatch:
