@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const models=[['chatgpt','ChatGPT'],['claude','Claude'],['gemini','Gemini'],['grok','Grok'],['perplexity','Perplexity'],['kimi','Kimi'],['glm','GLM'],['microsoft-copilot','Microsoft Copilot'],['poe','Poe'],['le-chat','Le Chat']];
+const models=[['chatgpt','ChatGPT'],['claude','Claude'],['gemini','Gemini'],['grok','Grok'],['perplexity','Perplexity'],['kimi','Kimi'],['glm','GLM'],['microsoft-copilot','Microsoft Copilot'],['deepseek','DeepSeek'],['qwen','Qwen']];
 const $=id=>document.getElementById(id),product=$('matrix-product'),country=$('matrix-country'),plan=$('matrix-plan'),channel=$('matrix-channel'),body=$('matrix-body'),status=$('matrix-status');
 const fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
 for(const [id,name] of models){const opt=new Option(name,id);product.add(opt)}
