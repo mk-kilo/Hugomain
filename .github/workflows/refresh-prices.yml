@@ -1,0 +1,35 @@
+name: Refresh Global AI Subscription Prices
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pricing-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Collect validated public subscription prices
+        run: python3 scripts/refresh_prices.py
+      - name: Validate generated JSON
+        run: python3 -m json.tool pricing-snapshots.json > /dev/null
+      - name: Commit changed snapshots if new verified data exists
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pricing-snapshots.json price-history/
+          if git diff --cached --quiet; then
+            echo "No new verified price observations; nothing to commit."
+          else
+            git commit -m "data: refresh attributed regional subscription price snapshots"
+            git push origin HEAD:main
+          fi
