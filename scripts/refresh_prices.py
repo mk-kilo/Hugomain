@@ -29,6 +29,9 @@ def get(url):
  with urllib.request.urlopen(req,timeout=25) as r:return json.loads(r.read(5_000_000))
 def normalized(record,id,now):
  if not isinstance(record,dict):return None
+ # Never publish demo, placeholder or explicitly unverified prices.
+ if record.get('is_demo') is True or record.get('demo') is True or record.get('is_placeholder') is True:return None
+ if str(record.get('status','')).lower() in ('demo','placeholder','unverified','rejected'):return None
  item=record.get('price') if isinstance(record.get('price'),dict) else record
  country=str(pick(item,'country_code','countryCode','region_code','region','country') or '').upper()
  if country not in COUNTRIES:return None
@@ -43,7 +46,7 @@ def normalized(record,id,now):
   # Never treat annual/weekly billing as monthly without verified conversion.
   return None
  source=str(pick(item,'source_url','sourceUrl','url','store_url') or '')
- if not source.startswith(('https://','http://')):return None
+ if not source.startswith('https://'):return None
  date=str(pick(item,'last_verified','verified_at','observed_at','date','checked_at','last_updated') or '')[:10]
  try:dt.date.fromisoformat(date)
  except ValueError:return None
