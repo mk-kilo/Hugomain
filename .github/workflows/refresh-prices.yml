@@ -27,6 +27,8 @@ jobs:
         run: python3 scripts/refresh_prices.py
       - name: Validate generated JSON
         run: python3 -m json.tool pricing-snapshots.json > /dev/null
+      - name: Refuse anything other than verified monthly observations
+        run: python3 scripts/check_price_snapshot.py
       - name: Commit changed snapshots if new verified data exists
         run: |
           git config user.name "github-actions[bot]"

@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "overall": "unverified",
+  "updatedAt": null,
+  "source": "tests/ofox_smoke.py",
+  "recordedBy": null,
+  "note": "No successful authenticated run is recorded in this repository. A missing OFOX_API_KEY or a failed smoke run must leave this file unverified. Do not edit overall to api_smoke_passed by hand.",
+  "checks": {
+    "openai_responses": {
+      "status": "unverified",
+      "passedAt": null,
+      "detail": "No successful authenticated Responses API call has been recorded by tests/ofox_smoke.py."
+    },
+    "anthropic_messages": {
+      "status": "unverified",
+      "passedAt": null,
+      "detail": "No successful authenticated Messages API call has been recorded by tests/ofox_smoke.py."
+    },
+    "codex_cli": {
+      "status": "unverified",
+      "passedAt": null,
+      "detail": "tests/ofox_smoke.py does not launch Codex CLI. An API smoke pass would not verify Codex."
+    },
+    "claude_code": {
+      "status": "unverified",
+      "passedAt": null,
+      "detail": "tests/ofox_smoke.py does not launch Claude Code. An API smoke pass would not verify Claude Code."
+    },
+    "cursor_direct": {
+      "status": "provider_marked_incompatible",
+      "passedAt": null,
+      "detail": "Ofox documents direct Cursor integration as unsuitable.",
+      "source": "https://ofox.ai/docs/integrations/cursor",
+      "sourceUpdated": "2026-10-16"
+    }
+  }
+}
