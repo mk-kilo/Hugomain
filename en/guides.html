@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Setup notes for Codex, Claude Code and Cursor with a third-party API. Ofox marks Cursor as unsuitable. Codex and Claude Code are not verified by JXZNE.">
+  <meta name="theme-color" content="#080b12">
+  <title>Codex, Claude Code and Cursor API setup | JXZNE AI</title>
+  <link rel="canonical" href="https://jxzne.com/en/guides.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/guides.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/guides.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/guides.html">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="nav guide-nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span><span>JXZNE AI</span></a>
+  <nav class="nav-links">
+    <a href="#codex">Codex</a>
+    <a href="#claude-code">Claude Code</a>
+    <a href="#cursor">Cursor</a>
+    <a href="#config-wizard">Helper</a>
+    <a href="#troubleshoot">Errors</a>
+    <a href="developers.html">API prices</a>
+    <a href="../validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../guides.html?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="guides.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+  <a class="btn btn-primary" href="https://ofox.ai/x/itoken" rel="noopener noreferrer sponsored" target="_blank">See API options ↗</a>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official site for any model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices, promotions and compatibility are whatever the provider publishes.</div>
+<main class="guide-wrap">
+  <section class="guide-hero">
+    <span class="kicker">AI CODING · PRACTICAL SETUP GUIDES</span>
+    <h1>AI coding tools<br><span>API setup, without the traps</span></h1>
+    <p>Official config paths, compatibility checks and troubleshooting for Codex, Claude Code and Cursor. Confirm the protocol before you buy third-party API credit.</p>
+    <div class="guide-nav-cards"><a href="#codex">⌘ Codex setup →</a><a href="#claude-code">✳ Claude Code setup →</a><a href="#cursor">◈ Cursor setup →</a></div>
+    <div class="guide-warning"><strong>Important:</strong> these are setup notes. They are not a passed Ofox test. Buying Ofox API credit does not give you a Codex, Claude Code or Cursor subscription. Each tool speaks a different API and blocks different features.</div>
+    <p class="calc-note">Ofox’s partner page says the extra $3 on a referred user’s first top-up is paid by Ofox, not by the affiliate. <a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Source</a>, reviewed 2026-10-29.</p>
+  </section>
+
+  <section class="guide-section" id="codex">
+    <div class="guide-heading"><span class="coding-logo logo-codex">⌘</span><div><span class="kicker">GUIDE 01</span><h2>Codex: model provider config</h2></div></div>
+    <p>Codex CLI and the IDE extension read <code>~/.codex/config.toml</code>. Official docs allow a model provider. The service still has to speak the protocol Codex uses and serve the model you name. <a href="https://developers.openai.com/docs/config-file/config-basic" target="_blank" rel="noopener noreferrer">Official config docs ↗</a></p>
+    <ol>
+      <li>Install and update official Codex, and confirm it runs on your machine.</li>
+      <li>Open <code>~/.codex/config.toml</code> and read the official docs for <code>model_provider</code>, <code>model_providers</code> and <code>wire_api</code>.</li>
+      <li>Ask the API provider whether they support the Responses protocol Codex uses, the model id, and the auth scheme. OpenAI Chat Completions alone does not prove compatibility.</li>
+      <li>Make a small test call. Check tool use, long output and stability before a large top-up.</li>
+    </ol>
+    <div class="guide-warning"><strong>Status: not verified.</strong> This site does not ship an untested Ofox Codex config file. Copying a guessed file is how people get errors. <code>tests/ofox_smoke.py</code> does not launch Codex, and it has not recorded a pass here.</div>
+    <div class="guide-actions">
+      <a class="btn btn-secondary" href="https://developers.openai.com/docs/config-file/config-reference" target="_blank" rel="noopener noreferrer">Official config reference ↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See partner models and prices →</a>
+    </div>
+  </section>
+
+  <section class="guide-section" id="claude-code">
+    <div class="guide-heading"><span class="coding-logo logo-claude">✳</span><div><span class="kicker">GUIDE 02</span><h2>Claude Code: LLM gateway</h2></div></div>
+    <p>Claude Code calls the Anthropic API. Official docs allow an LLM gateway, and that gateway has to expose a compatible interface. <a href="https://docs.anthropic.com/en/docs/claude-code/llm-gateway" target="_blank" rel="noopener noreferrer">Official gateway docs ↗</a></p>
+    <ol>
+      <li>Install from the official guide and complete a basic run first.</li>
+      <li>Ask the provider whether they expose an Anthropic Messages gateway, tool calls, streaming, and which model ids.</li>
+      <li>If they confirm that, the official variable shape looks like this. Use the values they give you:</li>
+    </ol>
+    <div class="snippet"><div>Shell · example variables (not a working Ofox config)<button class="copy-code" type="button" data-copy="claude-snippet">Copy</button></div><pre id="claude-snippet"><code>export ANTHROPIC_BASE_URL="https://YOUR-COMPATIBLE-GATEWAY"
+export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
+    <p>Do not put an API key in GitHub or on a public page. Auth headers and paths differ by gateway. Follow the provider and the official docs.</p>
+    <div class="guide-warning"><strong>Status: not verified.</strong> Do not put an OpenAI-only <code>/v1</code> base URL into <code>ANTHROPIC_BASE_URL</code>. Claude Code is not launched by <code>tests/ofox_smoke.py</code>, and that test has not recorded a pass here.</div>
+    <div class="guide-actions">
+      <a class="btn btn-secondary" href="https://docs.anthropic.com/en/docs/claude-code/getting-started" target="_blank" rel="noopener noreferrer">Official getting started ↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See the partner API →</a>
+    </div>
+  </section>
+
+  <section class="guide-section" id="cursor">
+    <div class="guide-heading"><span class="coding-logo logo-cursor">◈</span><div><span class="kicker">GUIDE 03</span><h2>Cursor: do not point it straight at Ofox</h2></div></div>
+    <p>Cursor can store API keys for some providers. That setting does not cover every Cursor feature. <a href="https://docs.cursor.com/settings/api-keys" target="_blank" rel="noopener noreferrer">Official API keys docs ↗</a></p>
+    <ol>
+      <li>Open Cursor Settings → Models. The menu moves between versions.</li>
+      <li>Confirm the provider and model are in the official list, add the key as the page describes, and use Verify.</li>
+      <li>Check whether a custom base URL is supported. For an aggregator, confirm the current Cursor version against that provider’s own notice.</li>
+      <li>Test chat and edits you actually use. Tab completion and similar features may still use Cursor’s own service.</li>
+    </ol>
+    <div class="guide-warning"><strong>Status: Ofox marks this incompatible.</strong> Cursor Tab, Background Agent and Auto are not a fit for Ofox. Ofox’s suggestion is to run <code>codex</code> or <code>claude</code> in Cursor’s built-in terminal, after those tools are configured on their own. Those two clients are still unverified on this site. <a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox compatibility note ↗</a>, last updated 2026-10-16.</div>
+    <div class="guide-actions">
+      <a class="btn btn-secondary" href="https://docs.cursor.com/settings/api-keys" target="_blank" rel="noopener noreferrer">Cursor’s own help ↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See model prices →</a>
+    </div>
+  </section>
+
+  <section class="guide-section" id="config-wizard">
+    <span class="kicker">INTERACTIVE SETUP</span>
+    <h2>API setup helper</h2>
+    <p>Pick a tool and an operating system. The helper shows what to prepare, the official docs, and a copyable checklist. Ofox publishes Codex and Claude Code guides. This site has not verified them with a working key. Ofox marks direct Cursor use as unsuitable.</p>
+    <div class="wizard-box">
+      <div class="wizard-fields">
+        <label>Coding tool<select id="wizard-tool"><option value="codex">Codex</option><option value="claude">Claude Code</option><option value="cursor">Cursor</option></select></label>
+        <label>Operating system<select id="wizard-os"><option value="mac">macOS</option><option value="windows">Windows</option><option value="linux">Linux</option></select></label>
+        <label>Endpoint<select id="wizard-provider"><option value="official">An officially supported model service</option><option value="ofox">Ofox third-party API (not verified)</option></select></label>
+      </div>
+      <div class="wizard-result" aria-live="polite">
+        <strong id="wizard-status">Preparing steps</strong>
+        <p id="wizard-description"></p>
+        <div class="snippet"><div>Checklist<button type="button" id="wizard-copy" class="copy-code">Copy</button></div><pre><code id="wizard-code"></code></pre></div>
+        <a id="wizard-docs" class="btn btn-secondary" href="https://developers.openai.com/docs/config-file/config-basic" target="_blank" rel="noopener noreferrer">Official config docs ↗</a>
+        <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See Ofox models and prices ↗</a>
+        <p class="wizard-disclaimer">Do not type or paste a real API key on this page. The checklist is built in your browser and is not submitted.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="guide-section" id="troubleshoot">
+    <span class="kicker">TROUBLESHOOTING</span>
+    <h2>When the call fails, check these first</h2>
+    <div class="guide-faq">
+      <details open><summary>401 Unauthorized?</summary><p>Check that the key belongs to that API, that you did not copy a space, that the account has credit, and that the auth header matches the tool. Do not paste the key into a public post.</p></details>
+      <details><summary>404 or model not found?</summary><p>Check the path, the protocol and the model id. Codex Responses and a generic OpenAI-compatible chat endpoint are not the same feature. Claude Code needs an Anthropic-compatible gateway.</p></details>
+      <details><summary>429 or rate limited?</summary><p>Check balance, concurrency, token rate and upstream capacity. Slow the client down and retry.</p></details>
+      <details><summary>Why didn’t a top-up turn on Cursor Tab or an official subscription?</summary><p>Third-party model credit is billed apart from Codex, Claude Code and Cursor subscriptions. Some features only run on the official service. Ofox’s Cursor note says Tab, Background Agent and Auto do not follow a custom provider.</p></details>
+    </div>
+  </section>
+
+  <section class="guide-bottom">
+    <span class="kicker">READY TO EXPLORE?</span>
+    <h2>Check compatibility, then open an API account</h2>
+    <p>Use the referral link to see live models, prices and the new-user offer. Confirm the tool’s protocol before you pay. The extra $3 on a first top-up, if you qualify, is Ofox’s credit.</p>
+    <a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://ofox.ai/x/itoken">See models and the new-user offer →</a>
+    <p class="calc-note"><a href="developers.html#price-compare">Compare API prices</a> · <a href="compare-aggregators.html">Official API vs aggregators</a></p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><span>Independent guide and referral site · not the Codex, Anthropic or Cursor website</span><a href="./">Home</a></footer>
+<script>try{localStorage.setItem('jxzne-locale','en')}catch(e){}</script>
+<script>document.querySelectorAll('.copy-code').forEach(b=>b.addEventListener('click',async()=>{const t=document.getElementById(b.dataset.copy)?.innerText||'';if(!t)return;try{await navigator.clipboard.writeText(t);b.textContent='Copied'}catch(e){b.textContent='Select the code and copy it'}}));</script>
+<script src="wizard.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "source": "https://api.ofox.ai/v1/models",
+  "fetchedAt": "2026-10-29T15:55:27+00:00",
+  "catalogCount": 117,
+  "note": "Observed unauthenticated public catalog rates. USD per million tokens = per-token rate × 1,000,000. Omitted models were not in this response or had no usable per-token text price. Not an invoice and not a promise that the signed-in price matches.",
+  "requested": [
+    "openai/gpt-5.4",
+    "openai/gpt-5.2",
+    "google/gemini-2.5-flash",
+    "google/gemini-2.5-pro",
+    "anthropic/claude-sonnet-4.6"
+  ],
+  "missing": [
+    "anthropic/claude-sonnet-4.6"
+  ],
+  "models": [
+    {
+      "id": "openai/gpt-5.4",
+      "promptPerToken": 2.5e-06,
+      "completionPerToken": 1.5e-05,
+      "promptPerMillion": 2.5,
+      "completionPerMillion": 15.0,
+      "endpoints": [
+        "/v1/chat/completions",
+        "/v1/responses"
+      ]
+    },
+    {
+      "id": "openai/gpt-5.2",
+      "promptPerToken": 1.75e-06,
+      "completionPerToken": 1.4e-05,
+      "promptPerMillion": 1.75,
+      "completionPerMillion": 14.0,
+      "endpoints": [
+        "/v1/chat/completions",
+        "/v1/responses"
+      ]
+    },
+    {
+      "id": "google/gemini-2.5-flash",
+      "promptPerToken": 3e-07,
+      "completionPerToken": 2.5e-06,
+      "promptPerMillion": 0.3,
+      "completionPerMillion": 2.5,
+      "endpoints": [
+        "/v1/chat/completions"
+      ]
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "promptPerToken": 1.25e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 1.25,
+      "completionPerMillion": 10.0,
+      "endpoints": [
+        "/v1/chat/completions"
+      ]
+    }
+  ]
+}

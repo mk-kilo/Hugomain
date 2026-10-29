@@ -103,7 +103,16 @@ def main():
  if not collected:
   print('NO_NEW_VERIFIED_DATA: existing snapshot preserved; no new history created.')
   return 0
- merged={(x['id'],x['plan'],x['code'],x['channel']):x for x in old.get('rows',[]) if all(k in x for k in ('id','plan','code','channel'))}
+ def keep(x):
+  if not isinstance(x,dict) or not all(k in x and x[k] not in ('',None) for k in ('id','plan','code','channel','source')):return False
+  if not str(x.get('source','')).startswith('https://') or x.get('unit')!='USD/月':return False
+  if str(x.get('status','')).lower() in ('demo','placeholder','unverified','rejected'):return False
+  if x.get('is_demo') is True or x.get('demo') is True or x.get('is_placeholder') is True:return False
+  try:
+   usd=float(x.get('usd'));dt.date.fromisoformat(str(x.get('date') or '')[:10])
+  except (TypeError,ValueError):return False
+  return 0<usd<5000
+ merged={(x['id'],x['plan'],x['code'],x['channel']):x for x in old.get('rows',[]) if keep(x)}
  for key,row in collected.items():
   prev=merged.get(key)
   if prev is None or row['date']>=prev.get('date',''):merged[key]=row

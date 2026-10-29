@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>官方 API、Ofox 与 OpenRouter 怎么选 | JXZNE AI</title>
+  <meta name="description" content="对照官方 API、Ofox 与 OpenRouter 类聚合：多模型便利、计费、OpenAI / Anthropic / Gemini 协议，以及 Ofox 对 Cursor 的不兼容说明。">
+  <link rel="canonical" href="https://jxzne.com/compare-aggregators.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/compare-aggregators.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/compare-aggregators.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/compare-aggregators.html">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <nav class="nav-links">
+    <a href="/">首页</a>
+    <a href="developers.html">开发者 API</a>
+    <a href="guides.html">配置教程</a>
+    <a href="validation.html">实测状态</a>
+    <a href="enterprise.html">企业专区</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="compare-aggregators.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/compare-aggregators.html" hreflang="en" lang="en">EN</a>
+  </nav>
+  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">获取 API Key ↗</a>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。下表引用的是各家公开页面，不是本站对账单的审计。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">OFFICIAL API VS AGGREGATORS</span>
+    <h1>官方 API、Ofox、<br>OpenRouter 类聚合</h1>
+    <p>给已经在调用多个模型的开发者：什么时候一个聚合账号更省事，什么时候应该留在原厂。费用和兼容性以对方当期页面为准。本页不把任何一家写成“一定更便宜”。</p>
+    <div class="pricing-hub-actions">
+      <a class="btn btn-primary" href="developers.html#price-compare">去填真实 API 单价 →</a>
+      <a class="btn btn-secondary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">查看 Ofox 报价与首充 $3 ↗</a>
+    </div>
+    <p class="calc-note">$3 是 Ofox 对推荐渠道新用户首次充值的赠额，由 Ofox 承担，不从推荐佣金扣除，本站不支付。查阅于 2026-10-29：<a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>对照</h2>
+    <div class="matrix-scroll">
+      <table class="matrix-table compare-table">
+        <thead><tr><th>比较项</th><th>模型厂商官方 API</th><th>Ofox</th><th>OpenRouter（聚合例子）</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>多模型便利</td>
+            <td>每个厂商单独开户、单独 Key、单独账单。原厂功能和商务支持最直接。</td>
+            <td>Ofox 称一个 Key 可调用 GPT、Claude、Gemini 等 100+ 模型。这是他们的产品说明。未登录公开目录里有没有某个模型，要看当次响应，不能用宣传页代替目录。</td>
+            <td>定价页称 Standard 可访问大量模型（页面写 500+）。以他们的模型列表为准，不要把这个数字套到 Ofox 上。</td>
+          </tr>
+          <tr>
+            <td>计费</td>
+            <td>厂商标价。企业折扣、批处理和缓存要单独问。没有中间平台手续费，但你要自己管多家账单。</td>
+            <td>Ofox 企业页和更新日志称：按厂商标价计费，平台手续费 0%。日志另有按月消费返还的档位说明（最高写到 7%）。这些都是 Ofox 的规则原文，不是本站保证，也不是我们已经拿到的折扣。</td>
+            <td>2026-10-29 查阅的定价页：Free 平台费写 N/A，Standard 5.5%，Business 8%，Enterprise 写可谈折扣。这是他们公布的价目，不是我们的实测账单。会变。</td>
+          </tr>
+          <tr>
+            <td>协议</td>
+            <td>各家只提供自己的原生协议。</td>
+            <td>Ofox 文档列出 OpenAI 兼容（Chat Completions / Responses）、Anthropic 原生 Messages、Gemini 原生 generateContent。某个模型是否开通某个端点，以模型卡片为准。本站没有替你打通。</td>
+            <td>这类聚合常常以 OpenAI 兼容为主。有没有 Anthropic 或 Gemini 原生接口，要读他们自己的文档。本站没有验收。</td>
+          </tr>
+          <tr>
+            <td>Cursor 直接接入</td>
+            <td>Cursor 允许为部分官方提供商保存 Key。Tab 等功能仍可能走 Cursor 自己的模型。</td>
+            <td>Ofox 兼容性说明（更新于 2026-10-16）写明：直接接 Cursor 不合适。Tab、Background Agent、Auto 不会跟着自定义供应商走。建议在 Cursor 终端里用 Codex CLI 或 Claude Code。这两项客户端本站仍是未验证。</td>
+            <td>不要默认另一家聚合能接上 Cursor。同时核对 Cursor 当前版本文档和该聚合的兼容说明。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="calc-note compare-sources" id="catalog-observed">公开目录观察以仓库里的 ofox-public-prices.json 为准。文件打不开时，本页不报模型数量，也不报 Ofox 单价。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>什么时候不要用聚合</h2>
+    <div class="grok-checks">
+      <div><h3>你只用一个模型</h3><p>原厂账号更简单，企业折扣也可能更好。聚合的价值主要在“多家模型一个账单”。</p></div>
+      <div><h3>你要 Cursor 的 Tab / Agent / Auto</h3><p>Ofox 已经说明这些不走自定义 API。换一家聚合也不会自动补上 Cursor 的官方功能。</p></div>
+      <div><h3>合规要求直签原厂</h3><p>如果 DPA、数据驻留或发票必须和模型厂商直接签，中间商条款可能不够。先要文件，再充值。</p></div>
+      <div><h3>工具还没在你机器上跑通</h3><p>本站的 Codex CLI 和 Claude Code 目前是未验证。tests/ofox_smoke.py 没在这里记录通过，而且它本来也不启动这两个客户端。</p></div>
+      <div><h3>标价和结算页不一致</h3><p>宣传页上的 0% 手续费、返还或赠额，都以结账时的规则为准。对不上就别按宣传页做预算。</p></div>
+      <div><h3>你把聊天会员当成 API</h3><p>ChatGPT、Claude 或 Cursor 的订阅通常不能当作第三方 API 余额。买 API 额度也不会自动开通这些订阅。</p></div>
+    </div>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>来源（查阅日 2026-10-29）</h2>
+    <ul class="checklist compare-sources">
+      <li><a href="https://ofox.ai/enterprise" target="_blank" rel="noopener noreferrer">Ofox 企业页</a>：0% 平台手续费、厂商标价的说法</li>
+      <li><a href="https://ofox.ai/docs/changelog" target="_blank" rel="noopener noreferrer">Ofox 更新日志</a>：标价、0% 手续费、返还档位、推荐首充 $3</li>
+      <li><a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>：$3 由 Ofox 承担，不从佣金扣除</li>
+      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 说明</a>：直接接入不合适，更新于 2026-10-16</li>
+      <li><a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox 计费文档</a></li>
+      <li><a href="https://openrouter.ai/pricing" target="_blank" rel="noopener noreferrer">OpenRouter 定价页</a>：平台费档位</li>
+      <li><a href="https://docs.cursor.com/settings/api-keys" target="_blank" rel="noopener noreferrer">Cursor API keys 文档</a></li>
+      <li><a href="developers.html#price-compare">本站价格比较</a>：没有目录价格时留空</li>
+    </ul>
+    <div class="pricing-hub-actions">
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">在 Ofox 核对当前报价 ↗</a>
+      <a class="btn btn-secondary" href="guides.html">先看配置限制 →</a>
+    </div>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 独立对照，不是三家中任何一家的官方报价</p><a href="/">首页</a></footer>
+<script>
+try{if(new URLSearchParams(location.search).get('lang')==='zh')localStorage.setItem('jxzne-locale','zh-CN')}catch(e){}
+fetch('ofox-public-prices.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(data){
+  var node=document.getElementById('catalog-observed');
+  if(!node||!data||!data.fetchedAt)return;
+  var missing=(data.missing||[]).join('、')||'无';
+  node.textContent='未登录公开目录观察时间 '+data.fetchedAt+'，响应该目录 '+data.catalogCount+' 个模型。请求了但没有可用文本单价的 id：'+missing+'。Ofox 宣传页仍可能提到这些名字。这不是发票，也不是“买不到”的结论。';
+}).catch(function(){});
+</script>
+</body>
+</html>
