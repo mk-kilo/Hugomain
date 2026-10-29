@@ -7,9 +7,9 @@ ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'pricing-snapshots.json'
 HISTORY=ROOT/'price-history'
 API='https://subpriced.com/api/prices'
-PRODUCTS=['chatgpt','claude','gemini','grok','perplexity','kimi','glm','microsoft-copilot','poe','le-chat']
+PRODUCTS=['chatgpt','claude','gemini','grok','perplexity','kimi','glm','deepseek','qwen','microsoft-copilot']
 COUNTRIES={'US':'美国','TR':'土耳其','JP':'日本','GB':'英国','CA':'加拿大','FR':'法国','DE':'德国','IN':'印度','BR':'巴西','PH':'菲律宾','PK':'巴基斯坦','EG':'埃及','ID':'印度尼西亚','CN':'中国','NG':'尼日利亚','DK':'丹麦','AU':'澳大利亚','KR':'韩国','MX':'墨西哥','AR':'阿根廷','CH':'瑞士','TH':'泰国','VN':'越南','SG':'新加坡'}
-NAMES={'chatgpt':'ChatGPT','claude':'Claude','gemini':'Gemini','grok':'Grok','glm':'GLM','leonardo-ai':'Leonardo AI','character-ai':'Character AI','perplexity':'Perplexity','microsoft-copilot':'Microsoft Copilot','manus':'Manus','kimi':'Kimi','poe':'Poe','sora':'Sora','kling-ai':'Kling AI','runwayml':'Runway','captions':'Captions','pollo-ai':'Pollo AI','heygen':'HeyGen','invideo-ai':'invideo AI','catcosplay':'CatCosplay','suno':'Suno','x':'X','le-chat':'Le Chat'}
+NAMES={'chatgpt':'ChatGPT','claude':'Claude','gemini':'Gemini','grok':'Grok','glm':'GLM','leonardo-ai':'Leonardo AI','character-ai':'Character AI','perplexity':'Perplexity','microsoft-copilot':'Microsoft Copilot','manus':'Manus','kimi':'Kimi','poe':'Poe','sora':'Sora','kling-ai':'Kling AI','runwayml':'Runway','captions':'Captions','pollo-ai':'Pollo AI','heygen':'HeyGen','invideo-ai':'invideo AI','catcosplay':'CatCosplay','suno':'Suno','x':'X','le-chat':'Le Chat','deepseek':'DeepSeek','qwen':'Qwen'}
 def pick(obj,*keys):
  for k in keys:
   if isinstance(obj,dict) and obj.get(k) is not None: return obj[k]
