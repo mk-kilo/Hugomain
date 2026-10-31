@@ -1,7 +1,7 @@
 {
   "about": "Observed, attributed, monthly subscription prices. USD equivalents are not API rates or guaranteed quotes.",
-  "lastReviewed": "2026-10-30",
-  "lastSuccessfulFetch": "2026-10-30T10:54:21+00:00",
+  "lastReviewed": "2026-10-31",
+  "lastSuccessfulFetch": "2026-10-31T10:26:25+00:00",
   "automatedRows": 107,
   "dataProvider": "Subscription Price Monitor / OpenTheRank, CC BY 4.0 (per provider statement)",
   "dataProviderUrl": "https://subpriced.com/api-docs",
@@ -747,7 +747,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -757,11 +757,11 @@
       "country": "澳大利亚",
       "code": "AU",
       "channel": "app_store",
-      "usd": 21.0773,
+      "usd": 21.0849,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -771,11 +771,11 @@
       "country": "巴西",
       "code": "BR",
       "channel": "app_store",
-      "usd": 18.6309,
+      "usd": 18.5095,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -785,11 +785,11 @@
       "country": "加拿大",
       "code": "CA",
       "channel": "app_store",
-      "usd": 17.8644,
+      "usd": 17.8934,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -799,11 +799,11 @@
       "country": "德国",
       "code": "DE",
       "channel": "app_store",
-      "usd": 25.6604,
+      "usd": 25.6703,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -813,11 +813,11 @@
       "country": "丹麦",
       "code": "DK",
       "channel": "app_store",
-      "usd": 26.6609,
+      "usd": 26.7247,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -827,11 +827,11 @@
       "country": "法国",
       "code": "FR",
       "channel": "app_store",
-      "usd": 25.6604,
+      "usd": 25.6703,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -841,11 +841,11 @@
       "country": "英国",
       "code": "GB",
       "channel": "app_store",
-      "usd": 26.6834,
+      "usd": 26.7572,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -855,11 +855,11 @@
       "country": "印度",
       "code": "IN",
       "channel": "app_store",
-      "usd": 20.9776,
+      "usd": 21.0258,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/india/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -869,11 +869,11 @@
       "country": "日本",
       "code": "JP",
       "channel": "app_store",
-      "usd": 19.0016,
+      "usd": 19.0483,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/japan/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -883,11 +883,11 @@
       "country": "韩国",
       "code": "KR",
       "channel": "app_store",
-      "usd": 21.6735,
+      "usd": 21.7309,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/south-korea/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -897,11 +897,11 @@
       "country": "墨西哥",
       "code": "MX",
       "channel": "app_store",
-      "usd": 21.1856,
+      "usd": 21.1963,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -911,11 +911,11 @@
       "country": "尼日利亚",
       "code": "NG",
       "channel": "app_store",
-      "usd": 23.3988,
+      "usd": 23.4118,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -925,11 +925,11 @@
       "country": "巴基斯坦",
       "code": "PK",
       "channel": "app_store",
-      "usd": 17.7149,
+      "usd": 17.7037,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -939,11 +939,11 @@
       "country": "土耳其",
       "code": "TR",
       "channel": "app_store",
-      "usd": 20.0329,
+      "usd": 20.0183,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/turkey/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -957,7 +957,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/chatgpt/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1031,7 +1031,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1041,11 +1041,11 @@
       "country": "澳大利亚",
       "code": "AU",
       "channel": "app_store",
-      "usd": 21.0843,
+      "usd": 21.0919,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1055,11 +1055,11 @@
       "country": "巴西",
       "code": "BR",
       "channel": "app_store",
-      "usd": 24.2258,
+      "usd": 24.0679,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1069,11 +1069,11 @@
       "country": "加拿大",
       "code": "CA",
       "channel": "app_store",
-      "usd": 20.0162,
+      "usd": 20.0487,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1083,11 +1083,11 @@
       "country": "德国",
       "code": "DE",
       "channel": "app_store",
-      "usd": 24.5554,
+      "usd": 24.5649,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1097,11 +1097,11 @@
       "country": "丹麦",
       "code": "DK",
       "channel": "app_store",
-      "usd": 26.6609,
+      "usd": 26.7247,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1111,11 +1111,11 @@
       "country": "埃及",
       "code": "EG",
       "channel": "app_store",
-      "usd": 17.8435,
+      "usd": 17.848,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1125,11 +1125,11 @@
       "country": "法国",
       "code": "FR",
       "channel": "app_store",
-      "usd": 24.5554,
+      "usd": 24.5649,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1139,11 +1139,11 @@
       "country": "英国",
       "code": "GB",
       "channel": "app_store",
-      "usd": 26.6968,
+      "usd": 26.7706,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1153,11 +1153,11 @@
       "country": "印度",
       "code": "IN",
       "channel": "app_store",
-      "usd": 20.9776,
+      "usd": 21.0258,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/india/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1167,11 +1167,11 @@
       "country": "日本",
       "code": "JP",
       "channel": "app_store",
-      "usd": 19.0016,
+      "usd": 19.0483,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/japan/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1181,11 +1181,11 @@
       "country": "韩国",
       "code": "KR",
       "channel": "app_store",
-      "usd": 24.6629,
+      "usd": 24.7282,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/south-korea/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1195,11 +1195,11 @@
       "country": "墨西哥",
       "code": "MX",
       "channel": "app_store",
-      "usd": 21.1856,
+      "usd": 21.1963,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1209,11 +1209,11 @@
       "country": "尼日利亚",
       "code": "NG",
       "channel": "app_store",
-      "usd": 22.2103,
+      "usd": 22.2227,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/nigeria/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1223,11 +1223,11 @@
       "country": "巴基斯坦",
       "code": "PK",
       "channel": "app_store",
-      "usd": 17.7149,
+      "usd": 17.7037,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1237,11 +1237,11 @@
       "country": "土耳其",
       "code": "TR",
       "channel": "app_store",
-      "usd": 20.0329,
+      "usd": 20.0183,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/turkey/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1255,7 +1255,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/claude/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1325,11 +1325,11 @@
       "country": "澳大利亚",
       "code": "AU",
       "channel": "app_store",
-      "usd": 23.1857,
+      "usd": 23.1941,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1339,11 +1339,11 @@
       "country": "巴西",
       "code": "BR",
       "channel": "app_store",
-      "usd": 18.0714,
+      "usd": 17.9536,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1353,11 +1353,11 @@
       "country": "加拿大",
       "code": "CA",
       "channel": "app_store",
-      "usd": 19.2942,
+      "usd": 19.3255,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1367,11 +1367,11 @@
       "country": "瑞士",
       "code": "CH",
       "channel": "app_store",
-      "usd": 20.5783,
+      "usd": 20.6181,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1381,11 +1381,11 @@
       "country": "德国",
       "code": "DE",
       "channel": "app_store",
-      "usd": 24.5442,
+      "usd": 24.5537,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1395,11 +1395,11 @@
       "country": "丹麦",
       "code": "DK",
       "channel": "app_store",
-      "usd": 25.1715,
+      "usd": 25.2317,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1409,11 +1409,11 @@
       "country": "埃及",
       "code": "EG",
       "channel": "app_store",
-      "usd": 16.7729,
+      "usd": 16.7771,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1423,11 +1423,11 @@
       "country": "法国",
       "code": "FR",
       "channel": "app_store",
-      "usd": 24.5442,
+      "usd": 24.5537,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1437,11 +1437,11 @@
       "country": "英国",
       "code": "GB",
       "channel": "app_store",
-      "usd": 25.3486,
+      "usd": 25.4187,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1451,11 +1451,11 @@
       "country": "印度",
       "code": "IN",
       "channel": "app_store",
-      "usd": 20.4634,
+      "usd": 20.5104,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1465,11 +1465,11 @@
       "country": "日本",
       "code": "JP",
       "channel": "app_store",
-      "usd": 18.3682,
+      "usd": 18.4134,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1479,11 +1479,11 @@
       "country": "韩国",
       "code": "KR",
       "channel": "app_store",
-      "usd": 21.6735,
+      "usd": 21.7309,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1493,11 +1493,11 @@
       "country": "尼日利亚",
       "code": "NG",
       "channel": "app_store",
-      "usd": 21.1703,
+      "usd": 21.1821,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1507,11 +1507,11 @@
       "country": "土耳其",
       "code": "TR",
       "channel": "app_store",
-      "usd": 17.4286,
+      "usd": 17.4159,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1525,7 +1525,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/gemini/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1563,7 +1563,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1577,7 +1577,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1591,7 +1591,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1605,7 +1605,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1619,7 +1619,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1633,7 +1633,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1647,7 +1647,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1661,7 +1661,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1675,7 +1675,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1689,7 +1689,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1703,7 +1703,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1717,7 +1717,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1731,7 +1731,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1745,7 +1745,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/glm/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1759,7 +1759,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1769,11 +1769,11 @@
       "country": "澳大利亚",
       "code": "AU",
       "channel": "app_store",
-      "usd": 35.1405,
+      "usd": 35.1532,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1783,11 +1783,11 @@
       "country": "巴西",
       "code": "BR",
       "channel": "app_store",
-      "usd": 27.9557,
+      "usd": 27.7735,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1797,11 +1797,11 @@
       "country": "加拿大",
       "code": "CA",
       "channel": "app_store",
-      "usd": 28.5945,
+      "usd": 28.641,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1811,11 +1811,11 @@
       "country": "德国",
       "code": "DE",
       "channel": "app_store",
-      "usd": 39.0654,
+      "usd": 39.0805,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1825,11 +1825,11 @@
       "country": "丹麦",
       "code": "DK",
       "channel": "app_store",
-      "usd": 37.087,
+      "usd": 37.1756,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1839,11 +1839,11 @@
       "country": "埃及",
       "code": "EG",
       "channel": "app_store",
-      "usd": 26.7654,
+      "usd": 26.772,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1853,11 +1853,11 @@
       "country": "法国",
       "code": "FR",
       "channel": "app_store",
-      "usd": 39.0654,
+      "usd": 39.0805,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1867,11 +1867,11 @@
       "country": "英国",
       "code": "GB",
       "channel": "app_store",
-      "usd": 40.0452,
+      "usd": 40.1559,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1881,11 +1881,11 @@
       "country": "印度",
       "code": "IN",
       "channel": "app_store",
-      "usd": 30.4327,
+      "usd": 30.5027,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/india/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1895,11 +1895,11 @@
       "country": "日本",
       "code": "JP",
       "channel": "app_store",
-      "usd": 31.6693,
+      "usd": 31.7472,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1909,11 +1909,11 @@
       "country": "韩国",
       "code": "KR",
       "channel": "app_store",
-      "usd": 32.8839,
+      "usd": 32.971,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1923,11 +1923,11 @@
       "country": "墨西哥",
       "code": "MX",
       "channel": "app_store",
-      "usd": 31.8049,
+      "usd": 31.8211,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1937,11 +1937,11 @@
       "country": "尼日利亚",
       "code": "NG",
       "channel": "app_store",
-      "usd": 37.0666,
+      "usd": 37.0873,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1951,11 +1951,11 @@
       "country": "巴基斯坦",
       "code": "PK",
       "channel": "app_store",
-      "usd": 28.5607,
+      "usd": 28.5428,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1965,11 +1965,11 @@
       "country": "土耳其",
       "code": "TR",
       "channel": "app_store",
-      "usd": 26.0428,
+      "usd": 26.0238,
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -1983,7 +1983,7 @@
       "unit": "USD/月",
       "date": "2026-09-29",
       "source": "https://opentherank.com/ai-pricing/grok/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2269,11 +2269,11 @@
       "country": "澳大利亚",
       "code": "AU",
       "channel": "app_store",
-      "usd": 20.3815,
+      "usd": 20.3888,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2283,11 +2283,11 @@
       "country": "巴西",
       "code": "BR",
       "channel": "app_store",
-      "usd": 22.3608,
+      "usd": 22.2151,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2297,11 +2297,11 @@
       "country": "加拿大",
       "code": "CA",
       "channel": "app_store",
-      "usd": 17.8716,
+      "usd": 17.9006,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2311,11 +2311,11 @@
       "country": "瑞士",
       "code": "CH",
       "channel": "app_store",
-      "usd": 24.2098,
+      "usd": 24.2566,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2325,11 +2325,11 @@
       "country": "德国",
       "code": "DE",
       "channel": "app_store",
-      "usd": 24.5554,
+      "usd": 24.5649,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2339,11 +2339,11 @@
       "country": "丹麦",
       "code": "DK",
       "channel": "app_store",
-      "usd": 26.6609,
+      "usd": 26.7247,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2353,11 +2353,11 @@
       "country": "法国",
       "code": "FR",
       "channel": "app_store",
-      "usd": 24.5554,
+      "usd": 24.5649,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2367,11 +2367,11 @@
       "country": "英国",
       "code": "GB",
       "channel": "app_store",
-      "usd": 25.3619,
+      "usd": 25.4321,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2381,11 +2381,11 @@
       "country": "印度",
       "code": "IN",
       "channel": "app_store",
-      "usd": 20.9776,
+      "usd": 21.0258,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2395,11 +2395,11 @@
       "country": "日本",
       "code": "JP",
       "channel": "app_store",
-      "usd": 19.0016,
+      "usd": 19.0483,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2409,11 +2409,11 @@
       "country": "韩国",
       "code": "KR",
       "channel": "app_store",
-      "usd": 18.684,
+      "usd": 18.7335,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2423,11 +2423,11 @@
       "country": "尼日利亚",
       "code": "NG",
       "channel": "app_store",
-      "usd": 22.2103,
+      "usd": 22.2227,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2437,11 +2437,11 @@
       "country": "土耳其",
       "code": "TR",
       "channel": "app_store",
-      "usd": 16.0262,
+      "usd": 16.0146,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -2455,7 +2455,7 @@
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/kimi/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3313,11 +3313,11 @@
       "country": "澳大利亚",
       "code": "AU",
       "channel": "app_store",
-      "usd": 21.0843,
+      "usd": 21.0919,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3327,11 +3327,11 @@
       "country": "巴西",
       "code": "BR",
       "channel": "app_store",
-      "usd": 24.2258,
+      "usd": 24.0679,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3341,11 +3341,11 @@
       "country": "加拿大",
       "code": "CA",
       "channel": "app_store",
-      "usd": 17.8716,
+      "usd": 17.9006,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3355,11 +3355,11 @@
       "country": "瑞士",
       "code": "CH",
       "channel": "app_store",
-      "usd": 24.2098,
+      "usd": 24.2566,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3369,11 +3369,11 @@
       "country": "德国",
       "code": "DE",
       "channel": "app_store",
-      "usd": 24.5554,
+      "usd": 24.5649,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3383,11 +3383,11 @@
       "country": "丹麦",
       "code": "DK",
       "channel": "app_store",
-      "usd": 26.6609,
+      "usd": 26.7247,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3397,11 +3397,11 @@
       "country": "法国",
       "code": "FR",
       "channel": "app_store",
-      "usd": 24.5554,
+      "usd": 24.5649,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3411,11 +3411,11 @@
       "country": "英国",
       "code": "GB",
       "channel": "app_store",
-      "usd": 26.6968,
+      "usd": 26.7706,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3425,11 +3425,11 @@
       "country": "印度",
       "code": "IN",
       "channel": "app_store",
-      "usd": 20.9776,
+      "usd": 21.0258,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3439,11 +3439,11 @@
       "country": "日本",
       "code": "JP",
       "channel": "app_store",
-      "usd": 19.0016,
+      "usd": 19.0483,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3453,11 +3453,11 @@
       "country": "韩国",
       "code": "KR",
       "channel": "app_store",
-      "usd": 24.6629,
+      "usd": 24.7282,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3467,11 +3467,11 @@
       "country": "尼日利亚",
       "code": "NG",
       "channel": "app_store",
-      "usd": 22.2103,
+      "usd": 22.2227,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3481,11 +3481,11 @@
       "country": "土耳其",
       "code": "TR",
       "channel": "app_store",
-      "usd": 20.0329,
+      "usd": 20.0183,
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
@@ -3499,7 +3499,7 @@
       "unit": "USD/月",
       "date": "2026-09-28",
       "source": "https://opentherank.com/ai-pricing/perplexity/",
-      "fetchedAt": "2026-10-30T10:54:21+00:00",
+      "fetchedAt": "2026-10-31T10:26:25+00:00",
       "dataset": "Subscription Price Monitor / OpenTheRank"
     },
     {
