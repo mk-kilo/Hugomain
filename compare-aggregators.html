@@ -10,6 +10,17 @@
   <link rel="alternate" hreflang="en" href="https://jxzne.com/en/compare-aggregators.html">
   <link rel="alternate" hreflang="x-default" href="https://jxzne.com/compare-aggregators.html">
   <link rel="stylesheet" href="styles.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JXZNE AI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="官方 API、Ofox 与 OpenRouter 怎么选 | JXZNE AI">
+<meta property="og:description" content="对照官方 API、Ofox 与 OpenRouter 类聚合：多模型便利、计费、OpenAI / Anthropic / Gemini 协议，以及 Ofox 对 Cursor 的不兼容说明。">
+<meta property="og:url" content="https://jxzne.com/compare-aggregators.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="官方 API、Ofox 与 OpenRouter 怎么选 | JXZNE AI">
+<meta name="twitter:description" content="对照官方 API、Ofox 与 OpenRouter 类聚合：多模型便利、计费、OpenAI / Anthropic / Gemini 协议，以及 Ofox 对 Cursor 的不兼容说明。">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/compare-aggregators.html#webpage","url":"https://jxzne.com/compare-aggregators.html","name":"官方 API、Ofox 与 OpenRouter 怎么选 | JXZNE AI","description":"对照官方 API、Ofox 与 OpenRouter 类聚合：多模型便利、计费、OpenAI / Anthropic / Gemini 协议，以及 Ofox 对 Cursor 的不兼容说明。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"官方 API、Ofox 与 OpenRouter 怎么选","item":"https://jxzne.com/compare-aggregators.html"}]}]}</script>
 </head>
 <body>
 <header class="nav">
@@ -86,6 +97,29 @@
       <div><h3>标价和结算页不一致</h3><p>宣传页上的 0% 手续费、返还或赠额，都以结账时的规则为准。对不上就别按宣传页做预算。</p></div>
       <div><h3>你把聊天会员当成 API</h3><p>ChatGPT、Claude 或 Cursor 的订阅通常不能当作第三方 API 余额。买 API 额度也不会自动开通这些订阅。</p></div>
     </div>
+  </section>
+
+  <section class="pricing-hub-section" id="how-to-choose">
+    <h2>按三个问题做决定</h2>
+    <p>上面的对照表回答“各家公开页面怎么写”。这一节回答“你该先看哪一列”。不新增价格，也不把 Ofox 写成已验证或更便宜。</p>
+    <div class="grok-checks">
+      <div><h3>1 · 你买的是聊天会员，还是 API？</h3><p>ChatGPT Plus、Claude Pro 这类订阅通常不包含可在自己程序里调用的 API 额度。API 是另一张账单、另一套 Key。先看 <a href="developers.html#subscription-vs-api">聊天会员和 API 的区别</a>，再决定要不要打开聚合商。</p></div>
+      <div><h3>2 · 客户端要哪种协议？</h3><p>Codex 的官方配置走模型提供商，不能用“支持 Chat Completions”代替。Claude Code 需要 Anthropic Messages 网关。自己的 OpenAI SDK 程序通常只改 Base URL。协议对不上，标价没有意义。</p></div>
+      <div><h3>3 · 账单和合规要跟谁签？</h3><p>只要一个模型，或者 DPA、数据驻留、发票必须跟原厂签，留在官方 API。要在一个账户里切换多家模型，再把聚合商放进候选。OpenRouter 在本页是公开价目的例子，不是本站测过的账单。</p></div>
+    </div>
+    <h3>客户端和协议，分开核对</h3>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <thead><tr><th>你在用的东西</th><th>需要先确认的协议</th><th>本站目前能说的话</th></tr></thead>
+        <tbody>
+          <tr><td>自己的服务端，OpenAI SDK</td><td>Chat Completions 或 Responses，以你代码里的调用为准</td><td>Ofox 文档列出这两类 OpenAI 兼容面。某个模型是否开通，以模型卡片为准。本站没有替你打通。</td></tr>
+          <tr><td>Codex CLI</td><td>配置里的 model provider / wire_api，通常不是普通聊天接口</td><td>未验证。tests/ofox_smoke.py 不启动 Codex，仓库里也没有记录通过的付费调用。</td></tr>
+          <tr><td>Claude Code</td><td>Anthropic Messages 网关，含你需要的工具调用和流式</td><td>未验证。同一支冒烟脚本不启动 Claude Code。</td></tr>
+          <tr><td>Cursor 里的 Tab、Agent、Auto</td><td>Cursor 自己的模型服务，不是自定义 Base URL</td><td>Ofox 兼容性说明（2026-10-16）写明直接接入不合适。换一家聚合不会自动补上这些功能。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="calc-note">步骤在 <a href="guides.html">配置教程</a> 和 <a href="cursor-codex-third-party-api.html">Cursor / Codex 用不了第三方 API 怎么办</a>。按问题选聚合商：<a href="choose-ai-api-aggregator.html">第三方 AI API 聚合商怎么选</a>。实测状态在 <a href="validation.html">验证页</a>。</p>
   </section>
 
   <section class="pricing-hub-section">

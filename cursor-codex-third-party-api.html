@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI</title>
+  <meta name="description" content="Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。">
+  <link rel="canonical" href="https://jxzne.com/cursor-codex-third-party-api.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/cursor-codex-third-party-api.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/cursor-codex-third-party-api.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/cursor-codex-third-party-api.html">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JXZNE AI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI">
+<meta property="og:description" content="Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。">
+<meta property="og:url" content="https://jxzne.com/cursor-codex-third-party-api.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI">
+<meta name="twitter:description" content="Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/cursor-codex-third-party-api.html#webpage","url":"https://jxzne.com/cursor-codex-third-party-api.html","name":"Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI","description":"Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"Cursor 和 Codex 用不了第三方 API 怎么办","item":"https://jxzne.com/cursor-codex-third-party-api.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/cursor-codex-third-party-api.html#faq","url":"https://jxzne.com/cursor-codex-third-party-api.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"为什么充了 API 额度，Cursor Tab 还是不动？","acceptedAnswer":{"@type":"Answer","text":"Tab、Background Agent 和 Auto 按 Ofox 的说明不走自定义供应商。额度买的是 API 调用，不是这些编辑器功能。"}},{"@type":"Question","name":"能不能把一份 Ofox 的 Codex 配置直接贴进 config.toml？","acceptedAnswer":{"@type":"Answer","text":"本站不提供。协议、模型 id 和认证方式对不上就会报错。先读官方配置文档，再向 Ofox 确认他们当前写明支持的端点。"}},{"@type":"Question","name":"Claude Code 是不是已经测通了？","acceptedAnswer":{"@type":"Answer","text":"没有。验证页把它标成待验证。tests/ofox_smoke.py 不启动 Claude Code。需要 Anthropic 兼容网关，不能把只支持 OpenAI 的 /v1 填进 ANTHROPIC_BASE_URL。"}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <nav class="nav-links">
+    <a href="guides.html">配置教程</a>
+    <a href="validation.html">实测状态</a>
+    <a href="compare-aggregators.html">聚合对比</a>
+    <a href="developers.html">开发者 API</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="cursor-codex-third-party-api.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/cursor-codex-third-party-api.html" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox、Cursor 或 OpenAI 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。兼容性以工具和 Ofox 的当期说明为准。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">CURSOR · CODEX · THIRD-PARTY API</span>
+    <h1>Cursor 和 Codex 用不了第三方 API 怎么办</h1>
+    <p>先分清是哪一个接不上。Cursor 的 Tab、Background Agent 和 Auto，Ofox 已经写明不会走自定义供应商。Codex 官方允许配置模型提供商，但“有一个 OpenAI 兼容的聊天接口”不等于 Codex 能用。本站没有一份可以复制即用的 Ofox 配置，也没有把这两项标成已验证。</p>
+    <div class="pricing-hub-actions">
+      <a class="btn btn-primary" href="guides.html#cursor">从 Cursor 的限制读起 →</a>
+      <a class="btn btn-secondary" href="validation.html">查看验证矩阵 →</a>
+    </div>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>三种接不上，三种下一步</h2>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <thead><tr><th>现象</th><th>已经能确定的事</th><th>下一步</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Cursor 的 Tab、Agent 或 Auto 不用你的 Key</td>
+            <td>Ofox 兼容性说明（更新于 2026-10-16）写明直接接入不合适。这些功能留在 Cursor 自己的服务里。</td>
+            <td>继续用 Cursor 官方支持的模型。不要换一家聚合商来补这个功能。说明：<a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 文档 ↗</a> · <a href="https://docs.cursor.com/settings/api-keys" target="_blank" rel="noopener noreferrer">Cursor API keys ↗</a></td>
+          </tr>
+          <tr>
+            <td>想在 Cursor 里用别的模型写代码</td>
+            <td>Ofox 的建议是在 Cursor 内置终端运行 Codex CLI 或 Claude Code。这两项客户端本站仍未验证。买 API 额度也不会变成 Cursor 订阅。</td>
+            <td>先分别看 <a href="guides.html#codex">Codex</a> 和 <a href="guides.html#claude-code">Claude Code</a> 的配置条件，用小额调用做你自己的测试。本站不代发配置文件。</td>
+          </tr>
+          <tr>
+            <td>Codex 报 404、模型不存在，或工具调用失败</td>
+            <td>Codex 读取 <code>~/.codex/config.toml</code> 里的 provider。只支持 Chat Completions 的地址，不能当成 Responses 已经可用。</td>
+            <td>对照 <a href="https://developers.openai.com/docs/config-file/config-basic" target="_blank" rel="noopener noreferrer">Codex 官方配置文档 ↗</a> 核对 <code>model_provider</code> 和 <code>wire_api</code>。再向 API 方确认模型 id。冒烟脚本 <code>tests/ofox_smoke.py</code> 不启动 Codex。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="guide-warning"><strong>未验证就是未验证。</strong>仓库里的 ofox-smoke-status.json 在真实冒烟通过之前保持 unverified。接口一旦通过，也只说明那次 HTTP 调用返回了内容，不说明 Codex 或 Claude Code 客户端可用。</div>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>自己的程序，和编辑器不是同一题</h2>
+    <p>如果你写的是服务端，用的是 OpenAI SDK，要改的是 Base URL、Key 和模型名。这跟 Cursor 的 Tab 无关。Ofox 文档列出 Chat Completions 和 Responses。你的代码走哪一个，就核对哪一个端点。价格仍要你自己在对方页面看。开发者页在没填单价时不会显示省了多少钱。</p>
+    <p><a href="developers.html#subscription-vs-api">聊天会员和 API 的区别</a> · <a href="choose-ai-api-aggregator.html">要不要用聚合商</a> · <a href="guides.html#troubleshoot">401 / 404 / 429</a></p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>充值之前可以核对的三件事</h2>
+    <ol class="step-list">
+      <li>模型 id 是否出现在你打开的 Ofox 目录里，而不只是宣传页上的名字。</li>
+      <li>端点是否覆盖你的客户端。Cursor 直接接入按 Ofox 的说明排除。</li>
+      <li>先做一次小调用。本站不承诺免充值就能跑通，也不公布没测过的成功率。</li>
+    </ol>
+    <div class="pricing-hub-actions">
+      <a class="btn btn-secondary" href="guides.html#config-wizard">打开配置助手（不要粘贴 Key）→</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">在 Ofox 查看模型与价格（推广链接）↗</a>
+    </div>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。API 余额不是 Cursor、Codex 或 Claude Code 的官方订阅。</p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>常见问题</h2>
+    <details open>
+      <summary>为什么充了 API 额度，Cursor Tab 还是不动？</summary>
+      <p>Tab、Background Agent 和 Auto 按 Ofox 的说明不走自定义供应商。额度买的是 API 调用，不是这些编辑器功能。</p>
+    </details>
+    <details>
+      <summary>能不能把一份 Ofox 的 Codex 配置直接贴进 config.toml？</summary>
+      <p>本站不提供。协议、模型 id 和认证方式对不上就会报错。先读官方配置文档，再向 Ofox 确认他们当前写明支持的端点。</p>
+    </details>
+    <details>
+      <summary>Claude Code 是不是已经测通了？</summary>
+      <p>没有。验证页把它标成待验证。tests/ofox_smoke.py 不启动 Claude Code。需要 Anthropic 兼容网关，不能把只支持 OpenAI 的 /v1 填进 ANTHROPIC_BASE_URL。</p>
+    </details>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 独立说明，不是 Cursor 或 OpenAI 的支持文档</p><a href="en/cursor-codex-third-party-api.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script>try{if(new URLSearchParams(location.search).get('lang')==='zh')localStorage.setItem('jxzne-locale','zh-CN')}catch(e){}</script>
+</body>
+</html>

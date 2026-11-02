@@ -10,6 +10,17 @@
   <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/compare-aggregators.html">
   <link rel="alternate" hreflang="x-default" href="https://jxzne.com/compare-aggregators.html">
   <link rel="stylesheet" href="../styles.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JXZNE AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:title" content="Official API vs Ofox vs OpenRouter | JXZNE AI">
+<meta property="og:description" content="Honest comparison of official AI APIs, Ofox, and OpenRouter-style aggregators: convenience, billing, OpenAI / Anthropic / Gemini protocols, and Ofox’s Cursor incompatibility note.">
+<meta property="og:url" content="https://jxzne.com/en/compare-aggregators.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Official API vs Ofox vs OpenRouter | JXZNE AI">
+<meta name="twitter:description" content="Honest comparison of official AI APIs, Ofox, and OpenRouter-style aggregators: convenience, billing, OpenAI / Anthropic / Gemini protocols, and Ofox’s Cursor incompatibility note.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/compare-aggregators.html#webpage","url":"https://jxzne.com/en/compare-aggregators.html","name":"Official API vs Ofox vs OpenRouter | JXZNE AI","description":"Honest comparison of official AI APIs, Ofox, and OpenRouter-style aggregators: convenience, billing, OpenAI / Anthropic / Gemini protocols, and Ofox’s Cursor incompatibility note.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"Official API vs Ofox vs OpenRouter","item":"https://jxzne.com/en/compare-aggregators.html"}]}]}</script>
 </head>
 <body>
 <header class="nav">
@@ -20,7 +31,8 @@
     <a href="guides.html">Setup guides</a>
     <a href="validation.html">Verification</a>
     <a href="api-pricing.html">API pricing</a>
-  <a href="api-pricing.html">API pricing</a><a href="validation.html">Verification</a><a href="enterprise.html">Enterprise</a></nav>
+    <a href="enterprise.html">Enterprise</a>
+  </nav>
   <nav class="lang-switch" aria-label="Language">
     <a href="../compare-aggregators.html?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a>
     <a href="compare-aggregators.html" hreflang="en" lang="en" aria-current="page">EN</a>
@@ -86,6 +98,29 @@
       <div><h3>The sticker and the checkout disagree</h3><p>A claimed 0% fee, credit or bonus is only as real as the rule on the checkout you are looking at. Do not budget from a marketing page that disagrees with it.</p></div>
       <div><h3>You are treating a chat plan as an API</h3><p>A ChatGPT, Claude or Cursor subscription is usually not third-party API credit. Buying API credit does not turn on those subscriptions.</p></div>
     </div>
+  </section>
+
+  <section class="pricing-hub-section" id="how-to-choose">
+    <h2>Decide with three questions</h2>
+    <p>The table above is what each public page said. This section is which column to read first. It adds no price, and it does not mark Ofox verified or cheaper.</p>
+    <div class="grok-checks">
+      <div><h3>1 · Chat plan, or API?</h3><p>ChatGPT Plus and Claude Pro usually do not include API credit you can call from your own program. The API is another bill and another key. Read <a href="api-pricing.html">chat subscription vs API billing</a> before you open an aggregator.</p></div>
+      <div><h3>2 · Which protocol does the client need?</h3><p>Codex’s provider config is not “Chat Completions exists.” Claude Code needs an Anthropic Messages gateway. An app on the OpenAI SDK usually only changes the base URL. A rate does not matter if the protocol does not match.</p></div>
+      <div><h3>3 · Who has to sign?</h3><p>One model, or a DPA, residency rule, or invoice that must be with the lab: stay on the official API. Several models on one account: then an aggregator is a candidate. OpenRouter on this page is an example of a published price list, not an invoice we paid.</p></div>
+    </div>
+    <h3>Client and protocol, checked apart</h3>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <thead><tr><th>What you run</th><th>Protocol to confirm first</th><th>What this site can say</th></tr></thead>
+        <tbody>
+          <tr><td>Your own server, OpenAI SDK</td><td>Chat Completions or Responses, whichever your code calls</td><td>Ofox docs list both OpenAI-compatible surfaces. The model card has to show the endpoint. We have not certified it for you.</td></tr>
+          <tr><td>Codex CLI</td><td>model provider / wire_api in the config, which is not a generic chat URL</td><td>Unverified. tests/ofox_smoke.py does not launch Codex, and this repo has no recorded paid pass.</td></tr>
+          <tr><td>Claude Code</td><td>An Anthropic Messages gateway, including the tool calls and streaming you need</td><td>Unverified. The same smoke script does not launch Claude Code.</td></tr>
+          <tr><td>Cursor Tab, Agent, or Auto</td><td>Cursor’s own models, not a custom base URL</td><td>Ofox’s note (2026-10-16) says a direct connection is not suitable. Another aggregator does not add those features back.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="calc-note">Steps: <a href="guides.html">setup guides</a> and <a href="cursor-codex-third-party-api.html">when Cursor or Codex will not take a third-party API</a>. A shorter decision page: <a href="choose-ai-api-aggregator.html">how to choose an aggregator</a>. Evidence: <a href="validation.html">verification</a>.</p>
   </section>
 
   <section class="pricing-hub-section">
