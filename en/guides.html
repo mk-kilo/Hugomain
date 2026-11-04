@@ -11,6 +11,17 @@
   <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/guides.html">
   <link rel="alternate" hreflang="x-default" href="https://jxzne.com/guides.html">
   <link rel="stylesheet" href="../styles.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JXZNE AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:title" content="Codex, Claude Code and Cursor API setup | JXZNE AI">
+<meta property="og:description" content="Setup notes for Codex, Claude Code and Cursor with a third-party API. Ofox marks Cursor as unsuitable. Codex and Claude Code are not verified by JXZNE.">
+<meta property="og:url" content="https://jxzne.com/en/guides.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codex, Claude Code and Cursor API setup | JXZNE AI">
+<meta name="twitter:description" content="Setup notes for Codex, Claude Code and Cursor with a third-party API. Ofox marks Cursor as unsuitable. Codex and Claude Code are not verified by JXZNE.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/guides.html#webpage","url":"https://jxzne.com/en/guides.html","name":"Codex, Claude Code and Cursor API setup | JXZNE AI","description":"Setup notes for Codex, Claude Code and Cursor with a third-party API. Ofox marks Cursor as unsuitable. Codex and Claude Code are not verified by JXZNE.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"Codex, Claude Code and Cursor API setup","item":"https://jxzne.com/en/guides.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/guides.html#faq","url":"https://jxzne.com/en/guides.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"401 Unauthorized?","acceptedAnswer":{"@type":"Answer","text":"Check that the key belongs to that API, that you did not copy a space, that the account has credit, and that the auth header matches the tool. Do not paste the key into a public post."}},{"@type":"Question","name":"404 or model not found?","acceptedAnswer":{"@type":"Answer","text":"Check the path, the protocol and the model id. Codex Responses and a generic OpenAI-compatible chat endpoint are not the same feature. Claude Code needs an Anthropic-compatible gateway."}},{"@type":"Question","name":"429 or rate limited?","acceptedAnswer":{"@type":"Answer","text":"Check balance, concurrency, token rate and upstream capacity. Slow the client down and retry."}},{"@type":"Question","name":"Why didn’t a top-up turn on Cursor Tab or an official subscription?","acceptedAnswer":{"@type":"Answer","text":"Third-party model credit is billed apart from Codex, Claude Code and Cursor subscriptions. Some features only run on the official service. Ofox’s Cursor note says Tab, Background Agent and Auto do not follow a custom provider."}}]}]}</script>
 </head>
 <body>
 <header class="nav guide-nav">
@@ -21,9 +32,11 @@
     <a href="#cursor">Cursor</a>
     <a href="#config-wizard">Helper</a>
     <a href="#troubleshoot">Errors</a>
-    <a href="developers.html">API prices</a>
+    <a href="developers.html">Developers</a>
+    <a href="api-pricing.html">API pricing</a>
     <a href="validation.html">Verification</a>
-  <a href="api-pricing.html">API pricing</a><a href="validation.html">Verification</a><a href="enterprise.html">Enterprise</a></nav>
+    <a href="enterprise.html">Enterprise</a>
+  </nav>
   <nav class="lang-switch" aria-label="Language">
     <a href="../guides.html?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a>
     <a href="guides.html" hreflang="en" lang="en" aria-current="page">EN</a>
@@ -112,6 +125,13 @@ export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
     </div>
   </section>
 
+  <section class="guide-section" id="subscription-vs-api">
+    <span class="kicker">TWO BILLS</span>
+    <h2>A chat subscription and API credit are not the same payment</h2>
+    <p>ChatGPT Plus, Claude Pro, and a Cursor subscription buy features inside those products. An Ofox or lab API balance is a separate bill. Adding API credit does not turn on Cursor Tab, and it does not become Plus. List prices and country samples are in the <a href="ai-pricing.html">pricing hub</a> and the <a href="pricing-matrix.html">matrix</a>. How to read Plus samples: <a href="chatgpt-plus-by-country.html">ChatGPT Plus by country</a>. Claude plans: <a href="claude-pro-pricing.html">Claude Pro comparison</a>. The API side is <a href="api-pricing.html">API pricing</a>.</p>
+    <p>When Cursor or Codex will not take a third-party endpoint, read <a href="cursor-codex-third-party-api.html">the limits and the next step</a>, then <a href="validation.html">verification</a>. Whether to use an aggregator: <a href="choose-ai-api-aggregator.html">how to choose</a> and the <a href="compare-aggregators.html">comparison</a>. This site does not ship a copy-paste Ofox config.</p>
+  </section>
+
   <section class="guide-section" id="troubleshoot">
     <span class="kicker">TROUBLESHOOTING</span>
     <h2>When the call fails, check these first</h2>
@@ -128,7 +148,7 @@ export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
     <h2>Check compatibility, then open an API account</h2>
     <p>Use the referral link to see live models, prices and the new-user offer. Confirm the tool’s protocol before you pay. The extra $3 on a first top-up, if you qualify, is Ofox’s credit.</p>
     <a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://ofox.ai/x/itoken">See models and the new-user offer →</a>
-    <p class="calc-note"><a href="api-pricing.html">Compare API prices</a> · <a href="compare-aggregators.html">Official API vs aggregators</a></p>
+    <p class="calc-note"><a href="api-pricing.html">Compare API prices</a> · <a href="compare-aggregators.html">Official API vs aggregators</a> · <a href="cursor-codex-third-party-api.html">Cursor or Codex will not take the API</a> · <a href="validation.html">Verification</a></p>
   </section>
 </main>
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><span>Independent guide and referral site · not the Codex, Anthropic or Cursor website</span><a href="./">Home</a></footer>
