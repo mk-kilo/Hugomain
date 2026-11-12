@@ -51,3 +51,33 @@
 .pricing-hub ol.step-list{color:#c5d0e2;line-height:1.75;padding-left:1.25em;margin:12px 0 0}
 .pricing-hub ol.step-list li{margin:10px 0}
 .pricing-hub .matrix-table caption{caption-side:bottom;text-align:left;color:#9cabc3;font-size:13px;padding:10px 4px 0}
+
+.nav-toggle{display:none;align-items:center;gap:8px;border:1px solid #34405b;background:#111725;color:#f7f9fc;border-radius:9px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.nav-toggle-bars{width:16px;height:2px;background:currentColor;box-shadow:0 -5px 0 currentColor,0 5px 0 currentColor}
+.nav-toggle:focus-visible{outline:3px solid #9cbbff;outline-offset:3px}
+.affiliate-disclosure{display:block;flex-basis:100%;margin:8px 0 0;color:#9aa4b5;font-size:13px;line-height:1.6}
+.smoke-banner{margin:18px auto 0;max-width:760px;padding:12px 16px;border-radius:12px;font-weight:700}
+.smoke-banner.is-pending{background:#3a3018;color:#ffe3a3;border:1px solid #6d5a2e}
+.smoke-banner.is-passed{background:#14523f;color:#b6f3d8;border:1px solid #1f7a5c}
+.smoke-banner.is-failed{background:#3a1d24;color:#ffc7c7;border:1px solid #7a3340}
+.smoke-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.smoke-facts div{padding:14px;border:1px solid #2b3851;border-radius:12px;background:#10182a}
+.smoke-facts dt{color:#9aa4b5;font-size:12px}
+.smoke-facts dd{margin:6px 0 0;font-weight:750}
+@media(max-width:900px){
+  header.nav{flex-wrap:wrap;height:auto;min-height:72px;row-gap:8px}
+  .nav-toggle{display:inline-flex}
+  header.nav .nav-links{display:none;flex:1 0 100%;flex-direction:column;align-items:flex-start;gap:12px;order:10;padding:4px 0 14px}
+  header.nav.is-open .nav-links{display:flex}
+}
+
+.hero-actions,.coding-actions,.guide-actions,.pricing-detail-actions{flex-wrap:wrap}
+.code-top .copy-code{margin-left:8px}
+
+.brand{flex-shrink:0}
+.brand span{white-space:nowrap}
+header.nav>a.btn,header.nav .btn-ghost{white-space:nowrap;flex-shrink:0}
+@media(max-width:900px){
+  .lang-label,#site-lang{display:none}
+  header.nav>a.btn,header.nav .btn-ghost{max-width:46vw;overflow:hidden;text-overflow:ellipsis}
+}

@@ -16,30 +16,41 @@ JXZNE AI 是一个面向开发者和小团队的 AI 模型聚合入口网站，�
 
 ## Ofox API 冒烟测试
 
-`tests/ofox_smoke.py` 只在环境变量 `OFOX_API_KEY` 非空时请求 Ofox。它覆盖 OpenAI Responses 和 Anthropic Messages 各一次，**不启动 Codex CLI 或 Claude Code**。仓库里的 `ofox-smoke-status.json` 默认是 `unverified`。测试失败、密钥为空或密钥格式不对时，工作流不会把状态改成通过。
+`scripts/ofox-smoke.py` 在环境变量 `OFOX_API_KEY` 非空时，向 `POST https://api.ofox.ai/v1/chat/completions` 发一次请求。默认模型是 `openai/gpt-5.4`。2026-11-12 的公开目录 `GET https://api.ofox.ai/v1/models` 包含这个 id，不包含 `openai/gpt-5.6`（目录里的 5.6 系列是 `openai/gpt-5.6-sol`、`openai/gpt-5.6-luna`、`openai/gpt-5.6-terra`）。Ofox 文档写明 `openai/gpt-5.4-pro` 和 Codex 系列只走 Responses API，所以这次冒烟不用它们。
 
-本仓库当前没有记录到成功的认证调用。在 Actions 真正通过之前，页面徽章保持未验证。不要手工把 `overall` 改成 `api_smoke_passed`。
+脚本把 `model`、`latencyMs`、`status`、`httpStatus`、`timestamp` 写入 `ofox-smoke-status.json`。不写入密钥，也不写入模型原文。没有 Key 时打印 `BLOCKED_NO_OFOX_API_KEY`，退出码 0，不改状态文件。当前仓库里的 `overall` 是 `unverified`：准备这次改动时环境里没有 Key，所以没有发起调用。不要手工把 `overall` 或 `status` 改成通过。
+
+这次调用不启动 Codex CLI 或 Claude Code。Ofox 有这两份配置文档，但本仓库没有跑过客户端。Cursor 直接接入仍按 Ofox 兼容性说明记为不合适。
+
+`tests/ofox_smoke.py` 仍是单独的 Responses / Messages 检查，默认模型已改为目录中存在的 `openai/gpt-5.4` 和 `anthropic/claude-sonnet-4.6`。它不负责改写状态文件。
 
 ### 添加 GitHub Secret 并运行
 
 1. 打开仓库 **Settings → Secrets and variables → Actions → New repository secret**。
 2. Name 填 `OFOX_API_KEY`。
 3. Value 填 Ofox 控制台里的原始 API Key。不要加 `Bearer ` 前缀，不要带引号或换行。
-4. 打开 **Actions → Ofox API Compatibility Smoke Test → Run workflow**。
+4. 打开 **Actions → Ofox chat completions smoke → Run workflow**。工作流也可在每周一 06:00 UTC 运行。
 
-工作流只在 `tests/ofox_smoke.py` 退出码为 0 之后运行 `scripts/record_smoke_status.py`。那一步只把 `openai_responses` 和 `anthropic_messages` 写成 `passed`，并提交 `ofox-smoke-status.json`。`codex_cli` 和 `claude_code` 保持 `unverified`。Cursor 保持 Ofox 文档中的不兼容说明。
+Secret 为空时工作流不请求 Ofox，也不提交状态文件。有 Key 且脚本改写了状态文件时，才会把 `ofox-smoke-status.json` 提交到 `main`。
 
-密钥缺失时脚本打印 `BLOCKED_NO_OFOX_API_KEY` 并以状态码 2 退出，状态文件不动。
-
-本地不要把密钥写进命令参数或提交到仓库。在当前 shell 里导出后再跑：
+本地不要把密钥写进命令参数或提交到仓库：
 
 ```bash
 read -rs OFOX_API_KEY
 export OFOX_API_KEY
-python3 tests/ofox_smoke.py
+python3 scripts/ofox-smoke.py
 ```
 
-工作流里的默认模型是 `openai/gpt-5.6` 和 `anthropic/claude-sonnet-4.6`。2026-10-29 的未登录公开目录里没有这两个 id（Claude 的文本单价也没有被记录）。如果冒烟测试返回模型不存在，在仓库变量或工作流环境里把 `OFOX_RESPONSES_MODEL` / `OFOX_ANTHROPIC_MODEL` 改成 Ofox 当前在售的 id，而不是把失败改成通过。
+说明页：<https://jxzne.com/case-study.html> 与 <https://jxzne.com/en/case-study.html>。在真实记录出现之前，页面标明「待实测 / pending real run」。
+
+## 访问统计
+
+`assets/analytics-config.js` 是全站唯一的统计配置，每个 HTML 页面都会引入它和 `assets/analytics.js`。
+
+- `ga4MeasurementId`：GA4 衡量 ID，形如 `G-XXXXXXXX`。留空则不加载 gtag。
+- `plausibleDomain`：Plausible 里配置的域名，例如 `jxzne.com`。留空则不加载 Plausible。
+
+两个值都为空时，页面不向统计服务发请求。填上之后，联盟外链、复制代码按钮和语言切换会调用已加载的 `gtag` / `plausible`。不要在这个文件里写 API Key。本仓库没有填入衡量 ID。
 
 ## 公开目录价格
 

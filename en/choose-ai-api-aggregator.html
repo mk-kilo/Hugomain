@@ -25,7 +25,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button><nav id="site-nav" class="nav-links">
     <a href="compare-aggregators.html">Comparison</a>
     <a href="api-pricing.html">API pricing</a>
     <a href="guides.html">Setup guides</a>
@@ -79,7 +79,7 @@
     <h2>If Ofox is still on the list</h2>
     <p>Open their catalog and check the model id, the endpoint, and the rate you are shown before you choose an amount. This site’s unauthenticated observation from 2026-10-29 is <a href="../ofox-public-prices.json">ofox-public-prices.json</a>: a text rate is listed only when that response had one. <code>anthropic/claude-sonnet-4.6</code> did not. A name on a marketing page is not a price in that file.</p>
     <div class="pricing-detail-actions">
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">Check the Ofox catalog and prices (sponsored) ↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span>
     </div>
     <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. Prices, credits, and compatibility follow Ofox’s current page. If the extra $3 on a referred first top-up is still offered, Ofox pays it. This site does not.</p>
   </section>
@@ -102,5 +102,7 @@
 </main>
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Independent selection notes</p><a href="../choose-ai-api-aggregator.html?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
 <script>try{localStorage.setItem('jxzne-locale','en')}catch(e){}</script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
 </body>
 </html>

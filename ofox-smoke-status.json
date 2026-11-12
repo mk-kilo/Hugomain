@@ -1,35 +1,51 @@
 {
-  "schema": 1,
+  "schema": 2,
   "overall": "unverified",
+  "endpoint": "POST https://api.ofox.ai/v1/chat/completions",
+  "model": "openai/gpt-5.4",
+  "latencyMs": null,
+  "status": "unverified",
+  "httpStatus": null,
+  "timestamp": null,
   "updatedAt": null,
-  "source": "tests/ofox_smoke.py",
   "recordedBy": null,
-  "note": "No successful authenticated run is recorded in this repository. A missing OFOX_API_KEY or a failed smoke run must leave this file unverified. Do not edit overall to api_smoke_passed by hand.",
+  "catalogChecked": "2026-11-12",
+  "catalogSource": "https://api.ofox.ai/v1/models",
+  "note": "No authenticated chat completion has been recorded. The environment that prepared this file had no OFOX_API_KEY, so scripts/ofox-smoke.py was not able to call Ofox. Do not edit overall or status to a pass by hand.",
   "checks": {
+    "chat_completions": {
+      "status": "unverified",
+      "passedAt": null,
+      "model": "openai/gpt-5.4",
+      "latencyMs": null,
+      "httpStatus": null,
+      "timestamp": null,
+      "detail": "scripts/ofox-smoke.py has not recorded an authenticated POST /v1/chat/completions call."
+    },
     "openai_responses": {
       "status": "unverified",
       "passedAt": null,
-      "detail": "No successful authenticated Responses API call has been recorded by tests/ofox_smoke.py."
+      "detail": "scripts/ofox-smoke.py calls Chat Completions only. It does not call the Responses API."
     },
     "anthropic_messages": {
       "status": "unverified",
       "passedAt": null,
-      "detail": "No successful authenticated Messages API call has been recorded by tests/ofox_smoke.py."
+      "detail": "scripts/ofox-smoke.py does not call the Anthropic Messages API."
     },
     "codex_cli": {
       "status": "unverified",
       "passedAt": null,
-      "detail": "tests/ofox_smoke.py does not launch Codex CLI. An API smoke pass would not verify Codex."
+      "detail": "scripts/ofox-smoke.py does not launch Codex CLI. Ofox publishes a Codex configuration guide, and this file does not verify that client."
     },
     "claude_code": {
       "status": "unverified",
       "passedAt": null,
-      "detail": "tests/ofox_smoke.py does not launch Claude Code. An API smoke pass would not verify Claude Code."
+      "detail": "scripts/ofox-smoke.py does not launch Claude Code. Ofox publishes a Claude Code configuration guide, and this file does not verify that client."
     },
     "cursor_direct": {
       "status": "provider_marked_incompatible",
       "passedAt": null,
-      "detail": "Ofox documents direct Cursor integration as unsuitable.",
+      "detail": "Ofox documents direct Cursor integration as unsuitable. Tab completion, Agent mode, and Auto do not follow a custom provider.",
       "source": "https://ofox.ai/docs/integrations/cursor",
       "sourceUpdated": "2026-10-16"
     }

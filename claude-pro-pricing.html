@@ -25,7 +25,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button><nav id="site-nav" class="nav-links">
     <a href="pricing-matrix.html">价格对照表</a>
     <a href="ai-pricing/claude.html">Claude 标价</a>
     <a href="compare-aggregators.html">聚合对比</a>
@@ -84,7 +84,7 @@
     <p>要在 Claude Code 里走第三方网关，还要先确认 Anthropic Messages、工具调用和流式输出。本站这项仍是未验证。<a href="validation.html">验证状态</a> · <a href="guides.html#claude-code">配置说明</a> · <a href="cursor-codex-third-party-api.html">Cursor / Codex 接不上时</a></p>
     <div class="pricing-hub-actions">
       <a class="btn btn-secondary" href="developers.html#price-compare">用你查到的单价做对比 →</a>
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">在 Ofox 查看当前目录（推广链接）↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span>
     </div>
     <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。Ofox 不是 Claude 官方账单，本页也不保证它更便宜。</p>
   </section>
@@ -107,5 +107,7 @@
 </main>
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 独立说明，不是 Anthropic 报价</p><a href="en/claude-pro-pricing.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
 <script>try{if(new URLSearchParams(location.search).get('lang')==='zh')localStorage.setItem('jxzne-locale','zh-CN')}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
 </body>
 </html>

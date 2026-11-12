@@ -25,7 +25,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button><nav id="site-nav" class="nav-links">
     <a href="/">首页</a>
     <a href="developers.html">开发者 API</a>
     <a href="guides.html">配置教程</a>
@@ -36,7 +36,7 @@
     <a href="compare-aggregators.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
     <a href="en/compare-aggregators.html" hreflang="en" lang="en">EN</a>
   </nav>
-  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">获取 API Key ↗</a>
+  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="secondary">查看 Ofox 模型目录</a>
 </header>
 <div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。下表引用的是各家公开页面，不是本站对账单的审计。</div>
 <main class="pricing-hub">
@@ -46,7 +46,7 @@
     <p>给已经在调用多个模型的开发者：什么时候一个聚合账号更省事，什么时候应该留在原厂。费用和兼容性以对方当期页面为准。本页不把任何一家写成“一定更便宜”。</p>
     <div class="pricing-hub-actions">
       <a class="btn btn-primary" href="developers.html#price-compare">去填真实 API 单价 →</a>
-      <a class="btn btn-secondary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">查看 Ofox 报价与首充 $3 ↗</a>
+      <a class="btn btn-secondary" href="case-study.html">查看接入实测</a>
     </div>
     <p class="calc-note">$3 是 Ofox 对推荐渠道新用户首次充值的赠额，由 Ofox 承担，不从推荐佣金扣除，本站不支付。查阅于 2026-10-29：<a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>。</p>
   </section>
@@ -135,7 +135,7 @@
       <li><a href="developers.html#price-compare">本站价格比较</a>：没有目录价格时留空</li>
     </ul>
     <div class="pricing-hub-actions">
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">在 Ofox 核对当前报价 ↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span>
       <a class="btn btn-secondary" href="guides.html">先看配置限制 →</a>
     </div>
   </section>
@@ -150,5 +150,7 @@ fetch('ofox-public-prices.json',{cache:'no-store'}).then(function(r){return r.ok
   node.textContent='未登录公开目录观察时间 '+data.fetchedAt+'，响应该目录 '+data.catalogCount+' 个模型。请求了但没有可用文本单价的 id：'+missing+'。Ofox 宣传页仍可能提到这些名字。这不是发票，也不是“买不到”的结论。';
 }).catch(function(){});
 </script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
 </body>
 </html>

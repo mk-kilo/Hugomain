@@ -45,7 +45,6 @@ function track(kind, detail) {
     if (typeof window.plausible === 'function') window.plausible(kind, {props: {source: detail}});
   } catch (e) {}
 }
-document.querySelectorAll('a[href*="ofox.ai/x/itoken"]').forEach((el) => el.addEventListener('click', () => track('referral_click', el.getAttribute('data-cta') || 'developer_page')));
 document.querySelectorAll('a[href*="guides.html"]').forEach((el) => el.addEventListener('click', () => track('guide_click', el.getAttribute('href') || 'guides')));
 
 const models = {

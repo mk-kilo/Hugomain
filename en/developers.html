@@ -26,7 +26,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button><nav id="site-nav" class="nav-links">
     <a href="./">Home</a>
     <a href="guides.html">Setup guides</a>
     <a href="compare-aggregators.html">Aggregators</a>
@@ -38,7 +38,7 @@
     <a href="../developers.html?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a>
     <a href="developers.html" hreflang="en" lang="en" aria-current="page">EN</a>
   </nav>
-  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">Get API key ↗</a>
+  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="secondary">Ofox catalog</a>
 </header>
 <div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official site for any model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices, promotions and compatibility are whatever the provider publishes.</div>
 <main class="developer-wrap">
@@ -48,7 +48,7 @@
     <p>For people who already call Codex, Claude Code, or more than one lab: compare real API cost, then decide whether an Ofox account is worth it. We do not promise that every model is cheaper than the official API.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="guides.html#config-wizard">Open the free setup helper →</a>
-      <a class="btn btn-secondary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See Ofox pricing and the $3 offer ↗</a>
+      <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     </div>
     <p class="affiliate-note">We are an independent guide and referral site. We are not affiliated with Codex, Anthropic, Cursor or Ofox. A third-party API balance is not a subscription to those tools.</p>
     <p class="calc-note">Ofox’s partner page says a referred user’s first top-up can include an extra $3 credit. Ofox pays that credit. It is not taken from referral commission, and JXZNE does not pay it. Eligibility is Ofox’s current rule. <a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>, reviewed 2026-10-29.</p>
@@ -91,7 +91,7 @@
         <p id="dev-result-text">Read the third-party Responses API notes and the known limits.</p>
         <p class="dev-caution" id="dev-result-caution">JXZNE has not completed a paid Ofox call. Confirm the model and the protocol first.</p>
         <a id="dev-guide-link" class="btn btn-primary" href="guides.html#codex">Open the setup guide →</a>
-        <a class="btn btn-secondary dev-referral" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored" data-cta="selector">See Ofox signup and prices ↗</a>
+        <a class="btn btn-secondary dev-referral" href="case-study.html">Read the integration case</a>
       </div>
     </div>
   </section>
@@ -116,7 +116,7 @@
     </div>
     <div class="hero-actions">
       <a class="btn btn-primary" href="guides.html#config-wizard">Start setup →</a>
-      <a class="btn btn-secondary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">Sign up / see the offer ↗</a>
+      <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     </div>
   </section>
 
@@ -136,7 +136,7 @@
     <h2>Ofox’s $3 credit on the first top-up</h2>
     <p>Ofox’s partner rules say a qualifying new user who signs up through a referral and completes a first top-up can receive an extra $3 credit. Ofox funds it. The affiliate does not pay it, and it is not deducted from commission. Whether it lands depends on Ofox’s current checkout. Sources, reviewed 2026-10-29: <a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a> and <a href="https://ofox.ai/docs/changelog" target="_blank" rel="noopener noreferrer">changelog v1.0.54</a>.</p>
     <div class="trial-actions">
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored" data-cta="first_topup_bonus">See the first-top-up terms ↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span>
       <a class="btn btn-secondary" href="../developer-partner.html">I ship a tool that needs a provider →</a>
     </div>
   </section>
@@ -188,7 +188,7 @@
     </div>
     <div class="trial-actions">
       <a class="btn btn-secondary" href="guides.html#config-wizard">Setup helper →</a>
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored" data-cta="trial_plan">See Ofox prices and top-up rules ↗</a>
+      <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     </div>
     <p class="affiliate-note">JXZNE AI is an independent Ofox referral site and may earn a commission. Accounts, top-ups, keys and payment happen on the provider.</p>
   </section>
@@ -223,13 +223,13 @@
       <div><strong>Ofox public catalog</strong><p id="live-price-status" role="status">Ofox public prices are not loaded yet.</p></div>
       <button type="button" id="load-ofox-prices" class="btn btn-secondary">Reload the public catalog →</button>
     </div>
-    <div class="guide-warning" id="ofox-price-fallback"><p data-fallback-lead>The Ofox public catalog is not loaded yet. This page will not fill in a guessed price. Open one of the links, check the rate, then type USD per million tokens on the left.</p><p><a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener noreferrer">Public model catalog JSON</a> · <a href="https://ofox.ai/enterprise" target="_blank" rel="noopener noreferrer">Ofox list-price statement</a> · <a href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See the price inside an Ofox account</a></p></div>
+    <div class="guide-warning" id="ofox-price-fallback"><p data-fallback-lead>The Ofox public catalog is not loaded yet. This page will not fill in a guessed price. Open one of the links, check the rate, then type USD per million tokens on the left.</p><p><a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener noreferrer">Public model catalog JSON</a> · <a href="https://ofox.ai/enterprise" target="_blank" rel="noopener noreferrer">Ofox list-price statement</a> · <a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener">See the price inside an Ofox account</a></p></div>
     <div id="ofox-catalog" class="matrix-scroll" hidden></div>
     <p class="calc-note">The browser asks Ofox’s public catalog directly and does not send a secret. If the browser blocks that cross-origin read, the page can show the last observation stored in <code>ofox-public-prices.json</code>, with the time it was fetched. A missing model stays blank. Claude Sonnet 4.6 was not in the catalog response recorded on 2026-10-29, so that row is not given an Ofox price. Ofox’s marketing pages still name Claude. Treat availability as unconfirmed until you see it on their site.</p>
-    <div class="price-sources"><span>Official list prices:</span><a id="price-official-source" href="https://developers.openai.com/api/docs/models/gpt-5.4" target="_blank" rel="noopener noreferrer">Current model source ↗</a><a href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored" data-cta="price_source">Check the live Ofox price ↗</a><span>Official rates checked against lab pages on 2026-10-25. They move. The provider’s invoice wins.</span></div>
+    <div class="price-sources"><span>Official list prices:</span><a id="price-official-source" href="https://developers.openai.com/api/docs/models/gpt-5.4" target="_blank" rel="noopener noreferrer">Current model source ↗</a><a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener">Check the live Ofox price ↗</a><span>Official rates checked against lab pages on 2026-10-25. They move. The provider’s invoice wins.</span></div>
     <div class="price-cta">
       <div><h3>Open an account after the price and the client both look right</h3><p>Check Ofox’s live rate, model list, payment methods and the first-top-up offer. The extra $3, if you qualify, is Ofox’s credit, not a payment from this site. No JXZNE account is required.</p></div>
-      <a class="btn btn-primary" data-cta="price_comparison" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See Ofox prices and sign up →</a>
+      <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     </div>
     <p class="affiliate-note"><strong>Commercial relationship:</strong> JXZNE AI is an independent Ofox referral site. Eligible signups or spend through our Ofox link may earn a commission. This is not Ofox’s official website and it does not speak for other model labs.</p>
   </section>
@@ -256,5 +256,7 @@
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Independent AI API guide</p><a href="./">Home</a></footer>
 <script>try{localStorage.setItem('jxzne-locale','en')}catch(e){}</script>
 <script src="../developers.js" defer></script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
 </body>
 </html>

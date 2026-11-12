@@ -25,7 +25,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button><nav id="site-nav" class="nav-links">
     <a href="pricing-matrix.html">价格对照表</a>
     <a href="ai-pricing/chatgpt.html">ChatGPT 标价</a>
     <a href="guides.html">配置教程</a>
@@ -83,7 +83,7 @@
     <div class="pricing-hub-actions">
       <a class="btn btn-secondary" href="developers.html#subscription-vs-api">聊天会员和 API 的区别 →</a>
       <a class="btn btn-secondary" href="en/api-pricing.html" hreflang="en" lang="en">English API pricing →</a>
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">在 Ofox 核对按量目录（推广链接）↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span>
     </div>
     <p class="affiliate-note">赞助披露：上面的 Ofox 链接是联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。价格、赠额和模型目录以你打开链接时 Ofox 页面为准。$3 首充赠额若仍在，由 Ofox 承担，本站不支付。</p>
   </section>
@@ -106,5 +106,7 @@
 </main>
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 独立说明，不是 OpenAI 报价</p><a href="en/chatgpt-plus-by-country.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
 <script>try{if(new URLSearchParams(location.search).get('lang')==='zh')localStorage.setItem('jxzne-locale','zh-CN')}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
 </body>
 </html>

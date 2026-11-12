@@ -18,7 +18,7 @@ if not KEY:
  sys.exit(2)
 tests=[
  ("OpenAI Responses", "https://api.ofox.ai/v1/responses",
-  {"model":os.getenv("OFOX_RESPONSES_MODEL","openai/gpt-5.6"),"input":"Reply with OK only.","max_output_tokens":32},
+  {"model":os.getenv("OFOX_RESPONSES_MODEL","openai/gpt-5.4"),"input":"Reply with OK only.","max_output_tokens":32},
   {"Authorization":"Bearer "+KEY}),
  ("Anthropic Messages","https://api.ofox.ai/anthropic/v1/messages",
   {"model":os.getenv("OFOX_ANTHROPIC_MODEL","anthropic/claude-sonnet-4.6"),"messages":[{"role":"user","content":"Reply with OK only."}],"max_tokens":32},

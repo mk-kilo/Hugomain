@@ -26,7 +26,7 @@
 <body>
 <header class="nav guide-nav">
   <a class="brand" href="./"><span class="brand-mark">J</span><span>JXZNE AI</span></a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button><nav id="site-nav" class="nav-links">
     <a href="#codex">Codex</a>
     <a href="#claude-code">Claude Code</a>
     <a href="#cursor">Cursor</a>
@@ -41,7 +41,7 @@
     <a href="../guides.html?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a>
     <a href="guides.html" hreflang="en" lang="en" aria-current="page">EN</a>
   </nav>
-  <a class="btn btn-primary" href="https://ofox.ai/x/itoken" rel="noopener noreferrer sponsored" target="_blank">See API options ↗</a>
+  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="secondary">Ofox catalog</a>
 </header>
 <div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official site for any model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices, promotions and compatibility are whatever the provider publishes.</div>
 <main class="guide-wrap">
@@ -66,7 +66,7 @@
     <div class="guide-warning"><strong>Status: not verified.</strong> This site does not ship an untested Ofox Codex config file. Copying a guessed file is how people get errors. <code>tests/ofox_smoke.py</code> does not launch Codex, and it has not recorded a pass here.</div>
     <div class="guide-actions">
       <a class="btn btn-secondary" href="https://developers.openai.com/docs/config-file/config-reference" target="_blank" rel="noopener noreferrer">Official config reference ↗</a>
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See partner models and prices →</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span>
     </div>
   </section>
 
@@ -84,7 +84,7 @@ export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
     <div class="guide-warning"><strong>Status: not verified.</strong> Do not put an OpenAI-only <code>/v1</code> base URL into <code>ANTHROPIC_BASE_URL</code>. Claude Code is not launched by <code>tests/ofox_smoke.py</code>, and that test has not recorded a pass here.</div>
     <div class="guide-actions">
       <a class="btn btn-secondary" href="https://docs.anthropic.com/en/docs/claude-code/getting-started" target="_blank" rel="noopener noreferrer">Official getting started ↗</a>
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See the partner API →</a>
+      <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     </div>
   </section>
 
@@ -100,7 +100,7 @@ export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
     <div class="guide-warning"><strong>Status: Ofox marks this incompatible.</strong> Cursor Tab, Background Agent and Auto are not a fit for Ofox. Ofox’s suggestion is to run <code>codex</code> or <code>claude</code> in Cursor’s built-in terminal, after those tools are configured on their own. Those two clients are still unverified on this site. <a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox compatibility note ↗</a>, last updated 2026-10-16.</div>
     <div class="guide-actions">
       <a class="btn btn-secondary" href="https://docs.cursor.com/settings/api-keys" target="_blank" rel="noopener noreferrer">Cursor’s own help ↗</a>
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See model prices →</a>
+      <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     </div>
   </section>
 
@@ -119,7 +119,7 @@ export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
         <p id="wizard-description"></p>
         <div class="snippet"><div>Checklist<button type="button" id="wizard-copy" class="copy-code">Copy</button></div><pre><code id="wizard-code"></code></pre></div>
         <a id="wizard-docs" class="btn btn-secondary" href="https://developers.openai.com/docs/config-file/config-basic" target="_blank" rel="noopener noreferrer">Official config docs ↗</a>
-        <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See Ofox models and prices ↗</a>
+        <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
         <p class="wizard-disclaimer">Do not type or paste a real API key on this page. The checklist is built in your browser and is not submitted.</p>
       </div>
     </div>
@@ -147,7 +147,7 @@ export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
     <span class="kicker">READY TO EXPLORE?</span>
     <h2>Check compatibility, then open an API account</h2>
     <p>Use the referral link to see live models, prices and the new-user offer. Confirm the tool’s protocol before you pay. The extra $3 on a first top-up, if you qualify, is Ofox’s credit.</p>
-    <a class="btn btn-primary" target="_blank" rel="noopener noreferrer sponsored" href="https://ofox.ai/x/itoken">See models and the new-user offer →</a>
+    <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     <p class="calc-note"><a href="api-pricing.html">Compare API prices</a> · <a href="compare-aggregators.html">Official API vs aggregators</a> · <a href="cursor-codex-third-party-api.html">Cursor or Codex will not take the API</a> · <a href="validation.html">Verification</a></p>
   </section>
 </main>
@@ -155,5 +155,7 @@ export ANTHROPIC_AUTH_TOKEN="YOUR_API_KEY"</code></pre></div>
 <script>try{localStorage.setItem('jxzne-locale','en')}catch(e){}</script>
 <script>document.querySelectorAll('.copy-code').forEach(b=>b.addEventListener('click',async()=>{const t=document.getElementById(b.dataset.copy)?.innerText||'';if(!t)return;try{await navigator.clipboard.writeText(t);b.textContent='Copied'}catch(e){b.textContent='Select the code and copy it'}}));</script>
 <script src="wizard.js" defer></script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
 </body>
 </html>
