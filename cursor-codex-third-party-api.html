@@ -25,7 +25,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button><nav id="site-nav" class="nav-links">
     <a href="guides.html">配置教程</a>
     <a href="validation.html">实测状态</a>
     <a href="compare-aggregators.html">聚合对比</a>
@@ -90,7 +90,7 @@
     </ol>
     <div class="pricing-hub-actions">
       <a class="btn btn-secondary" href="guides.html#config-wizard">打开配置助手（不要粘贴 Key）→</a>
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">在 Ofox 查看模型与价格（推广链接）↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span>
     </div>
     <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。API 余额不是 Cursor、Codex 或 Claude Code 的官方订阅。</p>
   </section>
@@ -113,5 +113,7 @@
 </main>
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 独立说明，不是 Cursor 或 OpenAI 的支持文档</p><a href="en/cursor-codex-third-party-api.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
 <script>try{if(new URLSearchParams(location.search).get('lang')==='zh')localStorage.setItem('jxzne-locale','zh-CN')}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
 </body>
 </html>

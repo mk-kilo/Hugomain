@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Update ofox-smoke-status.json only after a real passing smoke run.
+"""Legacy recorder. The weekly workflow now runs scripts/ofox-smoke.py instead.
+
+Update ofox-smoke-status.json only after a real passing smoke run.
 
 This script does not call Ofox. The workflow runs it only after tests/ofox_smoke.py
 exits 0. It refuses to write the repository status file unless all of these hold:

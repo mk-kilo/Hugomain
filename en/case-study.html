@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ofox Chat Completions case record | JXZNE AI</title>
+  <meta name="description" content="A reproducible Ofox Chat Completions call. The status file is unverified: no OFOX_API_KEY was available when this page was prepared, so no request was sent.">
+  <link rel="canonical" href="https://jxzne.com/en/case-study.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/case-study.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/case-study.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/case-study.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Ofox Chat Completions case record | JXZNE AI">
+  <meta property="og:description" content="Reproducible Ofox Chat Completions record. The page stays pending until a real call is stored.">
+  <meta property="og:url" content="https://jxzne.com/en/case-study.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ofox Chat Completions case record | JXZNE AI">
+  <meta name="twitter:description" content="Reproducible Ofox Chat Completions record. The page stays pending until a real call is stored.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/case-study.html#webpage","url":"https://jxzne.com/en/case-study.html","name":"Ofox Chat Completions case record","description":"Reproducible Ofox Chat Completions record. The page stays pending until a real call is stored.","inLanguage":"en","dateModified":"2026-11-12","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"Ofox Chat Completions case record","item":"https://jxzne.com/en/case-study.html"}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button><nav id="site-nav" class="nav-links">
+    <a href="developers.html">Developer API</a>
+    <a href="guides.html">Setup guides</a>
+    <a href="validation.html">Verification</a>
+    <a href="compare-aggregators.html">Aggregators</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language"><a href="../case-study.html" hreflang="zh-CN" lang="zh-CN">中文</a><a href="case-study.html" hreflang="en" lang="en" aria-current="page">EN</a></nav>
+  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="secondary">Ofox catalog</a>
+</header>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">OFOX CHAT COMPLETIONS</span>
+    <h1>One reproducible integration record</h1>
+    <p id="smoke-banner" class="smoke-banner is-pending">Pending real run. No authenticated chat completion is recorded in ofox-smoke-status.json.</p>
+    <p>This page shows only the fields <code>scripts/ofox-smoke.py</code> writes to <a href="../ofox-smoke-status.json">ofox-smoke-status.json</a>: model, latency, status, and timestamp. It does not store the key or the model text, and it does not describe an unsent request as a pass.</p>
+  </section>
+  <section class="pricing-hub-section" id="smoke-result">
+    <h2>Current record</h2>
+    <dl class="smoke-facts">
+      <div><dt>overall</dt><dd id="smoke-overall">unverified</dd></div>
+      <div><dt>status</dt><dd id="smoke-status">unverified</dd></div>
+      <div><dt>model</dt><dd id="smoke-model">openai/gpt-5.4</dd></div>
+      <div><dt>latencyMs</dt><dd id="smoke-latency">—</dd></div>
+      <div><dt>httpStatus</dt><dd id="smoke-http">—</dd></div>
+      <div><dt>timestamp</dt><dd id="smoke-timestamp">—</dd></div>
+    </dl>
+    <p class="calc-note">On 2026-11-12 the environment that prepared this page had no <code>OFOX_API_KEY</code>. The script did not call Ofox. The blanks above mean “not run”, not a failed or successful call.</p>
+  </section>
+  <section class="pricing-hub-section">
+    <h2>What the script calls</h2>
+    <p>Ofox’s OpenAI-compatible base URL is <code>https://api.ofox.ai/v1</code>. Chat Completions is <code>POST https://api.ofox.ai/v1/chat/completions</code> with <code>Authorization: Bearer</code> and the raw key. <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener">Chat Completions</a> · <a href="https://ofox.ai/docs/develop" target="_blank" rel="noopener">Quick start</a></p>
+    <p>The public catalog fetched on 2026-11-12 (<a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener">GET /v1/models</a>, 131 ids) includes <code>openai/gpt-5.4</code> and does not include <code>openai/gpt-5.6</code>. The 5.6 ids in that response were <code>openai/gpt-5.6-sol</code>, <code>openai/gpt-5.6-luna</code>, and <code>openai/gpt-5.6-terra</code>. Ofox’s GPT docs say <code>openai/gpt-5.4-pro</code> and the Codex ids are Responses-only, so this smoke test does not use them.</p>
+    <div class="snippet"><div>curl · same shape as the script<button class="copy-code" type="button" data-copy="case-snippet">Copy</button></div>
+      <pre id="case-snippet"><code>curl https://api.ofox.ai/v1/chat/completions \
+  -H "Authorization: Bearer $OFOX_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-5.4","messages":[{"role":"user","content":"Reply with OK only."}],"max_tokens":16}'</code></pre>
+    </div>
+  </section>
+  <section class="pricing-hub-section">
+    <h2>How to record a real run</h2>
+    <ol>
+      <li>Copy the raw API key from the Ofox console. Do not add <code>Bearer </code>, quotes, or a trailing newline.</li>
+      <li>From the repository root, export it in the current shell only. Do not commit it.</li>
+    </ol>
+    <div class="snippet"><div>Shell<button class="copy-code" type="button" data-copy="case-run">Copy</button></div>
+      <pre id="case-run"><code>read -rs OFOX_API_KEY
+export OFOX_API_KEY
+python3 scripts/ofox-smoke.py</code></pre>
+    </div>
+    <p>With a key, the script sends one Chat Completions request and writes <code>model</code>, <code>latencyMs</code>, <code>status</code>, <code>httpStatus</code>, and <code>timestamp</code>. With no key it prints <code>BLOCKED_NO_OFOX_API_KEY</code>, exits 0, and does not change the status file.</p>
+    <p>The Actions workflow “Ofox chat completions smoke” runs on demand and every Monday at 06:00 UTC. It reads the <code>OFOX_API_KEY</code> Actions secret. If that secret is empty, the job does not call Ofox and does not commit the status file.</p>
+  </section>
+  <section class="pricing-hub-section">
+    <h2>What this record does not show</h2>
+    <ul>
+      <li>Direct Cursor integration: Ofox’s compatibility notice says Tab, Agent, and Auto do not follow a custom provider. <a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener">Cursor notice</a>. This site does not claim that path works.</li>
+      <li>Codex CLI and Claude Code: Ofox publishes setup guides (<a href="https://ofox.ai/docs/integrations/codex" target="_blank" rel="noopener">Codex</a>, <a href="https://ofox.ai/docs/integrations/claude-code" target="_blank" rel="noopener">Claude Code</a>). This script does not launch either client, so both stay unverified.</li>
+      <li>No usage totals, savings percentages, prices, or testimonials. Latency appears in the table only after one real call is stored.</li>
+    </ul>
+    <p><a href="validation.html">Back to verification status</a></p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">Get an Ofox API key</a></p>
+    <span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span>
+  </section>
+</main>
+<footer><a href="./">JXZNE AI</a> · <a href="../case-study.html" hreflang="zh-CN" lang="zh-CN">中文</a></footer>
+<script src="../assets/case-study.js"></script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

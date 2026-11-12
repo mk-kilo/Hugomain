@@ -25,7 +25,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button><nav id="site-nav" class="nav-links">
     <a href="compare-aggregators.html">对照表</a>
     <a href="developers.html">开发者 API</a>
     <a href="guides.html">配置教程</a>
@@ -79,7 +79,7 @@
     <h2>如果候选里还有 Ofox</h2>
     <p>打开他们的目录，确认模型 id、端点和你看到的单价，再决定充多少。本站 2026-10-29 的未登录观察在 <a href="ofox-public-prices.json">ofox-public-prices.json</a>：有文本单价的才列出，<code>anthropic/claude-sonnet-4.6</code> 那次没有可用单价。宣传页提到某个名字，不等于那次目录里有价。</p>
     <div class="pricing-detail-actions">
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">打开 Ofox 核对目录和价格（推广链接）↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span>
     </div>
     <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。价格、赠额和兼容性以 Ofox 当期页面为准。推荐渠道首充额外 $3 若仍在活动中，由 Ofox 承担，本站不支付。</p>
   </section>
@@ -102,5 +102,7 @@
 </main>
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 独立选择说明</p><a href="en/choose-ai-api-aggregator.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
 <script>try{if(new URLSearchParams(location.search).get('lang')==='zh')localStorage.setItem('jxzne-locale','zh-CN')}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
 </body>
 </html>

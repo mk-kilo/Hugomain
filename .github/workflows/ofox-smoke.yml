@@ -1,10 +1,12 @@
-name: Ofox API Compatibility Smoke Test
+name: Ofox chat completions smoke
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
 permissions:
   contents: write
 jobs:
-  api-smoke-test:
+  chat-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -13,19 +15,17 @@ jobs:
         with:
           ref: main
           persist-credentials: true
-      - name: Test authenticated OpenAI Responses and Anthropic Messages APIs
+      - name: Call chat completions only when OFOX_API_KEY is set
         env:
           OFOX_API_KEY: ${{ secrets.OFOX_API_KEY }}
-          OFOX_RESPONSES_MODEL: openai/gpt-5.6
-          OFOX_ANTHROPIC_MODEL: anthropic/claude-sonnet-4.6
-        run: python3 tests/ofox_smoke.py
-      - name: Record a pass only after the smoke test exits 0
-        if: success()
-        env:
-          OFOX_API_KEY: ${{ secrets.OFOX_API_KEY }}
-          OFOX_SMOKE_PASSED: "1"
-        run: python3 scripts/record_smoke_status.py
-      - name: Commit status only when the recorder wrote a real pass
+          OFOX_CHAT_MODEL: openai/gpt-5.4
+        run: |
+          if [ -z "${OFOX_API_KEY}" ]; then
+            echo "OFOX_API_KEY is unset. Not calling Ofox. ofox-smoke-status.json stays as committed."
+            exit 0
+          fi
+          python3 scripts/ofox-smoke.py
+      - name: Commit the status file only when the script changed it
         if: success()
         run: |
           git config user.name "github-actions[bot]"
@@ -34,6 +34,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Smoke status unchanged. Nothing to commit."
           else
-            git commit -m "data: record passing Ofox API smoke test"
+            git commit -m "data: record Ofox chat completion smoke status"
             git push origin HEAD:main
           fi

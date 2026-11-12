@@ -25,7 +25,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button><nav id="site-nav" class="nav-links">
     <a href="./">Home</a>
     <a href="developers.html">Developer API</a>
     <a href="guides.html">Setup guides</a>
@@ -37,7 +37,7 @@
     <a href="../compare-aggregators.html?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a>
     <a href="compare-aggregators.html" hreflang="en" lang="en" aria-current="page">EN</a>
   </nav>
-  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">Get API key ↗</a>
+  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="secondary">Ofox catalog</a>
 </header>
 <div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official site for any model provider. Eligible signups or spend through our Ofox link may earn us a commission. The table cites public pages. It is not an audit of anyone’s invoice.</div>
 <main class="pricing-hub">
@@ -47,7 +47,7 @@
     <p>For developers already calling more than one model: when one account is the point, and when you should stay with the lab. Fees and compatibility follow each provider’s current page. Nothing here is “always cheaper.”</p>
     <div class="pricing-hub-actions">
       <a class="btn btn-primary" href="api-pricing.html">Compare a real token rate →</a>
-      <a class="btn btn-secondary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See Ofox prices and the $3 offer ↗</a>
+      <a class="btn btn-secondary" href="case-study.html">Read the integration case</a>
     </div>
     <p class="calc-note">The extra $3 on a referred user’s first top-up is Ofox’s credit. Ofox pays it. It is not taken from commission, and this site does not pay it. Reviewed 2026-10-29: <a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>.</p>
   </section>
@@ -136,7 +136,7 @@
       <li><a href="api-pricing.html">Price comparison on this site</a> — blank when there is no catalog rate</li>
     </ul>
     <div class="pricing-hub-actions">
-      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">Check the current Ofox price ↗</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span>
       <a class="btn btn-secondary" href="guides.html">Read the setup limits →</a>
     </div>
   </section>
@@ -151,5 +151,7 @@ fetch('../ofox-public-prices.json',{cache:'no-store'}).then(function(r){return r
   node.textContent='Unauthenticated public catalog observed at '+data.fetchedAt+' ('+data.catalogCount+' models in that response). Requested ids with no usable text rate: '+missing+'. Ofox marketing may still name those models. This is not an invoice and not a conclusion that they are unsold.';
 }).catch(function(){});
 </script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
 </body>
 </html>

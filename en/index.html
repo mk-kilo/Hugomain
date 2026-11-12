@@ -26,7 +26,7 @@
 <body>
 <header class="nav">
   <a class="brand" href="./"><span class="brand-mark">J</span><span>JXZNE AI</span></a>
-  <nav class="nav-links">
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button><nav id="site-nav" class="nav-links">
     <a href="developers.html">Developer API</a>
     <a href="guides.html">Setup guides</a>
     <a href="compare-aggregators.html">Aggregators</a>
@@ -39,7 +39,7 @@
     <a href="../?lang=zh" hreflang="zh-CN" lang="zh-CN">中文</a>
     <a href="./" hreflang="en" lang="en" aria-current="page">EN</a>
   </nav>
-  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">Get API key</a>
+  <a class="btn btn-ghost" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="secondary">Ofox catalog</a>
 </header>
 <div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox or any model lab’s official website. Eligible signups or spend through our links may earn us a commission. Model prices, promotions and compatibility follow the provider.</div>
 <main id="top">
@@ -50,11 +50,28 @@
     <h1>One API key for<br><span>the models you already switch between</span></h1>
     <p class="hero-copy">GPT, Claude, Gemini, DeepSeek, Qwen. Compare the API path first, then open a provider account if the rate and the client both hold up. Chat subscriptions are a different product.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="developers.html">Developers: compare multi-model API cost →</a>
-      <a class="btn btn-secondary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">Ofox $3 first top-up · Get a key</a>
+      <a class="btn btn-secondary" href="developers.html">Developers: compare multi-model API cost →</a>
+      <a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary">Get an Ofox API key</a>
+      <span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span>
     </div>
     <p class="affiliate-note hero-bonus-note">The $3 credit is Ofox’s promotion for referred users who complete a first top-up. Ofox pays it. This site does not. Eligibility is their current rule. <a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>, reviewed 2026-10-29.</p>
     <div class="trust-row"><span>✓ OpenAI-style SDK path</span><span>✓ Pay for usage</span><span>✓ Switch models</span><span>✓ Cursor direct link: Ofox says no</span></div>
+<div class="code-card">
+        <div class="code-top"><span></span><span></span><span></span><small>Python</small><button type="button" class="copy-code" data-copy="home-snippet">Copy sample</button></div>
+        <pre id="home-snippet"><code>from openai import OpenAI
+
+client = OpenAI(
+  base_url="https://api.ofox.ai/v1",
+  api_key="YOUR_API_KEY"
+)
+
+response = client.chat.completions.create(
+  model="openai/gpt-5.4",
+  messages=[{"role":"user","content":"Hello JXZNE AI"}]
+)</code></pre>
+      </div>
+      <p class="calc-note">The sample model id is openai/gpt-5.4. The public catalog on 2026-11-12 included that id and did not include openai/gpt-5.6. This is the request shape, not a recorded call.</p>
+
     <p class="hero-copy"><a href="guides.html">Setup guides</a> · <a href="compare-aggregators.html">Official API vs aggregators</a> · <a href="api-pricing.html">Subscription price library (中文)</a></p>
   </section>
 
@@ -65,6 +82,7 @@
     <div class="home-value-links">
       <a class="btn btn-primary" href="api-pricing.html">Compare API cost →</a>
       <a class="btn btn-secondary" href="validation.html">Verification status →</a>
+      <a class="btn btn-secondary" href="case-study.html">Integration case →</a>
       <a class="btn btn-secondary" href="guides.html">Codex, Claude Code, Cursor →</a>
     </div>
   </section>
@@ -72,8 +90,8 @@
   <section class="section coding-section" id="coding-tools">
     <div class="section-head"><div><span class="kicker">AI CODING WORKFLOWS</span><h2>Codex, Claude Code, Cursor</h2></div><p>Read how each tool accepts a third-party endpoint before you buy credit.</p></div>
     <div class="coding-grid">
-      <article class="coding-card"><div class="coding-title"><span class="coding-logo logo-codex">⌘</span><h3>Codex</h3></div><p>Provider config exists. A paid Ofox call from this site is not on record, and the smoke test does not launch Codex.</p><div class="coding-actions"><a class="btn btn-secondary" href="guides.html#codex">Setup guide →</a><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See API options →</a></div></article>
-      <article class="coding-card"><div class="coding-title"><span class="coding-logo logo-claude">✳</span><h3>Claude Code</h3></div><p>Needs an Anthropic-compatible gateway. Streaming and tool calls are unverified here.</p><div class="coding-actions"><a class="btn btn-secondary" href="guides.html#claude-code">Setup guide →</a><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="noopener noreferrer sponsored">See API options →</a></div></article>
+      <article class="coding-card"><div class="coding-title"><span class="coding-logo logo-codex">⌘</span><h3>Codex</h3></div><p>Provider config exists. A paid Ofox call from this site is not on record, and the smoke test does not launch Codex.</p><div class="coding-actions"><a class="btn btn-secondary" href="guides.html#codex">Setup guide →</a><a class="btn btn-secondary" href="case-study.html">Read the integration case</a></div></article>
+      <article class="coding-card"><div class="coding-title"><span class="coding-logo logo-claude">✳</span><h3>Claude Code</h3></div><p>Needs an Anthropic-compatible gateway. Streaming and tool calls are unverified here.</p><div class="coding-actions"><a class="btn btn-secondary" href="guides.html#claude-code">Setup guide →</a><a class="btn btn-secondary" href="case-study.html">Read the integration case</a></div></article>
       <article class="coding-card"><div class="coding-title"><span class="coding-logo logo-cursor">◈</span><h3>Cursor</h3></div><p>Ofox marks a direct connection as unsuitable. Use the terminal CLIs if you configure them, and do not expect Tab or Auto to follow Ofox.</p><div class="coding-actions"><a class="btn btn-secondary" href="guides.html#cursor">Read the limit →</a><a class="btn btn-primary" href="compare-aggregators.html">Why this matters →</a></div></article>
     </div>
   </section>
@@ -126,5 +144,7 @@
 </main>
 <footer><div class="brand"><span class="brand-mark">J</span><span>JXZNE AI</span></div><p>© 2026 JXZNE AI. Independent AI model access and referral service.</p><div><a href="developers.html">Developers</a><a href="mailto:hello@jxzne.com">Contact</a></div></footer>
 <script>try{localStorage.setItem('jxzne-locale','en')}catch(e){}</script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
 </body>
 </html>
