@@ -1,8 +1,8 @@
 {
   "source": "https://api.ofox.ai/v1/models",
-  "fetchedAt": "2026-10-29T15:55:27+00:00",
-  "catalogCount": 117,
-  "note": "Observed unauthenticated public catalog rates. USD per million tokens = per-token rate × 1,000,000. Omitted models were not in this response or had no usable per-token text price. Not an invoice and not a promise that the signed-in price matches.",
+  "fetchedAt": "2026-11-15T13:54:52+00:00",
+  "catalogCount": 125,
+  "note": "Public unauthenticated catalog prices observed at fetchedAt. USD per million tokens. Not a transaction quote, invoice, confirmation of model compatibility, or guarantee that checkout matches.",
   "requested": [
     "openai/gpt-5.4",
     "openai/gpt-5.2",
@@ -10,31 +10,79 @@
     "google/gemini-2.5-pro",
     "anthropic/claude-sonnet-4.6"
   ],
-  "missing": [
-    "anthropic/claude-sonnet-4.6"
-  ],
+  "missing": [],
   "models": [
     {
-      "id": "openai/gpt-5.4",
-      "promptPerToken": 2.5e-06,
-      "completionPerToken": 1.5e-05,
-      "promptPerMillion": 2.5,
-      "completionPerMillion": 15.0,
-      "endpoints": [
-        "/v1/chat/completions",
-        "/v1/responses"
-      ]
+      "id": "anthropic/claude-fable-5.2",
+      "promptPerToken": 8e-06,
+      "completionPerToken": 4e-05,
+      "promptPerMillion": 8.0,
+      "completionPerMillion": 40.0,
+      "endpoints": []
     },
     {
-      "id": "openai/gpt-5.2",
-      "promptPerToken": 1.75e-06,
-      "completionPerToken": 1.4e-05,
-      "promptPerMillion": 1.75,
-      "completionPerMillion": 14.0,
-      "endpoints": [
-        "/v1/chat/completions",
-        "/v1/responses"
-      ]
+      "id": "anthropic/claude-sonnet-4.6",
+      "promptPerToken": 3e-06,
+      "completionPerToken": 1.5e-05,
+      "promptPerMillion": 3.0,
+      "completionPerMillion": 15.0,
+      "endpoints": []
+    },
+    {
+      "id": "anthropic/claude-sonnet-5.5",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-0423",
+      "promptPerToken": 1.9e-07,
+      "completionPerToken": 5.1e-07,
+      "promptPerMillion": 0.19,
+      "completionPerMillion": 0.51,
+      "endpoints": []
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-0731",
+      "promptPerToken": 4.4e-07,
+      "completionPerToken": 1.32e-06,
+      "promptPerMillion": 0.44,
+      "completionPerMillion": 1.32,
+      "endpoints": []
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro-0423",
+      "promptPerToken": 1.74e-06,
+      "completionPerToken": 3.48e-06,
+      "promptPerMillion": 1.74,
+      "completionPerMillion": 3.48,
+      "endpoints": []
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro-0813",
+      "promptPerToken": 1.32e-06,
+      "completionPerToken": 3.96e-06,
+      "promptPerMillion": 1.32,
+      "completionPerMillion": 3.96,
+      "endpoints": []
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "promptPerToken": 3e-07,
+      "completionPerToken": 1.2e-06,
+      "promptPerMillion": 0.3,
+      "completionPerMillion": 1.2,
+      "endpoints": []
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash-1017",
+      "promptPerToken": 3e-07,
+      "completionPerToken": 1.2e-06,
+      "promptPerMillion": 0.3,
+      "completionPerMillion": 1.2,
+      "endpoints": []
     },
     {
       "id": "google/gemini-2.5-flash",
@@ -42,9 +90,39 @@
       "completionPerToken": 2.5e-06,
       "promptPerMillion": 0.3,
       "completionPerMillion": 2.5,
-      "endpoints": [
-        "/v1/chat/completions"
-      ]
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-2.5-flash-image",
+      "promptPerToken": 3e-07,
+      "completionPerToken": 2.5e-06,
+      "promptPerMillion": 0.3,
+      "completionPerMillion": 2.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-2.5-flash-lite",
+      "promptPerToken": 1e-07,
+      "completionPerToken": 4e-07,
+      "promptPerMillion": 0.1,
+      "completionPerMillion": 0.4,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-2.5-flash-lite-preview-tts",
+      "promptPerToken": 5e-07,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 0.5,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-2.5-flash-tts",
+      "promptPerToken": 5e-07,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 0.5,
+      "completionPerMillion": 10.0,
+      "endpoints": []
     },
     {
       "id": "google/gemini-2.5-pro",
@@ -52,9 +130,727 @@
       "completionPerToken": 1e-05,
       "promptPerMillion": 1.25,
       "completionPerMillion": 10.0,
-      "endpoints": [
-        "/v1/chat/completions"
-      ]
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-2.5-pro-tts",
+      "promptPerToken": 1e-06,
+      "completionPerToken": 2e-05,
+      "promptPerMillion": 1.0,
+      "completionPerMillion": 20.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3-flash-preview",
+      "promptPerToken": 5e-07,
+      "completionPerToken": 3e-06,
+      "promptPerMillion": 0.5,
+      "completionPerMillion": 3.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3-pro-image",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1.2e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 12.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.1-flash-image",
+      "promptPerToken": 5e-07,
+      "completionPerToken": 3e-06,
+      "promptPerMillion": 0.5,
+      "completionPerMillion": 3.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite",
+      "promptPerToken": 2.5e-07,
+      "completionPerToken": 1.5e-06,
+      "promptPerMillion": 0.25,
+      "completionPerMillion": 1.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite-image",
+      "promptPerToken": 2.5e-07,
+      "completionPerToken": 1.5e-06,
+      "promptPerMillion": 0.25,
+      "completionPerMillion": 1.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.1-pro-preview",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1.2e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 12.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.5-flash",
+      "promptPerToken": 1.5e-06,
+      "completionPerToken": 9e-06,
+      "promptPerMillion": 1.5,
+      "completionPerMillion": 9.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.5-flash-lite",
+      "promptPerToken": 3e-07,
+      "completionPerToken": 2.5e-06,
+      "promptPerMillion": 0.3,
+      "completionPerMillion": 2.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.7-flash",
+      "promptPerToken": 1.5e-06,
+      "completionPerToken": 7.5e-06,
+      "promptPerMillion": 1.5,
+      "completionPerMillion": 7.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.8-flash",
+      "promptPerToken": 1.5e-06,
+      "completionPerToken": 7.5e-06,
+      "promptPerMillion": 1.5,
+      "completionPerMillion": 7.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.8-flash-lite-tts",
+      "promptPerToken": 5e-07,
+      "completionPerToken": 6e-06,
+      "promptPerMillion": 0.5,
+      "completionPerMillion": 6.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-3.8-flash-tts",
+      "promptPerToken": 5e-07,
+      "completionPerToken": 9e-06,
+      "promptPerMillion": 0.5,
+      "completionPerMillion": 9.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-4-argon",
+      "promptPerToken": 4e-06,
+      "completionPerToken": 2e-05,
+      "promptPerMillion": 4.0,
+      "completionPerMillion": 20.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-4-hydrogen",
+      "promptPerToken": 1.5e-06,
+      "completionPerToken": 7.5e-06,
+      "promptPerMillion": 1.5,
+      "completionPerMillion": 7.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-nano-banana-2.1",
+      "promptPerToken": 1.5e-06,
+      "completionPerToken": 7.5e-06,
+      "promptPerMillion": 1.5,
+      "completionPerMillion": 7.5,
+      "endpoints": []
+    },
+    {
+      "id": "microsoft/mai-image-2.5",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 4.7e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 47.0,
+      "endpoints": []
+    },
+    {
+      "id": "microsoft/mai-image-2.5-flash",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 2.6e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 26.0,
+      "endpoints": []
+    },
+    {
+      "id": "microsoft/mai-image-2.5-pro",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 0.000106,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 106.0,
+      "endpoints": []
+    },
+    {
+      "id": "minimax/minimax-m2.5",
+      "promptPerToken": 3e-07,
+      "completionPerToken": 1.2e-06,
+      "promptPerMillion": 0.3,
+      "completionPerMillion": 1.2,
+      "endpoints": []
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "promptPerToken": 3e-07,
+      "completionPerToken": 1.2e-06,
+      "promptPerMillion": 0.3,
+      "completionPerMillion": 1.2,
+      "endpoints": []
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "promptPerToken": 6e-07,
+      "completionPerToken": 2.4e-06,
+      "promptPerMillion": 0.6,
+      "completionPerMillion": 2.4,
+      "endpoints": []
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "promptPerToken": 9.5e-07,
+      "completionPerToken": 4e-06,
+      "promptPerMillion": 0.95,
+      "completionPerMillion": 4.0,
+      "endpoints": []
+    },
+    {
+      "id": "moonshotai/kimi-k2.7-code",
+      "promptPerToken": 9.5e-07,
+      "completionPerToken": 4e-06,
+      "promptPerMillion": 0.95,
+      "completionPerMillion": 4.0,
+      "endpoints": []
+    },
+    {
+      "id": "moonshotai/kimi-k2.7-code-highspeed",
+      "promptPerToken": 1.9e-06,
+      "completionPerToken": 8e-06,
+      "promptPerMillion": 1.9,
+      "completionPerMillion": 8.0,
+      "endpoints": []
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "promptPerToken": 3e-06,
+      "completionPerToken": 1.5e-05,
+      "promptPerMillion": 3.0,
+      "completionPerMillion": 15.0,
+      "endpoints": []
+    },
+    {
+      "id": "moonshotai/kimi-k3.1-pro",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1.1e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 11.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-4o",
+      "promptPerToken": 2.5e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 2.5,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-4o-mini-transcribe",
+      "promptPerToken": 1.25e-06,
+      "completionPerToken": 5e-06,
+      "promptPerMillion": 1.25,
+      "completionPerMillion": 5.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-4o-transcribe-diarize",
+      "promptPerToken": 2.5e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 2.5,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5",
+      "promptPerToken": 1.25e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 1.25,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5-mini",
+      "promptPerToken": 2.5e-07,
+      "completionPerToken": 2e-06,
+      "promptPerMillion": 0.25,
+      "completionPerMillion": 2.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5-nano",
+      "promptPerToken": 5e-08,
+      "completionPerToken": 4e-07,
+      "promptPerMillion": 0.05,
+      "completionPerMillion": 0.4,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.1",
+      "promptPerToken": 1.25e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 1.25,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.2",
+      "promptPerToken": 1.75e-06,
+      "completionPerToken": 1.4e-05,
+      "promptPerMillion": 1.75,
+      "completionPerMillion": 14.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.3-codex",
+      "promptPerToken": 1.75e-06,
+      "completionPerToken": 1.4e-05,
+      "promptPerMillion": 1.75,
+      "completionPerMillion": 14.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.4",
+      "promptPerToken": 2.5e-06,
+      "completionPerToken": 1.5e-05,
+      "promptPerMillion": 2.5,
+      "completionPerMillion": 15.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.4-mini",
+      "promptPerToken": 7.5e-07,
+      "completionPerToken": 4.5e-06,
+      "promptPerMillion": 0.75,
+      "completionPerMillion": 4.5,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.4-nano",
+      "promptPerToken": 2e-07,
+      "completionPerToken": 1.25e-06,
+      "promptPerMillion": 0.2,
+      "completionPerMillion": 1.25,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.4-pro",
+      "promptPerToken": 3e-05,
+      "completionPerToken": 0.00018,
+      "promptPerMillion": 30.0,
+      "completionPerMillion": 180.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.5",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 3e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 30.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "promptPerToken": 2e-07,
+      "completionPerToken": 1.2e-06,
+      "promptPerMillion": 0.2,
+      "completionPerMillion": 1.2,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.6-sol",
+      "promptPerToken": 4e-06,
+      "completionPerToken": 2e-05,
+      "promptPerMillion": 4.0,
+      "completionPerMillion": 20.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-5.6-terra",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1.2e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 12.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-6-astra",
+      "promptPerToken": 1e-05,
+      "completionPerToken": 5e-05,
+      "promptPerMillion": 10.0,
+      "completionPerMillion": 50.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-6-luna",
+      "promptPerToken": 1e-07,
+      "completionPerToken": 5e-07,
+      "promptPerMillion": 0.1,
+      "completionPerMillion": 0.5,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-6-sol",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-6.1-sol",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-6.1-terra",
+      "promptPerToken": 1e-06,
+      "completionPerToken": 5e-06,
+      "promptPerMillion": 1.0,
+      "completionPerMillion": 5.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-image-1.5",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 10.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-image-2",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 3e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 30.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-image-2.5-flare",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 3e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 30.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-image-2.5-sunburst",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 3e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 30.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-image-2.6-flare",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 3e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 30.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/gpt-image-2.6-sunburst",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 3e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 30.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/text-embedding-3-large",
+      "promptPerToken": 1.4e-07,
+      "completionPerToken": 0.0,
+      "promptPerMillion": 0.14,
+      "completionPerMillion": 0.0,
+      "endpoints": []
+    },
+    {
+      "id": "openai/text-embedding-3-small",
+      "promptPerToken": 2e-08,
+      "completionPerToken": 0.0,
+      "promptPerMillion": 0.02,
+      "completionPerMillion": 0.0,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen-flash",
+      "promptPerToken": 2.2e-08,
+      "completionPerToken": 2.2e-07,
+      "promptPerMillion": 0.022,
+      "completionPerMillion": 0.22,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen-plus",
+      "promptPerToken": 1.2e-07,
+      "completionPerToken": 2.9e-07,
+      "promptPerMillion": 0.12,
+      "completionPerMillion": 0.29,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.5-flash",
+      "promptPerToken": 1e-07,
+      "completionPerToken": 4e-07,
+      "promptPerMillion": 0.1,
+      "completionPerMillion": 0.4,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.6-flash",
+      "promptPerToken": 2.5e-07,
+      "completionPerToken": 1.5e-06,
+      "promptPerMillion": 0.25,
+      "completionPerMillion": 1.5,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.7-max",
+      "promptPerToken": 1.71e-06,
+      "completionPerToken": 5.14e-06,
+      "promptPerMillion": 1.71,
+      "completionPerMillion": 5.14,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.7-plus",
+      "promptPerToken": 4e-07,
+      "completionPerToken": 1.6e-06,
+      "promptPerMillion": 0.4,
+      "completionPerMillion": 1.6,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.8-27b",
+      "promptPerToken": 5e-07,
+      "completionPerToken": 1.71e-06,
+      "promptPerMillion": 0.5,
+      "completionPerMillion": 1.71,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.8-flash",
+      "promptPerToken": 1.1e-07,
+      "completionPerToken": 3.9e-07,
+      "promptPerMillion": 0.11,
+      "completionPerMillion": 0.39,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.8-max",
+      "promptPerToken": 1.71e-06,
+      "completionPerToken": 5.14e-06,
+      "promptPerMillion": 1.71,
+      "completionPerMillion": 5.14,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen3.8-max-0902",
+      "promptPerToken": 1.71e-06,
+      "completionPerToken": 5.14e-06,
+      "promptPerMillion": 1.71,
+      "completionPerMillion": 5.14,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/text-embedding-v4",
+      "promptPerToken": 7.2e-08,
+      "completionPerToken": 0.0,
+      "promptPerMillion": 0.072,
+      "completionPerMillion": 0.0,
+      "endpoints": []
+    },
+    {
+      "id": "typesafe/jev-latest",
+      "promptPerToken": 4.2e-08,
+      "completionPerToken": 0.0,
+      "promptPerMillion": 0.042,
+      "completionPerMillion": 0.0,
+      "endpoints": []
+    },
+    {
+      "id": "volcengine/doubao-seed-2.0-code",
+      "promptPerToken": 6.7e-07,
+      "completionPerToken": 3.36e-06,
+      "promptPerMillion": 0.67,
+      "completionPerMillion": 3.36,
+      "endpoints": []
+    },
+    {
+      "id": "volcengine/doubao-seed-2.0-pro",
+      "promptPerToken": 6.7e-07,
+      "completionPerToken": 3.36e-06,
+      "promptPerMillion": 0.67,
+      "completionPerMillion": 3.36,
+      "endpoints": []
+    },
+    {
+      "id": "volcengine/doubao-seed-2.1-pro",
+      "promptPerToken": 8.84e-07,
+      "completionPerToken": 4.42e-06,
+      "promptPerMillion": 0.884,
+      "completionPerMillion": 4.42,
+      "endpoints": []
+    },
+    {
+      "id": "volcengine/doubao-seed-2.1-turbo",
+      "promptPerToken": 4.42e-07,
+      "completionPerToken": 2.212e-06,
+      "promptPerMillion": 0.442,
+      "completionPerMillion": 2.212,
+      "endpoints": []
+    },
+    {
+      "id": "volcengine/doubao-seed-character",
+      "promptPerToken": 1.77e-07,
+      "completionPerToken": 8.84e-07,
+      "promptPerMillion": 0.177,
+      "completionPerMillion": 0.884,
+      "endpoints": []
+    },
+    {
+      "id": "volcengine/doubao-seed-evolving",
+      "promptPerToken": 8.84e-07,
+      "completionPerToken": 4.42e-06,
+      "promptPerMillion": 0.884,
+      "completionPerMillion": 4.42,
+      "endpoints": []
+    },
+    {
+      "id": "x-ai/grok-4.1-fast",
+      "promptPerToken": 2e-07,
+      "completionPerToken": 5e-07,
+      "promptPerMillion": 0.2,
+      "completionPerMillion": 0.5,
+      "endpoints": []
+    },
+    {
+      "id": "x-ai/grok-4.3",
+      "promptPerToken": 1.25e-06,
+      "completionPerToken": 2.5e-06,
+      "promptPerMillion": 1.25,
+      "completionPerMillion": 2.5,
+      "endpoints": []
+    },
+    {
+      "id": "x-ai/grok-4.5",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 6e-06,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 6.0,
+      "endpoints": []
+    },
+    {
+      "id": "x-ai/grok-4.6",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 6e-06,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 6.0,
+      "endpoints": []
+    },
+    {
+      "id": "x-ai/grok-4.7",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 6e-06,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 6.0,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-4.7",
+      "promptPerToken": 4e-07,
+      "completionPerToken": 2.2e-06,
+      "promptPerMillion": 0.4,
+      "completionPerMillion": 2.2,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-4.7-flashx",
+      "promptPerToken": 7.2e-08,
+      "completionPerToken": 4e-07,
+      "promptPerMillion": 0.072,
+      "completionPerMillion": 0.4,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5",
+      "promptPerToken": 1e-06,
+      "completionPerToken": 3.2e-06,
+      "promptPerMillion": 1.0,
+      "completionPerMillion": 3.2,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5-turbo",
+      "promptPerToken": 1.2e-06,
+      "completionPerToken": 4e-06,
+      "promptPerMillion": 1.2,
+      "completionPerMillion": 4.0,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5.1",
+      "promptPerToken": 1.4e-06,
+      "completionPerToken": 4.4e-06,
+      "promptPerMillion": 1.4,
+      "completionPerMillion": 4.4,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5.2",
+      "promptPerToken": 1.4e-06,
+      "completionPerToken": 4.4e-06,
+      "promptPerMillion": 1.4,
+      "completionPerMillion": 4.4,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5.3",
+      "promptPerToken": 1.4e-06,
+      "completionPerToken": 4.4e-06,
+      "promptPerMillion": 1.4,
+      "completionPerMillion": 4.4,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "promptPerToken": 1.5e-07,
+      "completionPerToken": 5e-07,
+      "promptPerMillion": 0.15,
+      "completionPerMillion": 0.5,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5.3-flashx",
+      "promptPerToken": 3.7e-07,
+      "completionPerToken": 1.25e-06,
+      "promptPerMillion": 0.37,
+      "completionPerMillion": 1.25,
+      "endpoints": []
+    },
+    {
+      "id": "z-ai/glm-5v-turbo",
+      "promptPerToken": 1.2e-06,
+      "completionPerToken": 4e-06,
+      "promptPerMillion": 1.2,
+      "completionPerMillion": 4.0,
+      "endpoints": []
     }
   ]
 }

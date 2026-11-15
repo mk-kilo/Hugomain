@@ -11,7 +11,9 @@
   var plausibleOk = domain.length > 0 && domain.indexOf(" ") === -1 && domain.indexOf("/") === -1;
   var analyticsOn = gaOk || plausibleOk;
 
+  var debug = /(?:^|[?&])analytics_debug=1(?:&|$)/.test(window.location.search || "");
   function track(name, params) {
+    if (debug && window.console) console.info("[JXZNE analytics preview — not a confirmed vendor event]", name, params || {});
     if (!analyticsOn) return;
     try {
       if (gaOk && typeof window.gtag === "function") window.gtag("event", name, params || {});
@@ -19,6 +21,7 @@
     } catch (e) {}
   }
   window.jxzneTrack = track;
+  window.jxzneAnalyticsStatus = {ga4Configured:gaOk,plausibleConfigured:plausibleOk,debugMode:debug};
 
   if (gaOk) {
     var gaScript = document.createElement("script");
@@ -190,15 +193,25 @@
       var link = target.closest("a[href]");
       if (!link) return;
       var href = link.getAttribute("href") || "";
-      if (!isAffiliateHref(href)) return;
-      if (!analyticsOn) return;
-      var position = annotateAffiliate(link);
+      if (/^mailto:/i.test(href)) {
+        track("contact_intent", {
+          event_category: "lead_intent",
+          event_label: labelOf(link),
+          page_path: pagePath().slice(0, 200)
+        });
+      }
+      if (!/ofox\.ai/i.test(href)) return;
+      var referral = isAffiliateHref(href);
+      var position = link.getAttribute("data-cta-position") || "";
+      if (referral && analyticsOn) position = annotateAffiliate(link);
       track("affiliate_click", {
         event_category: "affiliate",
+        event_label: labelOf(link),
         page_path: pagePath().slice(0, 200),
         cta_position: position,
+        cta_id: link.getAttribute("data-cta") || "unlabeled",
         link_url: (link.href || href).split("#")[0].slice(0, 300),
-        outbound: "affiliate"
+        outbound: referral ? "affiliate" : ""
       });
     } catch (e) {}
   });

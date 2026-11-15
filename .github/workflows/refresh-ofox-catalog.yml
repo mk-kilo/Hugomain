@@ -1,0 +1,40 @@
+name: Refresh Ofox Public Model Prices
+on:
+  schedule:
+    - cron: '43 5 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/refresh_ofox_public_catalog.py'
+      - '.github/workflows/refresh-ofox-catalog.yml'
+permissions:
+  contents: write
+concurrency:
+  group: refresh-ofox-catalog
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Refresh public catalog; fail safely if invalid/unavailable
+        run: python3 scripts/refresh_ofox_public_catalog.py
+      - name: Validate JSON
+        run: python3 -m json.tool ofox-public-prices.json > /dev/null
+      - name: Commit fresh data only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ofox-public-prices.json
+          if git diff --cached --quiet; then
+            echo "No catalog change"
+          else
+            git commit -m "data: update Ofox observed public model prices"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
