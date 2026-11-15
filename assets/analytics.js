@@ -71,6 +71,7 @@
     var link = event.target.closest && event.target.closest("a[href]");
     if (!link) return;
     var href = link.getAttribute("href") || "";
+    if (/^mailto:/i.test(href)) track("contact_intent", {event_category:"lead_intent",event_label:labelOf(link),page_path:window.location.pathname});
     if (/ofox\.ai/i.test(href)) {
       track("affiliate_click", {
         event_category: "affiliate",
