@@ -7,13 +7,16 @@
   var gaOk = /^G-[A-Z0-9]+$/.test(ga);
   var plausibleOk = domain.length > 0 && domain.indexOf(" ") === -1 && domain.indexOf("/") === -1;
 
+  var debug = /(?:^|[?&])analytics_debug=1(?:&|$)/.test(window.location.search || "");
   function track(name, params) {
+    if (debug && window.console) console.info("[JXZNE analytics preview — not a confirmed vendor event]", name, params || {});
     try {
       if (typeof window.gtag === "function") window.gtag("event", name, params || {});
       if (typeof window.plausible === "function") window.plausible(name, {props: params || {}});
     } catch (e) {}
   }
   window.jxzneTrack = track;
+  window.jxzneAnalyticsStatus = {ga4Configured:gaOk,plausibleConfigured:plausibleOk,debugMode:debug};
 
   if (gaOk) {
     var gaScript = document.createElement("script");
@@ -72,7 +75,9 @@
       track("affiliate_click", {
         event_category: "affiliate",
         event_label: labelOf(link),
-        link_url: href.split("#")[0]
+        link_url: href.split("#")[0],
+        page_path: window.location.pathname,
+        cta_id: link.getAttribute("data-cta") || "unlabeled"
       });
     }
   });
