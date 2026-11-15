@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>API cost calculator: compare two scenarios you price | JXZNE AI</title>
+  <meta name="description" content="Estimate two monthly API bills in the browser from your token counts and per-million-token rates. Rate fields start empty. No model price is built in.">
+  <link rel="canonical" href="https://jxzne.com/en/api-cost-calculator.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/api-cost-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/api-cost-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/api-cost-calculator.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="API cost calculator: compare two scenarios you price | JXZNE AI">
+  <meta property="og:description" content="Estimate two monthly bills from tokens and per-million rates you type. Rate fields start empty.">
+  <meta property="og:url" content="https://jxzne.com/en/api-cost-calculator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="API cost calculator | JXZNE AI">
+  <meta name="twitter:description" content="Rate fields start empty. The month is arithmetic on numbers you type.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/api-cost-calculator.html#webpage","url":"https://jxzne.com/en/api-cost-calculator.html","name":"API cost calculator | JXZNE AI","description":"Estimate two monthly bills from tokens and per-million rates you type. Rate fields start empty.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"API cost calculator","item":"https://jxzne.com/en/api-cost-calculator.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/api-cost-calculator.html#faq","url":"https://jxzne.com/en/api-cost-calculator.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Why are the rates blank?","acceptedAnswer":{"@type":"Answer","text":"Blank means this page does not ship a model price. Copy the current input and output rate per million tokens from the provider's pricing page. The example button fills token counts only, and it labels them as an example volume."}},{"@type":"Question","name":"Is the difference a savings percent?","acceptedAnswer":{"@type":"Answer","text":"No. The difference is subtraction of the two monthly totals, in the same unit as the rates you typed. It excludes cache, batch, tax, and top-up fees, and it is not a measured saving."}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="cheaper-model-by-task.html">Compare by task</a>
+    <a href="developers.html">Developers</a>
+    <a href="list-openai-models.html">Model ids</a>
+    <a href="validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../api-cost-calculator.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="api-cost-calculator.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices and compatibility follow the provider.</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">MONTHLY COST</span>
+    <h1>Two monthly bills, from numbers you type</h1>
+    <p>The formula is: monthly cost = (monthly input tokens ÷ 1,000,000) × input rate per million tokens + (monthly output tokens ÷ 1,000,000) × output rate per million tokens. Both scenarios share one token volume. Each has its own rates. The math runs in your browser and these numbers are not uploaded.</p>
+    <p>Rate fields start empty. This page does not hardcode a model price. Replace them with the current figures on the provider’s pricing page. <a href="cheaper-model-by-task.html">How to pick the two ids</a>. This is a different tool from the developer page’s same-model official-versus-Ofox form on <a href="developers.html#price-compare">Developers</a> and from <a href="api-pricing.html">chat plan versus API billing</a>.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="calculator">
+    <h2>Enter volume and rates</h2>
+    <div id="cost-calc" class="calc-layout" data-name-a="Scenario A" data-name-b="Scenario B" data-msg-empty="Enter the monthly tokens and both rates for a scenario before that scenario shows a total." data-msg-bad="Use zero or a positive number." data-msg-pending="—" data-msg-same="On the numbers you typed, the two monthly totals match." data-msg-lower="On the numbers you typed, {low} is lower by {diff}. That is subtraction, not a savings percent.">
+      <div class="calc-form">
+        <p class="cost-example"><button type="button" class="utility-btn" id="cost-example-tokens">Fill example token volume</button></p>
+        <p id="cost-example-note" class="calc-note" hidden>Example volume only: 1,000,000 input tokens and 200,000 output tokens. This is not someone’s measured usage. Rates stay empty until you paste current prices from a pricing page.</p>
+        <label>Monthly input tokens<input id="cost-in" type="number" min="0" step="1" inputmode="decimal" autocomplete="off" placeholder="From your bill or your own estimate"></label>
+        <label>Monthly output tokens<input id="cost-out" type="number" min="0" step="1" inputmode="decimal" autocomplete="off" placeholder="From your bill or your own estimate"></label>
+        <fieldset class="scenario-block">
+          <legend>Scenario A</legend>
+          <label>Name<input id="cost-a-name" type="text" autocomplete="off" placeholder="For example, the first model id"></label>
+          <label>Input rate per 1M tokens<input id="cost-a-in" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="Copy from the pricing page, or leave blank"></label>
+          <label>Output rate per 1M tokens<input id="cost-a-out" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="Copy from the pricing page, or leave blank"></label>
+        </fieldset>
+        <fieldset class="scenario-block">
+          <legend>Scenario B</legend>
+          <label>Name<input id="cost-b-name" type="text" autocomplete="off" placeholder="For example, the second model id"></label>
+          <label>Input rate per 1M tokens<input id="cost-b-in" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="Copy from the pricing page, or leave blank"></label>
+          <label>Output rate per 1M tokens<input id="cost-b-out" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="Copy from the pricing page, or leave blank"></label>
+        </fieldset>
+        <p class="calc-note">Use the currency printed on the pricing page. Results have no currency symbol; the unit is whatever you typed. Pricing pages: <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer">OpenAI</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Gemini</a> · <a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox pricing note</a></p>
+      </div>
+      <div class="calc-results" aria-live="polite">
+        <div><span>Scenario A per month</span><strong id="cost-a-total">—</strong></div>
+        <div><span>Scenario B per month</span><strong id="cost-b-total">—</strong></div>
+        <div><span>A minus B</span><strong id="cost-diff">—</strong></div>
+        <p id="cost-compare" class="calc-note">Enter the monthly tokens and both rates for a scenario before that scenario shows a total.</p>
+        <p class="calc-note">Excludes cache, batch, long-context surcharges, tax, top-up fees, and exchange rates. The difference is not a measured saving and not proof that quality matches.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>Questions</h2>
+    <details open>
+      <summary>Why are the rates blank?</summary>
+      <p>Blank means this page does not ship a model price. Copy the current input and output rate per million tokens from the provider’s pricing page. The example button fills token counts only, and it labels them as an example volume.</p>
+    </details>
+    <details>
+      <summary>Is the difference a savings percent?</summary>
+      <p>No. The difference is subtraction of the two monthly totals, in the same unit as the rates you typed. It excludes cache, batch, tax, and top-up fees, and it is not a measured saving.</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Open an account after the numbers check out</h2>
+    <p>The calculator does not create a key. When you need to call, the account is on Ofox.</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p>
+    <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. A calculator result is not an Ofox quote.</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Rates come from you</p><a href="../api-cost-calculator.html" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
+<script>try{localStorage.setItem("jxzne-locale","en")}catch(e){}</script>
+<script src="../assets/cost-calculator.js" defer></script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

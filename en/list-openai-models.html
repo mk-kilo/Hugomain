@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>How to look up an OpenAI-compatible model id | JXZNE AI</title>
+  <meta name="description" content="Read model ids from GET https://api.ofox.ai/v1/models and copy the id into the chat completions model field. This page does not reprint a price list that will go stale.">
+  <link rel="canonical" href="https://jxzne.com/en/list-openai-models.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/list-openai-models.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/list-openai-models.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/list-openai-models.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="How to look up an OpenAI-compatible model id | JXZNE AI">
+  <meta property="og:description" content="Read model ids from GET https://api.ofox.ai/v1/models and copy the id into the model field.">
+  <meta property="og:url" content="https://jxzne.com/en/list-openai-models.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How to look up an OpenAI-compatible model id | JXZNE AI">
+  <meta name="twitter:description" content="Read ids from the models list and copy them into the model field.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/list-openai-models.html#webpage","url":"https://jxzne.com/en/list-openai-models.html","name":"How to look up an OpenAI-compatible model id | JXZNE AI","description":"Read model ids from GET https://api.ofox.ai/v1/models and copy the id into the model field.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"How to look up a model id","item":"https://jxzne.com/en/list-openai-models.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/list-openai-models.html#faq","url":"https://jxzne.com/en/list-openai-models.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Where is the model id in the response?","acceptedAnswer":{"@type":"Answer","text":"In an OpenAI-compatible list, the id field on each model object is the string you copy into the request. Do not substitute a display name."}},{"@type":"Question","name":"Can ofox-public-prices.json stand in for the live catalog?","acceptedAnswer":{"@type":"Answer","text":"No. That file is one unauthenticated observation and it records the time. Current ids come from the live GET https://api.ofox.ai/v1/models response. Models without a usable text rate are not given a number in that file."}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">Call samples</a>
+    <a href="openai-api-errors.html">API errors</a>
+    <a href="cheaper-model-by-task.html">Compare by task</a>
+    <a href="validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../list-openai-models.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="list-openai-models.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices and compatibility follow the provider.</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">MODEL IDS</span>
+    <h1>Copy the model id from the catalog before you call</h1>
+    <p>The OpenAI-compatible model list is <code>GET {root}/models</code>. Ofox’s root is <code>https://api.ofox.ai/v1</code>, so the list URL is <code>https://api.ofox.ai/v1/models</code>. The value for the <code>model</code> field is each object’s <code>id</code>, not the product name on a marketing page.</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Read the list once</h2>
+    <p><code>scripts/fetch_ofox_public_prices.py</code> requests this URL without a key, and it writes an observation only after HTTP 200 and a usable JSON list. If the provider later requires a key, add the same <code>Authorization: Bearer</code> header the chat call uses. Do not assume an unauthenticated read stays available.</p>
+    <div class="snippet"><div>curl · no key in the command<button class="copy-code" type="button" data-copy="models-snippet">Copy</button></div><pre id="models-snippet"><code>curl https://api.ofox.ai/v1/models</code></pre></div>
+    <p>In the JSON, open the <code>data</code> array. Each item’s <code>id</code> is the call string. If that item also has endpoint or price fields, they belong to that response. This page does not copy them into a price list that would go stale.</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>How to use the id</h2>
+    <ol class="step-list">
+      <li>Copy <code>id</code> exactly, including the slash. Samples on this site use <code>openai/gpt-5.4</code> because the public catalog on 2026-11-12 included that id and did not include <code>openai/gpt-5.6</code>. That is a catalog fact, not a ranking.</li>
+      <li>Put that same string in the Chat Completions <code>model</code> field. The shapes are on <a href="openai-compatible-api.html">Python / Node / curl</a>.</li>
+      <li>Do not invent an id that is absent from the list. A remembered name is a common cause of <a href="openai-api-errors.html#404">404 / model not found</a>.</li>
+      <li>One id is not automatically valid on every endpoint. This repo’s note of the Ofox docs says <code>openai/gpt-5.4-pro</code> and the Codex series are Responses-only. Seeing other ids on Chat Completions does not mean those two are available there.</li>
+    </ol>
+    <p class="calc-note"><a href="../ofox-public-prices.json">ofox-public-prices.json</a> is one dated observation. A model is listed only when that response had a usable text rate. Missing rates are not filled in. The file does not replace the list you just fetched.</p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>Questions</h2>
+    <details open>
+      <summary>Where is the model id in the response?</summary>
+      <p>In an OpenAI-compatible list, the <code>id</code> field on each model object is the string you copy into the request. Do not substitute a display name.</p>
+    </details>
+    <details>
+      <summary>Can ofox-public-prices.json stand in for the live catalog?</summary>
+      <p>No. That file is one unauthenticated observation and it records the time. Current ids come from the live <code>GET https://api.ofox.ai/v1/models</code> response. Models without a usable text rate are not given a number in that file.</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">After you have an id: <a href="cheaper-model-by-task.html">compare cost by task</a> · <a href="api-cost-calculator.html">paste rates into the monthly calculator</a> · <a href="developers.html#price-compare">official vs Ofox for one model</a></p>
+    <h2>The catalog does not issue the key</h2>
+    <p>The list tells you the id. A call still needs a key for this root.</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p>
+    <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. Catalog contents follow Ofox’s live response.</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · No stale price reprint</p><a href="../list-openai-models.html" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
+<script>try{localStorage.setItem("jxzne-locale","en")}catch(e){}</script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

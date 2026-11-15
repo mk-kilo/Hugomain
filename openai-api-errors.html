@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OpenAI 兼容 API 的 401、404、429 和超时怎么查 | JXZNE AI</title>
+  <meta name="description" content="按密钥、路径、模型 id、请求频率和客户端超时排查 OpenAI 兼容 Chat Completions。不给 Ofox 编造状态码或等待秒数。调用仍是待实测。">
+  <link rel="canonical" href="https://jxzne.com/openai-api-errors.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openai-api-errors.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openai-api-errors.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openai-api-errors.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="OpenAI 兼容 API 的 401、404、429 和超时怎么查 | JXZNE AI">
+  <meta property="og:description" content="按密钥、路径、模型 id、请求频率和客户端超时排查 OpenAI 兼容 Chat Completions。">
+  <meta property="og:url" content="https://jxzne.com/openai-api-errors.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OpenAI 兼容 API 的 401、404、429 和超时怎么查 | JXZNE AI">
+  <meta name="twitter:description" content="按密钥、路径、模型 id、请求频率和客户端超时排查。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/openai-api-errors.html#webpage","url":"https://jxzne.com/openai-api-errors.html","name":"OpenAI 兼容 API 的 401、404、429 和超时怎么查 | JXZNE AI","description":"按密钥、路径、模型 id、请求频率和客户端超时排查 OpenAI 兼容 Chat Completions。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"OpenAI 兼容 API 常见错误","item":"https://jxzne.com/openai-api-errors.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/openai-api-errors.html#faq","url":"https://jxzne.com/openai-api-errors.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"401 Unauthorized 先查什么？","acceptedAnswer":{"@type":"Answer","text":"确认 Authorization 是 Bearer 加一个空格再加密钥，密钥没有多余空格、换行或引号，并且这把密钥属于你填写的那个 Base URL 的账户。OpenAI 的密钥不能调用 api.ofox.ai，反过来也不行。不要把密钥贴到公开页面。"}},{"@type":"Question","name":"404 或 model not found 先查什么？","acceptedAnswer":{"@type":"Answer","text":"SDK 的根地址用 https://api.ofox.ai/v1，不要再加 /chat/completions。curl 的完整地址只含一次 /chat/completions。模型 id 必须来自该服务商的目录，例如 openai/gpt-5.4。只提供 Responses 的模型用 Chat Completions 去调，也可能是 404。"}},{"@type":"Question","name":"429 是不是表示价格不对？","acceptedAnswer":{"@type":"Answer","text":"不是。429 表示服务端要求降低频率或当前容量不足。先降低并发，并在响应有 Retry-After 时按那个秒数等待。余额问题看服务商控制台，本页不指定 Ofox 的欠费状态码。"}},{"@type":"Question","name":"超时是不是服务端的一种 HTTP 状态？","acceptedAnswer":{"@type":"Answer","text":"多数时候是客户端先断开。先分清客户端 timeout 和 HTTP 408 或 504。官方 SDK 可以调大 timeout，本页不给固定秒数。需要边生成边返回时，Chat Completions 有 stream 字段。"}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">调用示例</a>
+    <a href="list-openai-models.html">模型 id</a>
+    <a href="guides.html">配置教程</a>
+    <a href="validation.html">实测状态</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="openai-api-errors.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/openai-api-errors.html" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。模型价格、优惠及兼容性以服务商实际公布为准。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">API ERRORS</span>
+    <h1>401、404、429 和超时，按这个顺序查</h1>
+    <p>下面说的是 OpenAI 兼容的 Chat Completions：根地址 <code>https://api.ofox.ai/v1</code>，方法路径 <code>/chat/completions</code>。先看响应里的 HTTP 状态和正文，再改客户端。本站没有一份“Ofox 专属错误码表”，也不给一个推荐的等待秒数。冒烟调用仍是待实测。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="401">
+    <h2>401 Unauthorized</h2>
+    <p>401 表示这把凭证被拒绝。按下面四项核对，不要先换模型。</p>
+    <ol class="step-list">
+      <li>请求头是 <code>Authorization: Bearer</code>，然后一个空格，然后密钥。不要写成 <code>Bearer Bearer</code>，不要给密钥加引号。</li>
+      <li>粘贴时去掉首尾空格和换行。从网页复制密钥时，末尾经常多一个换行。</li>
+      <li>密钥必须属于你填写的那个根地址。发给 <code>api.openai.com</code> 的密钥不能调用 <code>api.ofox.ai</code>，反过来也不行。</li>
+      <li>到签发这把密钥的控制台确认它没有被撤销，并且账户允许调用。</li>
+    </ol>
+    <p>不要把密钥贴到本站、工单、聊天记录或 Git 仓库。示例里只应出现 <code>YOUR_API_KEY</code> 或环境变量。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="404">
+    <h2>404 和 model not found</h2>
+    <p>404 要先分成“路径不对”和“模型 id 不对”。两种都会表现为找不到。</p>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <caption>路径只写一次。SDK 和 curl 的写法不同。</caption>
+        <thead><tr><th>客户端</th><th>应该写成</th><th>容易 404 的写法</th></tr></thead>
+        <tbody>
+          <tr><td>Python <code>base_url</code> / Node <code>baseURL</code></td><td><code>https://api.ofox.ai/v1</code></td><td>根地址里已经带了 <code>/chat/completions</code>，SDK 会再接一次</td></tr>
+          <tr><td>curl</td><td><code>https://api.ofox.ai/v1/chat/completions</code></td><td>只写到 <code>/v1</code>，或把路径写了两次</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>模型 id 用目录里的完整字符串。本站示例用 <code>openai/gpt-5.4</code>，因为 2026-11-12 的公开目录包含这个 id，不包含 <code>openai/gpt-5.6</code>。短名字或你记得的旧名字都不算数。用 <a href="list-openai-models.html">GET /v1/models</a> 核对。</p>
+    <p>协议也不要混。本仓库记录的 Ofox 文档说明是：<code>openai/gpt-5.4-pro</code> 和 Codex 系列只走 Responses API。对它们发 Chat Completions，可能就是 404。以 Ofox 当期文档为准：<a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions</a>。调用示例在 <a href="openai-compatible-api.html">Python / Node / curl</a>。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="429">
+    <h2>429</h2>
+    <p>429 表示服务端要求你降低请求频率，或者当前容量不够。它不是一张价目，也不能从这里读出“贵了多少”。</p>
+    <ol class="step-list">
+      <li>看是不是开了过高的并发，或者失败后立刻重试、没有间隔。</li>
+      <li>如果响应头里有 <code>Retry-After</code>，按那个秒数等待。没有这个头时，本页不另给一个秒数。</li>
+      <li>正文如果在说额度或账单，打开服务商控制台看余额和限额。不同服务商用不同的状态码表示欠费。本页不把某一个码指定成 Ofox 的欠费码。</li>
+    </ol>
+  </section>
+
+  <section class="pricing-hub-section" id="timeout">
+    <h2>超时</h2>
+    <p>多数“超时”是客户端先放弃，不是服务端返回的 HTTP 状态。先看报错来自哪里。</p>
+    <ol class="step-list">
+      <li>客户端库写 timeout：这是你的等待上限短于这次生成。官方 OpenAI SDK 的构造参数里有 <code>timeout</code>（Python 与 Node 都有）。把它调到这次回答需要的时间以上。本页不写一个固定秒数。</li>
+      <li>HTTP 408 或 504：这是链路上的状态。先确认根地址能打开，再看你和 <code>api.ofox.ai</code> 之间的网络。本站没有一份延迟表。</li>
+      <li>长回答看起来像卡住：Chat Completions 请求体可以带 <code>stream: true</code>，服务端按块返回。这是协议字段，不是本站测得的加速数字。</li>
+    </ol>
+    <div class="snippet"><div>只说明字段位置 · 不是已测通的调用<button class="copy-code" type="button" data-copy="timeout-snippet">复制</button></div><pre id="timeout-snippet"><code>client = OpenAI(
+    base_url="https://api.ofox.ai/v1",
+    api_key="YOUR_API_KEY",
+    timeout=YOUR_LIMIT_SECONDS,
+)
+
+response = client.chat.completions.create(
+    model="openai/gpt-5.4",
+    messages=[{"role": "user", "content": "Hello"}],
+    stream=True,
+)</code></pre></div>
+    <p class="calc-note"><code>YOUR_LIMIT_SECONDS</code> 不是一个可用的数字。把它换成你这次调用需要的秒数上限。本页不指定秒数，也没有测得的 Ofox 响应时间。</p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>常见错误</h2>
+    <details open>
+      <summary>401 Unauthorized 先查什么？</summary>
+      <p>确认 <code>Authorization</code> 是 <code>Bearer</code> 加一个空格再加密钥，密钥没有多余空格、换行或引号，并且这把密钥属于你填写的那个 Base URL 的账户。OpenAI 的密钥不能调用 <code>api.ofox.ai</code>，反过来也不行。不要把密钥贴到公开页面。</p>
+    </details>
+    <details>
+      <summary>404 或 model not found 先查什么？</summary>
+      <p>SDK 的根地址用 <code>https://api.ofox.ai/v1</code>，不要再加 <code>/chat/completions</code>。curl 的完整地址只含一次 <code>/chat/completions</code>。模型 id 必须来自该服务商的目录，例如 <code>openai/gpt-5.4</code>。只提供 Responses 的模型用 Chat Completions 去调，也可能是 404。</p>
+    </details>
+    <details>
+      <summary>429 是不是表示价格不对？</summary>
+      <p>不是。429 表示服务端要求降低频率或当前容量不足。先降低并发，并在响应有 <code>Retry-After</code> 时按那个秒数等待。余额问题看服务商控制台，本页不指定 Ofox 的欠费状态码。</p>
+    </details>
+    <details>
+      <summary>超时是不是服务端的一种 HTTP 状态？</summary>
+      <p>多数时候是客户端先断开。先分清客户端 timeout 和 HTTP 408 或 504。官方 SDK 可以调大 <code>timeout</code>，本页不给固定秒数。需要边生成边返回时，Chat Completions 有 <code>stream</code> 字段。</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">工具侧的短说明仍在 <a href="guides.html#troubleshoot">配置教程</a>。编程工具和这里的 HTTP 调用不是同一条路径。模型 id：<a href="list-openai-models.html">列表接口</a>。请求形状：<a href="openai-compatible-api.html">Python / Node / curl</a>。</p>
+    <h2>密钥本身要先能签发</h2>
+    <p>401 有时只是因为还没有这把密钥。账号在 Ofox 创建。</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。本页不把某一次报错写成已复现的 Ofox 缺陷。</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 排查步骤，不是错误码实测</p><a href="en/openai-api-errors.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script>try{if(new URLSearchParams(location.search).get("lang")==="zh")localStorage.setItem("jxzne-locale","zh-CN")}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
+</body>
+</html>
