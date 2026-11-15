@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>API 月费计算器：按你填入的单价比较两个方案 | JXZNE AI</title>
+  <meta name="description" content="在浏览器里用每月输入和输出 token、以及每百万 token 的单价，估算两个方案的月费。单价栏留空，不预填模型价格。">
+  <link rel="canonical" href="https://jxzne.com/api-cost-calculator.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/api-cost-calculator.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/api-cost-calculator.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/api-cost-calculator.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="API 月费计算器：按你填入的单价比较两个方案 | JXZNE AI">
+  <meta property="og:description" content="用每月 token 和每百万 token 单价估算两个方案。单价栏留空，不预填模型价格。">
+  <meta property="og:url" content="https://jxzne.com/api-cost-calculator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="API 月费计算器 | JXZNE AI">
+  <meta name="twitter:description" content="单价栏留空。月费只按你填入的数字计算。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/api-cost-calculator.html#webpage","url":"https://jxzne.com/api-cost-calculator.html","name":"API 月费计算器 | JXZNE AI","description":"用每月 token 和每百万 token 单价估算两个方案。单价栏留空。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"API 月费计算器","item":"https://jxzne.com/api-cost-calculator.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/api-cost-calculator.html#faq","url":"https://jxzne.com/api-cost-calculator.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"为什么单价是空的？","acceptedAnswer":{"@type":"Answer","text":"空着表示本页不预填模型价格。请从服务商当前的价目页抄入每百万 token 的输入和输出单价。示例按钮只填 token 数量，并标明那是示例用量。"}},{"@type":"Question","name":"差额是不是省下来的百分比？","acceptedAnswer":{"@type":"Answer","text":"不是。差额是两个月费的算术差，单位与你填入的单价相同。它不含缓存、批处理、税、充值手续费，也不是实测节省。"}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="cheaper-model-by-task.html">按任务比较</a>
+    <a href="developers.html">开发者</a>
+    <a href="list-openai-models.html">模型 id</a>
+    <a href="validation.html">实测状态</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="api-cost-calculator.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/api-cost-calculator.html" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。模型价格、优惠及兼容性以服务商实际公布为准。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">MONTHLY COST</span>
+    <h1>两个方案的月费，只按你填的数来算</h1>
+    <p>公式是：每月费用 =（每月输入 token ÷ 1,000,000）× 每百万 token 输入单价 +（每月输出 token ÷ 1,000,000）× 每百万 token 输出单价。两个方案共用同一组 token 用量，单价各自填写。计算在你的浏览器里完成，不上传这些数字。</p>
+    <p>单价栏一开始是空的。本页不写死任何模型的价格。请换成服务商价目页上的当前数字。<a href="cheaper-model-by-task.html">怎么按任务选要比较的两个 id</a>。这和 <a href="developers.html#price-compare">开发者页</a> 的“同一模型、官方对 Ofox”不是同一个工具。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="calculator">
+    <h2>填写用量和单价</h2>
+    <div id="cost-calc" class="calc-layout" data-name-a="方案 A" data-name-b="方案 B" data-msg-empty="填完每月 token，以及一个方案的输入和输出单价后，这里才会出现该方案的月费。" data-msg-bad="请填 0 或正数。" data-msg-pending="—" data-msg-same="按你填的数，两个方案的月费相同。" data-msg-lower="按你填的数，{low} 更低，差额 {diff}。这只是减法，不是省下的百分比。">
+      <div class="calc-form">
+        <p class="cost-example"><button type="button" class="utility-btn" id="cost-example-tokens">填入示例 token 用量</button></p>
+        <p id="cost-example-note" class="calc-note" hidden>示例用量：1,000,000 输入 token 和 200,000 输出 token。这不是任何人的实测用量。单价仍然是空的，请换成价目页上的当前价格。</p>
+        <label>每月输入 token<input id="cost-in" type="number" min="0" step="1" inputmode="decimal" autocomplete="off" placeholder="从你的账单或估算填写"></label>
+        <label>每月输出 token<input id="cost-out" type="number" min="0" step="1" inputmode="decimal" autocomplete="off" placeholder="从你的账单或估算填写"></label>
+        <fieldset class="scenario-block">
+          <legend>方案 A</legend>
+          <label>名称<input id="cost-a-name" type="text" autocomplete="off" placeholder="例如：任务用的第一个模型 id"></label>
+          <label>输入单价，每百万 token<input id="cost-a-in" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="从价目页抄入，留空则不算"></label>
+          <label>输出单价，每百万 token<input id="cost-a-out" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="从价目页抄入，留空则不算"></label>
+        </fieldset>
+        <fieldset class="scenario-block">
+          <legend>方案 B</legend>
+          <label>名称<input id="cost-b-name" type="text" autocomplete="off" placeholder="例如：任务用的第二个模型 id"></label>
+          <label>输入单价，每百万 token<input id="cost-b-in" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="从价目页抄入，留空则不算"></label>
+          <label>输出单价，每百万 token<input id="cost-b-out" type="number" min="0" step="any" inputmode="decimal" autocomplete="off" placeholder="从价目页抄入，留空则不算"></label>
+        </fieldset>
+        <p class="calc-note">单价用价目页上的货币。结果不带货币符号，单位与你填入的单价相同。价目页：<a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer">OpenAI</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Gemini</a> · <a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox 计费说明</a></p>
+      </div>
+      <div class="calc-results" aria-live="polite">
+        <div><span>方案 A 每月</span><strong id="cost-a-total">—</strong></div>
+        <div><span>方案 B 每月</span><strong id="cost-b-total">—</strong></div>
+        <div><span>A 减 B</span><strong id="cost-diff">—</strong></div>
+        <p id="cost-compare" class="calc-note">填完每月 token，以及一个方案的输入和输出单价后，这里才会出现该方案的月费。</p>
+        <p class="calc-note">不含缓存、批处理、长上下文加价、税、充值手续费和汇率。差额不是实测节省，也不是服务质量相同的证明。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>常见问题</h2>
+    <details open>
+      <summary>为什么单价是空的？</summary>
+      <p>空着表示本页不预填模型价格。请从服务商当前的价目页抄入每百万 token 的输入和输出单价。示例按钮只填 token 数量，并标明那是示例用量。</p>
+    </details>
+    <details>
+      <summary>差额是不是省下来的百分比？</summary>
+      <p>不是。差额是两个月费的算术差，单位与你填入的单价相同。它不含缓存、批处理、税、充值手续费，也不是实测节省。</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>数字核对完，再去开户</h2>
+    <p>计算器不创建密钥。需要调用时，账号在 Ofox。</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。计算器的结果不是 Ofox 报价。</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 单价由你填写</p><a href="en/api-cost-calculator.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script>try{if(new URLSearchParams(location.search).get("lang")==="zh")localStorage.setItem("jxzne-locale","zh-CN")}catch(e){}</script>
+<script src="assets/cost-calculator.js" defer></script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
+</body>
+</html>

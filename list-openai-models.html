@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>怎么查 OpenAI 兼容接口的模型 id | JXZNE AI</title>
+  <meta name="description" content="用 GET https://api.ofox.ai/v1/models 读取模型 id，再原样放进 chat completions 的 model 字段。本页不粘贴会过期的价目。">
+  <link rel="canonical" href="https://jxzne.com/list-openai-models.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/list-openai-models.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/list-openai-models.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/list-openai-models.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="怎么查 OpenAI 兼容接口的模型 id | JXZNE AI">
+  <meta property="og:description" content="用 GET https://api.ofox.ai/v1/models 读取模型 id，再原样放进 model 字段。">
+  <meta property="og:url" content="https://jxzne.com/list-openai-models.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="怎么查 OpenAI 兼容接口的模型 id | JXZNE AI">
+  <meta name="twitter:description" content="用模型列表接口读取 id，再原样放进 model 字段。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/list-openai-models.html#webpage","url":"https://jxzne.com/list-openai-models.html","name":"怎么查 OpenAI 兼容接口的模型 id | JXZNE AI","description":"用 GET https://api.ofox.ai/v1/models 读取模型 id，再原样放进 model 字段。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"怎么查模型 id","item":"https://jxzne.com/list-openai-models.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/list-openai-models.html#faq","url":"https://jxzne.com/list-openai-models.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"模型 id 写在响应的哪里？","acceptedAnswer":{"@type":"Answer","text":"OpenAI 兼容的列表响应里，每个模型对象的 id 字段就是调用时要原样填写的字符串。不要用展示名称代替 id。"}},{"@type":"Question","name":"仓库里的 ofox-public-prices.json 能不能当当前目录？","acceptedAnswer":{"@type":"Answer","text":"不能。那是某一次未登录读取的观察，文件里写了时间。当前 id 以 GET https://api.ofox.ai/v1/models 的当场响应为准。没有文本单价的模型在那份文件里不会被补上一个数字。"}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">调用示例</a>
+    <a href="openai-api-errors.html">常见错误</a>
+    <a href="cheaper-model-by-task.html">按任务比较</a>
+    <a href="validation.html">实测状态</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="list-openai-models.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/list-openai-models.html" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。模型价格、优惠及兼容性以服务商实际公布为准。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">MODEL IDS</span>
+    <h1>调用前，先从目录里抄模型 id</h1>
+    <p>OpenAI 兼容接口的模型列表是 <code>GET {根地址}/models</code>。Ofox 的根地址是 <code>https://api.ofox.ai/v1</code>，所以列表地址是 <code>https://api.ofox.ai/v1/models</code>。你要放进 <code>model</code> 字段的，是响应里每个对象的 <code>id</code>，不是宣传页上的商品名。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>读一次列表</h2>
+    <p>本仓库的 <code>scripts/fetch_ofox_public_prices.py</code> 不带密钥请求这个地址，并且只在 HTTP 200 和可用的 JSON 列表时才写入观察文件。服务商以后若改为必须带密钥，就加上与聊天接口相同的 <code>Authorization: Bearer</code>。现在不要假设未登录读取永远可用。</p>
+    <div class="snippet"><div>curl · 不把密钥写进命令<button class="copy-code" type="button" data-copy="models-snippet">复制</button></div><pre id="models-snippet"><code>curl https://api.ofox.ai/v1/models</code></pre></div>
+    <p>在返回的 JSON 里找 <code>data</code> 数组。每一项的 <code>id</code> 是调用字符串。若该项还带有端点或价格字段，那是该次响应自己的内容；本页不转抄，以免变成一份过期价目。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>id 怎么用</h2>
+    <ol class="step-list">
+      <li>从 <code>id</code> 原样复制，包括斜杠。本站示例写成 <code>openai/gpt-5.4</code>，是因为 2026-11-12 的公开目录包含这个 id，不包含 <code>openai/gpt-5.6</code>。那是目录事实，不是推荐排名。</li>
+      <li>把同一个字符串放进 Chat Completions 的 <code>model</code>。写法见 <a href="openai-compatible-api.html">Python / Node / curl</a>。</li>
+      <li>列表里没有的 id，不要靠记忆补上。补出来的名字是 <a href="openai-api-errors.html#404">404 / model not found</a> 的常见原因。</li>
+      <li>同一条 id 不一定每个端点都能用。仓库记录的 Ofox 文档说明是：<code>openai/gpt-5.4-pro</code> 和 Codex 系列只走 Responses API。只在 Chat Completions 里看到别的 id，不能推断这两个也能用。</li>
+    </ol>
+    <p class="calc-note">仓库里的 <a href="ofox-public-prices.json">ofox-public-prices.json</a> 是一次带时间的观察。有可用文本单价的模型才列入，没有单价的放在 missing，不会被补一个数字。它不能代替你刚才请求到的列表。</p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>常见问题</h2>
+    <details open>
+      <summary>模型 id 写在响应的哪里？</summary>
+      <p>OpenAI 兼容的列表响应里，每个模型对象的 <code>id</code> 字段就是调用时要原样填写的字符串。不要用展示名称代替 id。</p>
+    </details>
+    <details>
+      <summary>仓库里的 ofox-public-prices.json 能不能当当前目录？</summary>
+      <p>不能。那是某一次未登录读取的观察，文件里写了时间。当前 id 以 <code>GET https://api.ofox.ai/v1/models</code> 的当场响应为准。没有文本单价的模型在那份文件里不会被补上一个数字。</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">选完 id 之后：<a href="cheaper-model-by-task.html">按任务比较费用</a> · <a href="api-cost-calculator.html">把单价填进月费计算器</a> · <a href="developers.html#price-compare">同一模型的官方价和 Ofox 价</a></p>
+    <h2>目录看完，密钥仍要单独签发</h2>
+    <p>列表能告诉你 id。真正调用还要一把这个根地址的密钥。</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。目录内容以 Ofox 当场响应为准。</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 不转抄会过期的价目</p><a href="en/list-openai-models.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script>try{if(new URLSearchParams(location.search).get("lang")==="zh")localStorage.setItem("jxzne-locale","zh-CN")}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>用 Python、Node、curl 调用 OpenAI 兼容 API | JXZNE AI</title>
+  <meta name="description" content="把官方 OpenAI SDK 的 base_url 指到兼容端点，并用 Python、Node 和 curl 调用 chat completions。示例模型是 openai/gpt-5.4，调用尚未在本站记为通过。">
+  <link rel="canonical" href="https://jxzne.com/openai-compatible-api.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openai-compatible-api.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openai-compatible-api.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openai-compatible-api.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="用 Python、Node、curl 调用 OpenAI 兼容 API | JXZNE AI">
+  <meta property="og:description" content="把官方 OpenAI SDK 的 base_url 指到兼容端点，并用 Python、Node 和 curl 调用 chat completions。示例模型是 openai/gpt-5.4，调用尚未在本站记为通过。">
+  <meta property="og:url" content="https://jxzne.com/openai-compatible-api.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="用 Python、Node、curl 调用 OpenAI 兼容 API | JXZNE AI">
+  <meta name="twitter:description" content="把官方 OpenAI SDK 的 base_url 指到兼容端点，并用 Python、Node 和 curl 调用 chat completions。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/openai-compatible-api.html#webpage","url":"https://jxzne.com/openai-compatible-api.html","name":"用 Python、Node、curl 调用 OpenAI 兼容 API | JXZNE AI","description":"把官方 OpenAI SDK 的 base_url 指到兼容端点，并用 Python、Node 和 curl 调用 chat completions。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"用 Python、Node、curl 调用 OpenAI 兼容 API","item":"https://jxzne.com/openai-compatible-api.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/openai-compatible-api.html#faq","url":"https://jxzne.com/openai-compatible-api.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"base_url 要不要带上 /chat/completions？","acceptedAnswer":{"@type":"Answer","text":"Python 和 Node 的官方 SDK 不要带。base_url 或 baseURL 写成 https://api.ofox.ai/v1，SDK 会自己请求 /chat/completions。curl 要写完整地址 https://api.ofox.ai/v1/chat/completions，只写一次。"}},{"@type":"Question","name":"示例里的 openai/gpt-5.4 是不是已经测通？","acceptedAnswer":{"@type":"Answer","text":"不是。它是请求格式里的模型 id。2026-11-12 的公开目录包含这个 id，不包含 openai/gpt-5.6。本站冒烟记录仍是待实测。"}},{"@type":"Question","name":"401、404、429 或超时先看哪里？","acceptedAnswer":{"@type":"Answer","text":"先核对密钥、路径和模型 id，再看频率和客户端超时。逐步说明在 OpenAI 兼容 API 常见错误页面。"}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="guides.html">配置教程</a>
+    <a href="developers.html">开发者</a>
+    <a href="openai-api-errors.html">常见错误</a>
+    <a href="validation.html">实测状态</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="openai-compatible-api.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/openai-compatible-api.html" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。模型价格、优惠及兼容性以服务商实际公布为准。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">OPENAI-COMPATIBLE API</span>
+    <h1>用 Python、Node 或 curl 调用一个 OpenAI 兼容接口</h1>
+    <p>官方 OpenAI SDK 把“哪一家服务”和“哪一个模型”分开。你保留原来的 <code>chat.completions.create</code>，只改两处：接口根地址，以及服务商目录里的模型 id。Ofox 文档中的 OpenAI 兼容根地址是 <code>https://api.ofox.ai/v1</code>。下面三段代码是这个形状。它们不是本站已经记录通过的调用。冒烟状态仍是待实测。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>调用前先对齐这三件事</h2>
+    <ol class="step-list">
+      <li>根地址用 <code>https://api.ofox.ai/v1</code>。Python 参数名是 <code>base_url</code>，Node 参数名是 <code>baseURL</code>。不要在 SDK 的根地址后面再加 <code>/chat/completions</code>，SDK 会自己接上。</li>
+      <li>密钥放在环境变量或本机密钥管理里，请求头由 SDK 写成 <code>Authorization: Bearer</code>。不要把密钥写进仓库、网页或下面的示例。</li>
+      <li>模型 id 用服务商目录里的完整字符串。本站示例用 <code>openai/gpt-5.4</code>，因为 2026-11-12 的公开目录包含这个 id，不包含 <code>openai/gpt-5.6</code>。目录会变，发送前用 <a href="list-openai-models.html">模型列表接口</a>再对一次。</li>
+    </ol>
+    <p class="calc-note">Python 的 <code>base_url</code> 见 <a href="https://github.com/openai/openai-python#configuring-the-http-client" target="_blank" rel="noopener noreferrer">openai-python 说明</a>。Node 的 <code>baseURL</code> 见 <a href="https://github.com/openai/openai-node" target="_blank" rel="noopener noreferrer">openai-node</a>。Ofox 的 Chat Completions 说明见 <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Ofox 文档</a>。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="python">
+    <h2>Python</h2>
+    <p>安装官方包 <code>openai</code> 后，构造客户端时传入根地址。下面的 <code>YOUR_API_KEY</code> 是占位符。</p>
+    <div class="snippet"><div>Python · 官方 SDK<button class="copy-code" type="button" data-copy="py-snippet">复制</button></div><pre id="py-snippet"><code>from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.ofox.ai/v1",
+    api_key="YOUR_API_KEY",
+)
+
+response = client.chat.completions.create(
+    model="openai/gpt-5.4",
+    messages=[{"role": "user", "content": "Hello"}],
+)
+
+print(response.choices[0].message.content)</code></pre></div>
+    <p>密钥也可以不写在代码里。官方客户端会读取环境变量 <code>OPENAI_API_KEY</code>。若只改地址，把密钥留在环境变量，<code>OpenAI(base_url="https://api.ofox.ai/v1")</code> 即可。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="node">
+    <h2>Node</h2>
+    <p>官方包是 <code>openai</code>。注意大小写：这里是 <code>baseURL</code>，不是 Python 的 <code>base_url</code>。</p>
+    <div class="snippet"><div>Node · 官方 SDK<button class="copy-code" type="button" data-copy="node-snippet">复制</button></div><pre id="node-snippet"><code>import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.ofox.ai/v1",
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const response = await client.chat.completions.create({
+  model: "openai/gpt-5.4",
+  messages: [{ role: "user", content: "Hello" }],
+});
+
+console.log(response.choices[0].message.content);</code></pre></div>
+  </section>
+
+  <section class="pricing-hub-section" id="curl">
+    <h2>curl</h2>
+    <p>curl 没有 SDK，所以地址要写到方法本身，只写一次 <code>/chat/completions</code>。密钥从环境变量读，不要写进 shell 历史可以分享的脚本里。</p>
+    <div class="snippet"><div>curl<button class="copy-code" type="button" data-copy="curl-snippet">复制</button></div><pre id="curl-snippet"><code>curl https://api.ofox.ai/v1/chat/completions \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-5.4","messages":[{"role":"user","content":"Hello"}]}'</code></pre></div>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>这三段代码没有证明的事</h2>
+    <p>本仓库的 <code>scripts/ofox-smoke.py</code> 会在有密钥时向 <code>POST https://api.ofox.ai/v1/chat/completions</code> 发一次请求，默认模型是 <code>openai/gpt-5.4</code>。当前记录的 <code>overall</code> 是待实测：准备状态文件时环境里没有密钥，所以没有发起那次调用。不要把上面的示例当成已通过的账单或延迟数据。</p>
+    <p>Cursor、Claude Code、Codex 不在这三份示例里。它们不是“改一个 base_url 就等同于官方订阅”。工具是否接受自定义 OpenAI 兼容地址，要看该工具自己的文档：<a href="openai-compatible-base-url.html">已核对过官方说明的工具</a>。Codex 与 Claude Code 的客户端本站仍未验证。Ofox 把直接接入 Cursor 标为不合适。</p>
+    <p class="calc-note">下一步：<a href="list-openai-models.html">核对模型 id</a> · <a href="openai-api-errors.html">401 / 404 / 429 / 超时</a> · <a href="api-cost-calculator.html">用你自己的单价估算月费</a> · <a href="case-study.html">实测状态说明</a></p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>常见问题</h2>
+    <details open>
+      <summary>base_url 要不要带上 /chat/completions？</summary>
+      <p>Python 和 Node 的官方 SDK 不要带。写成 <code>https://api.ofox.ai/v1</code>，SDK 会自己请求 <code>/chat/completions</code>。curl 要写完整地址 <code>https://api.ofox.ai/v1/chat/completions</code>，只写一次。</p>
+    </details>
+    <details>
+      <summary>示例里的 openai/gpt-5.4 是不是已经测通？</summary>
+      <p>不是。它是请求格式里的模型 id。2026-11-12 的公开目录包含这个 id，不包含 <code>openai/gpt-5.6</code>。本站冒烟记录仍是待实测。</p>
+    </details>
+    <details>
+      <summary>401、404、429 或超时先看哪里？</summary>
+      <p>先核对密钥、路径和模型 id，再看频率和客户端超时。逐步说明在 <a href="openai-api-errors.html">OpenAI 兼容 API 常见错误</a>。</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section" id="ofox">
+    <h2>需要密钥时再去开户</h2>
+    <p>上面的代码在你有该根地址的密钥之后才能发出请求。账号、充值和密钥都在 Ofox，不在这个静态页面。</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。价格和兼容性以 Ofox 当期页面为准。</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 调用示例，不是已通过的实测</p><a href="en/openai-compatible-api.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script>try{if(new URLSearchParams(location.search).get("lang")==="zh")localStorage.setItem("jxzne-locale","zh-CN")}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
+</body>
+</html>

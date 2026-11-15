@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>在支持自定义端点的工具里填写 OpenAI 兼容 Base URL | JXZNE AI</title>
+  <meta name="description" content="Open WebUI、Continue、LibreChat、Cline 和 LiteLLM 的官方文档写了自定义 OpenAI 兼容地址。这里按那些文档填写 https://api.ofox.ai/v1。本站没有用这些客户端打通过 Ofox。">
+  <link rel="canonical" href="https://jxzne.com/openai-compatible-base-url.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openai-compatible-base-url.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openai-compatible-base-url.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openai-compatible-base-url.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="在支持自定义端点的工具里填写 OpenAI 兼容 Base URL | JXZNE AI">
+  <meta property="og:description" content="Open WebUI、Continue、LibreChat、Cline 和 LiteLLM 的官方文档写了自定义 OpenAI 兼容地址。本站没有用这些客户端打通过 Ofox。">
+  <meta property="og:url" content="https://jxzne.com/openai-compatible-base-url.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在支持自定义端点的工具里填写 OpenAI 兼容 Base URL | JXZNE AI">
+  <meta name="twitter:description" content="按各工具官方文档填写 OpenAI 兼容 Base URL。本站没有用这些客户端打通过 Ofox。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/openai-compatible-base-url.html#webpage","url":"https://jxzne.com/openai-compatible-base-url.html","name":"在支持自定义端点的工具里填写 OpenAI 兼容 Base URL | JXZNE AI","description":"Open WebUI、Continue、LibreChat、Cline 和 LiteLLM 的官方文档写了自定义 OpenAI 兼容地址。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"OpenAI 兼容 Base URL","item":"https://jxzne.com/openai-compatible-base-url.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/openai-compatible-base-url.html#faq","url":"https://jxzne.com/openai-compatible-base-url.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"这些配置是不是已经用 Ofox 测通？","acceptedAnswer":{"@type":"Answer","text":"不是。每一节只说明该工具的官方文档允许填写自定义 OpenAI 兼容地址。本站没有运行 Open WebUI、Continue、LibreChat、Cline 或 LiteLLM 去调用 Ofox。状态是待实测。"}},{"@type":"Question","name":"为什么没有 Cursor、Claude Code 和 Codex？","acceptedAnswer":{"@type":"Answer","text":"Ofox 把直接接入 Cursor 标为不合适。Codex 和 Claude Code 的客户端本站没有验证，而且它们要的协议不一定是 Chat Completions。不要从本页推断它们可以改同一个 base_url。"}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">Python / Node / curl</a>
+    <a href="guides.html">配置教程</a>
+    <a href="openai-api-errors.html">常见错误</a>
+    <a href="validation.html">实测状态</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="openai-compatible-base-url.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/openai-compatible-base-url.html" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。模型价格、优惠及兼容性以服务商实际公布为准。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">BASE URL</span>
+    <h1>在官方支持自定义端点的工具里填写 Base URL</h1>
+    <p>这一页只写五款工具。它们自己的文档说明可以填写一个 OpenAI 兼容的接口根地址，而不是只允许 <code>https://api.openai.com/v1</code>。Ofox 文档中的对应根地址是 <code>https://api.ofox.ai/v1</code>。把地址填进去，不等于本站已经用该客户端打通过 Ofox。下面每一节都是待实测。</p>
+    <p>Cursor、Claude Code、Codex 不在这张清单里。Ofox 把直接接入 Cursor 标为不合适。Codex 和 Claude Code 要的协议也不等于 Chat Completions，本站没有验证那两个客户端。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="open-webui">
+    <h2>Open WebUI</h2>
+    <p>Open WebUI 的 OpenAI 兼容说明写的是：在 Settings → Connections 里管理 OpenAI API 连接，添加一条连接，URL 填服务商的 <code>/v1</code> 根地址，再填 API Key。模型列表接口不可用时，把模型 id 写进允许列表。<a href="https://docs.openwebui.com/getting-started/quick-start/connect-a-provider/starting-with-openai-compatible.md" target="_blank" rel="noopener noreferrer">Open WebUI 文档</a></p>
+    <div class="snippet"><div>连接字段 · 不是已验证的 Ofox 会话<button class="copy-code" type="button" data-copy="webui-snippet">复制</button></div><pre id="webui-snippet"><code>URL: https://api.ofox.ai/v1
+API Key: YOUR_API_KEY
+Model ID（自动发现失败时）: openai/gpt-5.4</code></pre></div>
+    <p>同一份文档也给出环境变量 <code>OPENAI_API_BASE_URL</code> 和 <code>OPENAI_API_KEY</code>。菜单名称会随版本变化，以你安装的那一版文档为准。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="continue">
+    <h2>Continue</h2>
+    <p>Continue 的 OpenAI 提供商文档写明：对 OpenAI 兼容服务，把 <code>provider</code> 设为 <code>openai</code>，并用 <code>apiBase</code> 指向该服务的 <code>/v1</code> 根地址。<a href="https://docs.continue.dev/customize/model-providers/top-level/openai" target="_blank" rel="noopener noreferrer">Continue 文档</a></p>
+    <div class="snippet"><div>config.yaml · 摘自 Continue 的字段名<button class="copy-code" type="button" data-copy="continue-snippet">复制</button></div><pre id="continue-snippet"><code>name: Example
+version: 0.0.1
+schema: v1
+models:
+  - name: Example model
+    provider: openai
+    model: openai/gpt-5.4
+    apiBase: https://api.ofox.ai/v1
+    apiKey: YOUR_API_KEY
+    useResponsesApi: false</code></pre></div>
+    <p>同一页写着：默认情况下，Continue 对 o 系列和 gpt-5 模型使用 OpenAI 的 <code>/responses</code>。若你要走 Chat Completions，他们的文档给出 <code>useResponsesApi: false</code>。模型 id 是否同时提供 <code>/chat/completions</code> 和 <code>/responses</code>，以服务商当时的模型卡片为准。本站没有用 Continue 调用过 Ofox。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="librechat">
+    <h2>LibreChat</h2>
+    <p>LibreChat 的自定义端点文档写明：不设置 <code>provider</code> 时走 OpenAI 兼容客户端；<code>baseURL</code> 是 API 根地址；程序会在后面接上 <code>/chat/completions</code>。只有 <code>baseURL</code> 已经是完整的 completions 地址时，才把 <code>directEndpoint</code> 设为 true。<a href="https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/custom_endpoint" target="_blank" rel="noopener noreferrer">LibreChat 文档</a></p>
+    <div class="snippet"><div>librechat.yaml · 密钥让每位用户自己填<button class="copy-code" type="button" data-copy="libre-snippet">复制</button></div><pre id="libre-snippet"><code>endpoints:
+  custom:
+    - name: "Ofox"
+      apiKey: "user_provided"
+      baseURL: "https://api.ofox.ai/v1"
+      models:
+        default: ["openai/gpt-5.4"]
+        fetch: true</code></pre></div>
+    <p><code>user_provided</code> 是他们的文档值：每位用户在界面里输入自己的密钥，而不是把密钥写进配置文件。本站没有跑过 LibreChat。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="cline">
+    <h2>Cline</h2>
+    <p>Cline 的 OpenAI Compatible 说明写的是：在设置里把 API Provider 选成 OpenAI Compatible，然后填写 Base URL、API Key 和 Model ID。Base URL 不是官方的 <code>https://api.openai.com/v1</code>，而是你选的那家服务商给出的根地址。<a href="https://github.com/cline/cline/blob/main/docs/provider-config/openai-compatible.mdx" target="_blank" rel="noopener noreferrer">Cline 文档</a></p>
+    <div class="snippet"><div>Cline 设置字段<button class="copy-code" type="button" data-copy="cline-snippet">复制</button></div><pre id="cline-snippet"><code>API Provider: OpenAI Compatible
+Base URL: https://api.ofox.ai/v1
+API Key: YOUR_API_KEY
+Model ID: openai/gpt-5.4</code></pre></div>
+    <p>他们的故障排查把 “Model Not Found” 解释为模型 id 或 Base URL 与该服务商不匹配。本站没有安装 Cline 去验证 Ofox。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="litellm">
+    <h2>LiteLLM</h2>
+    <p>LiteLLM 的 OpenAI 兼容文档写了两处改动：模型名前面加 <code>openai/</code>，表示用 OpenAI 客户端去调一个兼容端点；<code>api_base</code> 指向该端点。文档还写着，如果出现 Not Found，确认 <code>api_base</code> 带有 <code>/v1</code>。<a href="https://docs.litellm.ai/docs/providers/openai_compatible" target="_blank" rel="noopener noreferrer">LiteLLM 文档</a></p>
+    <div class="snippet"><div>Python · LiteLLM 的 openai/ 前缀<button class="copy-code" type="button" data-copy="litellm-snippet">复制</button></div><pre id="litellm-snippet"><code>import litellm
+
+response = litellm.completion(
+    model="openai/openai/gpt-5.4",
+    api_base="https://api.ofox.ai/v1",
+    api_key="YOUR_API_KEY",
+    messages=[{"role": "user", "content": "Hello"}],
+)</code></pre></div>
+    <p>前缀看起来重复，是因为两层名字叠在一起。开头的 <code>openai/</code> 是 LiteLLM 的路由前缀。后面的 <code>openai/gpt-5.4</code> 是 Ofox 目录里的模型 id。本站没有运行这段代码。</p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>常见问题</h2>
+    <details open>
+      <summary>这些配置是不是已经用 Ofox 测通？</summary>
+      <p>不是。每一节只说明该工具的官方文档允许填写自定义 OpenAI 兼容地址。本站没有运行 Open WebUI、Continue、LibreChat、Cline 或 LiteLLM 去调用 Ofox。状态是待实测。</p>
+    </details>
+    <details>
+      <summary>为什么没有 Cursor、Claude Code 和 Codex？</summary>
+      <p>Ofox 把直接接入 Cursor 标为不合适。Codex 和 Claude Code 的客户端本站没有验证，而且它们要的协议不一定是 Chat Completions。配置边界在 <a href="guides.html">配置教程</a> 和 <a href="cursor-codex-third-party-api.html">Cursor / Codex 接不上时</a>。不要从本页推断它们可以改同一个 base_url。</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">相关页面：<a href="openai-compatible-api.html">Python / Node / curl</a> · <a href="list-openai-models.html">核对模型 id</a> · <a href="openai-api-errors.html">401 / 404 / 429 / 超时</a> · <a href="case-study.html">实测记录</a></p>
+    <h2>先有密钥，再往工具里填</h2>
+    <p>上面的字段都要求一把属于这个根地址的密钥。开户在 Ofox 完成。</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。某工具的文档允许自定义地址，不等于该工具与 Ofox 的组合已经测通。</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 文档路径，待实测</p><a href="en/openai-compatible-base-url.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script>try{if(new URLSearchParams(location.search).get("lang")==="zh")localStorage.setItem("jxzne-locale","zh-CN")}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
+</body>
+</html>

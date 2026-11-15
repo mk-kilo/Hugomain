@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Call an OpenAI-compatible API from Python, Node, or curl | JXZNE AI</title>
+  <meta name="description" content="Point the official OpenAI SDK base URL at a compatible endpoint and call chat completions from Python, Node, and curl. The sample model id is openai/gpt-5.4. This site has not recorded a passing call.">
+  <link rel="canonical" href="https://jxzne.com/en/openai-compatible-api.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openai-compatible-api.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openai-compatible-api.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openai-compatible-api.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="Call an OpenAI-compatible API from Python, Node, or curl | JXZNE AI">
+  <meta property="og:description" content="Point the official OpenAI SDK base URL at a compatible endpoint and call chat completions from Python, Node, and curl. The sample model id is openai/gpt-5.4.">
+  <meta property="og:url" content="https://jxzne.com/en/openai-compatible-api.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Call an OpenAI-compatible API from Python, Node, or curl | JXZNE AI">
+  <meta name="twitter:description" content="Point the official OpenAI SDK base URL at a compatible endpoint and call chat completions from Python, Node, and curl.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/openai-compatible-api.html#webpage","url":"https://jxzne.com/en/openai-compatible-api.html","name":"Call an OpenAI-compatible API from Python, Node, or curl | JXZNE AI","description":"Point the official OpenAI SDK base URL at a compatible endpoint and call chat completions from Python, Node, and curl.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"Call an OpenAI-compatible API from Python, Node, or curl","item":"https://jxzne.com/en/openai-compatible-api.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/openai-compatible-api.html#faq","url":"https://jxzne.com/en/openai-compatible-api.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Should base_url include /chat/completions?","acceptedAnswer":{"@type":"Answer","text":"No for the official Python and Node SDKs. Set base_url or baseURL to https://api.ofox.ai/v1 and the SDK requests /chat/completions. curl uses the full URL https://api.ofox.ai/v1/chat/completions once."}},{"@type":"Question","name":"Is openai/gpt-5.4 a verified call?","acceptedAnswer":{"@type":"Answer","text":"No. It is the model id in the request shape. The public catalog on 2026-11-12 included that id and did not include openai/gpt-5.6. The smoke record on this site is still unverified."}},{"@type":"Question","name":"Where do 401, 404, 429, and timeouts go?","acceptedAnswer":{"@type":"Answer","text":"Check the key, the path, and the model id, then rate and client timeout. The step-by-step page is OpenAI-compatible API errors."}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="guides.html">Setup guides</a>
+    <a href="developers.html">Developers</a>
+    <a href="openai-api-errors.html">API errors</a>
+    <a href="validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../openai-compatible-api.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="openai-compatible-api.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices and compatibility follow the provider.</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">OPENAI-COMPATIBLE API</span>
+    <h1>Call an OpenAI-compatible API from Python, Node, or curl</h1>
+    <p>The official OpenAI SDK separates the host from the model. Keep <code>chat.completions.create</code> and change two values: the API root, and a model id from that provider’s catalog. Ofox documents the OpenAI-compatible root as <code>https://api.ofox.ai/v1</code>. The three samples below are that shape. They are not a call this site has recorded as passing. The smoke status is still unverified.</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Three checks before the first request</h2>
+    <ol class="step-list">
+      <li>Use the root <code>https://api.ofox.ai/v1</code>. Python’s argument is <code>base_url</code>. Node’s argument is <code>baseURL</code>. Do not append <code>/chat/completions</code> on the SDK root. The SDK adds that path.</li>
+      <li>Keep the key in an environment variable or a local secret store. The SDK sends <code>Authorization: Bearer</code>. Do not put a key in a repository, a web page, or the samples below.</li>
+      <li>Use the full model id from the provider catalog. These samples use <code>openai/gpt-5.4</code> because the public catalog on 2026-11-12 included that id and did not include <code>openai/gpt-5.6</code>. Catalogs change. Check <a href="list-openai-models.html">the models list</a> before you send traffic.</li>
+    </ol>
+    <p class="calc-note">Python <code>base_url</code>: <a href="https://github.com/openai/openai-python#configuring-the-http-client" target="_blank" rel="noopener noreferrer">openai-python</a>. Node <code>baseURL</code>: <a href="https://github.com/openai/openai-node" target="_blank" rel="noopener noreferrer">openai-node</a>. Ofox Chat Completions: <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Ofox docs</a>.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="python">
+    <h2>Python</h2>
+    <p>Install the official <code>openai</code> package, then pass the root when you construct the client. <code>YOUR_API_KEY</code> is a placeholder.</p>
+    <div class="snippet"><div>Python · official SDK<button class="copy-code" type="button" data-copy="py-snippet">Copy</button></div><pre id="py-snippet"><code>from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.ofox.ai/v1",
+    api_key="YOUR_API_KEY",
+)
+
+response = client.chat.completions.create(
+    model="openai/gpt-5.4",
+    messages=[{"role": "user", "content": "Hello"}],
+)
+
+print(response.choices[0].message.content)</code></pre></div>
+    <p>The official client also reads <code>OPENAI_API_KEY</code>. If the key stays in the environment, <code>OpenAI(base_url="https://api.ofox.ai/v1")</code> is enough.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="node">
+    <h2>Node</h2>
+    <p>The official package is <code>openai</code>. The option is <code>baseURL</code>, not Python’s <code>base_url</code>.</p>
+    <div class="snippet"><div>Node · official SDK<button class="copy-code" type="button" data-copy="node-snippet">Copy</button></div><pre id="node-snippet"><code>import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.ofox.ai/v1",
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const response = await client.chat.completions.create({
+  model: "openai/gpt-5.4",
+  messages: [{ role: "user", content: "Hello" }],
+});
+
+console.log(response.choices[0].message.content);</code></pre></div>
+  </section>
+
+  <section class="pricing-hub-section" id="curl">
+    <h2>curl</h2>
+    <p>curl has no SDK, so the URL includes the method once: <code>/chat/completions</code>. Read the key from the environment.</p>
+    <div class="snippet"><div>curl<button class="copy-code" type="button" data-copy="curl-snippet">Copy</button></div><pre id="curl-snippet"><code>curl https://api.ofox.ai/v1/chat/completions \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-5.4","messages":[{"role":"user","content":"Hello"}]}'</code></pre></div>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>What these samples do not prove</h2>
+    <p><code>scripts/ofox-smoke.py</code> posts once to <code>https://api.ofox.ai/v1/chat/completions</code> when a key is present. The default model is <code>openai/gpt-5.4</code>. The recorded <code>overall</code> is unverified: the environment that prepared the status file had no key, so that call was not sent. Do not read a latency or a bill out of the samples above.</p>
+    <p>Cursor, Claude Code, and Codex are not in these three samples. Changing a base URL is not an official subscription for those products. For tools whose own docs describe a custom OpenAI-compatible base URL, see <a href="openai-compatible-base-url.html">the checked list</a>. This site has not verified the Codex or Claude Code clients. Ofox marks direct Cursor use as unsuitable.</p>
+    <p class="calc-note">Next: <a href="list-openai-models.html">check a model id</a> · <a href="openai-api-errors.html">401 / 404 / 429 / timeout</a> · <a href="api-cost-calculator.html">estimate a month from rates you paste</a> · <a href="case-study.html">what the smoke file means</a></p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>Questions</h2>
+    <details open>
+      <summary>Should base_url include /chat/completions?</summary>
+      <p>No for the official Python and Node SDKs. Use <code>https://api.ofox.ai/v1</code>. The SDK requests <code>/chat/completions</code>. curl uses <code>https://api.ofox.ai/v1/chat/completions</code> once.</p>
+    </details>
+    <details>
+      <summary>Is openai/gpt-5.4 a verified call?</summary>
+      <p>No. It is the model id in the request shape. The public catalog on 2026-11-12 included that id and did not include <code>openai/gpt-5.6</code>. The smoke record on this site is still unverified.</p>
+    </details>
+    <details>
+      <summary>Where do 401, 404, 429, and timeouts go?</summary>
+      <p>Check the key, the path, and the model id, then rate and client timeout. The steps are on <a href="openai-api-errors.html">OpenAI-compatible API errors</a>.</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section" id="ofox">
+    <h2>Open an account when you need a key</h2>
+    <p>The samples can send a request only after you have a key for that root. The account, the top-up, and the key live on Ofox, not on this static page.</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p>
+    <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. Prices and compatibility follow Ofox’s current page.</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Request samples, not a recorded pass</p><a href="../openai-compatible-api.html" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
+<script>try{localStorage.setItem("jxzne-locale","en")}catch(e){}</script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

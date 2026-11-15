@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Set an OpenAI-compatible base URL in tools that document it | JXZNE AI</title>
+  <meta name="description" content="Open WebUI, Continue, LibreChat, Cline, and LiteLLM document a custom OpenAI-compatible base URL. These notes follow those docs for https://api.ofox.ai/v1. This site has not run those clients against Ofox.">
+  <link rel="canonical" href="https://jxzne.com/en/openai-compatible-base-url.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openai-compatible-base-url.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openai-compatible-base-url.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openai-compatible-base-url.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="Set an OpenAI-compatible base URL in tools that document it | JXZNE AI">
+  <meta property="og:description" content="Open WebUI, Continue, LibreChat, Cline, and LiteLLM document a custom OpenAI-compatible base URL. This site has not run those clients against Ofox.">
+  <meta property="og:url" content="https://jxzne.com/en/openai-compatible-base-url.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Set an OpenAI-compatible base URL in tools that document it | JXZNE AI">
+  <meta name="twitter:description" content="Notes from each tool's docs for a custom OpenAI-compatible base URL. Not a recorded Ofox test.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/openai-compatible-base-url.html#webpage","url":"https://jxzne.com/en/openai-compatible-base-url.html","name":"Set an OpenAI-compatible base URL in tools that document it | JXZNE AI","description":"Open WebUI, Continue, LibreChat, Cline, and LiteLLM document a custom OpenAI-compatible base URL.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"OpenAI-compatible base URL","item":"https://jxzne.com/en/openai-compatible-base-url.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/openai-compatible-base-url.html#faq","url":"https://jxzne.com/en/openai-compatible-base-url.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Are these configs verified with Ofox?","acceptedAnswer":{"@type":"Answer","text":"No. Each section only records that the tool's own docs allow a custom OpenAI-compatible base URL. This site has not run Open WebUI, Continue, LibreChat, Cline, or LiteLLM against Ofox. The status is unverified."}},{"@type":"Question","name":"Why are Cursor, Claude Code, and Codex absent?","acceptedAnswer":{"@type":"Answer","text":"Ofox marks direct Cursor use as unsuitable. This site has not verified the Codex or Claude Code clients, and those tools do not necessarily speak Chat Completions. Do not infer that they take the same base URL."}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">Python / Node / curl</a>
+    <a href="guides.html">Setup guides</a>
+    <a href="openai-api-errors.html">API errors</a>
+    <a href="validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../openai-compatible-base-url.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="openai-compatible-base-url.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices and compatibility follow the provider.</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">BASE URL</span>
+    <h1>Set a base URL in tools whose docs allow a custom endpoint</h1>
+    <p>This page covers five tools. Each tool’s own documentation describes an OpenAI-compatible API root other than <code>https://api.openai.com/v1</code>. Ofox documents the matching root as <code>https://api.ofox.ai/v1</code>. Filling in that root is not a client test this site has run. Every section below is unverified.</p>
+    <p>Cursor, Claude Code, and Codex are not on this list. Ofox marks direct Cursor use as unsuitable. Codex and Claude Code do not necessarily speak Chat Completions, and this site has not verified those clients.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="open-webui">
+    <h2>Open WebUI</h2>
+    <p>Open WebUI’s OpenAI-compatible guide says to open Settings → Connections, add an OpenAI API connection, set the URL to the provider’s <code>/v1</code> root, and set the API key. If model discovery is unavailable, add model ids to the allowlist. <a href="https://docs.openwebui.com/getting-started/quick-start/connect-a-provider/starting-with-openai-compatible.md" target="_blank" rel="noopener noreferrer">Open WebUI docs</a></p>
+    <div class="snippet"><div>Connection fields · not a verified Ofox session<button class="copy-code" type="button" data-copy="webui-snippet">Copy</button></div><pre id="webui-snippet"><code>URL: https://api.ofox.ai/v1
+API Key: YOUR_API_KEY
+Model ID if discovery fails: openai/gpt-5.4</code></pre></div>
+    <p>That doc also shows <code>OPENAI_API_BASE_URL</code> and <code>OPENAI_API_KEY</code>. Menu names move between versions. Follow the doc for the version you installed.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="continue">
+    <h2>Continue</h2>
+    <p>Continue’s OpenAI provider doc says that for an OpenAI-compatible server you set <code>provider: openai</code> and point <code>apiBase</code> at that server’s <code>/v1</code> root. <a href="https://docs.continue.dev/customize/model-providers/top-level/openai" target="_blank" rel="noopener noreferrer">Continue docs</a></p>
+    <div class="snippet"><div>config.yaml · field names from Continue’s doc<button class="copy-code" type="button" data-copy="continue-snippet">Copy</button></div><pre id="continue-snippet"><code>name: Example
+version: 0.0.1
+schema: v1
+models:
+  - name: Example model
+    provider: openai
+    model: openai/gpt-5.4
+    apiBase: https://api.ofox.ai/v1
+    apiKey: YOUR_API_KEY
+    useResponsesApi: false</code></pre></div>
+    <p>The same page says Continue uses OpenAI’s <code>/responses</code> endpoint by default for o-series and gpt-5 models. Their doc shows <code>useResponsesApi: false</code> when you need Chat Completions. Whether a model id is offered on <code>/chat/completions</code>, <code>/responses</code>, or both is a provider catalog question. This site has not called Ofox from Continue.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="librechat">
+    <h2>LibreChat</h2>
+    <p>LibreChat’s custom-endpoint doc says that omitting <code>provider</code> uses the OpenAI-compatible client, that <code>baseURL</code> is the API root, and that the app appends <code>/chat/completions</code>. Set <code>directEndpoint: true</code> only when <code>baseURL</code> is already the full completions URL. <a href="https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/custom_endpoint" target="_blank" rel="noopener noreferrer">LibreChat docs</a></p>
+    <div class="snippet"><div>librechat.yaml · each user supplies a key<button class="copy-code" type="button" data-copy="libre-snippet">Copy</button></div><pre id="libre-snippet"><code>endpoints:
+  custom:
+    - name: "Ofox"
+      apiKey: "user_provided"
+      baseURL: "https://api.ofox.ai/v1"
+      models:
+        default: ["openai/gpt-5.4"]
+        fetch: true</code></pre></div>
+    <p><code>user_provided</code> is their documented value: each person types a key in the UI instead of committing one. This site has not run LibreChat.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="cline">
+    <h2>Cline</h2>
+    <p>Cline’s OpenAI Compatible doc says to select API Provider “OpenAI Compatible”, then enter Base URL, API Key, and Model ID. The Base URL is the root from the provider you chose, not <code>https://api.openai.com/v1</code>. <a href="https://github.com/cline/cline/blob/main/docs/provider-config/openai-compatible.mdx" target="_blank" rel="noopener noreferrer">Cline docs</a></p>
+    <div class="snippet"><div>Cline setting fields<button class="copy-code" type="button" data-copy="cline-snippet">Copy</button></div><pre id="cline-snippet"><code>API Provider: OpenAI Compatible
+Base URL: https://api.ofox.ai/v1
+API Key: YOUR_API_KEY
+Model ID: openai/gpt-5.4</code></pre></div>
+    <p>Their troubleshooting describes “Model Not Found” as a model id or Base URL that does not match that provider. This site has not installed Cline to check Ofox.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="litellm">
+    <h2>LiteLLM</h2>
+    <p>LiteLLM’s OpenAI-compatible doc names two changes: prefix the model with <code>openai/</code> so LiteLLM uses the OpenAI client, and set <code>api_base</code> to the compatible endpoint. The same doc says a Not Found error means you should check that <code>api_base</code> includes <code>/v1</code>. <a href="https://docs.litellm.ai/docs/providers/openai_compatible" target="_blank" rel="noopener noreferrer">LiteLLM docs</a></p>
+    <div class="snippet"><div>Python · LiteLLM’s openai/ prefix<button class="copy-code" type="button" data-copy="litellm-snippet">Copy</button></div><pre id="litellm-snippet"><code>import litellm
+
+response = litellm.completion(
+    model="openai/openai/gpt-5.4",
+    api_base="https://api.ofox.ai/v1",
+    api_key="YOUR_API_KEY",
+    messages=[{"role": "user", "content": "Hello"}],
+)</code></pre></div>
+    <p>The prefix looks repeated because two names are stacked. The leading <code>openai/</code> is LiteLLM’s route. The rest, <code>openai/gpt-5.4</code>, is the model id in the Ofox catalog. This site has not run this snippet.</p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>Questions</h2>
+    <details open>
+      <summary>Are these configs verified with Ofox?</summary>
+      <p>No. Each section only records that the tool’s own docs allow a custom OpenAI-compatible base URL. This site has not run Open WebUI, Continue, LibreChat, Cline, or LiteLLM against Ofox. The status is unverified.</p>
+    </details>
+    <details>
+      <summary>Why are Cursor, Claude Code, and Codex absent?</summary>
+      <p>Ofox marks direct Cursor use as unsuitable. This site has not verified the Codex or Claude Code clients, and those tools do not necessarily speak Chat Completions. The limits are on the <a href="guides.html">setup guides</a> and <a href="cursor-codex-third-party-api.html">when Cursor or Codex will not take a third-party API</a>. Do not infer that they take the same base URL.</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">Related: <a href="openai-compatible-api.html">Python / Node / curl</a> · <a href="list-openai-models.html">check a model id</a> · <a href="openai-api-errors.html">401 / 404 / 429 / timeout</a> · <a href="case-study.html">smoke record</a></p>
+    <h2>Get a key before you fill the form</h2>
+    <p>Every field above needs a key for this API root. The account is opened on Ofox.</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p>
+    <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. A tool doc that allows a custom URL is not a recorded test of that tool with Ofox.</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Doc paths, unverified against Ofox</p><a href="../openai-compatible-base-url.html" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
+<script>try{localStorage.setItem("jxzne-locale","en")}catch(e){}</script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

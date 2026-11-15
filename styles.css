@@ -73,6 +73,13 @@
 
 .hero-actions,.coding-actions,.guide-actions,.pricing-detail-actions{flex-wrap:wrap}
 .code-top .copy-code{margin-left:8px}
+.code-copy-bar{display:flex;justify-content:flex-end;gap:8px;padding:8px 12px 0}
+.snippet>.code-copy-bar{border-bottom:1px solid #2a354b;padding:8px 12px}
+.scenario-block{margin:0 0 16px;padding:12px 12px 2px;border:1px solid #34415a;border-radius:14px}
+.scenario-block legend{padding:0 6px;color:#d5def3;font-weight:700}
+.cost-example{margin:0 0 14px}
+.utility-btn{background:#1d2840;border:1px solid #455371;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font:inherit;font-size:13px;font-weight:700}
+.utility-btn:focus-visible{outline:3px solid #9cbbff;outline-offset:3px}
 
 .brand{flex-shrink:0}
 .brand span{white-space:nowrap}

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fix 401, 404, 429, and timeouts on an OpenAI-compatible API | JXZNE AI</title>
+  <meta name="description" content="Check the key, path, model id, request rate, and client timeout for OpenAI-compatible chat completions. No invented Ofox status codes or wait times. Calls stay unverified.">
+  <link rel="canonical" href="https://jxzne.com/en/openai-api-errors.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openai-api-errors.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openai-api-errors.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openai-api-errors.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="Fix 401, 404, 429, and timeouts on an OpenAI-compatible API | JXZNE AI">
+  <meta property="og:description" content="Check the key, path, model id, request rate, and client timeout for OpenAI-compatible chat completions.">
+  <meta property="og:url" content="https://jxzne.com/en/openai-api-errors.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Fix 401, 404, 429, and timeouts on an OpenAI-compatible API | JXZNE AI">
+  <meta name="twitter:description" content="Check the key, path, model id, request rate, and client timeout.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/openai-api-errors.html#webpage","url":"https://jxzne.com/en/openai-api-errors.html","name":"Fix 401, 404, 429, and timeouts on an OpenAI-compatible API | JXZNE AI","description":"Check the key, path, model id, request rate, and client timeout for OpenAI-compatible chat completions.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"OpenAI-compatible API errors","item":"https://jxzne.com/en/openai-api-errors.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/openai-api-errors.html#faq","url":"https://jxzne.com/en/openai-api-errors.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What should I check on a 401?","acceptedAnswer":{"@type":"Answer","text":"Confirm Authorization is Bearer, one space, then the key. Remove extra spaces, newlines, and quotes. The key has to belong to the account for the base URL you set. A key for api.openai.com will not authorize api.ofox.ai, or the reverse. Do not paste the key into a public page."}},{"@type":"Question","name":"What should I check on a 404 or model not found?","acceptedAnswer":{"@type":"Answer","text":"SDK roots use https://api.ofox.ai/v1 with no extra /chat/completions. curl includes /chat/completions once. The model id has to come from that provider's catalog, for example openai/gpt-5.4. A Responses-only model called through Chat Completions can also 404."}},{"@type":"Question","name":"Does a 429 mean the price is wrong?","acceptedAnswer":{"@type":"Answer","text":"No. A 429 means the server asked you to slow down or is short on capacity. Lower concurrency, and honor Retry-After when that header is present. Billing questions belong in the provider console. This page does not assign Ofox a billing status code."}},{"@type":"Question","name":"Is a timeout an HTTP status from the server?","acceptedAnswer":{"@type":"Answer","text":"Usually the client gave up first. Separate a client timeout from HTTP 408 or 504. The official SDK accepts a timeout value. This page does not prescribe a number of seconds. Chat Completions also has a stream field when you want tokens as they are produced."}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">Call samples</a>
+    <a href="list-openai-models.html">Model ids</a>
+    <a href="guides.html">Setup guides</a>
+    <a href="validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../openai-api-errors.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="openai-api-errors.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices and compatibility follow the provider.</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">API ERRORS</span>
+    <h1>Check 401, 404, 429, and timeouts in that order</h1>
+    <p>This page is about OpenAI-compatible Chat Completions: root <code>https://api.ofox.ai/v1</code>, method path <code>/chat/completions</code>. Read the HTTP status and the body before you change the client. This site does not publish an Ofox-only error catalog, and it does not recommend a wait time. The smoke call is still unverified.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="401">
+    <h2>401 Unauthorized</h2>
+    <p>A 401 means the credential was rejected. Check these four items before you change the model.</p>
+    <ol class="step-list">
+      <li>The header is <code>Authorization: Bearer</code>, one space, then the key. Do not send <code>Bearer Bearer</code>, and do not wrap the key in quotes.</li>
+      <li>Trim spaces and newlines. A key copied from a web page often picks up a trailing line break.</li>
+      <li>The key has to belong to the root you configured. A key for <code>api.openai.com</code> does not authorize <code>api.ofox.ai</code>, or the reverse.</li>
+      <li>In the console that issued the key, confirm it was not revoked and that the account is allowed to call.</li>
+    </ol>
+    <p>Do not paste the key into this site, a ticket, a chat, or a Git repository. Samples should show <code>YOUR_API_KEY</code> or an environment variable.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="404">
+    <h2>404 and model not found</h2>
+    <p>Split a 404 into “wrong path” and “wrong model id”. Both surface as not found.</p>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <caption>Write the path once. SDKs and curl do that differently.</caption>
+        <thead><tr><th>Client</th><th>Write this</th><th>A 404-prone variant</th></tr></thead>
+        <tbody>
+          <tr><td>Python <code>base_url</code> / Node <code>baseURL</code></td><td><code>https://api.ofox.ai/v1</code></td><td>The root already includes <code>/chat/completions</code>, and the SDK appends it again</td></tr>
+          <tr><td>curl</td><td><code>https://api.ofox.ai/v1/chat/completions</code></td><td>Stopping at <code>/v1</code>, or including the path twice</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Use the full id from the catalog. These pages use <code>openai/gpt-5.4</code> because the public catalog on 2026-11-12 included that id and did not include <code>openai/gpt-5.6</code>. A short name or an id you remember is not a substitute. Check with <a href="list-openai-models.html">GET /v1/models</a>.</p>
+    <p>Do not mix protocols. This repo’s note of the Ofox docs says <code>openai/gpt-5.4-pro</code> and the Codex series are Responses-only. Calling them through Chat Completions can 404. The current Ofox page is the authority: <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions</a>. Request shapes are on <a href="openai-compatible-api.html">Python / Node / curl</a>.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="429">
+    <h2>429</h2>
+    <p>A 429 means the server asked you to slow down, or capacity is short. It is not a price list, and it does not say how much a model costs.</p>
+    <ol class="step-list">
+      <li>Look for too much parallelism, or retries that fire again immediately.</li>
+      <li>If the response includes <code>Retry-After</code>, wait that many seconds. When the header is absent, this page does not invent a delay.</li>
+      <li>If the body talks about quota or billing, open the provider console. Providers do not all use the same status for an empty balance. This page does not assign one of them to Ofox.</li>
+    </ol>
+  </section>
+
+  <section class="pricing-hub-section" id="timeout">
+    <h2>Timeouts</h2>
+    <p>Most timeouts are the client giving up, not an HTTP status from the server. See which side reported it.</p>
+    <ol class="step-list">
+      <li>The client library says timeout: your limit is shorter than this generation. The official OpenAI SDK constructor accepts <code>timeout</code> in both Python and Node. Raise it above the time this reply needs. This page does not pick a number of seconds.</li>
+      <li>HTTP 408 or 504: that status is on the path. Confirm the root answers, then look at the network between you and <code>api.ofox.ai</code>. This site does not publish a latency table.</li>
+      <li>A long reply looks stuck: the Chat Completions body can set <code>stream: true</code> so chunks return as they are produced. That is a protocol field, not a speed this site measured.</li>
+    </ol>
+    <div class="snippet"><div>Where the fields sit · not a recorded call<button class="copy-code" type="button" data-copy="timeout-snippet">Copy</button></div><pre id="timeout-snippet"><code>client = OpenAI(
+    base_url="https://api.ofox.ai/v1",
+    api_key="YOUR_API_KEY",
+    timeout=YOUR_LIMIT_SECONDS,
+)
+
+response = client.chat.completions.create(
+    model="openai/gpt-5.4",
+    messages=[{"role": "user", "content": "Hello"}],
+    stream=True,
+)</code></pre></div>
+    <p class="calc-note"><code>YOUR_LIMIT_SECONDS</code> is not a usable number. Replace it with the limit, in seconds, that this call needs. This page does not pick a value and does not have a measured Ofox latency.</p>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>Common errors</h2>
+    <details open>
+      <summary>What should I check on a 401?</summary>
+      <p>Confirm <code>Authorization</code> is <code>Bearer</code>, one space, then the key. Remove extra spaces, newlines, and quotes. The key has to belong to the account for the base URL you set. A key for <code>api.openai.com</code> will not authorize <code>api.ofox.ai</code>, or the reverse. Do not paste the key into a public page.</p>
+    </details>
+    <details>
+      <summary>What should I check on a 404 or model not found?</summary>
+      <p>SDK roots use <code>https://api.ofox.ai/v1</code> with no extra <code>/chat/completions</code>. curl includes <code>/chat/completions</code> once. The model id has to come from that provider’s catalog, for example <code>openai/gpt-5.4</code>. A Responses-only model called through Chat Completions can also 404.</p>
+    </details>
+    <details>
+      <summary>Does a 429 mean the price is wrong?</summary>
+      <p>No. A 429 means the server asked you to slow down or is short on capacity. Lower concurrency, and honor <code>Retry-After</code> when that header is present. Billing questions belong in the provider console. This page does not assign Ofox a billing status code.</p>
+    </details>
+    <details>
+      <summary>Is a timeout an HTTP status from the server?</summary>
+      <p>Usually the client gave up first. Separate a client timeout from HTTP 408 or 504. The official SDK accepts a <code>timeout</code> value. This page does not prescribe a number of seconds. Chat Completions also has a <code>stream</code> field when you want tokens as they are produced.</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">Shorter tool notes stay on the <a href="guides.html#troubleshoot">setup guides</a>. A coding tool and this HTTP call are not the same path. Model ids: <a href="list-openai-models.html">the list endpoint</a>. Request shape: <a href="openai-compatible-api.html">Python / Node / curl</a>.</p>
+    <h2>A 401 is sometimes just a missing key</h2>
+    <p>The account that issues the key is on Ofox.</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p>
+    <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. This page does not turn one error report into a reproduced Ofox defect.</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Checks, not a recorded error catalog</p><a href="../openai-api-errors.html" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
+<script>try{localStorage.setItem("jxzne-locale","en")}catch(e){}</script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>
