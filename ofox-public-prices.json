@@ -1,7 +1,7 @@
 {
   "source": "https://api.ofox.ai/v1/models",
-  "fetchedAt": "2026-11-16T13:59:07+00:00",
-  "catalogCount": 125,
+  "fetchedAt": "2026-11-17T14:53:38+00:00",
+  "catalogCount": 136,
   "note": "Public unauthenticated catalog prices observed at fetchedAt. USD per million tokens. Not a transaction quote, invoice, confirmation of model compatibility, or guarantee that checkout matches.",
   "requested": [
     "openai/gpt-5.4",
@@ -13,6 +13,22 @@
   "missing": [],
   "models": [
     {
+      "id": "anthropic/claude-fable-5",
+      "promptPerToken": 1e-05,
+      "completionPerToken": 5e-05,
+      "promptPerMillion": 10.0,
+      "completionPerMillion": 50.0,
+      "endpoints": []
+    },
+    {
+      "id": "anthropic/claude-fable-5.1",
+      "promptPerToken": 1e-05,
+      "completionPerToken": 5e-05,
+      "promptPerMillion": 10.0,
+      "completionPerMillion": 50.0,
+      "endpoints": []
+    },
+    {
       "id": "anthropic/claude-fable-5.2",
       "promptPerToken": 8e-06,
       "completionPerToken": 4e-05,
@@ -21,11 +37,59 @@
       "endpoints": []
     },
     {
+      "id": "anthropic/claude-haiku-5.5",
+      "promptPerToken": 1e-07,
+      "completionPerToken": 5e-07,
+      "promptPerMillion": 0.1,
+      "completionPerMillion": 0.5,
+      "endpoints": []
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 2.5e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 25.0,
+      "endpoints": []
+    },
+    {
+      "id": "anthropic/claude-opus-4.8",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 2.5e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 25.0,
+      "endpoints": []
+    },
+    {
+      "id": "anthropic/claude-opus-5",
+      "promptPerToken": 5e-06,
+      "completionPerToken": 2.5e-05,
+      "promptPerMillion": 5.0,
+      "completionPerMillion": 25.0,
+      "endpoints": []
+    },
+    {
+      "id": "anthropic/claude-opus-5.5",
+      "promptPerToken": 4e-06,
+      "completionPerToken": 2e-05,
+      "promptPerMillion": 4.0,
+      "completionPerMillion": 20.0,
+      "endpoints": []
+    },
+    {
       "id": "anthropic/claude-sonnet-4.6",
       "promptPerToken": 3e-06,
       "completionPerToken": 1.5e-05,
       "promptPerMillion": 3.0,
       "completionPerMillion": 15.0,
+      "endpoints": []
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "promptPerToken": 2e-06,
+      "completionPerToken": 1e-05,
+      "promptPerMillion": 2.0,
+      "completionPerMillion": 10.0,
       "endpoints": []
     },
     {
@@ -238,6 +302,14 @@
     },
     {
       "id": "google/gemini-4-argon",
+      "promptPerToken": 4e-06,
+      "completionPerToken": 2e-05,
+      "promptPerMillion": 4.0,
+      "completionPerMillion": 20.0,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-4-carbon",
       "promptPerToken": 4e-06,
       "completionPerToken": 2e-05,
       "promptPerMillion": 4.0,
@@ -666,6 +738,14 @@
       "completionPerToken": 5.14e-06,
       "promptPerMillion": 1.71,
       "completionPerMillion": 5.14,
+      "endpoints": []
+    },
+    {
+      "id": "qwen/qwen4-max",
+      "promptPerToken": 1.5e-06,
+      "completionPerToken": 4.5e-06,
+      "promptPerMillion": 1.5,
+      "completionPerMillion": 4.5,
       "endpoints": []
     },
     {
