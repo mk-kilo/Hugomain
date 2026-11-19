@@ -1,6 +1,6 @@
 {
   "source": "https://api.ofox.ai/v1/models",
-  "fetchedAt": "2026-11-18T14:32:53+00:00",
+  "fetchedAt": "2026-11-19T14:40:43+00:00",
   "catalogCount": 138,
   "note": "Public unauthenticated catalog prices observed at fetchedAt. USD per million tokens. Not a transaction quote, invoice, confirmation of model compatibility, or guarantee that checkout matches.",
   "requested": [
@@ -309,19 +309,19 @@
       "endpoints": []
     },
     {
-      "id": "google/gemini-4-carbon",
-      "promptPerToken": 4e-06,
-      "completionPerToken": 2e-05,
-      "promptPerMillion": 4.0,
-      "completionPerMillion": 20.0,
-      "endpoints": []
-    },
-    {
       "id": "google/gemini-4-hydrogen",
       "promptPerToken": 1.5e-06,
       "completionPerToken": 7.5e-06,
       "promptPerMillion": 1.5,
       "completionPerMillion": 7.5,
+      "endpoints": []
+    },
+    {
+      "id": "google/gemini-4-neon",
+      "promptPerToken": 3e-06,
+      "completionPerToken": 1.5e-05,
+      "promptPerMillion": 3.0,
+      "completionPerMillion": 15.0,
       "endpoints": []
     },
     {
