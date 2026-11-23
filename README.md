@@ -50,7 +50,7 @@ python3 scripts/ofox-smoke.py
 - `ga4MeasurementId`：GA4 衡量 ID，形如 `G-XXXXXXXX`。留空则不加载 gtag。
 - `plausibleDomain`：Plausible 里配置的域名，例如 `jxzne.com`。留空则不加载 Plausible。
 
-两个值都为空时，页面不向统计服务发请求，也不发送联盟点击事件。填上之后，指向 `https://ofox.ai/x/itoken` 的点击会发送 `affiliate_click`（带 `page_path` 和 `cta_position`），复制代码按钮和语言切换也会调用已加载的 `gtag` / `plausible`。怎么在 GA4 和 Plausible 里读这些事件：`docs/affiliate-clicks.md`。不要在这个文件里写 API Key。本仓库没有填入衡量 ID。
+两个值都为空时，页面不向统计服务发请求，也不发送联盟点击事件。填上之后，指向 `https://ofox.ai/x/itoken` 的点击会发送 `affiliate_click`（带 `page_path` 和 `cta_position`），复制代码按钮和语言切换也会调用已加载的 `gtag` / `plausible`。怎么在 GA4 和 Plausible 里读这些事件：`docs/affiliate-clicks.md`。不要在这个文件里写 API Key。当前 `ga4MeasurementId` 是 `G-Z959EMH17R`，`plausibleDomain` 仍为空。
 
 ## 公开目录价格
 
