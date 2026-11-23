@@ -52,11 +52,12 @@
       <li>从目录里选两个真实存在的 id，不要凭记忆。读法在 <a href="list-openai-models.html">模型列表</a>。两个 id 必须都能走你实际调用的那个端点。</li>
       <li>用同一小段输入各调用一次。你自己判断失败是否还能接受：字段错了、没跟上指令，或代码不能用。本站没有分数。</li>
       <li>打开服务商当前的价目页，抄下这两个 id 的输入单价和输出单价，单位是每百万 token。缓存、批处理和长上下文如果另计价，单独记下来，不要并进一个“更便宜”。</li>
-      <li>把每月输入 token、每月输出 token 和两套单价填进 <a href="api-cost-calculator.html">月费计算器</a>。计算器只做你填入数字的算术。没填单价就不会出结果。</li>
+      <li>把每月 token 填进 <a href="api-cost-calculator.html">月费计算器</a>。计算器可以从带日期的 Ofox 公开目录预填一个方案的单价；另一个方案和任何官方标价仍要你自己填。没填的单价不会被算进去。差额只是减法，不是省下的百分比。</li>
     </ol>
     <p>原厂价目可以从这些页面抄，抄的时候以你打开的那一版为准：<a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer">OpenAI</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Gemini</a>。Ofox 侧看他们的 <a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">计费说明</a> 和 <a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener noreferrer">当场目录</a>。同一模型、官方对 Ofox 的比较在 <a href="developers.html#price-compare">开发者页</a>，那里也不会在缺单价时声称省钱。</p>
   </section>
 
+  <aside class="context-cta"><h2>一个 OpenAI 兼容根地址</h2><p>Ofox 的 <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions 文档</a>把根地址写成 <code>https://api.ofox.ai/v1</code>。<a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">计费说明</a>写的是按量付费：按实际用量结算，没有月费套餐。本站 <a href="ofox-public-prices.json">ofox-public-prices.json</a>（刷新于 2026-11-22）里的模型 id 带有不止一个提供商前缀。这里没有记录到一次已通过的付费调用。</p><p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="zh-task-mid" data-cta-position="mid-article" data-outbound="affiliate">获取 Ofox API Key</a> <span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p></aside>
   <section class="pricing-hub-section">
     <h2>任务形状决定你该盯哪一个单价</h2>
     <p>下表只说明账单里哪一项更容易变大。它不说哪个模型赢，也不附带价格。</p>

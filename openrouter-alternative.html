@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ofox 与 OpenRouter：接口、模型目录和计费 | JXZNE AI</title>
+  <meta name="description" content="对照 Ofox 与 OpenRouter 的公开文档：OpenAI 兼容接口、模型目录规模和计费方式。查阅日 2026-11-23。未核对的项目写未验证。本页不计算节省金额。">
+  <link rel="canonical" href="https://jxzne.com/openrouter-alternative.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openrouter-alternative.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openrouter-alternative.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openrouter-alternative.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="Ofox 与 OpenRouter：接口、模型目录和计费 | JXZNE AI">
+  <meta property="og:description" content="只写 2026-11-23 能从公开页面核对到的接口、目录和计费。未核对的写未验证。不计算节省金额。">
+  <meta property="og:url" content="https://jxzne.com/openrouter-alternative.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ofox 与 OpenRouter | JXZNE AI">
+  <meta name="twitter:description" content="查阅日 2026-11-23。未核对的写未验证。不计算节省金额。">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="compare-aggregators.html">聚合对照</a>
+    <a href="developers.html">开发者</a>
+    <a href="api-cost-calculator.html">月费计算器</a>
+    <a href="validation.html">实测状态</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="openrouter-alternative.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/openrouter-alternative.html" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 或 OpenRouter 的官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。下表引用的是各家公开页面和本仓库的目录快照，不是对账单的审计。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">AS OF 2026-11-23</span>
+    <h1>Ofox 与 OpenRouter</h1>
+    <p>这一页只比较三件事：API 兼容、模型覆盖、付款和计价方式。材料来自 2026-11-23 打开的公开页面，以及仓库里 2026-11-22 的 Ofox 未登录目录快照。没有核对到的格子写“未验证”。本页不计算“你能省下多少”。</p>
+    <p class="calc-note">这是 HTTP API 的对照。本页不说 Cursor、Claude Code 或 Codex 可以连上 Ofox 或 OpenRouter。Ofox 自己的 Cursor 说明（更新于 2026-10-16）把直接接入标为不合适：<a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 文档</a>。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>API 兼容</h2>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <caption>接口地址以 2026-11-23 读到的文档为准。本站没有替你打通。</caption>
+        <thead><tr><th>项目</th><th>Ofox 文档怎么写</th><th>OpenRouter 文档怎么写</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>OpenAI SDK 根地址</td>
+            <td><code>base_url</code> / <code>baseURL</code> 为 <code>https://api.ofox.ai/v1</code>。Chat Completions 与 Responses 两页都有 Python 和 TypeScript 示例。</td>
+            <td>Quickstart 的 “Using the OpenAI SDK” 把 <code>baseURL</code> / <code>base_url</code> 写成 <code>https://openrouter.ai/api/v1</code>。</td>
+          </tr>
+          <tr>
+            <td>Chat Completions</td>
+            <td><code>POST https://api.ofox.ai/v1/chat/completions</code>。该页列出 <code>model</code>、<code>messages</code>，并写了流式和 Function Calling。</td>
+            <td>API reference overview 写支持 <code>POST /api/v1/chat/completions</code>，示例地址是 <code>https://openrouter.ai/api/v1/chat/completions</code>。</td>
+          </tr>
+          <tr>
+            <td>Responses</td>
+            <td><code>POST https://api.ofox.ai/v1/responses</code>。该页把它标为推荐给新项目的接口，并写了 Function Calling 和流式。</td>
+            <td>Quickstart 的请求示例指向 <code>https://openrouter.ai/api/v1/responses</code>。同一页也用 OpenAI SDK 的 <code>responses.create</code>。</td>
+          </tr>
+          <tr>
+            <td>Anthropic Messages</td>
+            <td>文档页写了 <code>POST https://api.ofox.ai/anthropic/v1/messages</code>，以及 Anthropic SDK 的 <code>base_url</code> <code>https://api.ofox.ai/anthropic</code>。那是 Ofox 的文档，不是本站测通的调用。仓库里的 <code>ofox-smoke-status.json</code> 仍是未验证。</td>
+            <td>未验证。2026-11-23 读到的 Quickstart、定价页和 API overview 没有确认一个 Anthropic 原生 Messages 地址。</td>
+          </tr>
+          <tr>
+            <td>Gemini 原生接口</td>
+            <td>更新日志 v1.0.0 写“OpenAI、Anthropic、Gemini 都原生兼容”。本页没有再打开 Gemini 端点文档，所以具体路径未验证。</td>
+            <td>未验证。</td>
+          </tr>
+          <tr>
+            <td>本站是否打通过</td>
+            <td><code>ofox-smoke-status.json</code> 的 <code>status</code> 是 <code>unverified</code>，<code>latencyMs</code> 和 <code>timestamp</code> 都是 null。没有延迟数字。</td>
+            <td>未验证。本站没有记录对 OpenRouter 的调用。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="calc-note">两边都写自己兼容 OpenAI 的请求形状。某个模型 id、某个参数或某个客户端是否真能用，要以当时的模型卡片和你自己的请求为准。定价页 FAQ 写：“Our API is OpenAI-compatible. Update the base URL and model names.” 这是 OpenRouter 的句子。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>模型覆盖</h2>
+    <p>Ofox 这边用的是仓库文件 <a href="ofox-public-prices.json">ofox-public-prices.json</a>。来源是未登录的 <code>GET https://api.ofox.ai/v1/models</code>，<code>fetchedAt</code> 为 <strong>2026-11-22T13:35:47+00:00</strong>。<code>catalogCount</code> 是 138，表示那次响应里的模型条数。其中 117 个带有可用的文本输入和输出单价，列在 <code>models</code> 里。没有文本单价的模型没有被补一个数字，也没有出现在这个列表里。</p>
+    <p>这 117 个 id 的前缀数量是：openai 32、google 23、qwen 12、anthropic 11、z-ai 10、deepseek 6、volcengine 6、moonshotai 5、x-ai 5、microsoft 3、minimax 3、typesafe 1。这只说明那次快照里有这些前缀，不说明每个 id 在你调用时仍然在售，也不说明和 OpenRouter 的目录重合了多少。重合部分未验证。</p>
+    <p>Ofox 更新日志 v1.0.0 写“100+ models”。那是他们的产品说明。上面的 138 和 117 是这次文件里的数，不是把宣传页上的 “100+” 再加一个新数字。</p>
+    <p>OpenRouter 定价页在 2026-11-23 写着：Standard 和 Business 为 “600+ models”、“80+ providers”；Free 为 “25+ free models”、“4 free providers”。这是他们页面上的标注。本站没有下载 OpenRouter 的模型列表，所以没有自己数过。</p>
+    <p class="calc-note">不要把 600+ 套到 Ofox 上，也不要把 138 套到 OpenRouter 上。同一天两边的目录都会变。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>付款和计价</h2>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <caption>费用按各家自己的页面分开记。本页不做减法。</caption>
+        <thead><tr><th>项目</th><th>Ofox 公开页面</th><th>OpenRouter 定价页</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>怎么计费</td>
+            <td>计费说明（页面写 Last updated on November 23, 2026）写：纯按量付费，没有订阅、没有套餐、没有月费、没有最低消费；先充值，余额不过期；文本模型按输入和输出 token 计。</td>
+            <td>Standard 和 Business 标成 Pay-as-you-go。FAQ 写：推理按提供商标价计，平台费在买额度时收取，不按单次请求收。Standard 和 Business 没有最低消费，也没有锁定期。</td>
+          </tr>
+          <tr>
+            <td>平台费</td>
+            <td>更新日志 v1.0.0 写 “Pay-as-you-go — The model provider’s list price. Zero platform fee.” v1.0.54 又写 “0% platform fee — pay the model provider’s list price.” 这是 Ofox 的原文。本站没有核对过一张发票。</td>
+            <td>FAQ 写：买额度时 Standard 收 5.5%，Business 收 8%，不在单次请求上收取。Free 的平台费一栏是 N/A。Enterprise 写费用折扣可谈，合同定价。</td>
+          </tr>
+          <tr>
+            <td>返还或额度规则</td>
+            <td>v1.0.54 列出月消费返还档：1,000 美元以上 3%，5,000 以上 4%，10,000 以上 5%，20,000 以上 7%。同一条还写推荐渠道首次充值额外 3 美元，由 Ofox 记入。这些是他们的规则说明。本站没有核对到账。</td>
+            <td>FAQ 写 BYOK：Standard 和 Business 每月 25,000 美元标价推理额度内不收 OpenRouter 费，超出后按标价的 5% 从额度扣除。Enterprise 的额度写 Custom。</td>
+          </tr>
+          <tr>
+            <td>付款方式</td>
+            <td>v1.0.54 写 Airwallex 与 Stripe，结算货币列出 USD、CNY、SGD。v1.0.0 写 Stripe 信用卡充值。是否接受某一张卡，未验证。</td>
+            <td>FAQ 写 Standard 和 Business：信用卡、借记卡、AliPay、加密货币（USDC）。Enterprise：发票和采购订单。税是否包含，他们写价格不含适用税费。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Ofox 更新日志 v1.0.39 用自己的话和 OpenRouter 做了费用对比。本页不引用那个对比里的节省数字，因为本站没有用两边的目录把它算出来。</p>
+    <p class="calc-note">5.5% 和 8% 是 OpenRouter 写在“购买额度”上的平台费。Ofox 写的是平台费 0% 和厂商标价。两句话的收费环节不一样。本页不把它们相减成一个节省金额。缓存折扣、批处理、税和实际扣款都未验证。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>未验证</h2>
+    <ul class="checklist">
+      <li>任何一个模型 id 是否同时出现在两边的当前目录里。</li>
+      <li>OpenRouter 有没有 Anthropic 或 Gemini 的原生接口。</li>
+      <li>Ofox Gemini 原生接口的具体路径。更新日志说有，本页没有打开那份端点文档。</li>
+      <li>本站对 Ofox 或 OpenRouter 的付费调用、延迟和可用性。状态文件是未验证，这里不补数字。</li>
+      <li>返还、3 美元赠额、0% 平台费是否和你结账时的页面一致。</li>
+      <li>Cursor、Claude Code、Codex 能否使用其中任何一家。本页不提供这些工具的配置。</li>
+    </ul>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>来源（查阅日 2026-11-23）</h2>
+    <ul class="checklist">
+      <li><a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Ofox Chat Completions</a></li>
+      <li><a href="https://ofox.ai/docs/api/openai/responses" target="_blank" rel="noopener noreferrer">Ofox Responses</a></li>
+      <li><a href="https://ofox.ai/docs/api/anthropic/messages" target="_blank" rel="noopener noreferrer">Ofox Anthropic Messages</a></li>
+      <li><a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox 计费说明</a>（页面写更新于 November 23, 2026）</li>
+      <li><a href="https://ofox.ai/docs/changelog" target="_blank" rel="noopener noreferrer">Ofox 更新日志</a>（v1.0.0、v1.0.39、v1.0.54）</li>
+      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 说明</a>（更新于 2026-10-16）</li>
+      <li><a href="ofox-public-prices.json">ofox-public-prices.json</a>，fetchedAt 2026-11-22T13:35:47+00:00</li>
+      <li><a href="https://openrouter.ai/docs/quickstart" target="_blank" rel="noopener noreferrer">OpenRouter Quickstart</a></li>
+      <li><a href="https://openrouter.ai/docs/api-reference/overview" target="_blank" rel="noopener noreferrer">OpenRouter API overview</a></li>
+      <li><a href="https://openrouter.ai/pricing" target="_blank" rel="noopener noreferrer">OpenRouter 定价页</a></li>
+    </ul>
+    <p>同一主题的旧对照在 <a href="compare-aggregators.html">官方 API、Ofox、OpenRouter</a>，查阅日写的是 2026-10-29。单价可以拿到 <a href="api-cost-calculator.html">月费计算器</a>：只预填这份 Ofox 快照，不预填官方标价。</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>要调用时再去开户</h2>
+    <p>账号、充值和密钥都在 Ofox。这一页的表格不是报价。</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="zh-openrouter-alt" data-cta-position="after-answer" data-outbound="affiliate">获取 Ofox API Key</a> <span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。OpenRouter 的链接不是联盟链接。</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 查阅日 2026-11-23</p><a href="en/openrouter-alternative.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
+</body>
+</html>

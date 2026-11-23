@@ -1,5 +1,7 @@
-/* Client-side monthly token cost. Prices are whatever the visitor types.
-   This file does not contain model rates. */
+/* Client-side monthly token cost.
+   Ofox rates are filled only after the visitor picks a model from
+   ofox-public-prices.json. Official lab rates are never filled in.
+   The difference line is subtraction. It is not a savings claim. */
 (function () {
   var root = document.getElementById("cost-calc");
   if (!root) return;
@@ -80,6 +82,81 @@
   }
 
   root.addEventListener("input", render);
+
+  var catalog = null;
+  var select = field("cost-ofox-model");
+  var sourceNote = field("cost-ofox-source");
+
+  function rateString(value) {
+    if (typeof value !== "number" || !isFinite(value) || value < 0) return "";
+    return String(Math.round(value * 1000000) / 1000000);
+  }
+
+  function applyCatalogModel() {
+    if (!select || !catalog) return;
+    var id = select.value;
+    if (!id) {
+      var blankName = field("cost-a-name");
+      var blankIn = field("cost-a-in");
+      var blankOut = field("cost-a-out");
+      if (blankName) blankName.value = "";
+      if (blankIn) blankIn.value = "";
+      if (blankOut) blankOut.value = "";
+      if (sourceNote) sourceNote.textContent = root.getAttribute("data-ofox-idle") || "";
+      render();
+      return;
+    }
+    var model = null;
+    for (var i = 0; i < catalog.models.length; i++) {
+      if (catalog.models[i] && catalog.models[i].id === id) model = catalog.models[i];
+    }
+    var inputRate = model ? rateString(model.promptPerMillion) : "";
+    var outputRate = model ? rateString(model.completionPerMillion) : "";
+    if (!model || inputRate === "" || outputRate === "") {
+      if (sourceNote) sourceNote.textContent = root.getAttribute("data-ofox-missing") || "";
+      return;
+    }
+    var name = field("cost-a-name");
+    var input = field("cost-a-in");
+    var output = field("cost-a-out");
+    if (name) name.value = id;
+    if (input) input.value = inputRate;
+    if (output) output.value = outputRate;
+    var template = root.getAttribute("data-ofox-filled") || "";
+    if (sourceNote) {
+      sourceNote.textContent = template
+        .replace("{id}", id)
+        .replace("{date}", catalog.fetchedAt)
+        .replace("{input}", inputRate)
+        .replace("{output}", outputRate);
+    }
+    render();
+  }
+
+  if (select) {
+    var pricesUrl = root.getAttribute("data-prices") || "/ofox-public-prices.json";
+    fetch(pricesUrl, { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("prices");
+        return response.json();
+      })
+      .then(function (data) {
+        if (!data || !Array.isArray(data.models) || !data.fetchedAt) throw new Error("prices");
+        catalog = data;
+        data.models.forEach(function (model) {
+          if (!model || typeof model.id !== "string" || !model.id) return;
+          var option = document.createElement("option");
+          option.value = model.id;
+          option.textContent = model.id;
+          select.appendChild(option);
+        });
+        select.addEventListener("change", applyCatalogModel);
+        if (sourceNote && !select.value) sourceNote.textContent = root.getAttribute("data-ofox-idle") || sourceNote.textContent;
+      })
+      .catch(function () {
+        if (sourceNote) sourceNote.textContent = root.getAttribute("data-ofox-error") || "";
+      });
+  }
 
   var example = field("cost-example-tokens");
   if (example) {
