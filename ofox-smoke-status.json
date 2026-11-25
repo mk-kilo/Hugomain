@@ -1,26 +1,26 @@
 {
   "schema": 2,
-  "overall": "unverified",
+  "overall": "failed",
   "endpoint": "POST https://api.ofox.ai/v1/chat/completions",
   "model": "openai/gpt-5.4",
-  "latencyMs": null,
-  "status": "unverified",
-  "httpStatus": null,
-  "timestamp": null,
-  "updatedAt": null,
-  "recordedBy": null,
+  "latencyMs": 611,
+  "status": "failed",
+  "httpStatus": 401,
+  "timestamp": "2026-11-25T13:04:39+00:00",
+  "updatedAt": "2026-11-25T13:04:39+00:00",
+  "recordedBy": "scripts/ofox-smoke.py",
   "catalogChecked": "2026-11-12",
   "catalogSource": "https://api.ofox.ai/v1/models",
-  "note": "No authenticated chat completion has been recorded. The environment that prepared this file had no OFOX_API_KEY, so scripts/ofox-smoke.py was not able to call Ofox. Do not edit overall or status to a pass by hand.",
+  "note": "Chat Completions returned HTTP 401. Response body was not stored.",
   "checks": {
     "chat_completions": {
-      "status": "unverified",
+      "status": "failed",
       "passedAt": null,
       "model": "openai/gpt-5.4",
-      "latencyMs": null,
-      "httpStatus": null,
-      "timestamp": null,
-      "detail": "scripts/ofox-smoke.py has not recorded an authenticated POST /v1/chat/completions call."
+      "latencyMs": 611,
+      "httpStatus": 401,
+      "timestamp": "2026-11-25T13:04:39+00:00",
+      "detail": "Chat Completions returned HTTP 401. Response body was not stored."
     },
     "openai_responses": {
       "status": "unverified",
@@ -35,12 +35,12 @@
     "codex_cli": {
       "status": "unverified",
       "passedAt": null,
-      "detail": "scripts/ofox-smoke.py does not launch Codex CLI. Ofox publishes a Codex configuration guide, and this file does not verify that client."
+      "detail": "scripts/ofox-smoke.py does not launch Codex CLI. Ofox publishes a Codex guide, and this run does not verify it."
     },
     "claude_code": {
       "status": "unverified",
       "passedAt": null,
-      "detail": "scripts/ofox-smoke.py does not launch Claude Code. Ofox publishes a Claude Code configuration guide, and this file does not verify that client."
+      "detail": "scripts/ofox-smoke.py does not launch Claude Code. Ofox publishes a Claude Code guide, and this run does not verify it."
     },
     "cursor_direct": {
       "status": "provider_marked_incompatible",
