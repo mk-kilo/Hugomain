@@ -20,15 +20,17 @@ JXZNE AI 是一个面向开发者和小团队的 AI 模型聚合入口网站，�
 
 脚本把 `model`、`latencyMs`、`status`、`httpStatus`、`timestamp` 写入 `ofox-smoke-status.json`。不写入密钥，也不写入模型原文。没有 Key 时打印 `BLOCKED_NO_OFOX_API_KEY`，退出码 0，不改状态文件。当前仓库里的 `overall` 是 `unverified`：准备这次改动时环境里没有 Key，所以没有发起调用。不要手工把 `overall` 或 `status` 改成通过。
 
+脚本会去掉 Key 里的空白（含回车换行）以及明确列出的不可见粘贴字符（BOM、零宽空格等），再检查剩余内容能否放进 HTTP 头。带 `Bearer `、`Authorization:` 或 `x-api-key:` 前缀时不发请求。引号和其它标点不会被删掉，也不会做 Unicode 兼容转换。去掉这些字符修不了填错、已吊销或没配置的 Key。
+
 这次调用不启动 Codex CLI 或 Claude Code。Ofox 有这两份配置文档，但本仓库没有跑过客户端。Cursor 直接接入仍按 Ofox 兼容性说明记为不合适。
 
-`tests/ofox_smoke.py` 仍是单独的 Responses / Messages 检查，默认模型已改为目录中存在的 `openai/gpt-5.4` 和 `anthropic/claude-sonnet-4.6`。它不负责改写状态文件。
+`tests/ofox_smoke.py` 仍是单独的 Responses / Messages 检查，默认模型已改为目录中存在的 `openai/gpt-5.4` 和 `anthropic/claude-sonnet-4.6`。它不负责改写状态文件，不规范化 Key，工作流也不运行它。
 
 ### 添加 GitHub Secret 并运行
 
 1. 打开仓库 **Settings → Secrets and variables → Actions → New repository secret**。
 2. Name 填 `OFOX_API_KEY`。
-3. Value 填 Ofox 控制台里的原始 API Key。不要加 `Bearer ` 前缀，不要带引号或换行。
+3. Value 填 Ofox 控制台里的原始 API Key。不要加 `Bearer ` 前缀，不要加引号。误粘贴的换行和空白由脚本去掉；Key 本身仍必须是控制台里的那一把。
 4. 打开 **Actions → Ofox chat completions smoke → Run workflow**。工作流也可在每周一 06:00 UTC 运行。
 
 Secret 为空时工作流不请求 Ofox，也不提交状态文件。有 Key 且脚本改写了状态文件时，才会把 `ofox-smoke-status.json` 提交到 `main`。
