@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>API cost calculator: compare two scenarios you price | JXZNE AI</title>
-  <meta name="description" content="Estimate two monthly API bills in the browser from your token counts and per-million-token rates. Rate fields start empty. No model price is built in.">
+  <meta name="description" content="Estimate two monthly API bills in the browser. One scenario can be filled from the dated Ofox public catalog. Official lab rates are not filled in.">
   <link rel="canonical" href="https://jxzne.com/en/api-cost-calculator.html">
   <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/api-cost-calculator.html">
   <link rel="alternate" hreflang="en" href="https://jxzne.com/en/api-cost-calculator.html">
@@ -15,12 +15,12 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="API cost calculator: compare two scenarios you price | JXZNE AI">
-  <meta property="og:description" content="Estimate two monthly bills from tokens and per-million rates you type. Rate fields start empty.">
+  <meta property="og:description" content="Estimate two monthly bills from tokens. One scenario can be filled from the dated Ofox public catalog. Official lab rates are not filled in.">
   <meta property="og:url" content="https://jxzne.com/en/api-cost-calculator.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="API cost calculator | JXZNE AI">
-  <meta name="twitter:description" content="Rate fields start empty. The month is arithmetic on numbers you type.">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/api-cost-calculator.html#webpage","url":"https://jxzne.com/en/api-cost-calculator.html","name":"API cost calculator | JXZNE AI","description":"Estimate two monthly bills from tokens and per-million rates you type. Rate fields start empty.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"API cost calculator","item":"https://jxzne.com/en/api-cost-calculator.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/api-cost-calculator.html#faq","url":"https://jxzne.com/en/api-cost-calculator.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Why are the rates blank?","acceptedAnswer":{"@type":"Answer","text":"Blank means this page does not ship a model price. Copy the current input and output rate per million tokens from the provider's pricing page. The example button fills token counts only, and it labels them as an example volume."}},{"@type":"Question","name":"Is the difference a savings percent?","acceptedAnswer":{"@type":"Answer","text":"No. The difference is subtraction of the two monthly totals, in the same unit as the rates you typed. It excludes cache, batch, tax, and top-up fees, and it is not a measured saving."}}]}]}</script>
+  <meta name="twitter:description" content="Ofox public catalog can fill one scenario. Official rates stay blank. The difference is subtraction.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/api-cost-calculator.html#webpage","url":"https://jxzne.com/en/api-cost-calculator.html","name":"API cost calculator | JXZNE AI","description":"Estimate two monthly bills from tokens. One scenario can be filled from the dated Ofox public catalog. Official lab rates are not filled in.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"API cost calculator","item":"https://jxzne.com/en/api-cost-calculator.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/api-cost-calculator.html#faq","url":"https://jxzne.com/en/api-cost-calculator.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Why are the rates blank?","acceptedAnswer":{"@type":"Answer","text":"Rates start blank. After you pick a model, scenario A is filled from that model's input and output rate in ofox-public-prices.json, and the page shows the file's refresh time. Official lab rates are not filled in. The example button fills token counts only."}},{"@type":"Question","name":"Is the difference a savings percent?","acceptedAnswer":{"@type":"Answer","text":"No. The difference is subtraction of the two monthly totals, in the same unit as the rates you typed. It excludes cache, batch, tax, and top-up fees, and it is not a measured saving."}}]}]}</script>
 </head>
 <body>
 <header class="nav">
@@ -43,13 +43,19 @@
     <span class="kicker">MONTHLY COST</span>
     <h1>Two monthly bills, from numbers you type</h1>
     <p>The formula is: monthly cost = (monthly input tokens ÷ 1,000,000) × input rate per million tokens + (monthly output tokens ÷ 1,000,000) × output rate per million tokens. Both scenarios share one token volume. Each has its own rates. The math runs in your browser and these numbers are not uploaded.</p>
-    <p>Rate fields start empty. This page does not hardcode a model price. Replace them with the current figures on the provider’s pricing page. <a href="cheaper-model-by-task.html">How to pick the two ids</a>. This is a different tool from the developer page’s same-model official-versus-Ofox form on <a href="developers.html#price-compare">Developers</a> and from <a href="api-pricing.html">chat plan versus API billing</a>.</p>
+    <p>Rate fields start empty. You can pick a model from this site’s <code>ofox-public-prices.json</code> and fill scenario A with that snapshot’s input and output rates. The page shows the file’s refresh time. Official lab rates are not filled in. Scenario B stays blank until you type a rate. <a href="cheaper-model-by-task.html">How to pick the two ids</a>. This is a different tool from the developer page’s same-model official-versus-Ofox form on <a href="developers.html#price-compare">Developers</a> and from <a href="api-pricing.html">chat plan versus API billing</a>.</p>
   </section>
 
   <section class="pricing-hub-section" id="calculator">
     <h2>Enter volume and rates</h2>
-    <div id="cost-calc" class="calc-layout" data-name-a="Scenario A" data-name-b="Scenario B" data-msg-empty="Enter the monthly tokens and both rates for a scenario before that scenario shows a total." data-msg-bad="Use zero or a positive number." data-msg-pending="—" data-msg-same="On the numbers you typed, the two monthly totals match." data-msg-lower="On the numbers you typed, {low} is lower by {diff}. That is subtraction, not a savings percent.">
+    <div id="cost-calc" class="calc-layout" data-prices="/ofox-public-prices.json" data-name-a="Scenario A" data-name-b="Scenario B" data-msg-empty="Enter the monthly tokens and both rates for a scenario before that scenario shows a total." data-msg-bad="Use zero or a positive number." data-msg-pending="—" data-msg-same="On the numbers you typed, the two monthly totals match." data-msg-lower="On the numbers you typed, {low} is lower by {diff}. That is subtraction, not a savings percent." data-ofox-idle="No model selected. Scenario A and scenario B rates stay blank. Official lab rates are not filled in." data-ofox-missing="This snapshot has no text rate for that model. Scenario A is not filled." data-ofox-filled="Scenario A uses the public-catalog rate for {id}: input {input}, output {output} USD per million tokens. Snapshot time {date}. This is not an invoice. Scenario B stays blank until you type a rate. This page does not fill official lab rates and does not call the difference a saving." data-ofox-error="Could not read /ofox-public-prices.json. Rates stay blank. No guessed price was filled in.">
       <div class="calc-form">
+        <label>Pick a model from the Ofox public catalog snapshot. This fills scenario A only.
+          <select id="cost-ofox-model">
+            <option value="">Do not prefill</option>
+          </select>
+        </label>
+        <p id="cost-ofox-source" class="calc-note">No model selected. Official lab rates are not filled in. Scenario B stays blank.</p>
         <p class="cost-example"><button type="button" class="utility-btn" id="cost-example-tokens">Fill example token volume</button></p>
         <p id="cost-example-note" class="calc-note" hidden>Example volume only: 1,000,000 input tokens and 200,000 output tokens. This is not someone’s measured usage. Rates stay empty until you paste current prices from a pricing page.</p>
         <label>Monthly input tokens<input id="cost-in" type="number" min="0" step="1" inputmode="decimal" autocomplete="off" placeholder="From your bill or your own estimate"></label>
@@ -82,7 +88,7 @@
     <h2>Questions</h2>
     <details open>
       <summary>Why are the rates blank?</summary>
-      <p>Blank means this page does not ship a model price. Copy the current input and output rate per million tokens from the provider’s pricing page. The example button fills token counts only, and it labels them as an example volume.</p>
+      <p>Rates start blank. After you pick a model, scenario A is filled from that model’s input and output rate in ofox-public-prices.json, and the page shows the file’s refresh time. Official lab rates are not filled in. The example button fills token counts only.</p>
     </details>
     <details>
       <summary>Is the difference a savings percent?</summary>

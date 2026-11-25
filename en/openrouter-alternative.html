@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ofox vs OpenRouter: API, catalog, and billing | JXZNE AI</title>
+  <meta name="description" content="Ofox and OpenRouter compared from public docs: OpenAI-compatible APIs, catalog size, and how each says it bills. As of 2026-11-23. Unchecked cells say not verified. No savings figure.">
+  <link rel="canonical" href="https://jxzne.com/en/openrouter-alternative.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/openrouter-alternative.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/openrouter-alternative.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/openrouter-alternative.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Ofox vs OpenRouter: API, catalog, and billing | JXZNE AI">
+  <meta property="og:description" content="Only API, catalog, and billing facts checked on 2026-11-23. Unchecked items say not verified. No savings figure.">
+  <meta property="og:url" content="https://jxzne.com/en/openrouter-alternative.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ofox vs OpenRouter | JXZNE AI">
+  <meta name="twitter:description" content="As of 2026-11-23. Unchecked items say not verified. No savings figure.">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="compare-aggregators.html">Aggregators</a>
+    <a href="developers.html">Developers</a>
+    <a href="api-cost-calculator.html">Cost calculator</a>
+    <a href="validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../openrouter-alternative.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="openrouter-alternative.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not OpenRouter. Eligible signups or spend through our Ofox link may earn a commission. The tables cite public pages and this repo’s catalog snapshot. They are not an audit of an invoice.</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">AS OF 2026-11-23</span>
+    <h1>Ofox vs OpenRouter</h1>
+    <p>This page compares three things: API compatibility, model coverage, and payment or pricing. The sources are public pages opened on 2026-11-23, plus the unauthenticated Ofox catalog snapshot stored in this repo on 2026-11-22. Where a cell was not checked, it says “not verified.” This page does not calculate a saving.</p>
+    <p class="calc-note">This is a comparison of HTTP APIs. It does not say that Cursor, Claude Code, or Codex can connect to Ofox or to OpenRouter. Ofox’s own Cursor note, updated 2026-10-16, marks direct Cursor integration as unsuitable: <a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor doc</a>.</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>API compatibility</h2>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <caption>Endpoints as read on 2026-11-23. This site has not completed the calls for you.</caption>
+        <thead><tr><th>Item</th><th>What Ofox’s docs say</th><th>What OpenRouter’s docs say</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>OpenAI SDK base URL</td>
+            <td><code>base_url</code> / <code>baseURL</code> is <code>https://api.ofox.ai/v1</code>. The Chat Completions and Responses pages both show Python and TypeScript examples.</td>
+            <td>Quickstart, “Using the OpenAI SDK,” sets <code>baseURL</code> / <code>base_url</code> to <code>https://openrouter.ai/api/v1</code>.</td>
+          </tr>
+          <tr>
+            <td>Chat Completions</td>
+            <td><code>POST https://api.ofox.ai/v1/chat/completions</code>. That page lists <code>model</code> and <code>messages</code>, and it describes streaming and function calling.</td>
+            <td>The API reference overview says OpenRouter supports <code>POST /api/v1/chat/completions</code>. The sample URL is <code>https://openrouter.ai/api/v1/chat/completions</code>.</td>
+          </tr>
+          <tr>
+            <td>Responses</td>
+            <td><code>POST https://api.ofox.ai/v1/responses</code>. That page recommends it for new projects and describes function calling and streaming.</td>
+            <td>Quickstart samples post to <code>https://openrouter.ai/api/v1/responses</code>. The same page also uses the OpenAI SDK’s <code>responses.create</code>.</td>
+          </tr>
+          <tr>
+            <td>Anthropic Messages</td>
+            <td>Ofox documents <code>POST https://api.ofox.ai/anthropic/v1/messages</code> and an Anthropic SDK <code>base_url</code> of <code>https://api.ofox.ai/anthropic</code>. That is their documentation. <code>ofox-smoke-status.json</code> in this repo is still unverified.</td>
+            <td>Not verified. The Quickstart, pricing page, and API overview read on 2026-11-23 did not confirm an Anthropic-native Messages URL.</td>
+          </tr>
+          <tr>
+            <td>Native Gemini</td>
+            <td>Changelog v1.0.0 says OpenAI, Anthropic, and Gemini are natively compatible. This page did not re-open a Gemini endpoint document, so the path is not verified.</td>
+            <td>Not verified.</td>
+          </tr>
+          <tr>
+            <td>Recorded by this site</td>
+            <td><code>ofox-smoke-status.json</code> has <code>status</code> <code>unverified</code>, and <code>latencyMs</code> and <code>timestamp</code> are null. No latency number is shown.</td>
+            <td>Not verified. This site has no recorded OpenRouter call.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="calc-note">Both vendors describe an OpenAI-compatible request shape. Whether a given model id, parameter, or client works is a question for that model card and for your own request. OpenRouter’s pricing FAQ says: “Our API is OpenAI-compatible. Update the base URL and model names.”</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Model coverage</h2>
+    <p>The Ofox figures come from <a href="../ofox-public-prices.json">ofox-public-prices.json</a>. The source is the unauthenticated <code>GET https://api.ofox.ai/v1/models</code> response. <code>fetchedAt</code> is <strong>2026-11-22T13:35:47+00:00</strong>. <code>catalogCount</code> is 138, the number of models in that response. 117 of them have a usable text input and output rate and are listed under <code>models</code>. Models without a text rate were not given a made-up number, and they are not in that list.</p>
+    <p>Prefix counts inside those 117 ids: openai 32, google 23, qwen 12, anthropic 11, z-ai 10, deepseek 6, volcengine 6, moonshotai 5, x-ai 5, microsoft 3, minimax 3, typesafe 1. That only says the snapshot contained those prefixes. It does not say each id is still for sale, and it does not say how many ids also exist on OpenRouter. Overlap is not verified.</p>
+    <p>Ofox changelog v1.0.0 says “100+ models.” That is their product statement. The 138 and 117 above are the counts in this file, not a new number added on top of “100+.”</p>
+    <p>On 2026-11-23 the OpenRouter pricing page said Standard and Business have “600+ models” and “80+ providers,” and Free has “25+ free models” and “4 free providers.” Those are the labels on their page. This site did not download OpenRouter’s model list, so it did not count the models itself.</p>
+    <p class="calc-note">Do not apply 600+ to Ofox, and do not apply 138 to OpenRouter. Both catalogs can change on the same day.</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Payment and pricing</h2>
+    <div class="matrix-scroll">
+      <table class="matrix-table">
+        <caption>Each fee is quoted from that vendor’s own page. This page does not subtract them.</caption>
+        <thead><tr><th>Item</th><th>Ofox public pages</th><th>OpenRouter pricing page</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>How billing is described</td>
+            <td>The pricing doc, which says “Last updated on November 23, 2026,” describes pure pay-as-you-go: no subscriptions, no plans, no monthly fees, no minimum spend; top up first; balance does not expire; text models are billed per input and output token.</td>
+            <td>Standard and Business are labeled pay-as-you-go. The FAQ says inference is billed at the provider’s list price, and the platform fee is charged when you buy credits, not on each request. Standard and Business have no minimum and no lock-in.</td>
+          </tr>
+          <tr>
+            <td>Platform fee</td>
+            <td>Changelog v1.0.0 says “Pay-as-you-go — The model provider’s list price. Zero platform fee.” v1.0.54 says “0% platform fee — pay the model provider’s list price.” That is Ofox’s wording. This site has not checked an invoice.</td>
+            <td>The FAQ says the fee on credit purchases is 5.5% on Standard and 8% on Business, and it is not charged per request. Free lists platform fees as N/A. Enterprise says fee discounts are available and pricing is set by contract.</td>
+          </tr>
+          <tr>
+            <td>Rebates or allowances</td>
+            <td>v1.0.54 lists monthly spend rebates: 3% from $1,000, 4% from $5,000, 5% from $10,000, and 7% from $20,000. The same entry says a partner referral can add $3 of credit on the first top-up, recorded by Ofox. Those are their published rules. This site has not checked that a credit arrived.</td>
+            <td>The FAQ says BYOK on Standard and Business includes $25,000 of list-price inference per month with no OpenRouter fee, then 5% of list price after that, deducted from credits. Enterprise allowances are listed as custom.</td>
+          </tr>
+          <tr>
+            <td>How you pay</td>
+            <td>v1.0.54 names Airwallex and Stripe, and lists settlement currencies USD, CNY, and SGD. v1.0.0 names Stripe card top-ups. Whether a specific card works is not verified.</td>
+            <td>The FAQ says Standard and Business accept credit and debit cards, AliPay, and crypto (USDC). Enterprise uses invoicing and purchase orders. They say prices exclude applicable tax.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Ofox changelog v1.0.39 compares its fees with OpenRouter in Ofox’s own words. This page does not repeat the savings figure from that entry, because this site did not calculate it from both catalogs.</p>
+    <p class="calc-note">5.5% and 8% are the platform fees OpenRouter publishes on credit purchases. Ofox publishes a 0% platform fee and provider list price. Those charges are not the same line item. This page does not subtract them into a savings amount. Cache discounts, batch pricing, tax, and the amount actually debited are not verified.</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Not verified</h2>
+    <ul class="checklist">
+      <li>Whether any single model id is on both live catalogs.</li>
+      <li>Whether OpenRouter has a native Anthropic or Gemini endpoint.</li>
+      <li>The exact path of a native Gemini endpoint on Ofox. The changelog says it exists; this page did not open that endpoint document.</li>
+      <li>A paid call, a latency, or uptime for Ofox or OpenRouter from this site. The status file is unverified, and no number is added here.</li>
+      <li>Whether the rebate, the $3 credit, or the 0% platform fee matches the checkout you see.</li>
+      <li>Whether Cursor, Claude Code, or Codex can use either provider. This page does not add config for those tools.</li>
+    </ul>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Sources (read 2026-11-23)</h2>
+    <ul class="checklist">
+      <li><a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Ofox Chat Completions</a></li>
+      <li><a href="https://ofox.ai/docs/api/openai/responses" target="_blank" rel="noopener noreferrer">Ofox Responses</a></li>
+      <li><a href="https://ofox.ai/docs/api/anthropic/messages" target="_blank" rel="noopener noreferrer">Ofox Anthropic Messages</a></li>
+      <li><a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox pricing</a> (page says last updated November 23, 2026)</li>
+      <li><a href="https://ofox.ai/docs/changelog" target="_blank" rel="noopener noreferrer">Ofox changelog</a> (v1.0.0, v1.0.39, v1.0.54)</li>
+      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor note</a> (updated 2026-10-16)</li>
+      <li><a href="../ofox-public-prices.json">ofox-public-prices.json</a>, fetchedAt 2026-11-22T13:35:47+00:00</li>
+      <li><a href="https://openrouter.ai/docs/quickstart" target="_blank" rel="noopener noreferrer">OpenRouter Quickstart</a></li>
+      <li><a href="https://openrouter.ai/docs/api-reference/overview" target="_blank" rel="noopener noreferrer">OpenRouter API overview</a></li>
+      <li><a href="https://openrouter.ai/pricing" target="_blank" rel="noopener noreferrer">OpenRouter pricing</a></li>
+    </ul>
+    <p>The older three-way table is <a href="compare-aggregators.html">Official API, Ofox, OpenRouter</a>, reviewed 2026-10-29. Rates can be taken to the <a href="api-cost-calculator.html">monthly calculator</a>, which prefills this Ofox snapshot only and does not prefill official lab rates.</p>
+  </section>
+
+  <section class="pricing-hub-section">
+    <h2>Open an account when you are ready to call</h2>
+    <p>The account, the top-up, and the key are on Ofox. The tables on this page are not a quote.</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="en-openrouter-alt" data-cta-position="after-answer" data-outbound="affiliate">Get an Ofox API key</a> <span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p>
+    <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. The OpenRouter links are not affiliate links.</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Read 2026-11-23</p><a href="../openrouter-alternative.html" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

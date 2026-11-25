@@ -101,6 +101,7 @@ console.log(response.choices[0].message.content);</code></pre></div>
   -d '{"model":"openai/gpt-5.4","messages":[{"role":"user","content":"Hello"}]}'</code></pre></div>
   </section>
 
+  <aside class="context-cta"><h2>一个 OpenAI 兼容根地址</h2><p>Ofox 的 <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions 文档</a>把根地址写成 <code>https://api.ofox.ai/v1</code>。<a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">计费说明</a>写的是按量付费：按实际用量结算，没有月费套餐。本站 <a href="ofox-public-prices.json">ofox-public-prices.json</a>（刷新于 2026-11-22）里的模型 id 带有不止一个提供商前缀。这里没有记录到一次已通过的付费调用。</p><p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="zh-compat-api-mid" data-cta-position="mid-article" data-outbound="affiliate">获取 Ofox API Key</a> <span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p></aside>
   <section class="pricing-hub-section">
     <h2>这三段代码没有证明的事</h2>
     <p>本仓库的 <code>scripts/ofox-smoke.py</code> 会在有密钥时向 <code>POST https://api.ofox.ai/v1/chat/completions</code> 发一次请求，默认模型是 <code>openai/gpt-5.4</code>。当前记录的 <code>overall</code> 是待实测：准备状态文件时环境里没有密钥，所以没有发起那次调用。不要把上面的示例当成已通过的账单或延迟数据。</p>

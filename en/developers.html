@@ -54,6 +54,53 @@
     <p class="calc-note">Ofox’s partner page says a referred user’s first top-up can include an extra $3 credit. Ofox pays that credit. It is not taken from referral commission, and JXZNE does not pay it. Eligibility is Ofox’s current rule. <a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>, reviewed 2026-10-29.</p>
     <p class="calc-note">Chat plans and API bills are explained on <a href="api-pricing.html">API pricing</a>, including the dated Ofox catalog observation. The Chinese section is <a href="../developers.html#subscription-vs-api" hreflang="zh-CN" lang="zh-CN">聊天会员和 API</a>.</p>
   </section>
+  <section class="section copy-config" id="copy-config">
+    <span class="kicker">OPENAI-COMPATIBLE</span>
+    <h2>Copy a generic OpenAI-compatible config</h2>
+    <p>The base URL <code>https://api.ofox.ai/v1</code> is the one already used on this site and in Ofox’s <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions doc</a>. Below are environment variables, then Python, Node, and curl samples that pass that base URL in the request. <code>YOUR_API_KEY</code> is a placeholder. These samples do not configure Cursor, Claude Code, or Codex.</p>
+    <aside class="api-status" data-api-status><h3>API status</h3><p data-api-status-state>not yet verified</p><p data-api-status-extra hidden></p></aside>
+    <div class="snippet"><div>Environment<button class="copy-code" type="button" data-copy="env-snippet">Copy</button></div><pre id="env-snippet"><code>OPENAI_BASE_URL=https://api.ofox.ai/v1
+OPENAI_API_KEY=YOUR_API_KEY</code></pre></div>
+    <div class="snippet"><div>Python<button class="copy-code" type="button" data-copy="py-snippet">Copy</button></div><pre id="py-snippet"><code>from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.ofox.ai/v1",
+    api_key="YOUR_API_KEY",
+)
+
+response = client.chat.completions.create(
+    model="openai/gpt-5.4",
+    messages=[{"role": "user", "content": "Hello"}],
+)
+
+print(response.choices[0].message.content)</code></pre></div>
+    <div class="snippet"><div>Node<button class="copy-code" type="button" data-copy="node-snippet">Copy</button></div><pre id="node-snippet"><code>import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.ofox.ai/v1",
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const response = await client.chat.completions.create({
+  model: "openai/gpt-5.4",
+  messages: [{ role: "user", content: "Hello" }],
+});
+
+console.log(response.choices[0].message.content);</code></pre></div>
+    <div class="snippet"><div>curl<button class="copy-code" type="button" data-copy="curl-snippet">Copy</button></div><pre id="curl-snippet"><code>curl https://api.ofox.ai/v1/chat/completions \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"openai/gpt-5.4","messages":[{"role":"user","content":"Hello"}]}'</code></pre></div>
+    <p class="calc-note"><code>openai/gpt-5.4</code> is a model id from the dated catalog below. Copying the sample is not a recorded successful call.</p>
+    <div class="model-id-list" id="model-id-list" data-prices="/ofox-public-prices.json">
+      <h3>Model ids you can copy</h3>
+      <p data-model-refreshed>Reading the Ofox public price file in this repo.</p>
+      <label>Search model ids<input class="model-search" type="search" data-model-search placeholder="for example openai/gpt-5.4" autocomplete="off"></label>
+      <p data-model-count class="calc-note"></p>
+      <ul data-model-results></ul>
+      <p class="calc-note">Rates in each row come from the same file, in USD per million tokens. They are not an invoice and not an official lab price. Copy copies the model id only.</p>
+    </div>
+  </section>
 <section class="section"><span class="kicker">FIRST REAL API CALL</span><h2>Validate the workflow before funding it</h2><p>Check the exact model, price and protocol before a small paid test. Never submit API keys to JXZNE.</p><div class="hero-actions"><a class="btn btn-primary" href="start-api.html" data-cta="en_first_call_guide">Start your first API call →</a><a class="btn btn-secondary" href="validation.html">Check test evidence →</a></div></section>
 
   <section class="section multi-value" id="why-aggregate">
@@ -129,7 +176,7 @@
       <article><h3>Ofox</h3><p>One balance can be more convenient. Check the model rate, any fee they actually charge, protocol support and data terms. A lower price is not guaranteed.</p></article>
       <article><h3>OpenRouter-style aggregators</h3><p>Another multi-model route. Compare credit fees, BYOK and tool support, not only the model sticker price. OpenRouter’s own page listed a platform fee when we read it on 2026-10-29.</p></article>
     </div>
-    <p><a href="compare-aggregators.html" class="btn btn-primary">Open the comparison →</a> <a href="validation.html" class="btn btn-secondary">What is still unverified →</a></p>
+    <p><a href="compare-aggregators.html" class="btn btn-primary">Open the comparison →</a> <a href="openrouter-alternative.html">Ofox vs OpenRouter, as of 2026-11-23</a> <a href="validation.html" class="btn btn-secondary">What is still unverified →</a></p>
   </section>
 
   <section class="section">
@@ -197,7 +244,7 @@
   <section class="section dev-price" id="price-compare">
     <span class="kicker">PRICE COMPARISON</span>
     <h2>Same model: Ofox versus the official API</h2>
-    <p class="dev-price-lead">Official rates below cite the lab’s pricing page. Ofox rates are filled only when the public catalog returns a per-token price, or from the last recorded observation of that catalog. <strong>If neither is available, the Ofox fields stay empty. We do not invent a discount.</strong> Compare the same model, billing mode and token volume. Two scenarios with rates you type, and blank price fields, are on the <a href="api-cost-calculator.html">monthly calculator</a>. Request shapes: <a href="openai-compatible-api.html">Python / Node / curl</a>. Errors: <a href="openai-api-errors.html">401 / 404 / 429 / timeout</a>.</p>
+    <p class="dev-price-lead">Official rates below cite the lab’s pricing page. Ofox rates are filled only when the public catalog returns a per-token price, or from the last recorded observation of that catalog. <strong>If neither is available, the Ofox fields stay empty. We do not invent a discount.</strong> Compare the same model, billing mode and token volume. The <a href="api-cost-calculator.html">monthly calculator</a> can fill one model from the dated Ofox public catalog. Official lab rates stay blank. Request shapes: <a href="openai-compatible-api.html">Python / Node / curl</a>. Errors: <a href="openai-api-errors.html">401 / 404 / 429 / timeout</a>.</p>
     <div class="price-tool">
       <div class="price-inputs">
         <label>Model<select id="price-model"><option value="gpt54">OpenAI · GPT-5.4</option><option value="gpt52">OpenAI · GPT-5.2</option><option value="sonnet46">Anthropic · Claude Sonnet 4.6</option><option value="gemini25">Google · Gemini 2.5 Flash</option></select></label>
@@ -257,6 +304,8 @@
 <footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Independent AI API guide</p><a href="./">Home</a></footer>
 <script>try{localStorage.setItem('jxzne-locale','en')}catch(e){}</script>
 <script src="../developers.js" defer></script>
+<script src="../assets/model-id-list.js" defer></script>
+<script src="../assets/api-status.js" defer></script>
 <script src="../assets/analytics-config.js"></script>
 <script src="../assets/analytics.js"></script>
 </body>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>API 月费计算器：按你填入的单价比较两个方案 | JXZNE AI</title>
-  <meta name="description" content="在浏览器里用每月输入和输出 token、以及每百万 token 的单价，估算两个方案的月费。单价栏留空，不预填模型价格。">
+  <meta name="description" content="在浏览器里用每月 token 估算两个方案的月费。可以从带日期的 Ofox 公开目录预填一个方案。官方标价不预填。">
   <link rel="canonical" href="https://jxzne.com/api-cost-calculator.html">
   <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/api-cost-calculator.html">
   <link rel="alternate" hreflang="en" href="https://jxzne.com/en/api-cost-calculator.html">
@@ -15,12 +15,12 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:title" content="API 月费计算器：按你填入的单价比较两个方案 | JXZNE AI">
-  <meta property="og:description" content="用每月 token 和每百万 token 单价估算两个方案。单价栏留空，不预填模型价格。">
+  <meta property="og:description" content="用每月 token 估算两个方案。可以从带日期的 Ofox 公开目录预填一个方案。官方标价不预填。">
   <meta property="og:url" content="https://jxzne.com/api-cost-calculator.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="API 月费计算器 | JXZNE AI">
-  <meta name="twitter:description" content="单价栏留空。月费只按你填入的数字计算。">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/api-cost-calculator.html#webpage","url":"https://jxzne.com/api-cost-calculator.html","name":"API 月费计算器 | JXZNE AI","description":"用每月 token 和每百万 token 单价估算两个方案。单价栏留空。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"API 月费计算器","item":"https://jxzne.com/api-cost-calculator.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/api-cost-calculator.html#faq","url":"https://jxzne.com/api-cost-calculator.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"为什么单价是空的？","acceptedAnswer":{"@type":"Answer","text":"空着表示本页不预填模型价格。请从服务商当前的价目页抄入每百万 token 的输入和输出单价。示例按钮只填 token 数量，并标明那是示例用量。"}},{"@type":"Question","name":"差额是不是省下来的百分比？","acceptedAnswer":{"@type":"Answer","text":"不是。差额是两个月费的算术差，单位与你填入的单价相同。它不含缓存、批处理、税、充值手续费，也不是实测节省。"}}]}]}</script>
+  <meta name="twitter:description" content="Ofox 公开目录可以预填一个方案。官方标价不预填。差额只是减法。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/api-cost-calculator.html#webpage","url":"https://jxzne.com/api-cost-calculator.html","name":"API 月费计算器 | JXZNE AI","description":"用每月 token 估算两个方案。可以从带日期的 Ofox 公开目录预填一个方案。官方标价不预填。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"API 月费计算器","item":"https://jxzne.com/api-cost-calculator.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/api-cost-calculator.html#faq","url":"https://jxzne.com/api-cost-calculator.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"为什么单价是空的？","acceptedAnswer":{"@type":"Answer","text":"页面打开时单价是空的。选择模型后，方案 A 会填入 ofox-public-prices.json 里该模型的输入和输出单价，并显示文件的刷新时间。官方实验室标价不会被填入。示例按钮只填 token 数量。"}},{"@type":"Question","name":"差额是不是省下来的百分比？","acceptedAnswer":{"@type":"Answer","text":"不是。差额是两个月费的算术差，单位与你填入的单价相同。它不含缓存、批处理、税、充值手续费，也不是实测节省。"}}]}]}</script>
 </head>
 <body>
 <header class="nav">
@@ -43,13 +43,19 @@
     <span class="kicker">MONTHLY COST</span>
     <h1>两个方案的月费，只按你填的数来算</h1>
     <p>公式是：每月费用 =（每月输入 token ÷ 1,000,000）× 每百万 token 输入单价 +（每月输出 token ÷ 1,000,000）× 每百万 token 输出单价。两个方案共用同一组 token 用量，单价各自填写。计算在你的浏览器里完成，不上传这些数字。</p>
-    <p>单价栏一开始是空的。本页不写死任何模型的价格。请换成服务商价目页上的当前数字。<a href="cheaper-model-by-task.html">怎么按任务选要比较的两个 id</a>。这和 <a href="developers.html#price-compare">开发者页</a> 的“同一模型、官方对 Ofox”不是同一个工具。</p>
+    <p>单价栏一开始是空的。你可以从本站 <code>ofox-public-prices.json</code> 选一个模型，把该快照的输入和输出单价填进方案 A，页面会显示文件里的刷新时间。官方实验室标价不会被填入。方案 B 保持空白，直到你自己填写。<a href="cheaper-model-by-task.html">怎么按任务选要比较的两个 id</a>。这和 <a href="developers.html#price-compare">开发者页</a> 的“同一模型、官方对 Ofox”不是同一个工具。</p>
   </section>
 
   <section class="pricing-hub-section" id="calculator">
     <h2>填写用量和单价</h2>
-    <div id="cost-calc" class="calc-layout" data-name-a="方案 A" data-name-b="方案 B" data-msg-empty="填完每月 token，以及一个方案的输入和输出单价后，这里才会出现该方案的月费。" data-msg-bad="请填 0 或正数。" data-msg-pending="—" data-msg-same="按你填的数，两个方案的月费相同。" data-msg-lower="按你填的数，{low} 更低，差额 {diff}。这只是减法，不是省下的百分比。">
+    <div id="cost-calc" class="calc-layout" data-prices="/ofox-public-prices.json" data-name-a="方案 A" data-name-b="方案 B" data-msg-empty="填完每月 token，以及一个方案的输入和输出单价后，这里才会出现该方案的月费。" data-msg-bad="请填 0 或正数。" data-msg-pending="—" data-msg-same="按你填的数，两个方案的月费相同。" data-msg-lower="按你填的数，{low} 更低，差额 {diff}。这只是减法，不是省下的百分比。" data-ofox-idle="尚未选择模型。方案 A 和方案 B 的单价都留空。官方实验室标价不会被填入。" data-ofox-missing="这份快照里没有该模型的文本单价。方案 A 不填数字。" data-ofox-filled="方案 A 使用 {id} 在公开目录快照中的单价：输入 {input}、输出 {output} 美元 / 百万 token。快照时间 {date}。这不是账单。方案 B 仍是空白，直到你自己填写。本页不预填官方标价，也不把差额写成节省。" data-ofox-error="没有读到 /ofox-public-prices.json。单价保持空白，不填入猜测价格。">
       <div class="calc-form">
+        <label>从 Ofox 公开目录快照选择模型，只填方案 A
+          <select id="cost-ofox-model">
+            <option value="">不预填</option>
+          </select>
+        </label>
+        <p id="cost-ofox-source" class="calc-note">尚未选择模型。官方实验室标价不会被填入。方案 B 保持空白。</p>
         <p class="cost-example"><button type="button" class="utility-btn" id="cost-example-tokens">填入示例 token 用量</button></p>
         <p id="cost-example-note" class="calc-note" hidden>示例用量：1,000,000 输入 token 和 200,000 输出 token。这不是任何人的实测用量。单价仍然是空的，请换成价目页上的当前价格。</p>
         <label>每月输入 token<input id="cost-in" type="number" min="0" step="1" inputmode="decimal" autocomplete="off" placeholder="从你的账单或估算填写"></label>
@@ -82,7 +88,7 @@
     <h2>常见问题</h2>
     <details open>
       <summary>为什么单价是空的？</summary>
-      <p>空着表示本页不预填模型价格。请从服务商当前的价目页抄入每百万 token 的输入和输出单价。示例按钮只填 token 数量，并标明那是示例用量。</p>
+      <p>页面打开时单价是空的。选择模型后，方案 A 会填入 ofox-public-prices.json 里该模型的输入和输出单价，并显示文件的刷新时间。官方实验室标价不会被填入。示例按钮只填 token 数量。</p>
     </details>
     <details>
       <summary>差额是不是省下来的百分比？</summary>

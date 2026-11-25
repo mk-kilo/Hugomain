@@ -71,7 +71,7 @@ models:
     <p>同一页写着：默认情况下，Continue 对 o 系列和 gpt-5 模型使用 OpenAI 的 <code>/responses</code>。若你要走 Chat Completions，他们的文档给出 <code>useResponsesApi: false</code>。模型 id 是否同时提供 <code>/chat/completions</code> 和 <code>/responses</code>，以服务商当时的模型卡片为准。本站没有用 Continue 调用过 Ofox。</p>
   </section>
 
-  <section class="pricing-hub-section" id="librechat">
+  <aside class="context-cta"><h2>一个 OpenAI 兼容根地址</h2><p>Ofox 的 <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions 文档</a>把根地址写成 <code>https://api.ofox.ai/v1</code>。<a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">计费说明</a>写的是按量付费：按实际用量结算，没有月费套餐。本站 <a href="ofox-public-prices.json">ofox-public-prices.json</a>（刷新于 2026-11-22）里的模型 id 带有不止一个提供商前缀。这里没有记录到一次已通过的付费调用。</p><p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="zh-base-url-mid" data-cta-position="mid-article" data-outbound="affiliate">获取 Ofox API Key</a> <span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p></aside><section class="pricing-hub-section" id="librechat">
     <h2>LibreChat</h2>
     <p>LibreChat 的自定义端点文档写明：不设置 <code>provider</code> 时走 OpenAI 兼容客户端；<code>baseURL</code> 是 API 根地址；程序会在后面接上 <code>/chat/completions</code>。只有 <code>baseURL</code> 已经是完整的 completions 地址时，才把 <code>directEndpoint</code> 设为 true。<a href="https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/custom_endpoint" target="_blank" rel="noopener noreferrer">LibreChat 文档</a></p>
     <div class="snippet"><div>librechat.yaml · 密钥让每位用户自己填<button class="copy-code" type="button" data-copy="libre-snippet">复制</button></div><pre id="libre-snippet"><code>endpoints:

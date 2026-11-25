@@ -74,7 +74,7 @@
     <p>Do not mix protocols. This repo’s note of the Ofox docs says <code>openai/gpt-5.4-pro</code> and the Codex series are Responses-only. Calling them through Chat Completions can 404. The current Ofox page is the authority: <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions</a>. Request shapes are on <a href="openai-compatible-api.html">Python / Node / curl</a>.</p>
   </section>
 
-  <section class="pricing-hub-section" id="429">
+  <aside class="context-cta"><h2>One OpenAI-compatible base URL</h2><p>Ofox’s <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions doc</a> uses the base URL <code>https://api.ofox.ai/v1</code>. The <a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">pricing page</a> describes pay-as-you-go billing for what you use, with no monthly plan. Model ids in this site’s <a href="../ofox-public-prices.json">ofox-public-prices.json</a> (refreshed 2026-11-22) use more than one provider prefix. No successful paid call is recorded here.</p><p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="en-errors-mid" data-cta-position="mid-article" data-outbound="affiliate">Get an Ofox API key</a> <span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p></aside><section class="pricing-hub-section" id="429">
     <h2>429</h2>
     <p>A 429 means the server asked you to slow down, or capacity is short. It is not a price list, and it does not say how much a model costs.</p>
     <ol class="step-list">
