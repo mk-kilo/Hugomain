@@ -3,22 +3,68 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # A push made with GITHUB_TOKEN does not start the push trigger above.
+  # These workflows commit data to main, so publish when they finish.
+  workflow_run:
+    workflows:
+      - "Ofox chat completions smoke"
+      - "Refresh Ofox Public Model Prices"
+      - "Refresh Global AI Subscription Prices"
+    types: [completed]
+    branches: [main]
 permissions:
   contents: read
   pages: write
   id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: true
 jobs:
+  gate:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.decide.outputs.deploy }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Deploy only when this run has something new on main
+        id: decide
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          TRIGGER_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" != "workflow_run" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          main_sha="$(git rev-parse HEAD)"
+          echo "trigger_sha=${TRIGGER_SHA}"
+          echo "main_sha=${main_sha}"
+          # head_sha is the commit the data workflow started on. A commit it
+          # pushed is a later main tip, so the two SHAs differ only then.
+          if [ "$TRIGGER_SHA" = "$main_sha" ]; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "Trigger left main at ${main_sha}. Skipping Pages deploy."
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
   deploy:
+    needs: gate
+    if: needs.gate.outputs.deploy == 'true'
+    concurrency:
+      group: pages
+      cancel-in-progress: true
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Keep the GitHub Pages custom domain
         run: test "$(tr -d '[:space:]' < CNAME)" = "jxzne.com"
       - name: Configure Pages
@@ -29,4 +75,14 @@ jobs:
           path: .
       - name: Deploy
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      # Run 45749590051 uploaded github-pages, then deploy-pages reported
+      # "No artifacts named github-pages" before the artifact API caught up.
+      - name: Wait before retrying the Pages deploy
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 15
+      - name: Retry the Pages deploy
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
