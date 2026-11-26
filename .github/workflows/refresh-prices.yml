@@ -5,18 +5,20 @@ on:
     paths:
       - 'scripts/refresh_prices.py'
       - '.github/workflows/refresh-prices.yml'
+      - '.github/scripts/open-workflow-failure-issue.sh'
   schedule:
     - cron: '17 4 * * *'
   workflow_dispatch:
 permissions:
   contents: write
+  issues: write
 concurrency:
   group: pricing-refresh
   cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
@@ -24,13 +26,39 @@ jobs:
           ref: main
           persist-credentials: true
       - name: Collect validated public subscription prices
-        run: python3 scripts/refresh_prices.py
+        run: |
+          set -euo pipefail
+          restore() {
+            git checkout -- pricing-snapshots.json price-history
+            git clean -fd -- price-history
+            rm -f pricing-snapshots.json.tmp price-history/*.json.tmp
+          }
+          delay=15
+          for attempt in 1 2 3; do
+            if python3 scripts/refresh_prices.py \
+              && python3 -m json.tool pricing-snapshots.json > /dev/null \
+              && python3 scripts/check_price_snapshot.py; then
+              exit 0
+            fi
+            echo "Price refresh attempt ${attempt} failed. Restoring the previous snapshot."
+            restore
+            if [ "$attempt" -eq 3 ]; then
+              echo "Price refresh failed after 3 attempts."
+              exit 1
+            fi
+            echo "Retrying in ${delay}s."
+            sleep "$delay"
+            delay=$((delay * 3))
+          done
       - name: Validate generated JSON
         run: python3 -m json.tool pricing-snapshots.json > /dev/null
       - name: Refuse anything other than verified monthly observations
         run: python3 scripts/check_price_snapshot.py
       - name: Commit changed snapshots if new verified data exists
         run: |
+          set -euo pipefail
+          python3 -m json.tool pricing-snapshots.json > /dev/null
+          python3 scripts/check_price_snapshot.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pricing-snapshots.json price-history/
@@ -38,5 +66,28 @@ jobs:
             echo "No new verified price observations; nothing to commit."
           else
             git commit -m "data: refresh attributed regional subscription price snapshots"
-            git push origin HEAD:main
+            delay=15
+            for attempt in 1 2 3; do
+              if git pull --rebase origin main && git push origin HEAD:main; then
+                exit 0
+              fi
+              git rebase --abort 2>/dev/null || true
+              if [ "$attempt" -eq 3 ]; then
+                echo "git push failed after 3 attempts. Remote main was not updated."
+                exit 1
+              fi
+              echo "Publish attempt ${attempt} failed. Retrying in ${delay}s."
+              sleep "$delay"
+              delay=$((delay * 3))
+            done
           fi
+      - name: Open or update a workflow-failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RUN_EVENT: ${{ github.event_name }}
+          RUN_REF: ${{ github.ref }}
+          RUN_SHA: ${{ github.sha }}
+        run: bash .github/scripts/open-workflow-failure-issue.sh

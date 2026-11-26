@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ofox Chat Completions 接入实测 | JXZNE AI</title>
-  <meta name="description" content="用脚本复现一次 Ofox Chat Completions 调用。当前状态文件是 unverified：准备页面时没有 OFOX_API_KEY，所以没有发起请求。">
+  <meta name="description" content="可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。">
   <link rel="canonical" href="https://jxzne.com/case-study.html">
   <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/case-study.html">
   <link rel="alternate" hreflang="en" href="https://jxzne.com/en/case-study.html">
@@ -14,12 +14,12 @@
   <meta property="og:site_name" content="JXZNE AI">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="Ofox Chat Completions 接入实测 | JXZNE AI">
-  <meta property="og:description" content="可复现的 Ofox Chat Completions 记录。没有真实调用之前，页面保持待实测。">
+  <meta property="og:description" content="可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。">
   <meta property="og:url" content="https://jxzne.com/case-study.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ofox Chat Completions 接入实测 | JXZNE AI">
-  <meta name="twitter:description" content="可复现的 Ofox Chat Completions 记录。没有真实调用之前，页面保持待实测。">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/case-study.html#webpage","url":"https://jxzne.com/case-study.html","name":"Ofox Chat Completions 接入实测","description":"可复现的 Ofox Chat Completions 记录。没有真实调用之前，页面保持待实测。","inLanguage":"zh-CN","dateModified":"2026-11-12","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"Ofox Chat Completions 接入实测","item":"https://jxzne.com/case-study.html"}]}]}</script>
+  <meta name="twitter:description" content="可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/case-study.html#webpage","url":"https://jxzne.com/case-study.html","name":"Ofox Chat Completions 接入实测","description":"可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。","inLanguage":"zh-CN","dateModified":"2026-11-26","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"Ofox Chat Completions 接入实测","item":"https://jxzne.com/case-study.html"}]}]}</script>
 </head>
 <body>
 <header class="nav">
@@ -38,8 +38,8 @@
   <section class="pricing-hub-hero">
     <span class="kicker">OFOX CHAT COMPLETIONS</span>
     <h1>一次可复现的接入记录</h1>
-    <p id="smoke-banner" class="smoke-banner is-pending">待实测。ofox-smoke-status.json 里没有已记录的认证 Chat Completions 调用。</p>
-    <p>本页只展示 <code>scripts/ofox-smoke.py</code> 写入 <a href="ofox-smoke-status.json">ofox-smoke-status.json</a> 的字段：模型、耗时、状态、时间。不写密钥，不写模型原文，也不把未跑过的请求说成已通过。</p>
+    <p id="smoke-banner" class="smoke-banner is-pending">待实测。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。</p>
+    <p>本页只展示 <code>scripts/ofox-smoke.py</code> 写入 <a href="ofox-smoke-status.json">ofox-smoke-status.json</a> 的字段：模型、耗时、状态、时间。不写密钥，不写模型原文。只有在一次调用被记录为成功之后，页面才会把它显示为通过。</p>
   </section>
   <section class="pricing-hub-section" id="smoke-result">
     <h2>当前记录</h2>
@@ -51,7 +51,7 @@
       <div><dt>httpStatus</dt><dd id="smoke-http">—</dd></div>
       <div><dt>timestamp</dt><dd id="smoke-timestamp">—</dd></div>
     </dl>
-    <p class="calc-note">准备本页时（2026-11-12）运行环境没有 <code>OFOX_API_KEY</code>。脚本因此没有请求 Ofox。上面的空值是未实测，不是一次失败或成功的结果。</p>
+    <p class="calc-note">认证调用尚未被记录为成功。在记录到一次成功之前，本页保持待实测。上面的空值不是一次成功结果。</p>
   </section>
   <section class="pricing-hub-section">
     <h2>脚本会调用什么</h2>
@@ -83,7 +83,7 @@ python3 scripts/ofox-smoke.py</code></pre>
     <ul>
       <li>Cursor 直接接入：Ofox 兼容性说明写明 Tab、Agent、Auto 不会走自定义供应商。<a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener">Cursor 兼容性说明</a>。本站不把它写成可用。</li>
       <li>Codex CLI 与 Claude Code：Ofox 有配置指南（<a href="https://ofox.ai/docs/integrations/codex" target="_blank" rel="noopener">Codex</a>、<a href="https://ofox.ai/docs/integrations/claude-code" target="_blank" rel="noopener">Claude Code</a>）。本脚本不启动这两个客户端，所以它们保持未验证。</li>
-      <li>没有用量、省钱比例、成交价或用户评价。延迟只在一次真实调用被记下来之后才出现在上面的表里。</li>
+      <li>没有用量、省钱比例、成交价或用户评价。延迟只在一次调用被记录为成功之后才出现在上面的表里。</li>
     </ul>
     <p><a href="validation.html">返回兼容性状态页</a></p>
     <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-outbound="affiliate">获取 Ofox API Key</a></p>

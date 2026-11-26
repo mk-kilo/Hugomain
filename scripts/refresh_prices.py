@@ -27,6 +27,10 @@ def records(x):
 def get(url):
  req=urllib.request.Request(url,headers={'User-Agent':'JXZNE-price-research/1.0 (public API; source attribution)','Accept':'application/json'})
  with urllib.request.urlopen(req,timeout=25) as r:return json.loads(r.read(5_000_000))
+def atomic_write(path,text):
+ tmp=path.with_name(path.name+'.tmp')
+ tmp.write_text(text,encoding='utf-8')
+ tmp.replace(path)
 def normalized(record,id,now):
  if not isinstance(record,dict):return None
  # Never publish demo, placeholder or explicitly unverified prices.
@@ -96,7 +100,10 @@ def main():
    print(id,'raw records:',len(raw),'valid monthly observations:',valid)
    if valid:worked+=1
    else:errors.append(id+': no validated monthly rows')
-  except (urllib.error.URLError,TimeoutError,ValueError,json.JSONDecodeError) as e:errors.append(id+': '+type(e).__name__)
+  except (urllib.error.URLError,TimeoutError,json.JSONDecodeError) as e:
+   # Leave pricing-snapshots.json and price-history untouched so a retried run cannot publish a partial scrape.
+   print(id,'fetch failed:',type(e).__name__,'- existing snapshot preserved')
+   return 1
   time.sleep(1.1)
  print('Validated products:',worked,'validated rows:',len(collected))
  print('Unavailable products:',', '.join(errors))
@@ -120,9 +127,11 @@ def main():
  output={'about':'Observed, attributed, monthly subscription prices. USD equivalents are not API rates or guaranteed quotes.','lastReviewed':today,'lastSuccessfulFetch':now,'automatedRows':len(collected),'dataProvider':'Subscription Price Monitor / OpenTheRank, CC BY 4.0 (per provider statement)','dataProviderUrl':'https://subpriced.com/api-docs','rows':rows}
  HISTORY.mkdir(exist_ok=True)
  snapshot=HISTORY/(today+'.json')
+ payload=json.dumps(output,ensure_ascii=False,indent=2)+'\n'
  # Daily snapshot is immutable for a day; preserve earlier runs and only use one snapshot per day.
- if not snapshot.exists():snapshot.write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n','utf-8')
- OUT.write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n','utf-8')
+ # Both files are replaced only after the full payload is written, so a crash cannot leave truncated JSON.
+ if not snapshot.exists():atomic_write(snapshot,payload)
+ atomic_write(OUT,payload)
  print('Updated',len(rows),'rows; immutable history',snapshot)
  return 0
 if __name__=='__main__':sys.exit(main())

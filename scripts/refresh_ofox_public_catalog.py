@@ -65,7 +65,10 @@ def main():
         "missing": [i for i in previous.get("requested", []) if i not in {x["id"] for x in selected}],
         "models": selected
     }
-    OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", "utf-8")
+    text = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+    temporary = OUTPUT.with_name(OUTPUT.name + ".tmp")
+    temporary.write_text(text, encoding="utf-8")
+    temporary.replace(OUTPUT)
     print("Saved", len(selected), "verified public rate pairs from", len(models), "catalog models")
 if __name__ == "__main__":
     main()
