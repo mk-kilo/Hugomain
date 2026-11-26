@@ -16,9 +16,13 @@ JXZNE AI 是一个面向开发者和小团队的 AI 模型聚合入口网站，�
 
 ## Ofox API 冒烟测试
 
-`scripts/ofox-smoke.py` 在环境变量 `OFOX_API_KEY` 非空时，向 `POST https://api.ofox.ai/v1/chat/completions` 发一次请求。默认模型是 `openai/gpt-5.4`。2026-11-12 的公开目录 `GET https://api.ofox.ai/v1/models` 包含这个 id，不包含 `openai/gpt-5.6`（目录里的 5.6 系列是 `openai/gpt-5.6-sol`、`openai/gpt-5.6-luna`、`openai/gpt-5.6-terra`）。Ofox 文档写明 `openai/gpt-5.4-pro` 和 Codex 系列只走 Responses API，所以这次冒烟不用它们。
+`scripts/ofox-smoke.py` 在环境变量 `OFOX_API_KEY` 非空时，各发一次请求：
 
-脚本把 `model`、`latencyMs`、`status`、`httpStatus`、`timestamp` 写入 `ofox-smoke-status.json`。不写入密钥，也不写入模型原文。没有 Key 时打印 `BLOCKED_NO_OFOX_API_KEY`，退出码 0，不改状态文件。当前仓库里的 `overall` 是 `unverified`：准备这次改动时环境里没有 Key，所以没有发起调用。不要手工把 `overall` 或 `status` 改成通过。
+- Chat Completions：`POST https://api.ofox.ai/v1/chat/completions`，`Authorization: Bearer`。默认模型是 `openai/gpt-5.4`。2026-11-12 的公开目录 `GET https://api.ofox.ai/v1/models` 包含这个 id，不包含 `openai/gpt-5.6`（目录里的 5.6 系列是 `openai/gpt-5.6-sol`、`openai/gpt-5.6-luna`、`openai/gpt-5.6-terra`）。Ofox 文档写明 `openai/gpt-5.4-pro` 和 Codex 系列只走 Responses API，所以 Chat Completions 不用它们。
+- Responses：`POST https://api.ofox.ai/v1/responses`，`Authorization: Bearer`，`max_output_tokens` 16。默认模型是 `qwen/qwen-flash`。2026-11-26 的公开目录里，这是 `supported_endpoints` 含 `/v1/responses` 的最低单价 id。
+- Anthropic Messages：`POST https://api.ofox.ai/anthropic/v1/messages`，请求头 `x-api-key` 和 `anthropic-version: 2023-06-01`，`max_tokens` 16。默认模型也是 `qwen/qwen-flash`。同一天的 `GET https://api.ofox.ai/anthropic/v1/models` 把它列为 Anthropic 协议可调用模型，并且单价最低。
+
+一次失败不会跳过另外两次，进程仍以 0 退出，工作流可以记下状态文件。脚本把每项的 `status`、`httpStatus`、`model`、`latencyMs`、`timestamp`、`passedAt`、`endpoint` 和一句事实写入 `ofox-smoke-status.json`。不写入密钥、请求头或模型原文。Chat Completions 失败会清掉自己的 `passedAt`。Responses 和 Messages 失败会留下上一次成功的 `passedAt`，但 `status` 记为 `failed`，页面因此保持未验证。没有 Key 时打印 `BLOCKED_NO_OFOX_API_KEY`，退出码 0，不改状态文件。不要手工把 `overall` 或 `status` 改成通过。
 
 脚本会去掉 Key 里的空白（含回车换行）以及明确列出的不可见粘贴字符（BOM、零宽空格等），再检查剩余内容能否放进 HTTP 头。带 `Bearer `、`Authorization:` 或 `x-api-key:` 前缀时不发请求。引号和其它标点不会被删掉，也不会做 Unicode 兼容转换。去掉这些字符修不了填错、已吊销或没配置的 Key。
 
@@ -31,7 +35,7 @@ JXZNE AI 是一个面向开发者和小团队的 AI 模型聚合入口网站，�
 1. 打开仓库 **Settings → Secrets and variables → Actions → New repository secret**。
 2. Name 填 `OFOX_API_KEY`。
 3. Value 填 Ofox 控制台里的原始 API Key。不要加 `Bearer ` 前缀，不要加引号。误粘贴的换行和空白由脚本去掉；Key 本身仍必须是控制台里的那一把。
-4. 打开 **Actions → Ofox chat completions smoke → Run workflow**。工作流也可在每周一 06:00 UTC 运行。
+4. 打开 **Actions → Ofox chat completions smoke → Run workflow**。工作流只在手动触发时运行。
 
 Secret 为空时工作流不请求 Ofox，也不提交状态文件。有 Key 且脚本改写了状态文件时，才会把 `ofox-smoke-status.json` 提交到 `main`。
 

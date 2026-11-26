@@ -353,8 +353,8 @@ function applySmoke(data) {
       if (detail) {
         const which = card.dataset.smoke === 'codex_cli' ? 'Codex CLI' : 'Claude Code';
         detail.textContent = t(
-          'Ofox 对应 API 冒烟于 ' + api.passedAt + ' 通过。' + which + ' 不在 tests/ofox_smoke.py 的覆盖范围内，客户端仍未验证。',
-          which + ' is outside tests/ofox_smoke.py, so the client stays unverified. The related API smoke passed at ' + api.passedAt + '.'
+          'Ofox 对应 API 冒烟于 ' + api.passedAt + ' 通过。' + which + ' 不在 scripts/ofox-smoke.py 的覆盖范围内，客户端仍未验证。',
+          which + ' is outside scripts/ofox-smoke.py, so the client stays unverified. The related API smoke passed at ' + api.passedAt + '.'
         );
       }
       return;
