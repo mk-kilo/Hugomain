@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI</title>
-  <meta name="description" content="Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。">
+  <meta name="description" content="Ofox 将 Cursor 直接接入标为不合适。Desktop 与 CC Switch 按 Ofox 官方说法转述。Codex CLI 与 Claude Code 本站仍未验证。">
   <link rel="canonical" href="https://jxzne.com/cursor-codex-third-party-api.html">
   <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/cursor-codex-third-party-api.html">
   <link rel="alternate" hreflang="en" href="https://jxzne.com/en/cursor-codex-third-party-api.html">
@@ -15,18 +15,19 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI">
-<meta property="og:description" content="Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。">
+<meta property="og:description" content="Ofox 将 Cursor 直接接入标为不合适。Desktop 与 CC Switch 按 Ofox 官方说法转述。Codex CLI 与 Claude Code 本站仍未验证。">
 <meta property="og:url" content="https://jxzne.com/cursor-codex-third-party-api.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI">
-<meta name="twitter:description" content="Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/cursor-codex-third-party-api.html#webpage","url":"https://jxzne.com/cursor-codex-third-party-api.html","name":"Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI","description":"Ofox 将 Cursor 直接接入标为不合适。Codex 与 Claude Code 有官方配置路径，但本站尚未验证。这里说明能做的下一步，不提供未测试的配置文件。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"Cursor 和 Codex 用不了第三方 API 怎么办","item":"https://jxzne.com/cursor-codex-third-party-api.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/cursor-codex-third-party-api.html#faq","url":"https://jxzne.com/cursor-codex-third-party-api.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"为什么充了 API 额度，Cursor Tab 还是不动？","acceptedAnswer":{"@type":"Answer","text":"Tab、Background Agent 和 Auto 按 Ofox 的说明不走自定义供应商。额度买的是 API 调用，不是这些编辑器功能。"}},{"@type":"Question","name":"能不能把一份 Ofox 的 Codex 配置直接贴进 config.toml？","acceptedAnswer":{"@type":"Answer","text":"本站不提供。协议、模型 id 和认证方式对不上就会报错。先读官方配置文档，再向 Ofox 确认他们当前写明支持的端点。"}},{"@type":"Question","name":"Claude Code 是不是已经测通了？","acceptedAnswer":{"@type":"Answer","text":"没有。验证页把它标成待验证。tests/ofox_smoke.py 不启动 Claude Code。需要 Anthropic 兼容网关，不能把只支持 OpenAI 的 /v1 填进 ANTHROPIC_BASE_URL。"}}]}]}</script>
+<meta name="twitter:description" content="Ofox 将 Cursor 直接接入标为不合适。Desktop 与 CC Switch 按 Ofox 官方说法转述。Codex CLI 与 Claude Code 本站仍未验证。">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/cursor-codex-third-party-api.html#webpage","url":"https://jxzne.com/cursor-codex-third-party-api.html","name":"Cursor 和 Codex 用不了第三方 API 怎么办 | JXZNE AI","description":"Ofox 将 Cursor 直接接入标为不合适。Desktop 与 CC Switch 按 Ofox 官方说法转述。Codex CLI 与 Claude Code 本站仍未验证。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"Cursor 和 Codex 用不了第三方 API 怎么办","item":"https://jxzne.com/cursor-codex-third-party-api.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/cursor-codex-third-party-api.html#faq","url":"https://jxzne.com/cursor-codex-third-party-api.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"为什么充了 API 额度，Cursor Tab 还是不动？","acceptedAnswer":{"@type":"Answer","text":"Tab、Background Agent 和 Auto 按 Ofox 的说明不走自定义供应商。额度买的是 API 调用，不是这些编辑器功能。"}},{"@type":"Question","name":"能不能把一份 Ofox 的 Codex 配置直接贴进 config.toml？","acceptedAnswer":{"@type":"Answer","text":"下一节转述 Ofox 写明的字段，包括 ~/.codex/config.toml 的 base_url https://api.ofox.ai/v1，以及 wire_api 的值 responses。本站没有运行 Codex CLI，所以仍是未验证。字段对不上就会报错。Ofox 还写明：仅凭一条回复，不能确定是哪一家供应商处理了这次请求；文本响应也不是工具兼容性测试。"}},{"@type":"Question","name":"Claude Code 是不是已经测通了？","acceptedAnswer":{"@type":"Answer","text":"没有，仍是未验证。tests/ofox_smoke.py 不启动 Claude Code。Ofox 把 Claude Code 写成客户端工具，基址是 https://api.ofox.ai/anthropic，认证变量是 ANTHROPIC_AUTH_TOKEN。只支持 OpenAI 的 /v1 不能填进 ANTHROPIC_BASE_URL。Ofox 的 Claude Code 文档写明：仅凭一条回复，不能确定是哪一家供应商处理了这次请求；文本响应也不是工具兼容性测试。"}}]}]}</script>
 </head>
 <body>
 <header class="nav">
   <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
   <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button><nav id="site-nav" class="nav-links">
     <a href="guides.html">配置教程</a>
+    <a href="#ofox-desktop">Desktop / CC Switch</a>
     <a href="validation.html">实测状态</a>
     <a href="compare-aggregators.html">聚合对比</a>
     <a href="developers.html">开发者 API</a>
@@ -42,7 +43,7 @@
   <section class="pricing-hub-hero">
     <span class="kicker">CURSOR · CODEX · THIRD-PARTY API</span>
     <h1>Cursor 和 Codex 用不了第三方 API 怎么办</h1>
-    <p>先分清是哪一个接不上。Cursor 的 Tab、Background Agent 和 Auto，Ofox 已经写明不会走自定义供应商。Codex 官方允许配置模型提供商，但“有一个 OpenAI 兼容的聊天接口”不等于 Codex 能用。本站没有一份可以复制即用的 Ofox 配置，也没有把这两项标成已验证。</p>
+    <p>先分清是哪一个接不上。Cursor 的 Tab、Background Agent 和 Auto，Ofox 已经写明不会走自定义供应商。Codex 官方允许配置模型提供商，但“有一个 OpenAI 兼容的聊天接口”不等于 Codex 能用。下面一节按 Ofox 官方说法转述 Desktop、CC Switch 和手工字段。本站没有运行 Codex CLI 或 Claude Code，这两项仍是未验证。</p>
     <div class="pricing-hub-actions">
       <a class="btn btn-primary" href="guides.html#cursor">从 Cursor 的限制读起 →</a>
       <a class="btn btn-secondary" href="validation.html">查看验证矩阵 →</a>
@@ -63,7 +64,7 @@
           <tr>
             <td>想在 Cursor 里用别的模型写代码</td>
             <td>Ofox 的建议是在 Cursor 内置终端运行 Codex CLI 或 Claude Code。这两项客户端本站仍未验证。买 API 额度也不会变成 Cursor 订阅。</td>
-            <td>先分别看 <a href="guides.html#codex">Codex</a> 和 <a href="guides.html#claude-code">Claude Code</a> 的配置条件，用小额调用做你自己的测试。本站不代发配置文件。</td>
+            <td>对照 <a href="#ofox-desktop">Ofox Desktop 与 CC Switch</a> 里转述的字段，再用自己的小额调用测试。Codex CLI 与 Claude Code 本站仍未验证。</td>
           </tr>
           <tr>
             <td>Codex 报 404、模型不存在，或工具调用失败</td>
@@ -96,6 +97,41 @@
     <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。API 余额不是 Cursor、Codex 或 Claude Code 的官方订阅。</p>
   </section>
 
+  <section class="pricing-hub-section" id="ofox-desktop">
+    <span class="kicker">OFOX 官方说法 · 查阅于 2026-11-26</span>
+    <h2>Ofox Desktop 与 CC Switch</h2>
+    <p>这一节只转述当天重新打开的 Ofox 页面。Codex CLI 和 Claude Code 在本站仍是未验证。<code>scripts/ofox-smoke.py</code> 和 <code>tests/ofox_smoke.py</code> 都不启动这两个客户端。Cursor 直接接入仍然不兼容，也不在 Desktop 的十个工具里。</p>
+
+    <h3>Ofox Desktop</h3>
+    <p><a href="https://ofox.ai/desktop" target="_blank" rel="noopener noreferrer">Ofox Desktop</a> 写的是：登录后选择已经安装的工具，点 Connect。Ofox 为每个选中的工具管理专用密钥，并写入该工具自己的接入设置。页面标题区点名 Claude Code、Codex、ChatGPT、OpenClaw，并说这些工具共用一个账户和一张账单。</p>
+    <p>兼容表在页面上标成 README · 1.5.0，同日打开的 <a href="https://github.com/ofoxai/ofox-desktop#compatibility" target="_blank" rel="noopener noreferrer">GitHub README</a> 也写「Supported in 1.5.0」。十个工具的一键接入都是勾：Claude Code、Codex、ChatGPT（Codex 模式）、OpenCode、Gemini CLI、OpenClaw、Hermes、WorkBuddy、DeepSeek Harness（dsh）、Pi。ChatGPT 这一行只覆盖 Codex 模式，和 Codex 共用配置与本地会话；普通 ChatGPT 云端对话不在这次接入里。</p>
+    <p>下载要求：macOS 12+、Apple Silicon，官方包已签名并公证；Windows 10/11 x64，安装包当前未签名，出现 SmartScreen 提示时先核对来源。同一页的 SoftwareApplication 结构化数据把 softwareVersion 写成 v1.5.3，和兼容表上的 1.5.0 是两个字段。Desktop 的下载表没有 Linux。应用本身免费，许可证是 MIT。模型、搜索和媒体按各自价格计费。</p>
+    <p>Codex 的桌面应用指南写明：Ofox Desktop 和 Codex Desktop 是两个应用。一次只用一种配置工具，避免设置被互相覆盖。装上配置工具本身，并不等于 API 已经接通。</p>
+
+    <h3>CC Switch</h3>
+    <p>Codex 与 Claude Code 的模型提供商指南都建议用 <a href="https://github.com/farion1231/cc-switch" target="_blank" rel="noopener noreferrer">CC Switch</a>，并同时给出 Ofox Desktop 作为更快的设置方式。macOS 安装命令是：</p>
+    <div class="snippet"><pre><code>brew install --cask cc-switch</code></pre></div>
+    <p>同一页还写了 macOS 的 .dmg、Windows 的 .msi，以及 Linux 的 deb、rpm、AppImage。CC Switch 的系统要求是 macOS 12+、Windows 10+、Ubuntu 22.04+ / Debian 11+ / Fedora 34+。</p>
+    <p>Codex 在 CC Switch 里切到 Codex 标签。请求地址是 <code>https://api.ofox.ai/v1</code>，末尾不加斜杠，API 格式选 OpenAI Compatible，并写入全局 <code>config.toml</code>。Claude Code 在这里只作为客户端工具：请求地址是 <code>https://api.ofox.ai/anthropic</code>，末尾不加斜杠，格式保持 Anthropic Messages (Native)，认证字段保持 <code>ANTHROPIC_AUTH_TOKEN</code>，CC Switch 写入 <code>~/.claude/settings.json</code>。通用 CC-Switch 页把另一处 API Base URL 写成 <code>https://api.ofox.ai/v1</code>；Claude Code 专页和集成说明写的是 <code>https://api.ofox.ai/anthropic</code>。按正在配置的客户端对照专页。</p>
+
+    <h3>手工字段，供对照</h3>
+    <p>Ofox 集成说明把 Codex 的文件写成 <code>~/.codex/config.toml</code>。下面把该说明里的提供商字段，和正文里的 <code>wire_api = "responses"</code> 放在一起。Codex 指南同样写明 CLI 使用 OpenAI Responses API，而且不是每个模型都支持这个格式。示例里的具体模型 id 没有照抄。Codex CLI 仍是未验证。</p>
+    <div class="snippet"><pre><code>model_provider = "ofoxai"
+
+[model_providers.ofoxai]
+name = "OfoxAI"
+base_url = "https://api.ofox.ai/v1"
+env_key = "OFOXAI_API_KEY"
+wire_api = "responses"</code></pre></div>
+    <p><code>env_key</code> 是环境变量名。密钥留在本机环境里，不写进公开页面。</p>
+    <p>同一份集成说明里的 Claude Code 环境变量，和 CC Switch 专页的请求地址、认证字段一致：</p>
+    <div class="snippet"><pre><code>export ANTHROPIC_BASE_URL=https://api.ofox.ai/anthropic
+export ANTHROPIC_AUTH_TOKEN=&lt;OFOXAI_API_KEY&gt;</code></pre></div>
+    <p>Claude Code 是 Anthropic 的编码客户端。这里不指定 Claude 模型。模型 id 以目录里该协议实际列出的为准。</p>
+    <div class="guide-warning"><strong>Ofox 自己的核对界限。</strong> Claude Code 文档写明：仅凭一条回复，不能确定是哪一家供应商处理了这次请求；如果需要工具调用，要在一次性项目里单独测试，文本响应不是工具兼容性测试。Codex Desktop 指南写的是：回复加上对得上的用量记录，只核对这条请求路径，并不能单独证明模型身份，也不能证明工具调用、图片输入或结构化输出。</div>
+    <p class="calc-note">来源（2026-11-26）：<a href="https://ofox.ai/desktop" target="_blank" rel="noopener noreferrer">Desktop</a> · <a href="https://github.com/ofoxai/ofox-desktop#compatibility" target="_blank" rel="noopener noreferrer">Desktop README</a> · <a href="https://ofox.ai/docs/integrations/codex" target="_blank" rel="noopener noreferrer">Codex</a> · <a href="https://ofox.ai/docs/integrations/codex/model-provider" target="_blank" rel="noopener noreferrer">Codex 提供商</a> · <a href="https://ofox.ai/docs/integrations/codex/desktop-app" target="_blank" rel="noopener noreferrer">Codex Desktop</a> · <a href="https://ofox.ai/docs/integrations/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a> · <a href="https://ofox.ai/docs/integrations/claude-code/model-provider" target="_blank" rel="noopener noreferrer">Claude Code 提供商</a> · <a href="https://ofox.ai/docs/integrations/cc-switch" target="_blank" rel="noopener noreferrer">CC-Switch</a> · <a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Cursor</a> · <a href="https://ofox.ai/llms-full.txt" target="_blank" rel="noopener noreferrer">llms-full.txt</a></p>
+  </section>
+
   <section class="pricing-hub-section dev-faq" id="faq">
     <h2>常见问题</h2>
     <details open>
@@ -104,11 +140,11 @@
     </details>
     <details>
       <summary>能不能把一份 Ofox 的 Codex 配置直接贴进 config.toml？</summary>
-      <p>本站不提供。协议、模型 id 和认证方式对不上就会报错。先读官方配置文档，再向 Ofox 确认他们当前写明支持的端点。</p>
+      <p>下一节转述 Ofox 写明的字段，包括 ~/.codex/config.toml 的 base_url https://api.ofox.ai/v1，以及 wire_api 的值 responses。本站没有运行 Codex CLI，所以仍是未验证。字段对不上就会报错。Ofox 还写明：仅凭一条回复，不能确定是哪一家供应商处理了这次请求；文本响应也不是工具兼容性测试。</p>
     </details>
     <details>
       <summary>Claude Code 是不是已经测通了？</summary>
-      <p>没有。验证页把它标成待验证。tests/ofox_smoke.py 不启动 Claude Code。需要 Anthropic 兼容网关，不能把只支持 OpenAI 的 /v1 填进 ANTHROPIC_BASE_URL。</p>
+      <p>没有，仍是未验证。tests/ofox_smoke.py 不启动 Claude Code。Ofox 把 Claude Code 写成客户端工具，基址是 https://api.ofox.ai/anthropic，认证变量是 ANTHROPIC_AUTH_TOKEN。只支持 OpenAI 的 /v1 不能填进 ANTHROPIC_BASE_URL。Ofox 的 Claude Code 文档写明：仅凭一条回复，不能确定是哪一家供应商处理了这次请求；文本响应也不是工具兼容性测试。</p>
     </details>
   </section>
 </main>
