@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>用 Cherry Studio、Chatbox 把 Ofox 对话留在本机 | JXZNE AI</title>
+  <meta name="description" content="Cherry Studio 与 Chatbox 的官方文档写了如何添加 OpenAI 兼容提供方，并把聊天记录存在本机。LobeChat 与 Open WebUI 是自建或浏览器里的另一条路。本站没有用这些客户端打通过 Ofox。">
+  <link rel="canonical" href="https://jxzne.com/ofox-chat-clients.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/ofox-chat-clients.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/ofox-chat-clients.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/ofox-chat-clients.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="用 Cherry Studio、Chatbox 把 Ofox 对话留在本机 | JXZNE AI">
+  <meta property="og:description" content="按各客户端官方文档填写 https://api.ofox.ai/v1，并把聊天记录留在本机或自建实例。本站没有用这些客户端打通过 Ofox。">
+  <meta property="og:url" content="https://jxzne.com/ofox-chat-clients.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="用 Cherry Studio、Chatbox 把 Ofox 对话留在本机 | JXZNE AI">
+  <meta name="twitter:description" content="按官方文档添加 OpenAI 兼容提供方。本站没有用这些客户端打通过 Ofox。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/ofox-chat-clients.html#webpage","url":"https://jxzne.com/ofox-chat-clients.html","name":"用 Cherry Studio、Chatbox 把 Ofox 对话留在本机 | JXZNE AI","description":"Cherry Studio 与 Chatbox 的官方文档写了如何添加 OpenAI 兼容提供方，并把聊天记录存在本机。","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"配置教程","item":"https://jxzne.com/guides.html"},{"@type":"ListItem","position":3,"name":"本地聊天客户端","item":"https://jxzne.com/ofox-chat-clients.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/ofox-chat-clients.html#faq","url":"https://jxzne.com/ofox-chat-clients.html","inLanguage":"zh-CN","mainEntity":[{"@type":"Question","name":"这些客户端是不是已经用 Ofox 测通？","acceptedAnswer":{"@type":"Answer","text":"不是。每一节只复述该客户端在 2026-11-26 仍能打开的官方文档或仓库说明。本站没有安装 Cherry Studio、Chatbox、LobeChat 或 Open WebUI 去调用 Ofox。"}},{"@type":"Question","name":"Cherry Studio 的 API Host 填哪一段？","acceptedAnswer":{"@type":"Answer","text":"Ofox 的 OpenAI 兼容根地址是 https://api.ofox.ai/v1，完整对话路径是 https://api.ofox.ai/v1/chat/completions。Cherry Studio 桌面文档写明程序会在根地址后接上 /v1/chat/completions，所以桌面 API Host 填 https://api.ofox.ai。手机文档的 Base URL 示例带 /v1，填 https://api.ofox.ai/v1。以字段下的路径预览为准，最终只保留一层 /v1。"}},{"@type":"Question","name":"401 和 402 分别表示什么？","acceptedAnswer":{"@type":"Answer","text":"Ofox 错误文档把 401 写成无效或缺失的 API Key。402 且错误码为 insufficient_credits 表示余额不足，充值后再试。同一个 402 若是 spending_limit_exceeded，表示团队、成员或密钥的支出上限已到，充值不能解开，需要提高上限或等周期重置。"}},{"@type":"Question","name":"聊天记录存在哪里？","acceptedAnswer":{"@type":"Answer","text":"Cherry Studio 写在本机的 CherryStudio 用户数据目录，并用设置里的数据备份保存。Chatbox 写在本机的 chatbox 目录，用设置里的数据管理导出 JSON。LobeChat 的部署文档写聊天记录在本地浏览器。Open WebUI 写在服务器的 webui.db，账户导出在设置的 Data Controls。"}},{"@type":"Question","name":"Cursor、Claude Code 和 Codex 能用同一套地址吗？","acceptedAnswer":{"@type":"Answer","text":"本页不写这三款编程工具。Ofox 把直接接入 Cursor 标为不合适。Codex 和 Claude Code 的客户端本站没有验证，而且它们要的协议不一定是 Chat Completions。不要从本页推断它们可以改同一个 base URL。"}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">菜单</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">Python / Node / curl</a>
+    <a href="guides.html">配置教程</a>
+    <a href="openai-api-errors.html">常见错误</a>
+    <a href="validation.html">实测状态</a>
+  </nav>
+  <nav class="lang-switch" aria-label="语言">
+    <a href="ofox-chat-clients.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">中文</a>
+    <a href="en/ofox-chat-clients.html" hreflang="en" lang="en">EN</a>
+  </nav>
+  <span class="nav-crosslink-row"><a class="nav-crosslink" href="https://tokenhubs.dev/?utm_source=jxzne" target="_blank" rel="noopener noreferrer">英文计算器 → tokenhubs.dev</a></span>
+</header>
+<div class="site-disclosure" role="note"><strong>推广说明：</strong>JXZNE AI 是独立运营的 Ofox 推荐推广网站，并非 Ofox 官方网站。通过本站 Ofox 专属链接注册或消费，本站可能获得佣金。模型价格、优惠及兼容性以服务商实际公布为准。</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">LOCAL CHAT</span>
+    <h1>把 Ofox 对话留在自己的客户端里</h1>
+    <p>这一页写的是会在本机或自建实例里保存对话的聊天客户端。Ofox 的 OpenAI 兼容根地址是 <code>https://api.ofox.ai/v1</code>，对话请求的完整路径是 <code>https://api.ofox.ai/v1/chat/completions</code>。密钥在 Ofox 控制台的 Settings → API Keys 里点 Create New Key 创建，只显示一次。Ofox 的错误说明要求保留 <code>sk-</code> 前缀；Ofox 自己的文章把示例密钥写成 <code>sk-of-</code> 开头。</p>
+    <p>下面的菜单名来自 2026-11-26 仍能打开的官方文档或仓库说明。中文安装包会翻译这些英文词，以你这一版界面为准。本站没有安装这些客户端去调用 Ofox，状态是待实测。Cursor、Claude Code、Codex 不在这张清单里。Ofox 把直接接入 Cursor 标为不合适。Codex 和 Claude Code 要的协议也不等于 Chat Completions，本站没有验证那两个客户端。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="models">
+    <h2>先核对模型 id</h2>
+    <p>模型 id 用公开目录里的完整字符串。2026-11-26 请求 <code>GET https://api.ofox.ai/v1/models</code> 时，目录里有 <code>openai/gpt-5.4</code>、<code>openai/gpt-5.4-mini</code> 和 <code>deepseek/deepseek-v4.1-flash</code>。目录会变。添加之前用 <a href="list-openai-models.html">同一条列表接口</a> 再对一次。短名字、你记得的旧名字，都不算这个 id。</p>
+    <div class="snippet"><div>四个客户端共用的值 · 不是已测通的会话<button class="copy-code" type="button" data-copy="shared-snippet">复制</button></div><pre id="shared-snippet"><code>API root: https://api.ofox.ai/v1
+Chat path: https://api.ofox.ai/v1/chat/completions
+API Key: YOUR_API_KEY
+Model IDs:
+  openai/gpt-5.4
+  openai/gpt-5.4-mini
+  deepseek/deepseek-v4.1-flash</code></pre></div>
+  </section>
+
+  <section class="pricing-hub-section" id="cherry-studio">
+    <h2>Cherry Studio</h2>
+    <p>桌面版的自定义提供方文档写的是：左侧点 Settings（齿轮），在设置页左侧选 Model Provider，在提供方列表底部点 + Add Provider，打开 Add Custom Provider。<a href="https://cherryai.com/docs/en/pre-basic/providers/zi-ding-yi-fu-wu-shang/" target="_blank" rel="noopener noreferrer">Cherry Studio 自定义提供方</a></p>
+    <ol class="step-list">
+      <li>Provider Name 填一个你认得的名字，例如 Ofox。API Key 填这把 Ofox 密钥。同一页的模型服务设置还写了另一种入口：在 API Key 栏点 Add API key，粘贴后点 Save and close。<a href="https://cherryai.com/docs/en/pre-basic/settings/providers/" target="_blank" rel="noopener noreferrer">模型服务设置</a></li>
+      <li>Endpoint settings 里填 OpenAI 的 API 根地址。Anthropic、Gemini 和图像地址留给别的协议；这一页只用 OpenAI 对话端点。字段下方会预览最终请求路径。</li>
+      <li>点 Add 保存。回到该提供方页面，打开右上角的启用开关。文档写明开关关掉时，模型不会出现在选择列表里。</li>
+      <li>在 Models 标题右侧点 Sync models，把要用的模型加进列表。也可以点旁边的 +，手工填 Model ID、Model Name 和 Group Name。Model ID 用目录里的完整 id，例如 <code>openai/gpt-5.4</code>。</li>
+      <li>点 API Key 右侧的 Model Check。文档写这次检查默认用模型列表里最后加入的对话模型。</li>
+    </ol>
+    <p>桌面文档对 API Host 的规则是：服务商若给出 <code>https://xxx.xxx.com/v1/chat/completions</code>，只填根地址 <code>https://xxx.xxx.com</code>，程序会接上 <code>/v1/chat/completions</code>。按这条规则，Ofox 的桌面 API Host 填 <code>https://api.ofox.ai</code>。地址以 <code>/</code> 结尾时，程序只接 <code>chat/completions</code>，所以 <code>https://api.ofox.ai/v1/</code> 也会落到同一条路径。地址以 <code>#</code> 结尾时，程序按你输入的地址原样请求，可写成 <code>https://api.ofox.ai/v1/chat/completions#</code>。看字段下的预览，最终路径应正好是 <code>https://api.ofox.ai/v1/chat/completions</code>。</p>
+    <p>手机文档是另一套字段。路径是 Settings → Model service，点 add，选 Custom provider，API 格式选 OpenAI，Base URL 按文档示例写成带 <code>/v1</code> 的根地址，也就是 <code>https://api.ofox.ai/v1</code>，不要再写 <code>/chat/completions</code>。然后抓取或手工加入模型 id，确认提供方已启用，再对一个文本模型做连接检查。手机文档还写明一个密钥一条记录，不要把多把密钥粘进同一个输入框。<a href="https://cherryai.com/docs/en/mobile/providers-and-models/" target="_blank" rel="noopener noreferrer">Cherry Studio 手机文档</a></p>
+    <div class="snippet"><div>Cherry Studio · 按当前文档拆开的地址<button class="copy-code" type="button" data-copy="cherry-snippet">复制</button></div><pre id="cherry-snippet"><code>Provider Name: Ofox
+API Key: YOUR_API_KEY
+Desktop API Host: https://api.ofox.ai
+Mobile Base URL: https://api.ofox.ai/v1
+Model ID: openai/gpt-5.4</code></pre></div>
+    <p><strong>聊天记录和备份</strong></p>
+    <p>数据在本机用户目录。文档给出的默认位置是：macOS <code>/Users/用户名/Library/Application Support/CherryStudio</code>，Windows <code>C:\Users\用户名\AppData\Roaming\CherryStudio</code>，Linux <code>/home/用户名/.config/CherryStudio</code>。Settings → Data → Data Directory 里的 App Data 一行显示实际路径，Open Directory 会打开它。<a href="https://cherryai.com/docs/en/pre-basic/personalization-settings/storage/" target="_blank" rel="noopener noreferrer">存储位置</a></p>
+    <p>备份在 Settings → Data。文档写的完整备份包含对话和话题、助手、知识库、附件、偏好，以及提供方配置；API 密钥也在备份里。Lite backup 打开后会跳过图片和知识库等数据文件，保留聊天记录和设置。可以随时点 Backup，也可以打开按间隔运行的自动备份。本地备份是另选一个文件夹；跨电脑可以用 WebDAV 或 S3 兼容存储，在一台机器备份、在另一台恢复。备份文件含密钥，不要发给别人，也不要放到不受信任的共享盘。<a href="https://cherryai.com/docs/en/pre-basic/data-settings/" target="_blank" rel="noopener noreferrer">数据设置</a></p>
+  </section>
+
+  <section class="pricing-hub-section" id="chatbox">
+    <h2>Chatbox</h2>
+    <p>Chatbox 文档仓库里的模型配置是这八步。英文文档站的同页用的是对应英文名：settings、Model Provider、Add、OpenAI API compatible、API Key、API Host、Check。<a href="https://github.com/chatboxai/chatbox-docs/blob/main/guides/providers/README.md" target="_blank" rel="noopener noreferrer">中文说明</a> · <a href="https://docs.chatboxai.app/en/guides/providers" target="_blank" rel="noopener noreferrer">英文说明</a></p>
+    <ol class="step-list">
+      <li>打开 Chatbox，点侧边栏的设置按钮。</li>
+      <li>点「模型提供方」。列表里没有 Ofox 时，点底部的「添加」。</li>
+      <li>填写 API 提供方名称。类型选「OpenAI API兼容」。Gemini 用的是另一项，这一页不选它。</li>
+      <li>填写 API 密钥和 API 主机。API 路径文档写的是一般不用填，默认为 <code>/v1/chat/completions</code>。</li>
+      <li>至少添加一个模型。能力勾选是可选的；不勾选时，文档把该模型当作纯文本模型。模型 id 用目录里的完整字符串，例如 <code>openai/gpt-5.4</code>。</li>
+      <li>保存后点「检查」。文档写成功时会提示连接成功。回到首页新建对话再发一条消息。</li>
+    </ol>
+    <p>Ofox 的对话地址是 <code>https://api.ofox.ai/v1/chat/completions</code>。文档默认路径已经含有 <code>/v1/chat/completions</code>，所以 API 主机填 <code>https://api.ofox.ai</code>，由这条默认路径补上后半段。如果你这一版的路径栏显示的是 <code>/chat/completions</code>，主机改成 <code>https://api.ofox.ai/v1</code>。两种拼法的目标都是只出现一层 <code>/v1</code>。</p>
+    <div class="snippet"><div>Chatbox · 文档默认路径<button class="copy-code" type="button" data-copy="chatbox-snippet">复制</button></div><pre id="chatbox-snippet"><code>API 提供方名称: Ofox
+类型: OpenAI API兼容
+API 密钥: YOUR_API_KEY
+API 主机: https://api.ofox.ai
+API 路径: /v1/chat/completions
+模型: openai/gpt-5.4</code></pre></div>
+    <p><strong>聊天记录和备份</strong></p>
+    <p>Chatbox 的用户指南写明：聊天记录在本地设备，不会上传到 Chatbox 的服务器。桌面路径是 Windows <code>%APPDATA%\chatbox\</code>，macOS <code>~/Library/Application Support/chatbox/</code>，Linux <code>~/.config/chatbox/</code>。iOS 在应用沙盒内，Android 在应用私有存储。指南同时写明，使用第三方 API 时，发出去的消息会到达你填写的那家服务；本机留档不等于请求不离开这台设备。</p>
+    <p>导出路径是设置 → 数据管理 →「导出数据」。JSON 是指南里用于备份和恢复的完整数据，Markdown 用于阅读和归档。Android 上文件会保存到 <code>Documents/chatbox_ai_exports</code>。恢复是在新设备进入同一页，选「导入数据」，再选先前的 JSON。指南写明目前没有自动的多设备同步，Chatbox 的服务器也不能把丢失的本地记录找回来。换机时先在旧设备导出 JSON。<a href="https://chatboxai.app/zh/guide/faq/data-storage" target="_blank" rel="noopener noreferrer">数据存储（中文）</a> · <a href="https://chatboxai.app/en/guide/faq/data-storage" target="_blank" rel="noopener noreferrer">Data storage</a></p>
+  </section>
+
+  <aside class="context-cta"><h2>密钥属于这个根地址</h2><p>Ofox 的 <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions 文档</a>把根地址写成 <code>https://api.ofox.ai/v1</code>。<a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">计费说明</a>写的是按量付费：按实际用量结算，没有月费套餐。上面的客户端都要求一把属于这个根地址的密钥。本站没有记录一次已通过的付费调用。</p><p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="zh-chat-clients-mid" data-cta-position="mid-article" data-outbound="affiliate">获取 Ofox API Key</a> <span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p></aside>
+
+  <section class="pricing-hub-section" id="lobechat">
+    <h2>LobeChat</h2>
+    <p>LobeHub 的 OpenAI 说明写的是：打开 App Settings → AI Providers，选中 OpenAI 并启用。填入 API key；如果用的是代理或兼容端点，再填它的 proxy URL。点 Check 做连接检查，然后启用要用的模型，在 Agent 设置里选中。<a href="https://lobehub.com/docs/usage/providers/openai" target="_blank" rel="noopener noreferrer">LobeHub OpenAI 说明</a></p>
+    <p>自建时，环境变量 <code>OPENAI_PROXY_URL</code> 覆盖默认的 <code>https://api.openai.com/v1</code>。同一页写明有的服务会自己补 <code>/v1</code>，有的不会；测试时若回复是空的，给地址加上 <code>/v1</code> 再试。Ofox 文档中的根地址带 <code>/v1</code>，所以这里填 <code>https://api.ofox.ai/v1</code>，并配 <code>OPENAI_API_KEY</code>。模型列表用 <code>OPENAI_MODEL_LIST</code>，加号表示加入一个 id，多项用英文逗号分隔，例如 <code>+openai/gpt-5.4,+deepseek/deepseek-v4.1-flash</code>。<a href="https://lobehub.com/docs/self-hosting/environment-variables/model-provider" target="_blank" rel="noopener noreferrer">模型提供方环境变量</a></p>
+    <p>部署文档写明：LobeHub 的聊天记录存在本地浏览器里，重新部署 Docker 不会清掉浏览器里的记录。<a href="https://lobehub.com/docs/self-hosting/advanced/upstream-sync" target="_blank" rel="noopener noreferrer">上游同步说明</a>这次没有找到一份写明导出按钮名称的官方页，所以这里不写导出菜单。要留档，就保留这份浏览器数据；清掉该站点的网站数据，记录会一起消失。</p>
+  </section>
+
+  <section class="pricing-hub-section" id="open-webui">
+    <h2>Open WebUI</h2>
+    <p>Open WebUI 的 OpenAI 兼容说明写的是：Settings → Connections（管理员区域）里的 Manage OpenAI API Connections，点 Add Connection。URL 填服务商的接口根地址，再填 API Key，然后 Save。Verify Connection 会用 Bearer 令牌请求该地址的 <code>/models</code>。保存本身不测试连接。自动发现不可用时，在 Model IDs 里输入模型 id 并点 +。<a href="https://docs.openwebui.com/getting-started/quick-start/connect-a-provider/starting-with-openai-compatible" target="_blank" rel="noopener noreferrer">Open WebUI 文档</a></p>
+    <div class="snippet"><div>Open WebUI 连接字段<button class="copy-code" type="button" data-copy="webui-snippet">复制</button></div><pre id="webui-snippet"><code>URL: https://api.ofox.ai/v1
+API Key: YOUR_API_KEY
+Model ID: openai/gpt-5.4</code></pre></div>
+    <p>历史在这套实例的数据库 <code>webui.db</code> 里，侧边栏会列出已保存的对话；登录同一实例的设备看到的是同一份记录。<a href="https://docs.openwebui.com/features/chat-conversations/chat-features/history-search/" target="_blank" rel="noopener noreferrer">历史说明</a>账户级导出是：点左下角头像或名字，选 Settings，打开 Data Controls，点 Export Chats，下载全部对话的 JSON。导入用同一页的 Import Chats。单条对话可以从聊天菜单下载；整份历史的导出格式是 JSON。<a href="https://docs.openwebui.com/features/chat-conversations/data-controls/import-export" target="_blank" rel="noopener noreferrer">导入与导出</a>服务器级备份看他们的数据库维护说明，文件在实例的数据目录里。<a href="https://docs.openwebui.com/tutorials/maintenance/database" target="_blank" rel="noopener noreferrer">数据库导出</a></p>
+  </section>
+
+  <section class="pricing-hub-section" id="troubleshoot">
+    <h2>连接失败时先看状态码</h2>
+    <p>状态码以下面 Ofox 的错误说明为准，查阅于 2026-11-26。<a href="https://ofox.ai/docs/develop/guides/error-handling" target="_blank" rel="noopener noreferrer">Ofox 错误处理</a>更长的对照在 <a href="openai-api-errors.html">OpenAI 兼容 API 常见错误</a>。</p>
+    <ol class="step-list">
+      <li><strong>401</strong> 是无效或缺失的 API Key，错误码 <code>invalid_api_key</code>。核对有没有多复制空格或换行，密钥有没有被禁用，以及粘贴的是不是这把 Ofox 密钥。发给 <code>api.openai.com</code> 的密钥不能调用 <code>api.ofox.ai</code>。Ofox 写明这个状态不要靠重试解决。</li>
+      <li><strong>402</strong> 且错误码为 <code>insufficient_credits</code> 表示余额不足。在 Ofox 控制台充值后再发。同一个 402 若是 <code>spending_limit_exceeded</code>，表示团队、成员或这把密钥的支出上限已到；文档写明充值不能解开，需要提高上限，或等到每日、每月周期重置。</li>
+      <li><strong>根地址少了 <code>/v1</code>，或写了两层 <code>/v1</code></strong>。客户端有的自己补 <code>/v1/chat/completions</code>，有的把默认路径设成 <code>/v1/chat/completions</code>。最终请求应正好是 <code>https://api.ofox.ai/v1/chat/completions</code>。路径不对时，常见结果是 404。</li>
+      <li><strong>模型找不到</strong>。Ofox 把 404、<code>not_found_error</code> 写成模型或资源不存在。把客户端里的 id 和 <code>GET https://api.ofox.ai/v1/models</code> 的 <code>id</code> 字段逐字对比。密钥不允许该模型时是另一个码：403、<code>model_not_allowed</code>，到控制台改这把密钥允许的模型。</li>
+    </ol>
+  </section>
+
+  <section class="pricing-hub-section" id="keys">
+    <h2>密钥怎么放才安全</h2>
+    <ol class="step-list">
+      <li>Ofox 写明密钥只在创建时显示一次。丢了就新建一把，而不是把旧密钥贴进聊天、工单或截图去找人恢复。</li>
+      <li>示例里只出现 <code>YOUR_API_KEY</code>。不要把真实密钥写进 Git、网页、本站表单，或和别人共享的备份。</li>
+      <li>Cherry Studio 的完整备份包含提供方配置和 API 密钥。Chatbox 把 API 密钥存在本机。谁能打开那台设备或那份备份，谁就能使用这把密钥。</li>
+      <li>Ofox 的密钥说明建议用不同密钥区分项目，并在密钥菜单里用 IP Whitelist 限制来源。文档还建议定期轮换，他们写的间隔是 90 天。<a href="https://ofox.ai/docs/develop/authentication" target="_blank" rel="noopener noreferrer">密钥说明</a></li>
+    </ol>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>常见问题</h2>
+    <details open>
+      <summary>这些客户端是不是已经用 Ofox 测通？</summary>
+      <p>不是。每一节只复述该客户端在 2026-11-26 仍能打开的官方文档或仓库说明。本站没有安装 Cherry Studio、Chatbox、LobeChat 或 Open WebUI 去调用 Ofox。</p>
+    </details>
+    <details>
+      <summary>Cherry Studio 的 API Host 填哪一段？</summary>
+      <p>Ofox 的根地址是 <code>https://api.ofox.ai/v1</code>。桌面文档写明程序会接上 <code>/v1/chat/completions</code>，所以桌面 API Host 填 <code>https://api.ofox.ai</code>。手机文档的 Base URL 示例带 <code>/v1</code>，填 <code>https://api.ofox.ai/v1</code>。以路径预览为准，最终只保留一层 <code>/v1</code>。</p>
+    </details>
+    <details>
+      <summary>401 和 402 分别表示什么？</summary>
+      <p>401 是无效或缺失的 API Key。402 且错误码为 <code>insufficient_credits</code> 表示余额不足。同一个 402 若是 <code>spending_limit_exceeded</code>，表示支出上限已到，充值不能解开。</p>
+    </details>
+    <details>
+      <summary>聊天记录存在哪里？</summary>
+      <p>Cherry Studio 在本机的 CherryStudio 目录，备份在 Settings → Data。Chatbox 在本机的 chatbox 目录，导出在设置 → 数据管理。LobeChat 的部署文档写记录在本地浏览器。Open WebUI 在服务器的 <code>webui.db</code>，账户导出在 Settings → Data Controls → Export Chats。</p>
+    </details>
+    <details>
+      <summary>Cursor、Claude Code 和 Codex 能用同一套地址吗？</summary>
+      <p>本页不写这三款编程工具。Ofox 把直接接入 Cursor 标为不合适。Codex 和 Claude Code 的客户端本站没有验证，而且它们要的协议不一定是 Chat Completions。边界在 <a href="guides.html">配置教程</a> 和 <a href="cursor-codex-third-party-api.html">Cursor / Codex 接不上时</a>。</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">相关页面：<a href="guides.html">配置教程</a> · <a href="openai-compatible-base-url.html">其他工具的 Base URL</a> · <a href="openai-compatible-api.html">Python / Node / curl</a> · <a href="list-openai-models.html">核对模型 id</a> · <a href="openai-api-errors.html">401 / 404 / 429 / 超时</a></p>
+    <h2>先有密钥，再往客户端里填</h2>
+    <p>上面的字段都要求一把属于 <code>https://api.ofox.ai/v1</code> 的密钥。开户在 Ofox 完成。</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">获取 Ofox API Key</a><span class="affiliate-disclosure">本站是 Ofox 联盟推广站，通过链接注册可能获得佣金</span></p>
+    <p class="affiliate-note">赞助披露：这是 Ofox 联盟／推荐链接。符合条件的注册或消费可能为 JXZNE 带来佣金。某客户端的文档允许自定义地址，不等于该客户端与 Ofox 的组合已经测通。</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · 文档路径，待实测</p><a href="en/ofox-chat-clients.html" hreflang="en" lang="en">English</a> · <a href="/">首页</a></footer>
+<script>try{if(new URLSearchParams(location.search).get("lang")==="zh")localStorage.setItem("jxzne-locale","zh-CN")}catch(e){}</script>
+<script src="assets/analytics-config.js"></script>
+<script src="assets/analytics.js"></script>
+</body>
+</html>
