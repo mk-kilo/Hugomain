@@ -1,6 +1,6 @@
-/* Reads /ofox-smoke-status.json and prints only what that file supports.
-   Unverified, or a null latencyMs or timestamp, stays "not yet verified"
-   with no invented latency or time. */
+/* Reads /ofox-smoke-status.json. A non-success stays "not yet verified".
+   Latency and time are shown only after a call is recorded as successful.
+   Does not render httpStatus, note, or detail. */
 (function () {
   var nodes = document.querySelectorAll("[data-api-status]");
   if (!nodes.length) return;
@@ -35,12 +35,15 @@
       var overall = data && data.overall;
       var latency = data ? data.latencyMs : null;
       var timestamp = data ? data.timestamp : null;
+      var code = data && data.httpStatus != null ? Number(data.httpStatus) : null;
       var verified = data &&
-        status &&
-        status !== "unverified" &&
+        status === "passed" &&
+        overall &&
         overall !== "unverified" &&
+        overall !== "failed" &&
         latency != null &&
-        timestamp != null;
+        timestamp != null &&
+        (code == null || (code >= 200 && code < 300));
       nodes.forEach(function (node) {
         if (!verified) {
           showUnverified(node);
