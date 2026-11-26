@@ -29,6 +29,21 @@
     return "model-id-" + index + "-" + String(id).replace(/[^a-zA-Z0-9_-]/g, "-");
   }
 
+  function sisterCampaign() {
+    var parts = location.pathname.split("/").filter(Boolean);
+    if (parts[0] === "en") parts.shift();
+    var cleaned = parts.map(function (part) { return part.replace(/\.html$/, ""); }).filter(Boolean);
+    if (!cleaned.length || cleaned[cleaned.length - 1] === "index") return "home";
+    if (cleaned.length >= 2 && cleaned[0] === "ai-pricing") return "ai-pricing-" + cleaned[cleaned.length - 1];
+    return cleaned[cleaned.length - 1];
+  }
+
+  function sisterHref(modelId) {
+    var params = ["utm_source=jxzne", "utm_medium=referral", "utm_campaign=" + encodeURIComponent(sisterCampaign())];
+    if (modelId) params.unshift("model=" + encodeURIComponent(modelId));
+    return "https://tokenhubs.dev/?" + params.join("&");
+  }
+
   function render() {
     if (!list) return;
     var query = search ? String(search.value || "").trim().toLowerCase() : "";
@@ -56,7 +71,13 @@
       button.className = "copy-code";
       button.setAttribute("data-copy", domId);
       button.textContent = zh ? "复制" : "Copy";
-      item.append(idNode, meta, button);
+      var estimate = document.createElement("a");
+      estimate.className = "row-estimate";
+      estimate.href = sisterHref(model.id);
+      estimate.target = "_blank";
+      estimate.rel = "noopener";
+      estimate.textContent = zh ? "算成本" : "Estimate";
+      item.append(idNode, meta, estimate, button);
       list.appendChild(item);
     });
     var summary = zh

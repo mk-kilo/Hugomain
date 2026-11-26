@@ -110,3 +110,11 @@ a.nav-crosslink:hover{color:#fff}
   .nav-crosslink-row{order:9;justify-content:flex-start}
   a.nav-crosslink{white-space:normal}
 }
+
+/* Sister calculator on tokenhubs.dev. Compact so it sits with the existing price modules. */
+.sister-cta{margin:28px 0 8px;padding:14px 16px;border:1px solid #3d4e70;border-radius:14px;background:#121c2e}
+.sister-cta p{margin:0;font-size:14px;line-height:1.6}
+.sister-cta a{color:#9dd9ff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+a.row-estimate{margin-left:8px;color:#9dd9ff;font-size:12px;font-weight:650;white-space:nowrap;text-decoration:underline;text-underline-offset:2px}
+footer a.sister-footer{color:#9ecfff}
+.model-id-row a.row-estimate{flex:0 0 auto;margin-left:0}
