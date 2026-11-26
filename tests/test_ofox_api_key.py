@@ -73,6 +73,8 @@ class OfoxApiKeyTests(unittest.TestCase):
                 "OFOX_SMOKE_STATUS_PATH": str(self.status_file),
                 "OFOX_API_KEY": "",
                 "OFOX_CHAT_MODEL": "",
+                "OFOX_RESPONSES_MODEL": "",
+                "OFOX_ANTHROPIC_MODEL": "",
                 "GITHUB_ACTIONS": "",
             },
         )
@@ -272,20 +274,33 @@ class OfoxApiKeyTests(unittest.TestCase):
             self.assert_absent(out, "Bearer" + self.clean, label)
 
     def _accept(self, body):
+        self.requests = []
+        bodies = {
+            mod.ENDPOINT: body,
+            mod.RESPONSES_ENDPOINT: b'{"output":[{"type":"message","content":[{"type":"output_text","text":"OK"}]}]}',
+            mod.ANTHROPIC_ENDPOINT: b'{"content":[{"type":"text","text":"OK"}]}',
+        }
+
         def _urlopen(request, timeout=None):
+            self.requests.append((request, timeout))
             self.captured = request
             self.captured_timeout = timeout
-            return FakeResponse(200, body)
+            payload = bodies.get(request.full_url)
+            if payload is None:
+                raise AssertionError("unexpected url")
+            return FakeResponse(200, payload)
+
         self.urlopen_mock.side_effect = _urlopen
 
     def assert_request_uses(self, token):
-        request = self.captured
+        matches = [item for item in self.requests if item[0].full_url == mod.ENDPOINT]
+        if len(matches) != 1:
+            raise AssertionError("chat request count")
+        request, timeout = matches[0]
         auth = request.headers.get("Authorization")
         if auth != "Bearer " + token:
             raise AssertionError("Authorization header mismatch")
-        if request.full_url != mod.ENDPOINT:
-            raise AssertionError("endpoint changed")
-        if self.captured_timeout != 45:
+        if timeout != 45:
             raise AssertionError("timeout changed")
         self.assert_absent(request.data or b"", token)
         self.assert_absent(request.data or b"", self.clean)
@@ -298,7 +313,7 @@ class OfoxApiKeyTests(unittest.TestCase):
         code, out, err = self.run_main()
         if code != 0:
             raise AssertionError("success exit")
-        if self.urlopen_mock.call_count != 1:
+        if self.urlopen_mock.call_count != 3:
             raise AssertionError("urlopen call count")
         self.assert_request_uses(self.clean)
         if "::add-mask::" in out:
@@ -359,6 +374,8 @@ class OfoxApiKeyTests(unittest.TestCase):
         code, out, err = self.run_main()
         if code != 0:
             raise AssertionError("value error exit")
+        if self.urlopen_mock.call_count != 3:
+            raise AssertionError("value error did not attempt every check")
         text = self.status_file.read_text(encoding="utf-8")
         self.assert_absent(out, self.clean)
         self.assert_absent(err, self.clean)
@@ -380,10 +397,13 @@ class OfoxApiKeyTests(unittest.TestCase):
                 io.BytesIO(b"echo " + auth.encode("utf-8")),
             )
 
+        self.urlopen_mock.reset_mock()
         self.urlopen_mock.side_effect = raise_http_error
         code, out, err = self.run_main()
         if code != 0:
             raise AssertionError("http error exit")
+        if self.urlopen_mock.call_count != 3:
+            raise AssertionError("http error did not attempt every check")
         text = self.status_file.read_text(encoding="utf-8")
         self.assert_absent(out, self.clean)
         self.assert_absent(err, self.clean)
@@ -441,8 +461,217 @@ class OfoxApiKeyTests(unittest.TestCase):
             raise AssertionError("smoke entrypoint missing")
         if "tests/ofox_smoke.py" in workflow or "workflow_call" in workflow:
             raise AssertionError("workflow broadened")
-        if 'cron: "0 6 * * 1"' not in workflow or "workflow_dispatch:" not in workflow:
-            raise AssertionError("workflow triggers changed")
+        if "workflow_dispatch:" not in workflow:
+            raise AssertionError("workflow_dispatch missing")
+        if "schedule:" in workflow or "cron:" in workflow:
+            raise AssertionError("scheduled smoke run was reintroduced")
+
+    def test_three_protocol_calls_record_a_pass_without_the_key(self):
+        os.environ["OFOX_API_KEY"] = self.clean
+        self._accept(b'{"choices":[{"message":{"content":" OK "}}]}')
+        code, out, err = self.run_main()
+        if code != 0:
+            raise AssertionError("protocol exit")
+        urls = [item[0].full_url for item in self.requests]
+        self.assert_same(
+            urls,
+            [mod.ENDPOINT, mod.RESPONSES_ENDPOINT, mod.ANTHROPIC_ENDPOINT],
+            "call order",
+        )
+        chat, responses, messages = [item[0] for item in self.requests]
+        if chat.headers.get("Authorization") != "Bearer " + self.clean:
+            raise AssertionError("chat auth")
+        if responses.headers.get("Authorization") != "Bearer " + self.clean:
+            raise AssertionError("responses auth")
+        if responses.headers.get("X-api-key") not in (None, ""):
+            raise AssertionError("responses sent x-api-key")
+        if messages.headers.get("X-api-key") != self.clean:
+            raise AssertionError("messages key header")
+        if messages.headers.get("Anthropic-version") != mod.ANTHROPIC_VERSION:
+            raise AssertionError("anthropic version")
+        if messages.headers.get("Authorization"):
+            raise AssertionError("messages sent Authorization")
+        for request, _timeout in self.requests:
+            self.assert_absent(request.data or b"", self.clean)
+            self.assert_absent(request.full_url, self.clean)
+            if _timeout != 45:
+                raise AssertionError("timeout")
+        self.assert_same(json.loads(chat.data.decode())["model"], "openai/gpt-5.4", "chat model")
+        self.assert_same(json.loads(chat.data.decode())["max_tokens"], 16, "chat tokens")
+        responses_body = json.loads(responses.data.decode())
+        self.assert_same(responses_body["model"], "qwen/qwen-flash", "responses model")
+        self.assert_same(responses_body["max_output_tokens"], 16, "responses tokens")
+        self.assert_same(responses_body["input"], "Reply with OK only.", "responses input")
+        messages_body = json.loads(messages.data.decode())
+        self.assert_same(messages_body["model"], "qwen/qwen-flash", "messages model")
+        self.assert_same(messages_body["max_tokens"], 16, "messages tokens")
+        text = self.status_file.read_text(encoding="utf-8")
+        self.assert_absent(text, self.clean)
+        self.assert_absent(out, self.clean)
+        self.assert_absent(err, self.clean)
+        if "balance" in text.lower() or "payment" in text.lower() or '"httpStatus": 402' in text:
+            raise AssertionError("blocked label stored")
+        status = json.loads(text)
+        if status["overall"] != "passed" or status["status"] != "passed" or status["httpStatus"] != 200:
+            raise AssertionError("top level chat record")
+        expected = (
+            ("chat_completions", "openai/gpt-5.4", "POST " + mod.ENDPOINT, "One Chat Completions call returned message content."),
+            ("openai_responses", "qwen/qwen-flash", "POST " + mod.RESPONSES_ENDPOINT, "One Responses call returned output text."),
+            ("anthropic_messages", "qwen/qwen-flash", "POST " + mod.ANTHROPIC_ENDPOINT, "One Messages call returned text."),
+        )
+        for name, model, endpoint, detail in expected:
+            check = status["checks"][name]
+            if check["status"] != "passed" or check["httpStatus"] != 200 or check["model"] != model:
+                raise AssertionError(name)
+            if check["endpoint"] != endpoint or check["detail"] != detail:
+                raise AssertionError(name + " endpoint or detail")
+            if not isinstance(check["latencyMs"], int) or check["passedAt"] != check["timestamp"]:
+                raise AssertionError(name + " timing")
+        if status["checks"]["codex_cli"]["status"] != "unverified" or status["checks"]["codex_cli"].get("passedAt") is not None:
+            raise AssertionError("codex")
+        if status["checks"]["claude_code"]["status"] != "unverified":
+            raise AssertionError("claude code")
+        if status["checks"]["cursor_direct"] != mod.CURSOR_CHECK:
+            raise AssertionError("cursor")
+
+    def test_one_failed_check_still_runs_the_others(self):
+        os.environ["OFOX_API_KEY"] = self.clean
+        self.status_file.write_text(json.dumps({
+            "schema": 2,
+            "catalogChecked": "2026-11-12",
+            "checks": {
+                "chat_completions": {"status": "passed", "passedAt": "2026-01-01T00:00:00+00:00"},
+                "openai_responses": {"status": "passed", "passedAt": "2026-02-02T00:00:00+00:00"},
+                "anthropic_messages": {"status": "passed", "passedAt": "2026-03-03T00:00:00+00:00"},
+            },
+        }), encoding="utf-8")
+
+        def _urlopen(request, timeout=None):
+            self.requests.append((request, timeout))
+            url = request.full_url
+            if url == mod.RESPONSES_ENDPOINT:
+                return FakeResponse(200, b'{"output":[]}')
+            if url == mod.ANTHROPIC_ENDPOINT:
+                raise mod.urllib.error.HTTPError(
+                    url,
+                    500,
+                    "Server Error",
+                    None,
+                    io.BytesIO(b"echo " + self.clean.encode("utf-8")),
+                )
+            return FakeResponse(200, b'{"choices":[{"message":{"content":"OK"}}]}')
+
+        self.requests = []
+        self.urlopen_mock.side_effect = _urlopen
+        code, out, err = self.run_main()
+        if code != 0:
+            raise AssertionError("partial exit")
+        urls = [item[0].full_url for item in self.requests]
+        self.assert_same(
+            urls,
+            [mod.ENDPOINT, mod.RESPONSES_ENDPOINT, mod.ANTHROPIC_ENDPOINT],
+            "partial order",
+        )
+        text = self.status_file.read_text(encoding="utf-8")
+        self.assert_absent(text, self.clean)
+        self.assert_absent(out, self.clean)
+        self.assert_absent(err, self.clean)
+        status = json.loads(text)
+        if status["overall"] != "chat_completion_passed" or status["status"] != "passed":
+            raise AssertionError("chat overall")
+        if status.get("catalogChecked") != "2026-11-12":
+            raise AssertionError("catalog note dropped")
+        chat = status["checks"]["chat_completions"]
+        responses = status["checks"]["openai_responses"]
+        messages = status["checks"]["anthropic_messages"]
+        if chat["status"] != "passed" or chat["passedAt"] == "2026-01-01T00:00:00+00:00":
+            raise AssertionError("chat pass was not refreshed")
+        if responses["status"] != "failed" or responses["passedAt"] != "2026-02-02T00:00:00+00:00":
+            raise AssertionError("responses pass was not preserved")
+        if responses["httpStatus"] != 200:
+            raise AssertionError("empty responses http")
+        if messages["status"] != "failed" or messages["passedAt"] != "2026-03-03T00:00:00+00:00":
+            raise AssertionError("messages pass was not preserved")
+        if messages["httpStatus"] != 500 or "HTTP 500" not in messages["detail"]:
+            raise AssertionError("messages http detail")
+        if status["checks"]["codex_cli"]["status"] == "passed":
+            raise AssertionError("codex passed")
+
+    def test_payment_failure_is_generic_and_does_not_stop_the_run(self):
+        os.environ["OFOX_API_KEY"] = self.clean
+
+        def _urlopen(request, timeout=None):
+            self.requests.append((request, timeout))
+            url = request.full_url
+            if url == mod.ENDPOINT:
+                raise mod.urllib.error.HTTPError(
+                    url,
+                    402,
+                    "Payment Required",
+                    None,
+                    io.BytesIO(b"insufficient balance; payment required " + self.clean.encode("utf-8")),
+                )
+            if url == mod.ANTHROPIC_ENDPOINT:
+                return FakeResponse(200, b'{"content":[{"type":"text","text":"OK"}]}')
+            return FakeResponse(200, b'{"output":[{"content":[{"text":"OK"}]}]}')
+
+        self.requests = []
+        self.urlopen_mock.side_effect = _urlopen
+        code, out, err = self.run_main()
+        if code != 0:
+            raise AssertionError("payment exit")
+        urls = [item[0].full_url for item in self.requests]
+        if mod.RESPONSES_ENDPOINT not in urls or mod.ANTHROPIC_ENDPOINT not in urls:
+            raise AssertionError("later checks were skipped")
+        text = self.status_file.read_text(encoding="utf-8")
+        blob = "\n".join((text, out, err))
+        self.assert_absent(blob, self.clean)
+        if "balance" in blob.lower() or "payment" in blob.lower():
+            raise AssertionError("payment detail leaked")
+        if '"httpStatus": 402' in text or "HTTP 402" in blob or "http=402" in blob:
+            raise AssertionError("payment status leaked")
+        status = json.loads(text)
+        chat = status["checks"]["chat_completions"]
+        if chat["status"] != "failed" or chat["httpStatus"] is not None or chat["passedAt"] is not None:
+            raise AssertionError("chat payment record")
+        if chat["detail"] != "The call failed. Response body was not stored.":
+            raise AssertionError("chat payment detail")
+        if status["httpStatus"] is not None or status["overall"] != "failed":
+            raise AssertionError("top level payment record")
+        if status["checks"]["openai_responses"]["status"] != "passed":
+            raise AssertionError("responses did not pass")
+        if status["checks"]["anthropic_messages"]["status"] != "passed":
+            raise AssertionError("messages did not pass")
+
+    def test_chat_failure_clears_its_own_passed_at(self):
+        os.environ["OFOX_API_KEY"] = self.clean
+        self.status_file.write_text(json.dumps({
+            "checks": {
+                "chat_completions": {"status": "passed", "passedAt": "2026-01-01T00:00:00+00:00"},
+                "openai_responses": {"status": "unverified", "passedAt": None},
+            },
+        }), encoding="utf-8")
+
+        def _urlopen(request, timeout=None):
+            if request.full_url == mod.ENDPOINT:
+                return FakeResponse(200, b'{"choices":[]}')
+            if request.full_url == mod.ANTHROPIC_ENDPOINT:
+                return FakeResponse(200, b'{"content":[{"type":"text","text":"OK"}]}')
+            return FakeResponse(200, b'{"output_text":"OK"}')
+
+        self.urlopen_mock.side_effect = _urlopen
+        code, _out, _err = self.run_main()
+        if code != 0:
+            raise AssertionError("clear exit")
+        status = json.loads(self.status_file.read_text(encoding="utf-8"))
+        if status["checks"]["chat_completions"]["passedAt"] is not None:
+            raise AssertionError("chat passedAt kept after failure")
+        if status["checks"]["chat_completions"]["status"] != "failed":
+            raise AssertionError("chat status")
+        if status["checks"]["openai_responses"]["status"] != "passed":
+            raise AssertionError("responses output_text")
+        if status["checks"]["anthropic_messages"]["passedAt"] is None:
+            raise AssertionError("messages passedAt")
 
 
 class SubprocessSmokeTests(unittest.TestCase):

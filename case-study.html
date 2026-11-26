@@ -56,6 +56,8 @@
   <section class="pricing-hub-section">
     <h2>脚本会调用什么</h2>
     <p>对照 Ofox 文档：OpenAI 兼容基址是 <code>https://api.ofox.ai/v1</code>，Chat Completions 是 <code>POST https://api.ofox.ai/v1/chat/completions</code>，认证头是 <code>Authorization: Bearer</code> 加上原始 Key。<a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener">Chat Completions 文档</a> · <a href="https://ofox.ai/docs/develop" target="_blank" rel="noopener">快速开始</a></p>
+    <p>同一次运行还会各发一次最小请求。Responses 是 <code>POST https://api.ofox.ai/v1/responses</code>，认证头同样是 <code>Authorization: Bearer</code>，默认模型是 <code>qwen/qwen-flash</code>。Anthropic Messages 是 <code>POST https://api.ofox.ai/anthropic/v1/messages</code>，请求头是 <code>x-api-key</code> 和 <code>anthropic-version: 2023-06-01</code>，默认模型也是 <code>qwen/qwen-flash</code>。输出上限是 16 个 token。一次失败不会挡住另外两次调用。<a href="https://ofox.ai/docs/api/openai/responses" target="_blank" rel="noopener">Responses 文档</a> · <a href="https://ofox.ai/docs/api/anthropic/messages" target="_blank" rel="noopener">Messages 文档</a></p>
+    <p>Responses 和 Messages 的结果写在状态文件的 <code>checks</code> 里。验证页只有在该项被记录为成功时才显示通过，否则保持未通过实际调用验证。上面的表仍然只是 Chat Completions 这一次调用。</p>
     <p>2026-11-12 拉取的公开目录 <a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener">GET /v1/models</a> 共 131 个 id。其中有 <code>openai/gpt-5.4</code>，没有 <code>openai/gpt-5.6</code>。同日目录里的 5.6 系列是 <code>openai/gpt-5.6-sol</code>、<code>openai/gpt-5.6-luna</code>、<code>openai/gpt-5.6-terra</code>。Ofox 的 GPT 文档写明 <code>openai/gpt-5.4-pro</code> 和 Codex 系列只支持 Responses API，所以这次冒烟不用它们。</p>
     <div class="snippet"><div>Python · 与脚本相同的请求格式<button class="copy-code" type="button" data-copy="case-snippet">复制</button></div>
       <pre id="case-snippet"><code>curl https://api.ofox.ai/v1/chat/completions \
@@ -75,8 +77,8 @@
 export OFOX_API_KEY
 python3 scripts/ofox-smoke.py</code></pre>
     </div>
-    <p>有 Key 时，脚本向 Chat Completions 发一次请求，并把 <code>model</code>、<code>latencyMs</code>、<code>status</code>、<code>httpStatus</code>、<code>timestamp</code> 写入 <code>ofox-smoke-status.json</code>。没有 Key 时打印 <code>BLOCKED_NO_OFOX_API_KEY</code>，退出码 0，不改状态文件。</p>
-    <p>仓库 Actions「Ofox chat completions smoke」可手动运行，并在每周一 06:00 UTC 运行。它使用名为 <code>OFOX_API_KEY</code> 的 Actions secret。Secret 为空时不请求 Ofox，也不提交状态文件。</p>
+    <p>有 Key 时，脚本向 Chat Completions、Responses、Anthropic Messages 各发一次请求。本页上面的表仍是 Chat Completions 的 <code>model</code>、<code>latencyMs</code>、<code>status</code>、<code>httpStatus</code>、<code>timestamp</code>。没有 Key 时打印 <code>BLOCKED_NO_OFOX_API_KEY</code>，退出码 0，不改状态文件。</p>
+    <p>仓库 Actions「Ofox chat completions smoke」可手动运行。它使用名为 <code>OFOX_API_KEY</code> 的 Actions secret。Secret 为空时不请求 Ofox，也不提交状态文件。</p>
   </section>
   <section class="pricing-hub-section">
     <h2>这条记录不能说明的事</h2>

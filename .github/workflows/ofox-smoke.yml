@@ -13,10 +13,12 @@ jobs:
         with:
           ref: main
           persist-credentials: true
-      - name: Call chat completions only when OFOX_API_KEY is set
+      - name: Call chat, responses, and messages when OFOX_API_KEY is set
         env:
           OFOX_API_KEY: ${{ secrets.OFOX_API_KEY }}
           OFOX_CHAT_MODEL: openai/gpt-5.4
+          OFOX_RESPONSES_MODEL: qwen/qwen-flash
+          OFOX_ANTHROPIC_MODEL: qwen/qwen-flash
         run: |
           if [ -z "${OFOX_API_KEY}" ]; then
             echo "OFOX_API_KEY is unset. Not calling Ofox. ofox-smoke-status.json stays as committed."
@@ -32,6 +34,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Smoke status unchanged. Nothing to commit."
           else
-            git commit -m "data: record Ofox chat completion smoke status"
+            git commit -m "data: record Ofox protocol smoke status"
             git push origin HEAD:main
           fi

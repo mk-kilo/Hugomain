@@ -56,6 +56,8 @@
   <section class="pricing-hub-section">
     <h2>What the script calls</h2>
     <p>Ofox’s OpenAI-compatible base URL is <code>https://api.ofox.ai/v1</code>. Chat Completions is <code>POST https://api.ofox.ai/v1/chat/completions</code> with <code>Authorization: Bearer</code> and the raw key. <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener">Chat Completions</a> · <a href="https://ofox.ai/docs/develop" target="_blank" rel="noopener">Quick start</a></p>
+    <p>The same run also sends one minimal request to each of the other two protocols. Responses is <code>POST https://api.ofox.ai/v1/responses</code> with <code>Authorization: Bearer</code>. The default model is <code>qwen/qwen-flash</code>. Anthropic Messages is <code>POST https://api.ofox.ai/anthropic/v1/messages</code> with <code>x-api-key</code> and <code>anthropic-version: 2023-06-01</code>. That default model is <code>qwen/qwen-flash</code> as well. Output is capped at 16 tokens. A failure in one call does not skip the others. <a href="https://ofox.ai/docs/api/openai/responses" target="_blank" rel="noopener">Responses</a> · <a href="https://ofox.ai/docs/api/anthropic/messages" target="_blank" rel="noopener">Messages</a></p>
+    <p>Responses and Messages results are stored on their own <code>checks</code>. The verification page shows a recorded pass only after that check is recorded as successful. Otherwise the row stays not verified. The table above is still the Chat Completions call.</p>
     <p>The public catalog fetched on 2026-11-12 (<a href="https://api.ofox.ai/v1/models" target="_blank" rel="noopener">GET /v1/models</a>, 131 ids) includes <code>openai/gpt-5.4</code> and does not include <code>openai/gpt-5.6</code>. The 5.6 ids in that response were <code>openai/gpt-5.6-sol</code>, <code>openai/gpt-5.6-luna</code>, and <code>openai/gpt-5.6-terra</code>. Ofox’s GPT docs say <code>openai/gpt-5.4-pro</code> and the Codex ids are Responses-only, so this smoke test does not use them.</p>
     <div class="snippet"><div>curl · same shape as the script<button class="copy-code" type="button" data-copy="case-snippet">Copy</button></div>
       <pre id="case-snippet"><code>curl https://api.ofox.ai/v1/chat/completions \
@@ -75,8 +77,8 @@
 export OFOX_API_KEY
 python3 scripts/ofox-smoke.py</code></pre>
     </div>
-    <p>With a key, the script sends one Chat Completions request and writes <code>model</code>, <code>latencyMs</code>, <code>status</code>, <code>httpStatus</code>, and <code>timestamp</code>. With no key it prints <code>BLOCKED_NO_OFOX_API_KEY</code>, exits 0, and does not change the status file.</p>
-    <p>The Actions workflow “Ofox chat completions smoke” runs on demand and every Monday at 06:00 UTC. It reads the <code>OFOX_API_KEY</code> Actions secret. If that secret is empty, the job does not call Ofox and does not commit the status file.</p>
+    <p>With a key, the script sends one Chat Completions request, one Responses request, and one Anthropic Messages request. The table above is still the Chat Completions <code>model</code>, <code>latencyMs</code>, <code>status</code>, <code>httpStatus</code>, and <code>timestamp</code>. With no key it prints <code>BLOCKED_NO_OFOX_API_KEY</code>, exits 0, and does not change the status file.</p>
+    <p>The Actions workflow “Ofox chat completions smoke” runs on demand. It reads the <code>OFOX_API_KEY</code> Actions secret. If that secret is empty, the job does not call Ofox and does not commit the status file.</p>
   </section>
   <section class="pricing-hub-section">
     <h2>What this record does not show</h2>
