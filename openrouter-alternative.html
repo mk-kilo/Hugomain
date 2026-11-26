@@ -41,8 +41,8 @@
   <section class="pricing-hub-hero">
     <span class="kicker">AS OF 2026-11-23</span>
     <h1>Ofox 与 OpenRouter</h1>
-    <p>这一页只比较三件事：API 兼容、模型覆盖、付款和计价方式。材料来自 2026-11-23 打开的公开页面，以及仓库里 2026-11-22 的 Ofox 未登录目录快照。没有核对到的格子写“未验证”。本页不计算“你能省下多少”。</p>
-    <p class="calc-note">这是 HTTP API 的对照。本页不说 Cursor、Claude Code 或 Codex 可以连上 Ofox 或 OpenRouter。Ofox 自己的 Cursor 说明（更新于 2026-10-16）把直接接入标为不合适：<a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 文档</a>。</p>
+    <p>这一页只比较三件事：API 兼容、模型覆盖、付款和计价方式。材料来自 2026-11-23 打开的公开页面，以及仓库里 2026-11-26 的 Ofox 未登录目录快照。没有核对到的格子写“未验证”。本页不计算“你能省下多少”。</p>
+    <p class="calc-note">这是 HTTP API 的对照。本页不说 Cursor、Claude Code 或 Codex 可以连上 Ofox 或 OpenRouter。Ofox 自己的 Cursor 说明（查阅于 2026-11-26）把直接接入标为不合适：<a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 文档</a>。</p>
   </section>
 
   <section class="pricing-hub-section">
@@ -69,17 +69,17 @@
           </tr>
           <tr>
             <td>Anthropic Messages</td>
-            <td>文档页写了 <code>POST https://api.ofox.ai/anthropic/v1/messages</code>，以及 Anthropic SDK 的 <code>base_url</code> <code>https://api.ofox.ai/anthropic</code>。那是 Ofox 的文档，不是本站测通的调用。仓库里的 <code>ofox-smoke-status.json</code> 仍是未验证。</td>
+            <td>文档页写了 <code>POST https://api.ofox.ai/anthropic/v1/messages</code>，以及 Anthropic SDK 的 <code>base_url</code> <code>https://api.ofox.ai/anthropic</code>。<code>ofox-smoke-status.json</code> 的 <code>anthropic_messages</code> 在 2026-11-26 记为通过，HTTP 200。那次调用不启动 Claude Code。</td>
             <td>未验证。2026-11-23 读到的 Quickstart、定价页和 API overview 没有确认一个 Anthropic 原生 Messages 地址。</td>
           </tr>
           <tr>
             <td>Gemini 原生接口</td>
-            <td>更新日志 v1.0.0 写“OpenAI、Anthropic、Gemini 都原生兼容”。本页没有再打开 Gemini 端点文档，所以具体路径未验证。</td>
+            <td><a href="https://ofox.ai/docs/api" target="_blank" rel="noopener noreferrer">Ofox API 概览</a>（Last updated on November 26, 2026）把 Gemini 原生基址写成 <code>https://api.ofox.ai/gemini</code>。本站冒烟文件没有这条记录。</td>
             <td>未验证。</td>
           </tr>
           <tr>
             <td>本站是否打通过</td>
-            <td><code>ofox-smoke-status.json</code> 的 <code>status</code> 是 <code>unverified</code>，<code>latencyMs</code> 和 <code>timestamp</code> 都是 null。没有延迟数字。</td>
+            <td><code>ofox-smoke-status.json</code> 的 <code>overall</code> 与 <code>chat_completions</code> 在 2026-11-26 是 <code>passed</code>，HTTP 200，<code>latencyMs</code> 1823。同一次运行里 <code>openai_responses</code> 和 <code>anthropic_messages</code> 也是 <code>passed</code>。文件没有 Gemini 原生接口的记录。<code>codex_cli</code> 与 <code>claude_code</code> 是 <code>unverified</code>，<code>cursor_direct</code> 是 <code>provider_marked_incompatible</code>。</td>
             <td>未验证。本站没有记录对 OpenRouter 的调用。</td>
           </tr>
         </tbody>
@@ -90,11 +90,11 @@
 
   <section class="pricing-hub-section">
     <h2>模型覆盖</h2>
-    <p>Ofox 这边用的是仓库文件 <a href="ofox-public-prices.json">ofox-public-prices.json</a>。来源是未登录的 <code>GET https://api.ofox.ai/v1/models</code>，<code>fetchedAt</code> 为 <strong>2026-11-22T13:35:47+00:00</strong>。<code>catalogCount</code> 是 138，表示那次响应里的模型条数。其中 117 个带有可用的文本输入和输出单价，列在 <code>models</code> 里。没有文本单价的模型没有被补一个数字，也没有出现在这个列表里。</p>
-    <p>这 117 个 id 的前缀数量是：openai 32、google 23、qwen 12、anthropic 11、z-ai 10、deepseek 6、volcengine 6、moonshotai 5、x-ai 5、microsoft 3、minimax 3、typesafe 1。这只说明那次快照里有这些前缀，不说明每个 id 在你调用时仍然在售，也不说明和 OpenRouter 的目录重合了多少。重合部分未验证。</p>
-    <p>Ofox 更新日志 v1.0.0 写“100+ models”。那是他们的产品说明。上面的 138 和 117 是这次文件里的数，不是把宣传页上的 “100+” 再加一个新数字。</p>
+    <p>Ofox 这边用的是仓库文件 <a href="ofox-public-prices.json">ofox-public-prices.json</a>。来源是未登录的 <code>GET https://api.ofox.ai/v1/models</code>，<code>fetchedAt</code> 为 <strong>2026-11-26T13:01:30+00:00</strong>。<code>catalogCount</code> 是 135，表示那次响应里的模型条数。其中 114 个带有可用的文本输入和输出单价，列在 <code>models</code> 里。没有文本单价的模型没有被补一个数字，也没有出现在这个列表里。</p>
+    <p>这 114 个 id 的前缀数量是：openai 32、google 18、qwen 12、anthropic 11、z-ai 10、deepseek 6、volcengine 6、microsoft 5、moonshotai 5、x-ai 5、minimax 3、typesafe 1。这只说明那次快照里有这些前缀，不说明每个 id 在你调用时仍然在售，也不说明和 OpenRouter 的目录重合了多少。重合部分未验证。</p>
+    <p>Ofox 更新日志 v1.0.0 写“100+ models”。那是他们的产品说明。上面的 135 和 114 是这次文件里的数，不是把宣传页上的 “100+” 再加一个新数字。</p>
     <p>OpenRouter 定价页在 2026-11-23 写着：Standard 和 Business 为 “600+ models”、“80+ providers”；Free 为 “25+ free models”、“4 free providers”。这是他们页面上的标注。本站没有下载 OpenRouter 的模型列表，所以没有自己数过。</p>
-    <p class="calc-note">不要把 600+ 套到 Ofox 上，也不要把 138 套到 OpenRouter 上。同一天两边的目录都会变。</p>
+    <p class="calc-note">不要把 600+ 套到 Ofox 上，也不要把 135 套到 OpenRouter 上。同一天两边的目录都会变。</p>
   </section>
 
   <section class="pricing-hub-section">
@@ -136,8 +136,8 @@
     <ul class="checklist">
       <li>任何一个模型 id 是否同时出现在两边的当前目录里。</li>
       <li>OpenRouter 有没有 Anthropic 或 Gemini 的原生接口。</li>
-      <li>Ofox Gemini 原生接口的具体路径。更新日志说有，本页没有打开那份端点文档。</li>
-      <li>本站对 Ofox 或 OpenRouter 的付费调用、延迟和可用性。状态文件是未验证，这里不补数字。</li>
+      <li>Gemini 原生接口的一次本站调用。API 概览写出了基址 <code>https://api.ofox.ai/gemini</code>，冒烟文件没有这项记录。</li>
+      <li>把 2026-11-26 的三次协议冒烟写成可用性承诺。状态文件只记录那三次 HTTP 结果。OpenRouter 仍没有本站调用记录。Gemini 原生、Codex、Claude Code、Cursor 不在通过记录里。</li>
       <li>返还、3 美元赠额、0% 平台费是否和你结账时的页面一致。</li>
       <li>Cursor、Claude Code、Codex 能否使用其中任何一家。本页不提供这些工具的配置。</li>
     </ul>
@@ -151,8 +151,8 @@
       <li><a href="https://ofox.ai/docs/api/anthropic/messages" target="_blank" rel="noopener noreferrer">Ofox Anthropic Messages</a></li>
       <li><a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox 计费说明</a>（页面写更新于 November 23, 2026）</li>
       <li><a href="https://ofox.ai/docs/changelog" target="_blank" rel="noopener noreferrer">Ofox 更新日志</a>（v1.0.0、v1.0.39、v1.0.54）</li>
-      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 说明</a>（更新于 2026-10-16）</li>
-      <li><a href="ofox-public-prices.json">ofox-public-prices.json</a>，fetchedAt 2026-11-22T13:35:47+00:00</li>
+      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 说明</a>（查阅于 2026-11-26）</li>
+      <li><a href="ofox-public-prices.json">ofox-public-prices.json</a>，fetchedAt 2026-11-26T13:01:30+00:00</li>
       <li><a href="https://openrouter.ai/docs/quickstart" target="_blank" rel="noopener noreferrer">OpenRouter Quickstart</a></li>
       <li><a href="https://openrouter.ai/docs/api-reference/overview" target="_blank" rel="noopener noreferrer">OpenRouter API overview</a></li>
       <li><a href="https://openrouter.ai/pricing" target="_blank" rel="noopener noreferrer">OpenRouter 定价页</a></li>
