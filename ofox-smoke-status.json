@@ -1,13 +1,13 @@
 {
   "schema": 2,
-  "overall": "chat_completion_passed",
+  "overall": "passed",
   "endpoint": "POST https://api.ofox.ai/v1/chat/completions",
   "model": "openai/gpt-5.4",
-  "latencyMs": 3121,
+  "latencyMs": 1823,
   "status": "passed",
   "httpStatus": 200,
-  "timestamp": "2026-11-26T03:56:25+00:00",
-  "updatedAt": "2026-11-26T03:56:25+00:00",
+  "timestamp": "2026-11-26T05:02:48+00:00",
+  "updatedAt": "2026-11-26T05:02:50+00:00",
   "recordedBy": "scripts/ofox-smoke.py",
   "catalogChecked": "2026-11-12",
   "catalogSource": "https://api.ofox.ai/v1/models",
@@ -15,22 +15,33 @@
   "checks": {
     "chat_completions": {
       "status": "passed",
-      "passedAt": "2026-11-26T03:56:25+00:00",
+      "passedAt": "2026-11-26T05:02:48+00:00",
       "model": "openai/gpt-5.4",
-      "latencyMs": 3121,
+      "latencyMs": 1823,
       "httpStatus": 200,
-      "timestamp": "2026-11-26T03:56:25+00:00",
+      "timestamp": "2026-11-26T05:02:48+00:00",
+      "endpoint": "POST https://api.ofox.ai/v1/chat/completions",
       "detail": "One Chat Completions call returned message content."
     },
     "openai_responses": {
-      "status": "unverified",
-      "passedAt": null,
-      "detail": "scripts/ofox-smoke.py calls Chat Completions only. It does not call the Responses API."
+      "status": "passed",
+      "passedAt": "2026-11-26T05:02:49+00:00",
+      "model": "qwen/qwen-flash",
+      "latencyMs": 1339,
+      "httpStatus": 200,
+      "timestamp": "2026-11-26T05:02:49+00:00",
+      "endpoint": "POST https://api.ofox.ai/v1/responses",
+      "detail": "One Responses call returned output text."
     },
     "anthropic_messages": {
-      "status": "unverified",
-      "passedAt": null,
-      "detail": "scripts/ofox-smoke.py does not call the Anthropic Messages API."
+      "status": "passed",
+      "passedAt": "2026-11-26T05:02:50+00:00",
+      "model": "qwen/qwen-flash",
+      "latencyMs": 1063,
+      "httpStatus": 200,
+      "timestamp": "2026-11-26T05:02:50+00:00",
+      "endpoint": "POST https://api.ofox.ai/anthropic/v1/messages",
+      "detail": "One Messages call returned text."
     },
     "codex_cli": {
       "status": "unverified",
