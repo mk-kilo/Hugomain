@@ -41,8 +41,8 @@
   <section class="pricing-hub-hero">
     <span class="kicker">AS OF 2026-11-23</span>
     <h1>Ofox vs OpenRouter</h1>
-    <p>This page compares three things: API compatibility, model coverage, and payment or pricing. The sources are public pages opened on 2026-11-23, plus the unauthenticated Ofox catalog snapshot stored in this repo on 2026-11-22. Where a cell was not checked, it says “not verified.” This page does not calculate a saving.</p>
-    <p class="calc-note">This is a comparison of HTTP APIs. It does not say that Cursor, Claude Code, or Codex can connect to Ofox or to OpenRouter. Ofox’s own Cursor note, updated 2026-10-16, marks direct Cursor integration as unsuitable: <a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor doc</a>.</p>
+    <p>This page compares three things: API compatibility, model coverage, and payment or pricing. The sources are public pages opened on 2026-11-23, plus the unauthenticated Ofox catalog snapshot stored in this repo on 2026-11-26. Where a cell was not checked, it says “not verified.” This page does not calculate a saving.</p>
+    <p class="calc-note">This is a comparison of HTTP APIs. It does not say that Cursor, Claude Code, or Codex can connect to Ofox or to OpenRouter. Ofox’s own Cursor note, accessed 2026-11-26, marks direct Cursor integration as unsuitable: <a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor doc</a>.</p>
   </section>
 
   <section class="pricing-hub-section">
@@ -69,17 +69,17 @@
           </tr>
           <tr>
             <td>Anthropic Messages</td>
-            <td>Ofox documents <code>POST https://api.ofox.ai/anthropic/v1/messages</code> and an Anthropic SDK <code>base_url</code> of <code>https://api.ofox.ai/anthropic</code>. That is their documentation. <code>ofox-smoke-status.json</code> in this repo is still unverified.</td>
+            <td>Ofox documents <code>POST https://api.ofox.ai/anthropic/v1/messages</code> and an Anthropic SDK <code>base_url</code> of <code>https://api.ofox.ai/anthropic</code>. <code>ofox-smoke-status.json</code> records <code>anthropic_messages</code> as passed on 2026-11-26, HTTP 200. That call does not launch Claude Code.</td>
             <td>Not verified. The Quickstart, pricing page, and API overview read on 2026-11-23 did not confirm an Anthropic-native Messages URL.</td>
           </tr>
           <tr>
             <td>Native Gemini</td>
-            <td>Changelog v1.0.0 says OpenAI, Anthropic, and Gemini are natively compatible. This page did not re-open a Gemini endpoint document, so the path is not verified.</td>
+            <td>The <a href="https://ofox.ai/docs/api" target="_blank" rel="noopener noreferrer">Ofox API overview</a> (last updated November 26, 2026) lists the Gemini native base URL as <code>https://api.ofox.ai/gemini</code>. This site’s smoke file has no record for it.</td>
             <td>Not verified.</td>
           </tr>
           <tr>
             <td>Recorded by this site</td>
-            <td><code>ofox-smoke-status.json</code> has <code>status</code> <code>unverified</code>, and <code>latencyMs</code> and <code>timestamp</code> are null. No latency number is shown.</td>
+            <td><code>ofox-smoke-status.json</code> records <code>overall</code> and <code>chat_completions</code> as <code>passed</code> on 2026-11-26, HTTP 200, <code>latencyMs</code> 1823. The same run records <code>openai_responses</code> and <code>anthropic_messages</code> as <code>passed</code>. The file has no Gemini-native record. <code>codex_cli</code> and <code>claude_code</code> are <code>unverified</code>, and <code>cursor_direct</code> is <code>provider_marked_incompatible</code>.</td>
             <td>Not verified. This site has no recorded OpenRouter call.</td>
           </tr>
         </tbody>
@@ -90,11 +90,11 @@
 
   <section class="pricing-hub-section">
     <h2>Model coverage</h2>
-    <p>The Ofox figures come from <a href="../ofox-public-prices.json">ofox-public-prices.json</a>. The source is the unauthenticated <code>GET https://api.ofox.ai/v1/models</code> response. <code>fetchedAt</code> is <strong>2026-11-22T13:35:47+00:00</strong>. <code>catalogCount</code> is 138, the number of models in that response. 117 of them have a usable text input and output rate and are listed under <code>models</code>. Models without a text rate were not given a made-up number, and they are not in that list.</p>
-    <p>Prefix counts inside those 117 ids: openai 32, google 23, qwen 12, anthropic 11, z-ai 10, deepseek 6, volcengine 6, moonshotai 5, x-ai 5, microsoft 3, minimax 3, typesafe 1. That only says the snapshot contained those prefixes. It does not say each id is still for sale, and it does not say how many ids also exist on OpenRouter. Overlap is not verified.</p>
-    <p>Ofox changelog v1.0.0 says “100+ models.” That is their product statement. The 138 and 117 above are the counts in this file, not a new number added on top of “100+.”</p>
+    <p>The Ofox figures come from <a href="../ofox-public-prices.json">ofox-public-prices.json</a>. The source is the unauthenticated <code>GET https://api.ofox.ai/v1/models</code> response. <code>fetchedAt</code> is <strong>2026-11-26T13:01:30+00:00</strong>. <code>catalogCount</code> is 135, the number of models in that response. 114 of them have a usable text input and output rate and are listed under <code>models</code>. Models without a text rate were not given a made-up number, and they are not in that list.</p>
+    <p>Prefix counts inside those 114 ids: openai 32, google 18, qwen 12, anthropic 11, z-ai 10, deepseek 6, volcengine 6, microsoft 5, moonshotai 5, x-ai 5, minimax 3, typesafe 1. That only says the snapshot contained those prefixes. It does not say each id is still for sale, and it does not say how many ids also exist on OpenRouter. Overlap is not verified.</p>
+    <p>Ofox changelog v1.0.0 says “100+ models.” That is their product statement. The 135 and 114 above are the counts in this file, not a new number added on top of “100+.”</p>
     <p>On 2026-11-23 the OpenRouter pricing page said Standard and Business have “600+ models” and “80+ providers,” and Free has “25+ free models” and “4 free providers.” Those are the labels on their page. This site did not download OpenRouter’s model list, so it did not count the models itself.</p>
-    <p class="calc-note">Do not apply 600+ to Ofox, and do not apply 138 to OpenRouter. Both catalogs can change on the same day.</p>
+    <p class="calc-note">Do not apply 600+ to Ofox, and do not apply 135 to OpenRouter. Both catalogs can change on the same day.</p>
   </section>
 
   <section class="pricing-hub-section">
@@ -136,8 +136,8 @@
     <ul class="checklist">
       <li>Whether any single model id is on both live catalogs.</li>
       <li>Whether OpenRouter has a native Anthropic or Gemini endpoint.</li>
-      <li>The exact path of a native Gemini endpoint on Ofox. The changelog says it exists; this page did not open that endpoint document.</li>
-      <li>A paid call, a latency, or uptime for Ofox or OpenRouter from this site. The status file is unverified, and no number is added here.</li>
+      <li>A call from this site to the native Gemini endpoint. The API overview lists <code>https://api.ofox.ai/gemini</code>, and the smoke file has no record for it.</li>
+      <li>Treating the 2026-11-26 protocol smoke as an uptime promise. The status file records those three HTTP results only. This site still has no recorded OpenRouter call. Gemini native, Codex, Claude Code, and Cursor are not in the passing records.</li>
       <li>Whether the rebate, the $3 credit, or the 0% platform fee matches the checkout you see.</li>
       <li>Whether Cursor, Claude Code, or Codex can use either provider. This page does not add config for those tools.</li>
     </ul>
@@ -151,8 +151,8 @@
       <li><a href="https://ofox.ai/docs/api/anthropic/messages" target="_blank" rel="noopener noreferrer">Ofox Anthropic Messages</a></li>
       <li><a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox pricing</a> (page says last updated November 23, 2026)</li>
       <li><a href="https://ofox.ai/docs/changelog" target="_blank" rel="noopener noreferrer">Ofox changelog</a> (v1.0.0, v1.0.39, v1.0.54)</li>
-      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor note</a> (updated 2026-10-16)</li>
-      <li><a href="../ofox-public-prices.json">ofox-public-prices.json</a>, fetchedAt 2026-11-22T13:35:47+00:00</li>
+      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor note</a> (accessed 2026-11-26)</li>
+      <li><a href="../ofox-public-prices.json">ofox-public-prices.json</a>, fetchedAt 2026-11-26T13:01:30+00:00</li>
       <li><a href="https://openrouter.ai/docs/quickstart" target="_blank" rel="noopener noreferrer">OpenRouter Quickstart</a></li>
       <li><a href="https://openrouter.ai/docs/api-reference/overview" target="_blank" rel="noopener noreferrer">OpenRouter API overview</a></li>
       <li><a href="https://openrouter.ai/pricing" target="_blank" rel="noopener noreferrer">OpenRouter pricing</a></li>

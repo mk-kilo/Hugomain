@@ -80,7 +80,7 @@
           <tr>
             <td>Cursor 直接接入</td>
             <td>Cursor 允许为部分官方提供商保存 Key。Tab 等功能仍可能走 Cursor 自己的模型。</td>
-            <td>Ofox 兼容性说明（更新于 2026-10-16）写明：直接接 Cursor 不合适。Tab、Background Agent、Auto 不会跟着自定义供应商走。建议在 Cursor 终端里用 Codex CLI 或 Claude Code。这两项客户端本站仍是未验证。</td>
+            <td>Ofox 兼容性说明（查阅于 2026-11-26）写明：直接接 Cursor 不合适。Tab、Background Agent、Auto 不会跟着自定义供应商走。建议在 Cursor 终端里用 Codex CLI 或 Claude Code。这两项客户端本站仍是未验证。</td>
             <td>不要默认另一家聚合能接上 Cursor。同时核对 Cursor 当前版本文档和该聚合的兼容说明。</td>
           </tr>
         </tbody>
@@ -117,7 +117,7 @@
           <tr><td>自己的服务端，OpenAI SDK</td><td>Chat Completions 或 Responses，以你代码里的调用为准</td><td>Ofox 文档列出这两类 OpenAI 兼容面。某个模型是否开通，以模型卡片为准。本站没有替你打通。</td></tr>
           <tr><td>Codex CLI</td><td>配置里的 model provider / wire_api，通常不是普通聊天接口</td><td>未验证。tests/ofox_smoke.py 不启动 Codex，仓库里也没有记录通过的付费调用。</td></tr>
           <tr><td>Claude Code</td><td>Anthropic Messages 网关，含你需要的工具调用和流式</td><td>未验证。同一支冒烟脚本不启动 Claude Code。</td></tr>
-          <tr><td>Cursor 里的 Tab、Agent、Auto</td><td>Cursor 自己的模型服务，不是自定义 Base URL</td><td>Ofox 兼容性说明（2026-10-16）写明直接接入不合适。换一家聚合不会自动补上这些功能。</td></tr>
+          <tr><td>Cursor 里的 Tab、Agent、Auto</td><td>Cursor 自己的模型服务，不是自定义 Base URL</td><td>Ofox 兼容性说明（查阅于 2026-11-26）写明直接接入不合适。换一家聚合不会自动补上这些功能。</td></tr>
         </tbody>
       </table>
     </div>
@@ -130,7 +130,7 @@
       <li><a href="https://ofox.ai/enterprise" target="_blank" rel="noopener noreferrer">Ofox 企业页</a>：0% 平台手续费、厂商标价的说法</li>
       <li><a href="https://ofox.ai/docs/changelog" target="_blank" rel="noopener noreferrer">Ofox 更新日志</a>：标价、0% 手续费、返还档位、推荐首充 $3</li>
       <li><a href="https://ofox.ai/partner" target="_blank" rel="noopener noreferrer">Ofox Partner</a>：$3 由 Ofox 承担，不从佣金扣除</li>
-      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 说明</a>：直接接入不合适，更新于 2026-10-16</li>
+      <li><a href="https://ofox.ai/docs/integrations/cursor" target="_blank" rel="noopener noreferrer">Ofox Cursor 说明</a>：直接接入不合适，查阅于 2026-11-26</li>
       <li><a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">Ofox 计费文档</a></li>
       <li><a href="https://openrouter.ai/pricing" target="_blank" rel="noopener noreferrer">OpenRouter 定价页</a>：平台费档位</li>
       <li><a href="https://docs.cursor.com/settings/api-keys" target="_blank" rel="noopener noreferrer">Cursor API keys 文档</a></li>
