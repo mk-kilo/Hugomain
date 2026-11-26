@@ -87,6 +87,48 @@
   var select = field("cost-ofox-model");
   var sourceNote = field("cost-ofox-source");
 
+  function sisterCampaign() {
+    var parts = location.pathname.split("/").filter(Boolean);
+    if (parts[0] === "en") parts.shift();
+    var cleaned = parts.map(function (part) { return part.replace(/\.html$/, ""); }).filter(Boolean);
+    if (!cleaned.length || cleaned[cleaned.length - 1] === "index") return "home";
+    if (cleaned.length >= 2 && cleaned[0] === "ai-pricing") return "ai-pricing-" + cleaned[cleaned.length - 1];
+    return cleaned[cleaned.length - 1];
+  }
+
+  function sisterHref(modelId) {
+    var params = ["utm_source=jxzne", "utm_medium=referral", "utm_campaign=" + encodeURIComponent(sisterCampaign())];
+    if (modelId) params.unshift("model=" + encodeURIComponent(modelId));
+    return "https://tokenhubs.dev/?" + params.join("&");
+  }
+
+  var sisterHolder = null;
+  var sisterLink = null;
+  if (select && sourceNote && sourceNote.parentNode) {
+    var zhCalc = (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
+    sisterHolder = document.createElement("p");
+    sisterHolder.className = "calc-note";
+    sisterHolder.hidden = true;
+    sisterLink = document.createElement("a");
+    sisterLink.className = "row-estimate";
+    sisterLink.target = "_blank";
+    sisterLink.rel = "noopener";
+    sisterLink.textContent = zhCalc ? "算成本" : "Estimate";
+    sisterHolder.appendChild(sisterLink);
+    sourceNote.parentNode.insertBefore(sisterHolder, sourceNote.nextSibling);
+  }
+
+  function setSister(modelId) {
+    if (!sisterHolder || !sisterLink) return;
+    if (!modelId) {
+      sisterHolder.hidden = true;
+      sisterLink.removeAttribute("href");
+      return;
+    }
+    sisterHolder.hidden = false;
+    sisterLink.href = sisterHref(modelId);
+  }
+
   function rateString(value) {
     if (typeof value !== "number" || !isFinite(value) || value < 0) return "";
     return String(Math.round(value * 1000000) / 1000000);
@@ -103,6 +145,7 @@
       if (blankIn) blankIn.value = "";
       if (blankOut) blankOut.value = "";
       if (sourceNote) sourceNote.textContent = root.getAttribute("data-ofox-idle") || "";
+      setSister("");
       render();
       return;
     }
@@ -114,6 +157,7 @@
     var outputRate = model ? rateString(model.completionPerMillion) : "";
     if (!model || inputRate === "" || outputRate === "") {
       if (sourceNote) sourceNote.textContent = root.getAttribute("data-ofox-missing") || "";
+      setSister(id);
       return;
     }
     var name = field("cost-a-name");
@@ -130,6 +174,7 @@
         .replace("{input}", inputRate)
         .replace("{output}", outputRate);
     }
+    setSister(id);
     render();
   }
 

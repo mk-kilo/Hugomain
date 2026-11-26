@@ -140,6 +140,22 @@ function moneyRate(n) {
   return '$' + n;
 }
 
+function sisterCampaign() {
+  const parts = location.pathname.split('/').filter(Boolean);
+  if (parts[0] === 'en') parts.shift();
+  const cleaned = parts.map((part) => part.replace(/\.html$/, '')).filter(Boolean);
+  if (!cleaned.length || cleaned[cleaned.length - 1] === 'index') return 'home';
+  if (cleaned.length >= 2 && cleaned[0] === 'ai-pricing') return 'ai-pricing-' + cleaned[cleaned.length - 1];
+  return cleaned[cleaned.length - 1];
+}
+
+function sisterHref(modelId) {
+  const params = [];
+  if (modelId) params.push('model=' + encodeURIComponent(modelId));
+  params.push('utm_source=jxzne', 'utm_medium=referral', 'utm_campaign=' + encodeURIComponent(sisterCampaign()));
+  return 'https://tokenhubs.dev/?' + params.join('&');
+}
+
 function renderTable() {
   const host = el('ofox-catalog');
   if (!host || !catalog) return;
@@ -166,9 +182,20 @@ function renderTable() {
     const cells = row
       ? [id, moneyRate(row.promptPerMillion), moneyRate(row.completionPerMillion), catalog.mode === 'live' ? t('本次读取', 'This fetch') : catalog.fetchedAt]
       : [id, '—', '—', t('这次目录里没有可用文本单价', 'No usable text rate in this catalog response')];
-    cells.forEach((value) => {
+    cells.forEach((value, index) => {
       const td = document.createElement('td');
-      td.textContent = value;
+      if (index === 0) {
+        td.append(document.createTextNode(value));
+        const link = document.createElement('a');
+        link.className = 'row-estimate';
+        link.href = sisterHref(id);
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = t('算成本', 'Estimate');
+        td.append(document.createTextNode(' '), link);
+      } else {
+        td.textContent = value;
+      }
       tr.append(td);
     });
     tbody.append(tr);
