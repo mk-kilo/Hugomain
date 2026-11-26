@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Keep Ofox chats in Cherry Studio or Chatbox | JXZNE AI</title>
+  <meta name="description" content="Cherry Studio and Chatbox document an OpenAI-compatible provider and store chat history on the device. LobeChat and Open WebUI are the self-hosted or browser options. This site has not run these clients against Ofox.">
+  <link rel="canonical" href="https://jxzne.com/en/ofox-chat-clients.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/ofox-chat-clients.html">
+  <link rel="alternate" hreflang="en" href="https://jxzne.com/en/ofox-chat-clients.html">
+  <link rel="alternate" hreflang="x-default" href="https://jxzne.com/ofox-chat-clients.html">
+  <link rel="stylesheet" href="../styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JXZNE AI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="Keep Ofox chats in Cherry Studio or Chatbox | JXZNE AI">
+  <meta property="og:description" content="Follow each client's docs for https://api.ofox.ai/v1 and for where that client stores chats. This site has not run these clients against Ofox.">
+  <meta property="og:url" content="https://jxzne.com/en/ofox-chat-clients.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Keep Ofox chats in Cherry Studio or Chatbox | JXZNE AI">
+  <meta name="twitter:description" content="Notes from each client's docs for an OpenAI-compatible provider. Not a recorded Ofox test.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/en/ofox-chat-clients.html#webpage","url":"https://jxzne.com/en/ofox-chat-clients.html","name":"Keep Ofox chats in Cherry Studio or Chatbox | JXZNE AI","description":"Cherry Studio and Chatbox document an OpenAI-compatible provider and store chat history on the device.","inLanguage":"en","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jxzne.com/en/"},{"@type":"ListItem","position":2,"name":"Setup guides","item":"https://jxzne.com/en/guides.html"},{"@type":"ListItem","position":3,"name":"Local chat clients","item":"https://jxzne.com/en/ofox-chat-clients.html"}]},{"@type":"FAQPage","@id":"https://jxzne.com/en/ofox-chat-clients.html#faq","url":"https://jxzne.com/en/ofox-chat-clients.html","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Are these clients verified with Ofox?","acceptedAnswer":{"@type":"Answer","text":"No. Each section only records what that client's official docs or repo still showed on 2026-11-26. This site has not installed Cherry Studio, Chatbox, LobeChat, or Open WebUI to call Ofox."}},{"@type":"Question","name":"Which host does Cherry Studio's API Host field take?","acceptedAnswer":{"@type":"Answer","text":"Ofox's OpenAI-compatible root is https://api.ofox.ai/v1, and the chat path is https://api.ofox.ai/v1/chat/completions. Cherry Studio's desktop docs say the app appends /v1/chat/completions, so the desktop API Host is https://api.ofox.ai. The mobile docs' Base URL example includes /v1, so that field is https://api.ofox.ai/v1. Use the path preview and keep a single /v1."}},{"@type":"Question","name":"What do 401 and 402 mean?","acceptedAnswer":{"@type":"Answer","text":"Ofox's error doc describes 401 as an invalid or missing API key. A 402 with insufficient_credits means the balance is too low; top up, then retry. A 402 with spending_limit_exceeded means a team, member, or key budget is used up. Topping up does not clear that limit."}},{"@type":"Question","name":"Where is chat history stored?","acceptedAnswer":{"@type":"Answer","text":"Cherry Studio stores data in the local CherryStudio user-data directory and backs it up from Settings, Data. Chatbox stores data in the local chatbox directory and exports JSON from Settings, Data Management. LobeChat's deploy doc says chats live in the local browser. Open WebUI stores chats in the server database webui.db and exports them from Settings, Data Controls."}},{"@type":"Question","name":"Do Cursor, Claude Code, and Codex take the same address?","acceptedAnswer":{"@type":"Answer","text":"This page does not cover those three coding tools. Ofox marks direct Cursor use as unsuitable. This site has not verified the Codex or Claude Code clients, and those tools do not necessarily speak Chat Completions. Do not infer that they take the same base URL."}}]}]}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><span class="brand-mark">J</span>JXZNE AI</a>
+  <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="nav-toggle-label">Menu</span></button>
+  <nav id="site-nav" class="nav-links">
+    <a href="openai-compatible-api.html">Python / Node / curl</a>
+    <a href="guides.html">Setup guides</a>
+    <a href="openai-api-errors.html">API errors</a>
+    <a href="validation.html">Verification</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language">
+    <a href="../ofox-chat-clients.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+    <a href="ofox-chat-clients.html" hreflang="en" lang="en" aria-current="page">EN</a>
+  </nav>
+  <span class="nav-crosslink-row"><a class="nav-crosslink" href="https://tokenhubs.dev/?utm_source=jxzne" target="_blank" rel="noopener noreferrer">English Calculator → tokenhubs.dev</a></span>
+</header>
+<div class="site-disclosure" role="note"><strong>Affiliate disclosure:</strong> JXZNE AI is an independent Ofox referral site, not Ofox and not an official model provider. Eligible signups or spend through our Ofox link may earn us a commission. Prices and compatibility follow the provider.</div>
+<main class="pricing-hub">
+  <section class="pricing-hub-hero">
+    <span class="kicker">LOCAL CHAT</span>
+    <h1>Keep Ofox chats in a client that stores them</h1>
+    <p>This page is for chat clients that keep the conversation on the device or on an instance you run. Ofox’s OpenAI-compatible root is <code>https://api.ofox.ai/v1</code>. The chat path is <code>https://api.ofox.ai/v1/chat/completions</code>. Create the key in the Ofox console at Settings → API Keys → Create New Key. The key is shown once. Ofox’s error doc says to keep the <code>sk-</code> prefix. Ofox’s own articles write the example key as starting with <code>sk-of-</code>.</p>
+    <p>Menu names below are the ones in official docs or the repo that were still online on 2026-11-26. A translated install uses its own words for the same controls. This site has not installed these clients to call Ofox. The status is unverified. Cursor, Claude Code, and Codex are not on this list. Ofox marks direct Cursor use as unsuitable. Codex and Claude Code do not necessarily speak Chat Completions, and this site has not verified those clients.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="models">
+    <h2>Check the model id first</h2>
+    <p>Use the full id from the public catalog. On 2026-11-26, <code>GET https://api.ofox.ai/v1/models</code> included <code>openai/gpt-5.4</code>, <code>openai/gpt-5.4-mini</code>, and <code>deepseek/deepseek-v4.1-flash</code>. The catalog changes. Check <a href="list-openai-models.html">the same list endpoint</a> again before you add an id. A short name, or an older name you remember, is a different string.</p>
+    <div class="snippet"><div>Values shared by the four clients · not a verified session<button class="copy-code" type="button" data-copy="shared-snippet">Copy</button></div><pre id="shared-snippet"><code>API root: https://api.ofox.ai/v1
+Chat path: https://api.ofox.ai/v1/chat/completions
+API Key: YOUR_API_KEY
+Model IDs:
+  openai/gpt-5.4
+  openai/gpt-5.4-mini
+  deepseek/deepseek-v4.1-flash</code></pre></div>
+  </section>
+
+  <section class="pricing-hub-section" id="cherry-studio">
+    <h2>Cherry Studio</h2>
+    <p>The desktop custom-provider doc says: click Settings (the gear) in the left bar, select Model Provider, then click + Add Provider at the bottom of the list. That opens Add Custom Provider. <a href="https://cherryai.com/docs/en/pre-basic/providers/zi-ding-yi-fu-wu-shang/" target="_blank" rel="noopener noreferrer">Cherry Studio custom provider</a></p>
+    <ol class="step-list">
+      <li>Set Provider Name to a name you will recognize, such as Ofox. Put the Ofox key in API Key. The model-service settings page also describes Add API key inside the API Key field, then Save and close. <a href="https://cherryai.com/docs/en/pre-basic/settings/providers/" target="_blank" rel="noopener noreferrer">Model service settings</a></li>
+      <li>Under Endpoint settings, fill the OpenAI API root. Leave the Anthropic, Gemini, and image URL fields for other protocols. This page uses the OpenAI chat endpoint. A preview of the final request path appears under the field.</li>
+      <li>Click Add. On the provider page, turn on the switch in the upper right. The doc says a disabled provider’s models stay out of the model list.</li>
+      <li>Click Sync models to the right of the Models heading and add the models you will use. The + beside it takes a Model ID, Model Name, and Group Name. The Model ID is the full catalog id, such as <code>openai/gpt-5.4</code>.</li>
+      <li>Click Model Check to the right of API Key. The doc says the check uses the last chat model added to the list.</li>
+    </ol>
+    <p>The desktop API Host rule is: when the provider’s full address looks like <code>https://xxx.xxx.com/v1/chat/completions</code>, enter only <code>https://xxx.xxx.com</code>. The app appends <code>/v1/chat/completions</code>. For Ofox, that desktop API Host is <code>https://api.ofox.ai</code>. An address that ends in <code>/</code> gets only <code>chat/completions</code> appended, so <code>https://api.ofox.ai/v1/</code> lands on the same path. An address that ends in <code>#</code> is used as entered, which is how <code>https://api.ofox.ai/v1/chat/completions#</code> is written. The preview under the field should show exactly <code>https://api.ofox.ai/v1/chat/completions</code>.</p>
+    <p>The phone app uses different labels. Open Settings → Model service, tap add, choose Custom provider, select the OpenAI API format, and set Base URL to a root that includes <code>/v1</code>, which is <code>https://api.ofox.ai/v1</code>. Leave <code>/chat/completions</code> out of that field. Fetch the list or type the model id, confirm the provider is enabled, and run the connection check on a text model. The mobile doc also says to add one key per entry, rather than pasting several keys into one field. <a href="https://cherryai.com/docs/en/mobile/providers-and-models/" target="_blank" rel="noopener noreferrer">Cherry Studio mobile docs</a></p>
+    <div class="snippet"><div>Cherry Studio · hosts split the way the current docs describe<button class="copy-code" type="button" data-copy="cherry-snippet">Copy</button></div><pre id="cherry-snippet"><code>Provider Name: Ofox
+API Key: YOUR_API_KEY
+Desktop API Host: https://api.ofox.ai
+Mobile Base URL: https://api.ofox.ai/v1
+Model ID: openai/gpt-5.4</code></pre></div>
+    <p><strong>Where the chats are, and how to back them up</strong></p>
+    <p>Data stays in the user directory. The documented defaults are macOS <code>/Users/yourname/Library/Application Support/CherryStudio</code>, Windows <code>C:\Users\yourname\AppData\Roaming\CherryStudio</code>, and Linux <code>/home/yourname/.config/CherryStudio</code>. Settings → Data → Data Directory shows the live path on the App Data row, and Open Directory opens it. <a href="https://cherryai.com/docs/en/pre-basic/personalization-settings/storage/" target="_blank" rel="noopener noreferrer">Storage location</a></p>
+    <p>Backups are under Settings → Data. A full backup includes conversations and topics, assistants, knowledge bases, attachments, preferences, and provider configuration. API keys are included. Lite backup skips image, knowledge-base, and other data files and keeps chat history and settings. Click Backup at any time, or turn on automatic backup at the interval the screen offers. Local backup is another folder on disk. WebDAV or S3-compatible storage is the documented way to move a backup from one computer to another. The backup contains keys. Keep the file off shared drives you do not trust. <a href="https://cherryai.com/docs/en/pre-basic/data-settings/" target="_blank" rel="noopener noreferrer">Data settings</a></p>
+  </section>
+
+  <section class="pricing-hub-section" id="chatbox">
+    <h2>Chatbox</h2>
+    <p>The provider guide is eight steps. The English doc and the Chinese doc in the docs repo name the same controls: the settings button in the sidebar, Model Provider, Add, OpenAI API compatible, API Key, API Host, and Check. <a href="https://docs.chatboxai.app/en/guides/providers" target="_blank" rel="noopener noreferrer">English guide</a> · <a href="https://github.com/chatboxai/chatbox-docs/blob/main/guides/providers/README.md" target="_blank" rel="noopener noreferrer">Chinese guide in the repo</a></p>
+    <ol class="step-list">
+      <li>Open Chatbox and click the settings button in the sidebar.</li>
+      <li>Open Model Provider. If Ofox is not in the list, click Add at the bottom.</li>
+      <li>Enter an API provider name. Choose OpenAI API compatible. The Gemini option is a different API type.</li>
+      <li>Enter the API Key and API Host. The doc says the API path can usually be left alone. Its default is <code>/v1/chat/completions</code>.</li>
+      <li>Add at least one model. Capability checkboxes are optional. An unconfigured model is treated as a plain text model. Use the full catalog id, such as <code>openai/gpt-5.4</code>.</li>
+      <li>Save, then click Check. The doc says a successful check reports that the connection succeeded. Go back to the home page, start a conversation, and send a message.</li>
+    </ol>
+    <p>Ofox’s chat URL is <code>https://api.ofox.ai/v1/chat/completions</code>. The documented default path already includes <code>/v1/chat/completions</code>, so the API Host is <code>https://api.ofox.ai</code> and that default path supplies the rest. If the path field on your build shows <code>/chat/completions</code>, put <code>https://api.ofox.ai/v1</code> in API Host. Either pairing should contain <code>/v1</code> once.</p>
+    <div class="snippet"><div>Chatbox · documented default path<button class="copy-code" type="button" data-copy="chatbox-snippet">Copy</button></div><pre id="chatbox-snippet"><code>API provider name: Ofox
+Type: OpenAI API compatible
+API Key: YOUR_API_KEY
+API Host: https://api.ofox.ai
+API path: /v1/chat/completions
+Model: openai/gpt-5.4</code></pre></div>
+    <p><strong>Where the chats are, and how to back them up</strong></p>
+    <p>Chatbox’s user guide says chat history stays on the device and is not uploaded to Chatbox’s servers. Desktop paths are Windows <code>%APPDATA%\chatbox\</code>, macOS <code>~/Library/Application Support/chatbox/</code>, and Linux <code>~/.config/chatbox/</code>. iOS uses the app sandbox. Android uses app private storage. The same guide says that a third-party API receives the messages you send. A local transcript still leaves the device as the API request.</p>
+    <p>Export is Settings → Data Management → Export Data. JSON is the format the guide describes for backup and recovery. Markdown is for reading and archiving. On Android the file is saved under <code>Documents/chatbox_ai_exports</code>. To restore, install Chatbox on the new device, open the same screen, choose Import Data, and pick the JSON file. The guide says there is no automatic multi-device sync, and Chatbox’s servers cannot restore a lost local history. Export the JSON before you change devices. <a href="https://chatboxai.app/en/guide/faq/data-storage" target="_blank" rel="noopener noreferrer">Data storage</a></p>
+  </section>
+
+  <aside class="context-cta"><h2>The key belongs to this root</h2><p>Ofox’s <a href="https://ofox.ai/docs/api/openai/chat-completions" target="_blank" rel="noopener noreferrer">Chat Completions doc</a> uses the base URL <code>https://api.ofox.ai/v1</code>. The <a href="https://ofox.ai/docs/develop/observability/pricing" target="_blank" rel="noopener noreferrer">pricing page</a> describes pay-as-you-go billing for what you use, with no monthly plan. Every client above needs a key for this root. No successful paid call is recorded here.</p><p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="en-chat-clients-mid" data-cta-position="mid-article" data-outbound="affiliate">Get an Ofox API key</a> <span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p></aside>
+
+  <section class="pricing-hub-section" id="lobechat">
+    <h2>LobeChat</h2>
+    <p>LobeHub’s OpenAI guide says to open App Settings → AI Providers, select OpenAI, and enable the provider. Enter the API key. If you use a proxy or a compatible endpoint, enter its proxy URL. Select Check, enable the models you need, and pick one in the Agent settings. <a href="https://lobehub.com/docs/usage/providers/openai" target="_blank" rel="noopener noreferrer">LobeHub OpenAI guide</a></p>
+    <p>For a self-hosted install, <code>OPENAI_PROXY_URL</code> overrides the default <code>https://api.openai.com/v1</code>. That page says some proxies add <code>/v1</code> and some do not. If a test reply comes back empty, add <code>/v1</code> and try again. Ofox documents the root with <code>/v1</code>, so the value here is <code>https://api.ofox.ai/v1</code>, with <code>OPENAI_API_KEY</code>. <code>OPENAI_MODEL_LIST</code> adds an id with a plus sign and separates items with commas, for example <code>+openai/gpt-5.4,+deepseek/deepseek-v4.1-flash</code>. <a href="https://lobehub.com/docs/self-hosting/environment-variables/model-provider" target="_blank" rel="noopener noreferrer">Model-provider environment variables</a></p>
+    <p>The deploy doc says LobeHub’s chat records are stored in the local browser, so redeploying the Docker image leaves those records in place. <a href="https://lobehub.com/docs/self-hosting/advanced/upstream-sync" target="_blank" rel="noopener noreferrer">Upstream sync</a> This run did not find an official page that names an export button, so this section does not name one. Keep the browser profile if you want the history. Clearing that site’s data clears the chats with it.</p>
+  </section>
+
+  <section class="pricing-hub-section" id="open-webui">
+    <h2>Open WebUI</h2>
+    <p>Open WebUI’s OpenAI-compatible guide says to open Settings → Connections (admin section), find Manage OpenAI API Connections, and click Add Connection. Set URL to the provider’s API root, set the API Key, and click Save. Verify Connection calls that host’s <code>/models</code> endpoint with a Bearer token. Saving the connection does not test it. When discovery is unavailable, type a model id under Model IDs and click +. <a href="https://docs.openwebui.com/getting-started/quick-start/connect-a-provider/starting-with-openai-compatible" target="_blank" rel="noopener noreferrer">Open WebUI docs</a></p>
+    <div class="snippet"><div>Open WebUI connection fields<button class="copy-code" type="button" data-copy="webui-snippet">Copy</button></div><pre id="webui-snippet"><code>URL: https://api.ofox.ai/v1
+API Key: YOUR_API_KEY
+Model ID: openai/gpt-5.4</code></pre></div>
+    <p>Chats are stored in that instance’s database, <code>webui.db</code>, and the sidebar lists them. Devices signed into the same instance see the same history. <a href="https://docs.openwebui.com/features/chat-conversations/chat-features/history-search/" target="_blank" rel="noopener noreferrer">History</a> For an account export, click the profile name or avatar at the bottom left, choose Settings, open Data Controls, and click Export Chats. That downloads every conversation as JSON. Import Chats on the same tab restores a JSON file. A single chat can be downloaded from the chat menu. The full history exports as JSON. <a href="https://docs.openwebui.com/features/chat-conversations/data-controls/import-export" target="_blank" rel="noopener noreferrer">Import and export</a> A server-level copy is the database file in the instance data directory. <a href="https://docs.openwebui.com/tutorials/maintenance/database" target="_blank" rel="noopener noreferrer">Database export</a></p>
+  </section>
+
+  <section class="pricing-hub-section" id="troubleshoot">
+    <h2>When the connection fails, read the status code</h2>
+    <p>The codes below follow Ofox’s error doc as it read on 2026-11-26. <a href="https://ofox.ai/docs/develop/guides/error-handling" target="_blank" rel="noopener noreferrer">Ofox error handling</a> A longer walkthrough is on <a href="openai-api-errors.html">OpenAI-compatible API errors</a>.</p>
+    <ol class="step-list">
+      <li><strong>401</strong> is an invalid or missing API key, code <code>invalid_api_key</code>. Check for a copied space or newline, check that the key is still enabled, and check that the pasted value is the Ofox key. A key issued for <code>api.openai.com</code> does not call <code>api.ofox.ai</code>. Ofox says this status is not fixed by retrying.</li>
+      <li><strong>402</strong> with <code>insufficient_credits</code> means the balance is too low. Top up in the Ofox console, then send again. The same 402 with <code>spending_limit_exceeded</code> means a team, member, or key budget is used up. The doc says topping up does not clear it. Raise the cap, or wait for the daily or monthly period to reset.</li>
+      <li><strong>A base URL missing <code>/v1</code>, or a URL with <code>/v1</code> twice.</strong> Some clients append <code>/v1/chat/completions</code>. Others default the path to <code>/v1/chat/completions</code>. The finished request is <code>https://api.ofox.ai/v1/chat/completions</code>. A wrong path commonly comes back as 404.</li>
+      <li><strong>Model not found.</strong> Ofox describes 404 and <code>not_found_error</code> as a missing model or resource. Compare the id in the client with the <code>id</code> field from <code>GET https://api.ofox.ai/v1/models</code>, character for character. A key that is not allowed to call that model is a different code: 403, <code>model_not_allowed</code>. Change the models that key is allowed to use.</li>
+    </ol>
+  </section>
+
+  <section class="pricing-hub-section" id="keys">
+    <h2>How to keep the key</h2>
+    <ol class="step-list">
+      <li>Ofox shows the key once, at creation. If it is lost, create a new key. Pasting the old one into a chat, a ticket, or a screenshot does not recover it.</li>
+      <li>Examples on this page use <code>YOUR_API_KEY</code>. Keep a real key out of Git, off public pages, out of forms on this site, and out of a backup you share.</li>
+      <li>Cherry Studio’s full backup includes provider configuration and API keys. Chatbox stores API keys on the device. Anyone who can open that device or that backup can use the key.</li>
+      <li>Ofox’s key doc recommends a separate key per project and an IP Whitelist on the key. It also recommends rotating keys, and the interval they name is 90 days. <a href="https://ofox.ai/docs/develop/authentication" target="_blank" rel="noopener noreferrer">Key setup</a></li>
+    </ol>
+  </section>
+
+  <section class="pricing-hub-section dev-faq" id="faq">
+    <h2>Questions</h2>
+    <details open>
+      <summary>Are these clients verified with Ofox?</summary>
+      <p>No. Each section only records what that client’s official docs or repo still showed on 2026-11-26. This site has not installed Cherry Studio, Chatbox, LobeChat, or Open WebUI to call Ofox.</p>
+    </details>
+    <details>
+      <summary>Which host does Cherry Studio’s API Host field take?</summary>
+      <p>Ofox’s root is <code>https://api.ofox.ai/v1</code>. The desktop docs say the app appends <code>/v1/chat/completions</code>, so the desktop API Host is <code>https://api.ofox.ai</code>. The mobile Base URL example includes <code>/v1</code>, so that field is <code>https://api.ofox.ai/v1</code>. Follow the path preview and keep a single <code>/v1</code>.</p>
+    </details>
+    <details>
+      <summary>What do 401 and 402 mean?</summary>
+      <p>401 is an invalid or missing API key. A 402 with <code>insufficient_credits</code> means the balance is too low. A 402 with <code>spending_limit_exceeded</code> means a spending cap is used up, and topping up does not clear it.</p>
+    </details>
+    <details>
+      <summary>Where is chat history stored?</summary>
+      <p>Cherry Studio uses the local CherryStudio directory and backs up from Settings → Data. Chatbox uses the local chatbox directory and exports from Settings → Data Management. LobeChat’s deploy doc says records stay in the local browser. Open WebUI uses the server’s <code>webui.db</code> and exports from Settings → Data Controls → Export Chats.</p>
+    </details>
+    <details>
+      <summary>Do Cursor, Claude Code, and Codex take the same address?</summary>
+      <p>This page does not cover those three coding tools. Ofox marks direct Cursor use as unsuitable. This site has not verified the Codex or Claude Code clients, and those tools do not necessarily speak Chat Completions. The limits are on the <a href="guides.html">setup guides</a> and <a href="cursor-codex-third-party-api.html">when Cursor or Codex will not take a third-party API</a>.</p>
+    </details>
+  </section>
+
+  <section class="pricing-hub-section">
+    <p class="calc-note">Related: <a href="guides.html">setup guides</a> · <a href="openai-compatible-base-url.html">base URL in other tools</a> · <a href="openai-compatible-api.html">Python / Node / curl</a> · <a href="list-openai-models.html">check a model id</a> · <a href="openai-api-errors.html">401 / 404 / 429 / timeout</a></p>
+    <h2>Get a key before you fill the form</h2>
+    <p>Every field above needs a key for <code>https://api.ofox.ai/v1</code>. The account is opened on Ofox.</p>
+    <p><a class="btn btn-primary" href="https://ofox.ai/x/itoken" target="_blank" rel="sponsored noopener" data-cta="primary" data-cta-position="after-answer" data-outbound="affiliate">Get an Ofox API key</a><span class="affiliate-disclosure">This site is an Ofox affiliate site. Signing up through the link may earn a commission.</span></p>
+    <p class="affiliate-note">Disclosure: this is an Ofox affiliate / referral link. Qualifying signups or spend may earn JXZNE a commission. A client doc that allows a custom URL is not a recorded test of that client with Ofox.</p>
+  </section>
+</main>
+<footer><div class="brand"><span class="brand-mark">J</span>JXZNE AI</div><p>© 2026 JXZNE AI · Doc paths, unverified against Ofox</p><a href="../ofox-chat-clients.html" hreflang="zh-CN" lang="zh-CN">中文</a> · <a href="./">Home</a></footer>
+<script>try{localStorage.setItem("jxzne-locale","en")}catch(e){}</script>
+<script src="../assets/analytics-config.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>
