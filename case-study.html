@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ofox Chat Completions 接入实测 | JXZNE AI</title>
-  <meta name="description" content="可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。">
+  <meta name="description" content="2026-11-26（UTC），scripts/ofox-smoke.py 向 https://api.ofox.ai/v1/chat/completions 发送一次 Chat Completions 请求，模型 openai/gpt-5.4，返回 HTTP 200。">
   <link rel="canonical" href="https://jxzne.com/case-study.html">
   <link rel="alternate" hreflang="zh-CN" href="https://jxzne.com/case-study.html">
   <link rel="alternate" hreflang="en" href="https://jxzne.com/en/case-study.html">
@@ -14,12 +14,12 @@
   <meta property="og:site_name" content="JXZNE AI">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="Ofox Chat Completions 接入实测 | JXZNE AI">
-  <meta property="og:description" content="可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。">
+  <meta property="og:description" content="2026-11-26（UTC），scripts/ofox-smoke.py 向 https://api.ofox.ai/v1/chat/completions 发送一次 Chat Completions 请求，模型 openai/gpt-5.4，返回 HTTP 200。">
   <meta property="og:url" content="https://jxzne.com/case-study.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ofox Chat Completions 接入实测 | JXZNE AI">
-  <meta name="twitter:description" content="可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/case-study.html#webpage","url":"https://jxzne.com/case-study.html","name":"Ofox Chat Completions 接入实测","description":"可复现的 Ofox Chat Completions 记录。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。","inLanguage":"zh-CN","dateModified":"2026-11-26","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"Ofox Chat Completions 接入实测","item":"https://jxzne.com/case-study.html"}]}]}</script>
+  <meta name="twitter:description" content="2026-11-26（UTC），scripts/ofox-smoke.py 向 https://api.ofox.ai/v1/chat/completions 发送一次 Chat Completions 请求，模型 openai/gpt-5.4，返回 HTTP 200。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://jxzne.com/case-study.html#webpage","url":"https://jxzne.com/case-study.html","name":"Ofox Chat Completions 接入实测","description":"2026-11-26（UTC），scripts/ofox-smoke.py 向 https://api.ofox.ai/v1/chat/completions 发送一次 Chat Completions 请求，模型 openai/gpt-5.4，返回 HTTP 200。","inLanguage":"zh-CN","dateModified":"2026-11-26","publisher":{"@type":"Organization","name":"JXZNE AI","url":"https://jxzne.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://jxzne.com/"},{"@type":"ListItem","position":2,"name":"Ofox Chat Completions 接入实测","item":"https://jxzne.com/case-study.html"}]}]}</script>
 </head>
 <body>
 <header class="nav">
@@ -38,20 +38,20 @@
   <section class="pricing-hub-hero">
     <span class="kicker">OFOX CHAT COMPLETIONS</span>
     <h1>一次可复现的接入记录</h1>
-    <p id="smoke-banner" class="smoke-banner is-pending">待实测。认证调用尚未被记录为成功，在记录成功之前本页保持待实测。</p>
+    <p id="smoke-banner" class="smoke-banner is-passed">2026-11-26（UTC），scripts/ofox-smoke.py 向 https://api.ofox.ai/v1/chat/completions 发送一次 Chat Completions 请求，模型 openai/gpt-5.4，返回 HTTP 200。</p>
     <p>本页只展示 <code>scripts/ofox-smoke.py</code> 写入 <a href="ofox-smoke-status.json">ofox-smoke-status.json</a> 的字段：模型、耗时、状态、时间。不写密钥，不写模型原文。只有在一次调用被记录为成功之后，页面才会把它显示为通过。</p>
   </section>
   <section class="pricing-hub-section" id="smoke-result">
     <h2>当前记录</h2>
     <dl class="smoke-facts">
-      <div><dt>overall</dt><dd id="smoke-overall">unverified</dd></div>
-      <div><dt>status</dt><dd id="smoke-status">unverified</dd></div>
+      <div><dt>overall</dt><dd id="smoke-overall">chat_completion_passed</dd></div>
+      <div><dt>status</dt><dd id="smoke-status">passed</dd></div>
       <div><dt>model</dt><dd id="smoke-model">openai/gpt-5.4</dd></div>
-      <div><dt>latencyMs</dt><dd id="smoke-latency">—</dd></div>
-      <div><dt>httpStatus</dt><dd id="smoke-http">—</dd></div>
-      <div><dt>timestamp</dt><dd id="smoke-timestamp">—</dd></div>
+      <div><dt>latencyMs</dt><dd id="smoke-latency">3121</dd></div>
+      <div><dt>httpStatus</dt><dd id="smoke-http">200</dd></div>
+      <div><dt>timestamp</dt><dd id="smoke-timestamp">2026-11-26T03:56:25+00:00</dd></div>
     </dl>
-    <p class="calc-note">认证调用尚未被记录为成功。在记录到一次成功之前，本页保持待实测。上面的空值不是一次成功结果。</p>
+    <p class="calc-note">2026-11-26（UTC），scripts/ofox-smoke.py 向 https://api.ofox.ai/v1/chat/completions 发送一次 Chat Completions 请求，模型 openai/gpt-5.4，返回 HTTP 200，并写入 ofox-smoke-status.json。上面的字段就是这次记录。Responses、Anthropic Messages、Codex、Claude Code 和 Cursor 不在这次调用里。</p>
   </section>
   <section class="pricing-hub-section">
     <h2>脚本会调用什么</h2>
